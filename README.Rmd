@@ -40,7 +40,7 @@ devtools::install_github("r-lib/winch")
 
 ## Example
 
-This is an example where an R function calls into C which calls back into R:
+This is an example where an R function calls into C which calls back into R, see the second-to-last entry in the trace:
 
 ```{r example}
 library(winch)

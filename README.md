@@ -31,7 +31,7 @@ devtools::install_github("r-lib/winch")
 ## Example
 
 This is an example where an R function calls into C which calls back
-into R:
+into R, see the second-to-last entry in the trace:
 
 ``` r
 library(winch)
@@ -66,7 +66,7 @@ foo()
 #>  18. │                   └─base::eval(expr, envir, enclos)
 #>  19. └─global::foo()
 #>  20.   └─winch::winch_call(bar)
-#>  21.     └─`winch.so(winch_call+0x1c) [0x7ff761154cac]`()
+#>  21.     └─`winch.so(winch_call+0x1c) [0x7f89cca02cac]`()
 #>  22.       └─(function () ...
 ```
 
