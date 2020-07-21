@@ -1,5 +1,3 @@
-options(error = winch::winch_entrace)
-#options(error = rlang::entrace)
+options(error = winch::winch_entrace, rlang_backtrace_on_error = "full")
 
-try(vctrs::vec_as_location(quote, 2))
-rlang::last_trace()
+vctrs::vec_as_location(quote, 2)
