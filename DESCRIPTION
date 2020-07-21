@@ -14,7 +14,8 @@ URL: https://github.com/krlmlr/r-prof,
     http://krlmlr.github.io/r-prof
 BugReports: https://github.com/krlmlr/r-prof/issues
 Suggests: 
-    rlang
+    rlang,
+    vctrs
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
