@@ -59,14 +59,14 @@ foo()
 #>  18. │                   └─base::eval(expr, envir, enclos)
 #>  19. └─global::foo()
 #>  20.   └─winch::winch_call(bar)
-#>  21.     └─`winch.so(winch_call+0x1c) [0x7f673e6e7cac]`()
+#>  21.     └─`winch.so(winch_call+0x1c) [0x7f10a8dcccac]`()
 #>  22.       └─(function () ...
 ```
 
 `winch_entrace()` is a drop-in replacement for `rlang::entrace()`. This
 cannot be easily demonstrated in a knitr document, see [this GitHub
 Actions
-run](https://github.com/r-prof/winch/runs/895384993?check_suite_focus=true#step:11:24)
+run](https://github.com/r-prof/winch/runs/895443204?check_suite_focus=true#step:11:53)
 for an example.
 
 ``` r
@@ -84,3 +84,26 @@ bar <- function() {
 
 foo()
 ```
+
+## How does it work?
+
+It’s a very crude heuristic. R’s traceback (and also profiling)
+infastructure introduces the notion of a “context”. Every call to an R
+function opens a new context, and closes it when execution of the
+function ends. Unfortunately, no new context is established for native
+code called with `.Call()` or `.External()`. Establishing contexts
+requires precious run time, this might be the reason for this omission.
+
+To work around this limitation, the source code of all R functions along
+the call chain is scanned for instances of `.Call` and `.External`. The
+native call stack (obtained via libc’s
+[`backtrace_symbols()`](https://www.gnu.org/software/libc/manual/html_node/Backtraces.html)
+is scanned for chunks of code outside of `libR.so` (R’s main library) –
+these are assumed to correspond to `.Call()` or `.External()`. The
+native traces are embedded as artificial calls into the R stack trace.
+
+## Limitations
+
+  - The matching will not be perfect, it still may lead to quicker
+    discovery of the cause of an error.
+  - Currently Linux and macOS only.
