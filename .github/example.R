@@ -1,5 +1,13 @@
 library(winch)
 
+foo0 <- function() {
+  winch_call(bar0)
+}
+
+bar0 <- function() {
+  winch_trace_back()
+}
+
 foo <- function() {
   winch_call(bar)
 }
@@ -20,4 +28,8 @@ boo <- function() {
   winch_trace_back()
 }
 
-baz(boo())
+tb <- function() {
+  rlang::trace_back()
+}
+
+out <- foo0()
