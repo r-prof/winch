@@ -3,19 +3,11 @@ foo <- function() {
 }
 
 bar <- function() {
-  calls <- sys.calls()
-  fun <- lapply(calls, `[[`, 1L)
-  is_fun <- vapply(fun, identical, quote(foo), FUN.VALUE = logical(1L))
-  limit <- which(is_fun)[[1]]
-  sys.calls()[-seq_len(limit - 1)]
+  sys.call(0)
 }
 
-# Calls look good
-calls <- foo()
-calls
-
-# Last call also looks good
-bar_call <- calls[[length(calls)]]
+# Call looks good
+bar_call <- foo()
 bar_call
 
 # When we convert to list, the results are surprising
