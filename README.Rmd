@@ -48,3 +48,22 @@ bar <- function() {
 
 foo()
 ```
+
+`winch_entrace()` is a drop-in replacement for `rlang::entrace()`.
+This cannot be easily demonstrated in a README.
+
+```{r error, error = TRUE}
+library(winch)
+
+options(error = winch_entrace, rlang_backtrace_on_error = "full")
+
+foo <- function() {
+  winch_call(bar)
+}
+
+bar <- function() {
+  stop("oops")
+}
+
+foo()
+```
