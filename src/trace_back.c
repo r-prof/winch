@@ -8,6 +8,16 @@ void* buf[10000];
 
 SEXP winch_trace_back() {
   int size = backtrace(buf, sizeof(buf) / sizeof(*buf));
-  backtrace_symbols_fd(buf, size, 2);
-  return R_NilValue;
+
+  char** symbols = backtrace_symbols(buf, size);
+  if (!symbols) Rf_error("backtrace_symbols() failed to allocate.");
+
+  SEXP out = PROTECT(Rf_allocVector(STRSXP, size));
+
+  for (int i = 0; i < size; ++i) {
+    SET_STRING_ELT(out, i, Rf_mkCharCE(symbols[i], CE_UTF8));
+  }
+
+  UNPROTECT(1);
+  return out;
 }
