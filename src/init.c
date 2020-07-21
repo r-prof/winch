@@ -19,7 +19,6 @@ static const R_CallMethodDef CallEntries[] = {
 
 export void R_init_winch(DllInfo *dll)
 {
-  fprintf(stderr, "Here\n");
   R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
   R_useDynamicSymbols(dll, FALSE);
 }
