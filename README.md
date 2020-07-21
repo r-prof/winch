@@ -10,7 +10,8 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 <!-- badges: end -->
 
 The goal of winch is to provide stack traces that combine R and C
-function calls.
+function calls. This is primarily useful for developers of R packages
+where a substantial portion of the code is C or C++.
 
 ## Installation
 
@@ -19,6 +20,12 @@ Once on CRAN, you can install the released version of winch from
 
 ``` r
 install.packages("winch")
+```
+
+Install the development version from GitHub with:
+
+``` r
+devtools::install_github("r-lib/winch")
 ```
 
 ## Example
@@ -59,7 +66,7 @@ foo()
 #>  18. │                   └─base::eval(expr, envir, enclos)
 #>  19. └─global::foo()
 #>  20.   └─winch::winch_call(bar)
-#>  21.     └─`winch.so(winch_call+0x1c) [0x7f10a8dcccac]`()
+#>  21.     └─`winch.so(winch_call+0x1c) [0x7ff761154cac]`()
 #>  22.       └─(function () ...
 ```
 

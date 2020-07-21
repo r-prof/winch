@@ -21,6 +21,7 @@ pkgload::load_all()
 <!-- badges: end -->
 
 The goal of winch is to provide stack traces that combine R and C function calls.
+This is primarily useful for developers of R packages where a substantial portion of the code is C or C++.
 
 
 ## Installation
@@ -29,6 +30,12 @@ Once on CRAN, you can install the released version of winch from [CRAN](https://
 
 ``` r
 install.packages("winch")
+```
+
+Install the development version from GitHub with:
+
+``` r
+devtools::install_github("r-lib/winch")
 ```
 
 ## Example
