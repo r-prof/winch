@@ -1,0 +1,49 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+pkgload::load_all()
+```
+
+# winch
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The goal of winch is to provide stack traces that combine R and C function calls.
+
+
+## Installation
+
+Once on CRAN, you can install the released version of winch from [CRAN](https://CRAN.R-project.org) with:
+
+``` r
+install.packages("winch")
+```
+
+## Example
+
+This is an example where an R function calls into C which calls back into R:
+
+```{r example}
+library(winch)
+
+foo <- function() {
+  winch_call(bar)
+}
+
+bar <- function() {
+  winch_trace_back()
+}
+
+foo()
+```
