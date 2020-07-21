@@ -3,12 +3,13 @@ winch_trace_back <- function() {
   rlang_trace <- rlang::trace_back(bottom = parent.frame())
 
   native_trace <- .Call(winch_c_trace_back)
-  native_trace <- gsub("/[^ ]+/", "", native_trace)
+  # Better results on Ubuntu
+  native_trace <- gsub("^/[^ ]+/", "", native_trace)
 
   # FIXME: This is artificial, remove when done
   #native_trace <- rep(native_trace, each = 3)
 
-  is_libr <- grepl("[/\\\\]libR[.]", native_trace)
+  is_libr <- grepl("libR[.]", native_trace)
   is_libr_idx <- which(is_libr)
 
   first_libr <- is_libr_idx[[length(is_libr_idx)]]
