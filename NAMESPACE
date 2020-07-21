@@ -2,5 +2,6 @@
 
 export(winch_call)
 export(winch_context)
+export(winch_entrace)
 export(winch_trace_back)
 useDynLib(winch, .registration = TRUE)

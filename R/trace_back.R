@@ -65,7 +65,7 @@ winch_trace_back <- function() {
 
     # Rechain existing
     parents_fix_idx <- trace$parents == idx
-    grandparents_fix_idx <- (trace$parents == trace$parents[[idx]] & seq_along(trace$parents) != idx)
+    grandparents_fix_idx <- (trace$parents == trace$parents[[idx]] & seq_along(trace$parents) > idx)
     trace$parents[parents_fix_idx | grandparents_fix_idx] <- new_idx[[length(new_idx)]]
 
     # Chain new
