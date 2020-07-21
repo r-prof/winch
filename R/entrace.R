@@ -11,6 +11,8 @@ winch_entrace <- function(cnd) {
     last_error_env$cnd$trace <- trace
     rlang:::entrace_handle_top(trace)
   } else {
-    abort(conditionMessage(cnd) %||% "", error = cnd, trace = trace)
+    rlang::abort(conditionMessage(cnd) %||% "", error = cnd, trace = trace)
   }
 }
+
+`%||%` <- function(e1, e2) if (is.null(e1)) e2 else e1
