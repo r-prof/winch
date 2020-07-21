@@ -57,6 +57,56 @@ typedef struct RCNTXT {
 
 extern RCNTXT* R_GlobalContext;
 
+// Not exported
+//extern SEXP R_findBCInterpreterSrcref(RCNTXT*);
+
 SEXP winch_context() {
-  return R_NilValue;
+  R_xlen_t len = 0;
+
+  for (RCNTXT* context = R_GlobalContext; context != context->nextcontext && context != NULL && context->callflag != 0; context = context->nextcontext) {
+    ++len;
+  }
+
+  SEXP out = PROTECT(Rf_allocVector(VECSXP, 5));
+  SEXP names = PROTECT(Rf_allocVector(STRSXP, 5));
+  Rf_setAttrib(out, R_NamesSymbol, names);
+
+  SEXP callfun = PROTECT(Rf_allocVector(VECSXP, len));
+  SET_STRING_ELT(names, 0, Rf_mkChar("callfun"));
+  SET_VECTOR_ELT(out, 0, callfun);
+
+  SEXP sysparent = PROTECT(Rf_allocVector(VECSXP, len));
+  SET_STRING_ELT(names, 1, Rf_mkChar("sysparent"));
+  SET_VECTOR_ELT(out, 1, sysparent);
+
+  SEXP call = PROTECT(Rf_allocVector(VECSXP, len));
+  SET_STRING_ELT(names, 2, Rf_mkChar("call"));
+  SET_VECTOR_ELT(out, 2, call);
+
+  SEXP cloenv = PROTECT(Rf_allocVector(VECSXP, len));
+  SET_STRING_ELT(names, 3, Rf_mkChar("cloenv"));
+  SET_VECTOR_ELT(out, 3, cloenv);
+
+  SEXP srcref = PROTECT(Rf_allocVector(VECSXP, len));
+  SET_STRING_ELT(names, 4, Rf_mkChar("srcref"));
+  SET_VECTOR_ELT(out, 4, srcref);
+
+  RCNTXT* context = R_GlobalContext;
+  for (R_xlen_t i = 0; i < len; context = context->nextcontext, ++i) {
+    SET_VECTOR_ELT(callfun, i, context->callfun);
+    SET_VECTOR_ELT(sysparent, i, context->sysparent);
+    SET_VECTOR_ELT(call, i, context->call);
+    SET_VECTOR_ELT(cloenv, i, context->cloenv);
+
+    SEXP current_srcref = context->srcref;
+    if (current_srcref == R_InBCInterpreter) {
+      // not exported
+      //current_srcref = R_findBCInterpreterSrcref(context);
+    }
+
+    SET_VECTOR_ELT(srcref, i, current_srcref);
+  }
+
+  UNPROTECT(5 + 2);
+  return out;
 }
