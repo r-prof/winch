@@ -99,10 +99,12 @@ SEXP winch_context() {
     SET_VECTOR_ELT(cloenv, i, context->cloenv);
 
     SEXP current_srcref = context->srcref;
-    if (current_srcref == R_InBCInterpreter) {
+
+    // not available in R < 3.4:
+    //if (current_srcref == R_InBCInterpreter) {
       // not exported
       //current_srcref = R_findBCInterpreterSrcref(context);
-    }
+    //}
 
     SET_VECTOR_ELT(srcref, i, current_srcref);
   }
