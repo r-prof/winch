@@ -4,7 +4,9 @@ winch_trace_back <- function() {
 
   native_trace <- .Call(winch_c_trace_back)
   # Better results on Ubuntu
-  native_trace <- gsub("^/[^ ]+/", "", native_trace)
+  native_trace <- sub("^/[^ ]+/", "", native_trace)
+  # Better results on macOS
+  native_trace <- gsub("[[:space:]]+", " ", native_trace)
 
   # FIXME: This is artificial, remove when done
   #native_trace <- rep(native_trace, each = 3)
