@@ -9,13 +9,14 @@
 extern SEXP winch_trace_back();
 
 static const R_CallMethodDef CallEntries[] = {
-  {"winch_trace_back",                   (DL_FUNC) &winch_trace_back, 0},
+  {"winch_c_trace_back",                   (DL_FUNC) &winch_trace_back, 0},
 
   {NULL, NULL, 0}
 };
 
 export void R_init_winch(DllInfo *dll)
 {
+  fprintf(stderr, "Here\n");
   R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
   R_useDynamicSymbols(dll, FALSE);
 }
