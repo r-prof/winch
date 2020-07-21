@@ -50,9 +50,9 @@ foo()
 ```
 
 `winch_entrace()` is a drop-in replacement for `rlang::entrace()`.
-This cannot be easily demonstrated in a README.
+This cannot be easily demonstrated in a knitr document, see [this GitHub Actions run](https://github.com/r-prof/winch/runs/895384993?check_suite_focus=true#step:11:24) for an example.
 
-```{r error, error = TRUE}
+```{r error, eval = FALSE}
 library(winch)
 
 options(error = winch_entrace, rlang_backtrace_on_error = "full")
