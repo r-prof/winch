@@ -81,6 +81,7 @@ winch_trace_back <- function() {
     rlang_trace <- append_native_chunk(rlang_trace, r_fun_has_call_idx[[i]], native_trace_chunks[[i]])
   }
 
+  class(rlang_trace) <- c("winch_trace", class(rlang_trace))
   rlang_trace
 }
 
