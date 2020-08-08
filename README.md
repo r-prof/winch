@@ -66,7 +66,7 @@ foo()
 #>  18. │                   └─base::eval(expr, envir, enclos)
 #>  19. └─global::foo()
 #>  20.   └─winch::winch_call(bar)
-#>  21.     └─`winch.so(winch_call+0x1c) [0x7f89cca02cac]`()
+#>  21.     └─`winch.so(winch_call+0x1c) [0x7fe2933aecac]`()
 #>  22.       └─(function () ...
 ```
 
@@ -82,7 +82,7 @@ library(winch)
 options(error = winch_entrace, rlang_backtrace_on_error = "full")
 
 foo <- function() {
-  winch_call(bar)
+  winch_call(function() bar())
 }
 
 bar <- function() {
