@@ -66,14 +66,14 @@ foo()
 #>  18. │                   └─base::eval(expr, envir, enclos)
 #>  19. └─global::foo()
 #>  20.   └─winch::winch_call(bar)
-#>  21.     └─`winch.so(winch_call+0x1c) [0x7fe2933aecac]`()
+#>  21.     └─`winch.so(winch_call+0x1c) [0x7f0896862cac]`()
 #>  22.       └─(function () ...
 ```
 
 `winch_entrace()` is a drop-in replacement for `rlang::entrace()`. This
 cannot be easily demonstrated in a knitr document, see [this GitHub
 Actions
-run](https://github.com/r-prof/winch/runs/895443204?check_suite_focus=true#step:11:53)
+run](https://github.com/r-prof/winch/runs/960815218?check_suite_focus=true#step:11:53)
 for an example.
 
 ``` r
