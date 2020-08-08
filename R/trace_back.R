@@ -1,6 +1,8 @@
 #' @export
-winch_trace_back <- function() {
-  rlang_trace <- rlang::trace_back(bottom = parent.frame())
+winch_trace_back <- function(trace = rlang::trace_back(bottom = parent.frame())) {
+  # Avoid recursion
+  rlang::local_options("rlang:::trace_hook" = NULL)
+  rlang_trace <- trace
 
   native_trace <- .Call(winch_c_trace_back)
   # Better results on Ubuntu
@@ -31,8 +33,9 @@ winch_trace_back <- function() {
     native_trace[seq.int(end, by = -1L, length.out = len)]
   })
 
-  r_funs <- sys_functions()[-1]
+  r_funs <- sys_functions()
   # Must be separate, sys_functions() is very brittle
+  r_funs <- utils::tail(r_funs, rlang::trace_length(trace))
   r_funs <- rev(r_funs)
   r_fun_bodies <- lapply(r_funs, body)
   r_fun_calls <- lapply(r_fun_bodies, find_calls)
@@ -72,8 +75,6 @@ winch_trace_back <- function() {
 
     # Chain new
     trace$parents <- c(trace$parents, lag(new_idx, default = idx))
-
-    trace$ids <- c(trace$ids, paste0(trace$ids[[idx]], "-", new_idx))
     trace$indices <- c(trace$indices, new_idx)
 
     trace
