@@ -1,6 +1,6 @@
 library(winch)
 
-options(error = winch_trace_back, rlang_backtrace_on_error = "full")
+options(error = winch_entrace, rlang_backtrace_on_error = "full")
 
 foo <- function() {
   winch_call(function() bar())
