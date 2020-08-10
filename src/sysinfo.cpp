@@ -839,7 +839,7 @@ int ProcMapsIterator::FormatLine(char* buffer, int bufsize,
   return (rc < 0 || rc >= bufsize) ? 0 : rc;
 }
 
-namespace tcmalloc {
+extern "C" {
 
 // Helper to add the list of mapped shared libraries to a profile.
 // Fill formatted "/proc/self/maps" contents into buffer 'buf' of size 'size'
