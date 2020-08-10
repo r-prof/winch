@@ -9,7 +9,7 @@ bar0 <- function() {
 }
 
 baz0 <- function() {
-  .Call(winch:::winch_c_trace_back)
+  winch_trace_back()
 }
 
 foo0()
