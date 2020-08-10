@@ -5,7 +5,7 @@ winch_get_proc_map <- function(path = "/proc/self/maps") {
   # - Return an R data frame
   # - Autogenerate config.h
 
-  lines <- readLines(path)
+  lines <- .Call(winch_c_get_proc_map)
   lines <- gsub(" +", " ", lines)
 
   data <- read.delim(text = lines, sep = " ", header = FALSE)
