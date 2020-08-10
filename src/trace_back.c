@@ -36,7 +36,7 @@ SEXP winch_trace_back() {
 
   SEXP out_ip = PROTECT(Rf_allocVector(STRSXP, size));
   char ip_buf[20];
-  sprintf(ip_buf, "%p", (void*)pi.start_ip);
+  sprintf(ip_buf, "%.16lx", pi.start_ip);
   //snprintf(ip_buf, sizeof(ip_buf) / sizeof(buf), "%p", (void*)pi.start_ip);
   ip_buf[sizeof(ip_buf) / sizeof(*ip_buf) - 1] = '\0';
   SET_STRING_ELT(out_ip, 0, Rf_mkCharCE(ip_buf, CE_UTF8));
