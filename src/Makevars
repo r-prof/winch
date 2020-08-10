@@ -1,2 +1,2 @@
 PKG_CPPFLAGS = -I.
-PKG_LIBS = -lunwind
+PKG_LIBS = -lSystem
