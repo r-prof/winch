@@ -73,7 +73,7 @@
 
 // We log all messages at this log-level and below.
 // INFO == -1, WARNING == -2, ERROR == -3, FATAL == -4
-DECLARE_int32(verbose);
+#define FLAGS_verbose (-10)
 
 // CHECK dies with a fatal error if condition is not true.  It is *not*
 // controlled by NDEBUG, so the check will be executed regardless of
