@@ -1,5 +1,12 @@
 #' @export
 winch_get_proc_map <- function(path = "/proc/self/maps") {
+  # FIXME: Use gperftools code:
+  # - Figure out copyright holder and license
+  # - Copy over sysinfo.cc and sysinfo.h
+  # - Remove unrelated code and headers
+  # - Try build, strip further
+  # - Return an R data frame
+
   lines <- readLines(path)
   lines <- gsub(" +", " ", lines)
 

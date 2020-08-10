@@ -4,7 +4,6 @@ winch_trace_back <- function() {
 
   ip <- native_trace[[2]]
 
-  # FIXME: Use gperftools code
   map <- winch_get_proc_map()
 
   gte <- outer(ip, map$from, `>=`)
