@@ -4,21 +4,17 @@ winch_add_trace_back <- function(trace = rlang::trace_back(bottom = parent.frame
   rlang::local_options("rlang:::trace_hook" = NULL)
   rlang_trace <- trace
 
-  native_trace <- .Call(winch_c_trace_back)
-  # Better results on Ubuntu
-  native_trace <- sub("^/[^ ]+/", "", native_trace)
-  # Better results on macOS
-  native_trace <- gsub("[[:space:]]+", " ", native_trace)
+  native_trace <- winch_trace_back()
 
   # FIXME: This is artificial, remove when done
   #native_trace <- rep(native_trace, each = 3)
 
-  is_libr <- grepl("libR[.]", native_trace)
+  is_libr <- (basename(native_trace$pathname) == "libR.so")
   is_libr_idx <- which(is_libr)
 
   first_libr <- is_libr_idx[[length(is_libr_idx)]]
 
-  native_trace <- native_trace[seq_len(first_libr)]
+  native_trace <- native_trace[seq_len(first_libr), ]
   is_libr <- is_libr[seq_len(first_libr)]
 
   if (all(is_libr)) {
@@ -30,7 +26,7 @@ winch_add_trace_back <- function(trace = rlang::trace_back(bottom = parent.frame
   native_idx_len <- is_libr_rle$lengths[is_native_rle_idx] - 1L
   native_idx_end <- cumsum(is_libr_rle$lengths)[is_native_rle_idx]
   native_trace_chunks <- Map(native_idx_end, native_idx_len, f = function(end, len) {
-    native_trace[seq.int(end, by = -1L, length.out = len)]
+    native_trace[seq.int(end, by = -1L, length.out = len), ]
   })
 
   r_funs <- sys_functions()
@@ -64,7 +60,11 @@ winch_add_trace_back <- function(trace = rlang::trace_back(bottom = parent.frame
   }
 
   append_native_chunk <- function(trace, idx, native) {
-    new_calls <- lapply(native, function(x) call(x))
+    new_calls <- Map(
+      basename(native$pathname),
+      native$func,
+      f = function(basename, func) bquote(`::`(.(as.name(paste0("/", basename))), .(as.name(func)))())
+    )
     trace$calls <- c(trace$calls, new_calls)
     new_idx <- max(trace$indices) + seq_along(new_calls)
 
