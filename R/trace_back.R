@@ -6,13 +6,15 @@ winch_trace_back <- function() {
 
   map <- winch_get_proc_map()
 
-  gte <- (ip >= map$from)
-  lt <- (ip < map$to)
-  inside <- which(gte & lt)
+  gte <- outer(ip, map$from, `>=`)
+  lt <- outer(ip, map$to, `<`)
+  inside <- apply(gte & lt, 1, function(x) which(x)[1])
 
-  if (length(inside) > 0) {
-    native_trace[[3]] <- map$pathname[ inside[[1]] ]
-  }
+  native_trace[[3]] <- map$pathname[inside]
+
+  attr(native_trace, "row.names") <- .set_row_names(length(native_trace[[1]]))
+  names(native_trace) <- c("func", "ip", "pathname")
+  class(native_trace) <- "data.frame"
 
   native_trace
 }
