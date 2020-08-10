@@ -13,3 +13,6 @@ baz0 <- function() {
 }
 
 foo0()
+
+winch_get_proc_map()
+read.delim(text = winch_get_proc_map(), sep = " ", header = FALSE)
