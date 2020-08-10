@@ -12,4 +12,6 @@ baz0 <- function() {
   winch_trace_back()
 }
 
+winch_get_proc_map()
+
 foo0()
