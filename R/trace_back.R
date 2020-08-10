@@ -1,5 +1,5 @@
 #' @export
-winch_trace_back <- function(trace = rlang::trace_back(bottom = parent.frame())) {
+winch_add_trace_back <- function(trace = rlang::trace_back(bottom = parent.frame())) {
   # Avoid recursion
   rlang::local_options("rlang:::trace_hook" = NULL)
   rlang_trace <- trace

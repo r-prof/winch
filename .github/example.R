@@ -9,7 +9,7 @@ bar0 <- function() {
 }
 
 baz0 <- function() {
-  winch_trace_back()
+  winch_add_trace_back()
 }
 
 foo0()
