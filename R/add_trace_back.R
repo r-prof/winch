@@ -9,7 +9,7 @@ winch_add_trace_back <- function(trace = rlang::trace_back(bottom = parent.frame
   # FIXME: This is artificial, remove when done
   #native_trace <- rep(native_trace, each = 3)
 
-  is_libr <- (basename(native_trace$pathname) == "libR.so")
+  is_libr <- grepl("libR[.](so|dylib|dll)", native_trace$pathname, ignore.case = TRUE)
   is_libr_idx <- which(is_libr)
 
   first_libr <- is_libr_idx[[length(is_libr_idx)]]
