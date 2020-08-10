@@ -4,6 +4,8 @@ winch_get_proc_map <- function(path = "/proc/self/maps") {
   lines <- gsub(" +", " ", lines)
 
   data <- read.delim(text = lines, sep = " ", header = FALSE)
+  # https://stackoverflow.com/a/1401595/946850
+  names(data) <- c("address", "perms", "offset", "dev", "inode", "pathname")
 
   address_range <- strsplit(data[[1]], "-", fixed = TRUE)
   from <- vapply(address_range, `[[`, 1L, FUN.VALUE = character(1))
