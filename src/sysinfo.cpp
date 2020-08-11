@@ -205,6 +205,7 @@ static bool NextExtMachHelper(const mach_header* hdr,
 }
 #endif
 
+#if defined(__linux__)
 // Finds |c| in |text|, and assign '\0' at the found position.
 // The original character at the modified position should be |c|.
 // A pointer to the modified position is stored in |endptr|.
@@ -302,7 +303,6 @@ static bool StringToIntegerUntilCharWithCheck(
   return true;
 }
 
-#if defined(__linux__)
 static bool ParseProcMapsLine(char *text, uint64 *start, uint64 *end,
                               char *flags, uint64 *offset,
                               int *major, int *minor, int64 *inode,
