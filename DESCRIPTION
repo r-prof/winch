@@ -3,11 +3,16 @@ Title: What the Package Does (One Line, Title Case)
 Version: 0.0.0.9000
 Date: 2020-07-21
 Authors@R: 
-    person(given = "Kirill",
-           family = "Müller",
-           role = c("aut", "cre"),
-           email = "krlmlr+r@mailbox.org",
-           comment = c(ORCID = "0000-0002-1416-3412"))
+    c(
+        person(given = "Kirill",
+               family = "Müller",
+               role = c("aut", "cre"),
+               email = "krlmlr+r@mailbox.org",
+               comment = c(ORCID = "0000-0002-1416-3412")),
+        person(family = "Google Inc.",
+               role = "cph",
+               comment = "Code extracted from gperftools")
+    )
 Description: What the package does (one paragraph).
 License: GPL-3
 URL: https://github.com/krlmlr/r-prof,
