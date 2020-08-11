@@ -1,7 +1,6 @@
 #' @export
 winch_get_proc_map <- function(path = "/proc/self/maps") {
   # FIXME: Use gperftools code:
-  # - Build in macOS without warnings
   # - Test on Windows, is libunwind included?
   # - Autogenerate config.h
 
