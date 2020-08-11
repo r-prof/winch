@@ -200,7 +200,9 @@ class ProcMapsIterator {
   int fd_;            // filehandle on /proc/*/maps
 #endif
   pid_t pid_;
+#if defined(__linux__) || defined(__FreeBSD__)
   char flags_[10];
+#endif
   Buffer* dynamic_buffer_;  // dynamically-allocated Buffer
   bool using_maps_backing_; // true if we are looking at maps_backing instead of maps.
 };
