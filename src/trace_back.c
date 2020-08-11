@@ -2,6 +2,9 @@
 #include <R.h>
 #include <Rinternals.h>
 
+#define __STDC_FORMAT_MACROS
+#include <inttypes.h>
+
 #define UNW_LOCAL_ONLY
 #include <libunwind.h>
 
