@@ -1,6 +1,8 @@
 #' @export
 winch_get_proc_map <- function(path = "/proc/self/maps") {
   # FIXME: Use gperftools code:
+  # - What do C++ traces look like?
+  # - Combine library detection with fetching of backtrace
   # - Test on Windows, is libunwind included?
   # - Autogenerate config.h
 
