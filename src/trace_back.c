@@ -8,9 +8,16 @@
 #define UNW_LOCAL_ONLY
 #include <libunwind.h>
 
+#include <backtrace.h>
+
 void* buf[10000];
 
+extern void* backtrace_state;
+
 SEXP winch_trace_back() {
+  backtrace_print(backtrace_state, 0, stderr);
+  return R_NilValue;
+
   unw_context_t uc;
 
   int unw;
