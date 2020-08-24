@@ -1,4 +1,8 @@
 #!/bin/bash
+
+set -e
+cd $(dirname $0)
+
 # Anticonf (tm) script by Jeroen Ooms, Murat Tasan and Kirill Müller (2020)
 # This script will prefer cflags (specifically includefile dirs) and lib dirs
 # in the following order of precedence:
@@ -64,11 +68,10 @@ if [ $R_CONFIG_ERROR ]; then
 fi
 
 # Write to Makevars
-sed -e "s|@cflags@|$PKG_CFLAGS|" -e "s|@libs@|$PKG_LIBS|" -e "s|@header@|# Generated from Makevars.in, do not edit by hand|" src/Makevars.in > src/Makevars.new
-if [ ! -f src/Makevars ] || (which diff > /dev/null && ! diff -q src/Makevars src/Makevars.new); then
-  cp -f src/Makevars.new src/Makevars
+sed -e "s|@cflags@|$PKG_CFLAGS|" -e "s|@libs@|$PKG_LIBS|" -e "s|@header@|# Generated from Makevars.in, do not edit by hand|" Makevars.in > Makevars.new
+if [ ! -f Makevars ] || (which diff > /dev/null && ! diff -q Makevars Makevars.new); then
+  cp -f Makevars.new Makevars
 fi
-rm -f src/Makevars.new
 
 # Success
 exit 0
