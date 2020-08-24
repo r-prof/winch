@@ -1,4 +1,11 @@
 @header@
-PKG_CPPFLAGS = -I.
+PKG_CPPFLAGS = -I. -Ilocal/include
 PKG_CFLAGS = @cflags@
-PKG_LIBS = @libs@
+PKG_LIBS = @libs@ local/lib/libbacktrace.a
+
+all: $(SHLIB)
+
+$(SHLIB): local/lib/libbacktrace.a
+
+local/lib/libbacktrace.a:
+	make -C build/libbacktrace install

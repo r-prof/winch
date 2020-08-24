@@ -72,6 +72,13 @@ sed -e "s|@cflags@|$PKG_CFLAGS|" -e "s|@libs@|$PKG_LIBS|" -e "s|@header@|# Gener
 if [ ! -f Makevars ] || (which diff > /dev/null && ! diff -q Makevars Makevars.new); then
   cp -f Makevars.new Makevars
 fi
+rm -f Makevars.new
+
+prefix=${PWD}/local
+if ! [ -d build/libbacktrace ]; then
+  mkdir -p build/libbacktrace
+  ( cd build/libbacktrace && ../../vendor/libbacktrace/configure --disable-host-shared --prefix=${prefix} )
+fi
 
 # Success
 exit 0
