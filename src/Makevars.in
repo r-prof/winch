@@ -1,7 +1,6 @@
 @header@
 PKG_CPPFLAGS = -I. -Ilocal/include
-PKG_CFLAGS = @cflags@
-PKG_LIBS = @libs@ local/lib/libbacktrace.a
+PKG_LIBS = local/lib/libbacktrace.a
 
 all: $(SHLIB)
 
