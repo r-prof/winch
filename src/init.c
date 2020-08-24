@@ -7,6 +7,9 @@
 #include <R_ext/Visibility.h>
 #define export attribute_visible extern
 
+#include <backtrace.h>
+#include <backtrace-supported.h>
+
 extern SEXP winch_trace_back();
 extern SEXP winch_call(SEXP function, SEXP env);
 extern SEXP winch_context();
@@ -23,8 +26,18 @@ static const R_CallMethodDef CallEntries[] = {
   {NULL, NULL, 0}
 };
 
+void *backtrace_state;
+
+static void backtrace_error_callback_full(void *vdata, const char *msg, int errnum) {
+  Rf_error("backtrace failed: %s", msg);
+}
+
 export void R_init_winch(DllInfo *dll)
 {
   R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
   R_useDynamicSymbols(dll, FALSE);
+
+  backtrace_state = backtrace_create_state
+    ("/usr/lib/R/bin/exec/R", 0, backtrace_error_callback_full, NULL);
+  fprintf(stderr, "state: %p\n", backtrace_state);
 }
