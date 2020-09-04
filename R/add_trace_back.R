@@ -5,6 +5,9 @@ winch_add_trace_back <- function(trace = rlang::trace_back(bottom = parent.frame
   rlang_trace <- trace
 
   native_trace <- winch_trace_back()
+  # Remove __libc_start_main because it comes between two entries pointing to
+  # .../bin/exec/R
+  native_trace <- native_trace[native_trace$func != "__libc_start_main", ]
 
   # FIXME: This is artificial, remove when done
   #native_trace <- rep(native_trace, each = 3)
