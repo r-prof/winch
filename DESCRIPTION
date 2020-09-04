@@ -12,9 +12,14 @@ Description: What the package does (one paragraph).
 License: GPL-3
 URL: https://krlmlr.github.io/r-prof/, https://github.com/krlmlr/r-prof
 BugReports: https://github.com/krlmlr/r-prof/issues
+Imports: 
+    procmaps (>= 0.0.1.9000),
+    rlang (>= 0.4.7.9000)
 Suggests: 
-    rlang,
     vctrs
+Remotes: 
+    r-prof/procmaps,
+    krlmlr/rlang@f-trace-hook
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
