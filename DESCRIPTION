@@ -13,6 +13,7 @@ License: GPL-3
 URL: https://krlmlr.github.io/r-prof/, https://github.com/krlmlr/r-prof
 BugReports: https://github.com/krlmlr/r-prof/issues
 Imports: 
+    procmaps,
     rlang (>= 0.4.7.9000)
 Suggests: 
     vctrs

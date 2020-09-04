@@ -4,7 +4,7 @@ winch_trace_back <- function() {
 
   ip <- native_trace[[2]]
 
-  map <- winch_get_proc_map()
+  map <- procmaps::procmap_get()
 
   gte <- outer(ip, map$from, `>=`)
   lt <- outer(ip, map$to, `<`)
