@@ -1,3 +1,4 @@
 ^winch\.Rproj$
 ^\.Rproj\.user$
 ^README\.Rmd$
+^src/Makevars$
