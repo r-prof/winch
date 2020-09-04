@@ -18,6 +18,7 @@ Imports:
 Suggests: 
     vctrs
 Remotes: 
+    r-prof/procmaps@cran-0.0.1,
     krlmlr/rlang@f-trace-hook
 Encoding: UTF-8
 LazyData: true
