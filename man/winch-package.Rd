@@ -11,8 +11,8 @@ What the package does (one paragraph).
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://krlmlr.github.io/r-prof/}
   \item \url{https://github.com/krlmlr/r-prof}
-  \item \url{http://krlmlr.github.io/r-prof}
   \item Report bugs at \url{https://github.com/krlmlr/r-prof/issues}
 }
 
