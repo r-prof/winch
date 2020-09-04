@@ -58,7 +58,7 @@ winch_add_trace_back <- function(trace = rlang::trace_back(bottom = parent.frame
     # Did we miss a call into native? Append at end
     end_idx <- seq.int(length(r_fun_has_call_idx), length(native_trace_chunks), by = 1L)
     native_trace_chunks[[length(r_fun_has_call_idx)]] <-
-      unlist(native_trace_chunks[end_idx])
+      do.call(rbind, native_trace_chunks[end_idx])
     length(native_trace_chunks) <- length(r_fun_has_call_idx)
   }
 
