@@ -61,7 +61,7 @@ SEXP winch_trace_back_unwind() {
 
     SET_STRING_ELT(out_name, i, Rf_mkCharCE(buf, CE_UTF8));
 
-    char ip_buf[20];
+    char ip_buf[33];
     sprintf(ip_buf, "%.16" PRIx64, pi.start_ip);
     //snprintf(ip_buf, sizeof(ip_buf) / sizeof(buf), "%p", (void*)pi.start_ip);
     ip_buf[sizeof(ip_buf) / sizeof(*ip_buf) - 1] = '\0';
