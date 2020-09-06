@@ -37,5 +37,4 @@ export void R_init_winch(DllInfo *dll)
 
   backtrace_state = backtrace_create_state
     ("/usr/lib/R/bin/exec/R", 0, backtrace_error_callback_full, NULL);
-  fprintf(stderr, "state: %p\n", backtrace_state);
 }
