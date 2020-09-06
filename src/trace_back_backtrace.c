@@ -46,14 +46,6 @@ void cb_get_name_from_syminfo(void *data, uintptr_t pc,
 }
 
 void cb_ignore_name_from_syminfo(void* data, const char *msg, int errnum) {
-  cb_get_name_ip_t* cb_data = (cb_get_name_ip_t*)data;
-
-  SEXP out = cb_data->out;
-  SEXP out_name = VECTOR_ELT(out, 0);
-
-  R_xlen_t pos = cb_data->pos;
-
-  SET_STRING_ELT(out_name, pos, NA_STRING);
 }
 
 int cb_get_name_ip(void *data, uintptr_t pc,
@@ -71,7 +63,10 @@ int cb_get_name_ip(void *data, uintptr_t pc,
   if (function != NULL) {
     SET_STRING_ELT(out_name, pos, Rf_mkCharCE(function, CE_UTF8));
   } else {
-    fprintf(stderr, "pc in: %lx\n", pc);
+    // Default
+    SET_STRING_ELT(out_name, pos, NA_STRING);
+
+    // Best effort
     backtrace_syminfo(
       backtrace_state, pc,
       cb_get_name_from_syminfo, cb_ignore_name_from_syminfo, data
