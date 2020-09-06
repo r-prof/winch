@@ -26,6 +26,36 @@ typedef struct {
   R_xlen_t pos;
 } cb_get_name_ip_t;
 
+void cb_get_name_from_syminfo(void *data, uintptr_t pc,
+                              const char *symname,
+                              uintptr_t symval,
+                              uintptr_t symsize) {
+  cb_get_name_ip_t* cb_data = (cb_get_name_ip_t*)data;
+
+  SEXP out = cb_data->out;
+  SEXP out_name = VECTOR_ELT(out, 0);
+
+  R_xlen_t pos = cb_data->pos;
+
+  fprintf(stderr, "pc: %lx\n", pc);
+  fprintf(stderr, "symname: %lx\n", symval);
+
+  if (symname != NULL) {
+    SET_STRING_ELT(out_name, pos, Rf_mkCharCE(symname, CE_UTF8));
+  }
+}
+
+void cb_ignore_name_from_syminfo(void* data, const char *msg, int errnum) {
+  cb_get_name_ip_t* cb_data = (cb_get_name_ip_t*)data;
+
+  SEXP out = cb_data->out;
+  SEXP out_name = VECTOR_ELT(out, 0);
+
+  R_xlen_t pos = cb_data->pos;
+
+  SET_STRING_ELT(out_name, pos, NA_STRING);
+}
+
 int cb_get_name_ip(void *data, uintptr_t pc,
                    const char *filename, int lineno,
                    const char *function) {
@@ -41,7 +71,11 @@ int cb_get_name_ip(void *data, uintptr_t pc,
   if (function != NULL) {
     SET_STRING_ELT(out_name, pos, Rf_mkCharCE(function, CE_UTF8));
   } else {
-    SET_STRING_ELT(out_name, pos, NA_STRING);
+    fprintf(stderr, "pc in: %lx\n", pc);
+    backtrace_syminfo(
+      backtrace_state, pc,
+      cb_get_name_from_syminfo, cb_ignore_name_from_syminfo, data
+    );
   }
 
   char ip_buf[33];
