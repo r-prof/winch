@@ -5,11 +5,14 @@ winch_add_trace_back <- function(trace = rlang::trace_back(bottom = parent.frame
   rlang_trace <- trace
 
   native_trace <- winch_trace_back()
+  # Remove __libc_start_main because it comes between two entries pointing to
+  # .../bin/exec/R
+  native_trace <- native_trace[native_trace$func != "__libc_start_main", ]
 
   # FIXME: This is artificial, remove when done
   #native_trace <- rep(native_trace, each = 3)
 
-  is_libr <- grepl("libR[.](so|dylib|dll)", native_trace$pathname, ignore.case = TRUE)
+  is_libr <- procmaps::path_is_libr(native_trace$pathname)
   is_libr_idx <- which(is_libr)
 
   first_libr <- is_libr_idx[[length(is_libr_idx)]]
@@ -55,7 +58,7 @@ winch_add_trace_back <- function(trace = rlang::trace_back(bottom = parent.frame
     # Did we miss a call into native? Append at end
     end_idx <- seq.int(length(r_fun_has_call_idx), length(native_trace_chunks), by = 1L)
     native_trace_chunks[[length(r_fun_has_call_idx)]] <-
-      unlist(native_trace_chunks[end_idx])
+      do.call(rbind, native_trace_chunks[end_idx])
     length(native_trace_chunks) <- length(r_fun_has_call_idx)
   }
 
