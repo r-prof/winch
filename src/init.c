@@ -16,7 +16,7 @@ extern SEXP winch_context();
 extern SEXP winch_stop(SEXP message);
 
 static const R_CallMethodDef CallEntries[] = {
-  {"winch_c_trace_back",                   (DL_FUNC) &winch_trace_back, 0},
+  {"winch_c_trace_back",                   (DL_FUNC) &winch_trace_back, 1},
   {"winch_c_call",                         (DL_FUNC) &winch_call, 2},
   {"winch_c_context",                      (DL_FUNC) &winch_context, 0},
   {"winch_c_stop",                         (DL_FUNC) &winch_stop, 1},

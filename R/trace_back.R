@@ -1,6 +1,6 @@
 #' @export
 winch_trace_back <- function() {
-  native_trace <- .Call(winch_c_trace_back)
+  native_trace <- .Call(winch_c_trace_back, 2L)
 
   ip <- native_trace[[2]]
 
