@@ -49,6 +49,9 @@ elif [ "$PKGCONFIG_CFLAGS" ] || [ "$PKGCONFIG_LIBS" ]; then
   echo "Found pkg-config cflags and libs ($PKG_CONFIG_NAME $PKGCONFIG_MODVERSION)!"
   PKG_CFLAGS="$PKGCONFIG_CFLAGS $PKG_LIBUNWIND $PKG_LIBBACKTRACE"
   PKG_LIBS="$PKGCONFIG_LIBS"
+else
+  echo "No cflags and libs found!"
+  PKG_CFLAGS="$PKG_LIBUNWIND $PKG_LIBBACKTRACE"
 fi
 
 # For debugging
