@@ -1,4 +1,8 @@
 #!/bin/bash
+
+set -e
+cd $(dirname $0)
+
 # Anticonf (tm) script by Jeroen Ooms, Murat Tasan and Kirill Müller (2020)
 # This script will prefer cflags (specifically includefile dirs) and lib dirs
 # in the following order of precedence:
@@ -14,24 +18,40 @@ PKG_URL="https://github.com/libunwind/libunwind"
 PKG_TEST_HEADER="<libunwind.h>"
 
 # pkg-config values (if available)
-if [ $(command -v pkg-config) ]; then
-  PKGCONFIG_CFLAGS=$(pkg-config --cflags --silence-errors ${PKG_CONFIG_NAME})
-  PKGCONFIG_LIBS=$(pkg-config --libs --silence-errors ${PKG_CONFIG_NAME})
-  PKGCONFIG_MODVERSION=$(pkg-config --modversion --silence-errors ${PKG_CONFIG_NAME})
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  PKG_CFLAGS=""
+  PKG_LIBUNWIND="-DHAVE_LIBUNWIND"
+  LOCAL_LIBS=""
+  PKG_LIBS="-lSystem"
+elif [[ "$OSTYPE" == "msys"* ]]; then
+  PKG_CFLAGS=""
+  PKG_LIBBACKTRACE="-DHAVE_LIBBACKTRACE"
+  LOCAL_LIBS="local/lib/libbacktrace.a"
+  PKG_LIBS="-lSystem"
+else
+  PKG_LIBUNWIND="-DHAVE_LIBUNWIND"
+  PKG_LIBBACKTRACE="-DHAVE_LIBBACKTRACE"
+  LOCAL_LIBS="local/lib/libbacktrace.a"
+
+  if [ $(command -v pkg-config) ]; then
+    PKGCONFIG_CFLAGS=$(pkg-config --cflags --silence-errors ${PKG_CONFIG_NAME})
+    PKGCONFIG_LIBS=$(pkg-config --libs --silence-errors ${PKG_CONFIG_NAME})
+    PKGCONFIG_MODVERSION=$(pkg-config --modversion --silence-errors ${PKG_CONFIG_NAME})
+  fi
 fi
 
 # Note that cflags may be empty in case of success
 if [ "$INCLUDE_DIR" ] || [ "$LIB_DIR" ]; then
   echo "Found INCLUDE_DIR and/or LIB_DIR!"
-  PKG_CFLAGS="-I$INCLUDE_DIR $PKG_CFLAGS"
+  PKG_CFLAGS="-I$INCLUDE_DIR $PKG_CFLAGS $PKG_LIBUNWIND $PKG_LIBBACKTRACE"
   PKG_LIBS="-L$LIB_DIR $PKG_LIBS"
 elif [ "$PKGCONFIG_CFLAGS" ] || [ "$PKGCONFIG_LIBS" ]; then
   echo "Found pkg-config cflags and libs ($PKG_CONFIG_NAME $PKGCONFIG_MODVERSION)!"
-  PKG_CFLAGS=${PKGCONFIG_CFLAGS}
-  PKG_LIBS=${PKGCONFIG_LIBS}
-elif [[ "$OSTYPE" == "darwin"* ]]; then
-  PKG_CFLAGS=""
-  PKG_LIBS="-lSystem"
+  PKG_CFLAGS="$PKGCONFIG_CFLAGS $PKG_LIBUNWIND $PKG_LIBBACKTRACE"
+  PKG_LIBS="$PKGCONFIG_LIBS"
+else
+  echo "No cflags and libs found!"
+  PKG_CFLAGS="$PKG_LIBUNWIND $PKG_LIBBACKTRACE"
 fi
 
 # For debugging
@@ -64,11 +84,11 @@ if [ $R_CONFIG_ERROR ]; then
 fi
 
 # Write to Makevars
-sed -e "s|@cflags@|$PKG_CFLAGS|" -e "s|@libs@|$PKG_LIBS|" -e "s|@header@|# Generated from Makevars.in, do not edit by hand|" src/Makevars.in > src/Makevars.new
-if [ ! -f src/Makevars ] || (which diff > /dev/null && ! diff -q src/Makevars src/Makevars.new); then
-  cp -f src/Makevars.new src/Makevars
+sed -e "s|@cflags@|$PKG_CFLAGS|" -e "s|@libs@|$PKG_LIBS|" -e "s|@local_libs@|$LOCAL_LIBS$|" -e "s|@header@|# Generated from Makevars.in, do not edit by hand|" Makevars.in > Makevars.new
+if [ ! -f Makevars ] || (which diff > /dev/null && ! diff -q Makevars Makevars.new); then
+  cp -f Makevars.new Makevars
 fi
-rm -f src/Makevars.new
+rm -f Makevars.new
 
 # Success
 exit 0

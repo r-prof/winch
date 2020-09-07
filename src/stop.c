@@ -3,5 +3,5 @@
 #include <Rinternals.h>
 
 SEXP winch_stop(SEXP message) {
-  Rf_error("winch_stop(): %s", message);
+  Rf_error("winch_stop(): %s", CHAR(STRING_ELT(message, 0)));
 }

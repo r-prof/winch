@@ -1,0 +1,13 @@
+PKG_CPPFLAGS = -Ilocal/include -DHAVE_LIBBACKTRACE
+PKG_CFLAGS =
+LOCAL_LIBS = local/lib/libbacktrace.a
+PKG_LIBS = -l${LOCAL_LIBS}
+
+all: $(SHLIB)
+
+$(SHLIB): ${LOCAL_LIBS}
+
+init.o: local/lib/libbacktrace.a
+
+local/lib/libbacktrace.a:
+	make -C build.win/libbacktrace install
