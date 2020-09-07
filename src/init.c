@@ -8,12 +8,14 @@
 #define export attribute_visible extern
 
 extern SEXP winch_trace_back();
+extern SEXP winch_trace_back_default_method();
 extern SEXP winch_call(SEXP function, SEXP env);
 extern SEXP winch_context();
 extern SEXP winch_stop(SEXP message);
 
 static const R_CallMethodDef CallEntries[] = {
   {"winch_c_trace_back",                   (DL_FUNC) &winch_trace_back, 1},
+  {"winch_c_trace_back_default_method",    (DL_FUNC) &winch_trace_back_default_method},
   {"winch_c_call",                         (DL_FUNC) &winch_call, 2},
   {"winch_c_context",                      (DL_FUNC) &winch_context, 0},
   {"winch_c_stop",                         (DL_FUNC) &winch_stop, 1},

@@ -23,3 +23,13 @@ SEXP winch_trace_back(SEXP method) {
     Rf_error("winch_trace_back: method invalid");
   }
 }
+
+SEXP winch_trace_back_default_method() {
+#if defined(HAVE_LIBUNWIND)
+  return Rf_ScalarInteger(1);
+#elif defined(HAVE_LIBBACKTRACE)
+  return Rf_ScalarInteger(2);
+#else
+  Rf_error("No traceback method available for this platform".)
+#endif
+}
