@@ -10,7 +10,16 @@
 
 #include <backtrace.h>
 
-extern void* backtrace_state;
+void *backtrace_state;
+
+static void backtrace_error_callback_full(void *vdata, const char *msg, int errnum) {
+  Rf_error("backtrace failed: %s", msg);
+}
+
+void init_backtrace() {
+  backtrace_state = backtrace_create_state
+    ("/usr/lib/R/bin/exec/R", 0, backtrace_error_callback_full, NULL);
+}
 
 void cb_error(void* data, const char *msg, int errnum) {
   Rf_error("libbacktrace: %d: %s", errnum, msg);
@@ -109,6 +118,9 @@ SEXP winch_trace_back_backtrace() {
 }
 
 #else // #ifdef HAVE_LIBBACKTRACE
+
+void init_backtrace() {
+}
 
 SEXP winch_trace_back_backtrace() {
   Rf_error("libbacktrace not supported on this platform.");
