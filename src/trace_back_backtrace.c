@@ -2,6 +2,9 @@
 #include <R.h>
 #include <Rinternals.h>
 
+
+#ifdef HAVE_LIBBACKTRACE
+
 #define __STDC_FORMAT_MACROS
 #include <inttypes.h>
 
@@ -104,3 +107,11 @@ SEXP winch_trace_back_backtrace() {
   UNPROTECT(3);
   return out;
 }
+
+#else // #ifdef HAVE_LIBBACKTRACE
+
+SEXP winch_trace_back_backtrace() {
+  Rf_error("libbacktrace not supported on this platform.");
+}
+
+#endif // #ifdef HAVE_LIBBACKTRACE
