@@ -23,9 +23,15 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   PKG_LIBUNWIND="-DHAVE_LIBUNWIND"
   LOCAL_LIBS=""
   PKG_LIBS="-lSystem"
+elif [[ "$OSTYPE" == "msys"* ]]; then
+  PKG_CFLAGS=""
+  PKG_LIBBACKTRACE="-DHAVE_LIBBACKTRACE"
+  LOCAL_LIBS="local/lib/libbacktrace.a"
+  PKG_LIBS="-lSystem"
 else
   PKG_LIBUNWIND="-DHAVE_LIBUNWIND"
   PKG_LIBBACKTRACE="-DHAVE_LIBBACKTRACE"
+  LOCAL_LIBS="local/lib/libbacktrace.a"
 
   if [ $(command -v pkg-config) ]; then
     PKGCONFIG_CFLAGS=$(pkg-config --cflags --silence-errors ${PKG_CONFIG_NAME})
@@ -74,15 +80,8 @@ if [ $R_CONFIG_ERROR ]; then
   exit 1;
 fi
 
-# Configure libbacktrace
-prefix=${PWD}/local
-if ! [ -d build/libbacktrace ]; then
-  mkdir -p build/libbacktrace
-  ( cd build/libbacktrace && ../../vendor/libbacktrace/configure --disable-host-shared --prefix=${prefix} )
-fi
-
 # Write to Makevars
-sed -e "s|@cflags@|$PKG_CFLAGS|" -e "s|@libs@|$PKG_LIBS|" -e "s|@header@|# Generated from Makevars.in, do not edit by hand|" Makevars.in > Makevars.new
+sed -e "s|@cflags@|$PKG_CFLAGS|" -e "s|@libs@|$PKG_LIBS|" -e "s|@local_libs@|$LOCAL_LIBS$|" -e "s|@header@|# Generated from Makevars.in, do not edit by hand|" Makevars.in > Makevars.new
 if [ ! -f Makevars ] || (which diff > /dev/null && ! diff -q Makevars Makevars.new); then
   cp -f Makevars.new Makevars
 fi

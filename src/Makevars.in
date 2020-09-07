@@ -8,5 +8,8 @@ all: $(SHLIB)
 
 $(SHLIB): ${LOCAL_LIBS}
 
-local/lib/libbacktrace.a:
+build/libbacktrace/Makefile: vendor/libbacktrace/configure
+	mkdir -p build/libbacktrace && cd build/libbacktrace && ../../vendor/libbacktrace/configure --disable-host-shared --prefix=$${PWD}/../../local
+
+local/lib/libbacktrace.a: build/libbacktrace/Makefile vendor/libbacktrace/*.c vendor/libbacktrace/*.h
 	make -C build/libbacktrace install
