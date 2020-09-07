@@ -2,6 +2,8 @@
 #include <R.h>
 #include <Rinternals.h>
 
+#ifdef HAVE_LIBUNWIND
+
 #define __STDC_FORMAT_MACROS
 #include <inttypes.h>
 
@@ -77,3 +79,11 @@ SEXP winch_trace_back_unwind() {
   UNPROTECT(3);
   return out;
 }
+
+#else // #ifdef HAVE_LIBUNWIND
+
+SEXP winch_trace_back_unwind() {
+  Rf_error("libunwind not supported on this platform.");
+}
+
+#endif // #ifdef HAVE_LIBUNWIND
