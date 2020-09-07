@@ -18,24 +18,31 @@ PKG_URL="https://github.com/libunwind/libunwind"
 PKG_TEST_HEADER="<libunwind.h>"
 
 # pkg-config values (if available)
-if [ $(command -v pkg-config) ]; then
-  PKGCONFIG_CFLAGS=$(pkg-config --cflags --silence-errors ${PKG_CONFIG_NAME})
-  PKGCONFIG_LIBS=$(pkg-config --libs --silence-errors ${PKG_CONFIG_NAME})
-  PKGCONFIG_MODVERSION=$(pkg-config --modversion --silence-errors ${PKG_CONFIG_NAME})
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  PKG_CFLAGS=""
+  PKG_LIBUNWIND="-DHAVE_LIBUNWIND"
+  LOCAL_LIBS=""
+  PKG_LIBS="-lSystem"
+else
+  PKG_LIBUNWIND="-DHAVE_LIBUNWIND"
+  PKG_LIBBACKTRACE="-DHAVE_LIBBACKTRACE"
+
+  if [ $(command -v pkg-config) ]; then
+    PKGCONFIG_CFLAGS=$(pkg-config --cflags --silence-errors ${PKG_CONFIG_NAME})
+    PKGCONFIG_LIBS=$(pkg-config --libs --silence-errors ${PKG_CONFIG_NAME})
+    PKGCONFIG_MODVERSION=$(pkg-config --modversion --silence-errors ${PKG_CONFIG_NAME})
+  fi
 fi
 
 # Note that cflags may be empty in case of success
 if [ "$INCLUDE_DIR" ] || [ "$LIB_DIR" ]; then
   echo "Found INCLUDE_DIR and/or LIB_DIR!"
-  PKG_CFLAGS="-I$INCLUDE_DIR $PKG_CFLAGS"
+  PKG_CFLAGS="-I$INCLUDE_DIR $PKG_CFLAGS $PKG_LIBUNWIND $PKG_LIBBACKTRACE"
   PKG_LIBS="-L$LIB_DIR $PKG_LIBS"
 elif [ "$PKGCONFIG_CFLAGS" ] || [ "$PKGCONFIG_LIBS" ]; then
   echo "Found pkg-config cflags and libs ($PKG_CONFIG_NAME $PKGCONFIG_MODVERSION)!"
-  PKG_CFLAGS=${PKGCONFIG_CFLAGS}
-  PKG_LIBS=${PKGCONFIG_LIBS}
-elif [[ "$OSTYPE" == "darwin"* ]]; then
-  PKG_CFLAGS=""
-  PKG_LIBS="-lSystem"
+  PKG_CFLAGS="$PKGCONFIG_CFLAGS $PKG_LIBUNWIND $PKG_LIBBACKTRACE"
+  PKG_LIBS="$PKGCONFIG_LIBS"
 fi
 
 # For debugging
@@ -67,18 +74,19 @@ if [ $R_CONFIG_ERROR ]; then
   exit 1;
 fi
 
+# Configure libbacktrace
+prefix=${PWD}/local
+if ! [ -d build/libbacktrace ]; then
+  mkdir -p build/libbacktrace
+  ( cd build/libbacktrace && ../../vendor/libbacktrace/configure --disable-host-shared --prefix=${prefix} )
+fi
+
 # Write to Makevars
 sed -e "s|@cflags@|$PKG_CFLAGS|" -e "s|@libs@|$PKG_LIBS|" -e "s|@header@|# Generated from Makevars.in, do not edit by hand|" Makevars.in > Makevars.new
 if [ ! -f Makevars ] || (which diff > /dev/null && ! diff -q Makevars Makevars.new); then
   cp -f Makevars.new Makevars
 fi
 rm -f Makevars.new
-
-prefix=${PWD}/local
-if ! [ -d build/libbacktrace ]; then
-  mkdir -p build/libbacktrace
-  ( cd build/libbacktrace && ../../vendor/libbacktrace/configure --disable-host-shared --prefix=${prefix} )
-fi
 
 # Success
 exit 0
