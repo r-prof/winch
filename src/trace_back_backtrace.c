@@ -16,9 +16,9 @@ static void backtrace_error_callback_full(void *vdata, const char *msg, int errn
   Rf_error("backtrace failed: %s", msg);
 }
 
-void init_backtrace() {
+void init_backtrace(const char* argv0) {
   backtrace_state = backtrace_create_state
-    ("/usr/lib/R/bin/exec/R", 0, backtrace_error_callback_full, NULL);
+    (argv0, 0, backtrace_error_callback_full, NULL);
 }
 
 void cb_error(void* data, const char *msg, int errnum) {
