@@ -17,6 +17,8 @@ static void backtrace_error_callback_full(void *vdata, const char *msg, int errn
 }
 
 void init_backtrace(const char* argv0) {
+  argv0 = "c:/Users/kirill/git/R/winch/src/winch.dll";
+
   backtrace_state = backtrace_create_state(
     argv0, 0, backtrace_error_callback_full, NULL
   );
