@@ -1,4 +1,5 @@
 library(winch)
+library(magrittr)
 
 options(error = winch_entrace, rlang_backtrace_on_error = "full")
 
