@@ -34,6 +34,10 @@ export void R_init_winch(DllInfo *dll)
 }
 
 SEXP winch_init_library(SEXP argv0) {
-  init_backtrace(CHAR(STRING_ELT(argv0, 0)));
+  const char* c_argv0 = NULL;
+  if (argv0 != R_NilValue) {
+    c_argv0 = CHAR(STRING_ELT(argv0, 0));
+  }
+  init_backtrace(c_argv0);
   return R_NilValue;
 }
