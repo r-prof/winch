@@ -20,8 +20,8 @@ Suggests:
     testthat,
     vctrs
 Remotes: 
-    krlmlr/rlang@f-trace-hook,
-    r-prof/procmaps
+    r-prof/procmaps,
+    krlmlr/rlang@f-trace-hook
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
