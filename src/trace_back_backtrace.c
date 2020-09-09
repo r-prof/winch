@@ -26,7 +26,9 @@ void cb_error(void* data, const char *msg, int errnum) {
   Rf_error("libbacktrace: %d: %s", errnum, msg);
 }
 
-int cb_increment_size(void *data, uintptr_t pc) {
+int cb_increment_size(void *data, uintptr_t pc,
+                      const char *filename, int lineno,
+                      const char *function) {
   R_xlen_t* size = (R_xlen_t*)data;
   ++*size;
   return 0;
@@ -59,7 +61,10 @@ void cb_get_name_from_syminfo(void *data, uintptr_t pc,
 void cb_ignore_name_from_syminfo(void* data, const char *msg, int errnum) {
 }
 
-int cb_get_name_ip(void *data, uintptr_t pc) {
+int cb_get_name_ip(void *data, uintptr_t pc,
+                   const char *filename, int lineno,
+                   const char *function) {
+
   cb_get_name_ip_t* cb_data = (cb_get_name_ip_t*)data;
 
   SEXP out = cb_data->out;
@@ -68,14 +73,18 @@ int cb_get_name_ip(void *data, uintptr_t pc) {
 
   R_xlen_t pos = cb_data->pos;
 
-  // Default
-  SET_STRING_ELT(out_name, pos, NA_STRING);
+  if (function != NULL) {
+    SET_STRING_ELT(out_name, pos, Rf_mkCharCE(function, CE_UTF8));
+  } else {
+    // Default
+    SET_STRING_ELT(out_name, pos, NA_STRING);
 
-  // Best effort
-  backtrace_syminfo(
-    backtrace_state, pc,
-    cb_get_name_from_syminfo, cb_ignore_name_from_syminfo, data
-  );
+    // Best effort
+    backtrace_syminfo(
+      backtrace_state, pc,
+      cb_get_name_from_syminfo, cb_ignore_name_from_syminfo, data
+    );
+  }
 
   char ip_buf[33];
   sprintf(ip_buf, "%.16" PRIx64, pc);
@@ -91,7 +100,7 @@ SEXP winch_trace_back_backtrace() {
   backtrace_print(backtrace_state, 1, stderr);
 
   R_xlen_t size = 0;
-  backtrace_simple(backtrace_state, 1, cb_increment_size, cb_error, &size);
+  backtrace_full(backtrace_state, 1, cb_increment_size, cb_error, &size);
 
   SEXP out_name = PROTECT(Rf_allocVector(STRSXP, size));
   SEXP out_ip = PROTECT(Rf_allocVector(STRSXP, size));
@@ -103,7 +112,7 @@ SEXP winch_trace_back_backtrace() {
   data.out = out;
   data.pos = 0;
 
-  backtrace_simple(backtrace_state, 1, cb_get_name_ip, cb_error, &data);
+  backtrace_full(backtrace_state, 1, cb_get_name_ip, cb_error, &data);
 
   UNPROTECT(3);
   return out;
