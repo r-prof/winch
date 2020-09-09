@@ -6,13 +6,15 @@ winch_init_library <- function(path = NULL, force = FALSE) {
 
   if (is.null(path)) {
     # Default to our library, which is compiled with debug info.
-    winch_c_init_library$dll[["path"]]
+    path <- winch_c_init_library$dll[["path"]]
     need_path_message <- TRUE
   } else {
     need_path_message <- FALSE
   }
 
   if (identical(path, library_env$path) && !force) return(invisible())
+
+  library_env$path <- path
 
   work_done <- .Call(winch_c_init_library, path)
   if (isTRUE(work_done) && need_path_message) {
@@ -21,4 +23,6 @@ winch_init_library <- function(path = NULL, force = FALSE) {
       "Initialized with ", path, ", use `winch_init_library()` to override."
     ))
   }
+
+  invisible()
 }
