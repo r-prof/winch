@@ -1,3 +1,4 @@
+DEBUG = true
 PKG_CPPFLAGS = -Ilocal/include
 PKG_CFLAGS = -DHAVE_LIBBACKTRACE
 LOCAL_LIBS = local/lib/libbacktrace.a

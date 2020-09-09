@@ -5,7 +5,9 @@
 }
 
 get_argv0 <- function() {
-  argv0 <- commandArgs()[[1]]
-  if (!file.exists(argv0)) return(NULL)
-  argv0
+  # For libbacktrace's purposes, argv0 is our shared library, which is compiled
+  # with debug info.
+  # This allows libbacktrace to perform correct initialization for this and
+  # for subsequent libraries, hopefully.
+  winch_c_init_library$dll[["path"]]
 }
