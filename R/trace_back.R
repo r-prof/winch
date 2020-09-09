@@ -2,6 +2,8 @@ default_method <- NULL
 
 #' @export
 winch_trace_back <- function() {
+  winch_init_library()
+
   native_trace <- .Call(winch_c_trace_back, default_method)
 
   ip <- native_trace[[2]]

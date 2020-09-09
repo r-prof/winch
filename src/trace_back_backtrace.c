@@ -16,10 +16,11 @@ static void backtrace_error_callback_full(void *vdata, const char *msg, int errn
   Rf_error("backtrace failed: %s", msg);
 }
 
-void init_backtrace(const char* argv0) {
+SEXP init_backtrace(const char* argv0) {
   backtrace_state = backtrace_create_state(
     argv0, 0, backtrace_error_callback_full, NULL
   );
+  return Rf_ScalarLogical(1);
 }
 
 void cb_error(void* data, const char *msg, int errnum) {
@@ -120,7 +121,8 @@ SEXP winch_trace_back_backtrace() {
 
 #else // #ifdef HAVE_LIBBACKTRACE
 
-void init_backtrace() {
+SEXP init_backtrace() {
+  return R_NilValue;
 }
 
 SEXP winch_trace_back_backtrace() {
