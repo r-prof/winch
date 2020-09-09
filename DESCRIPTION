@@ -22,6 +22,7 @@ Suggests:
 Remotes: 
     r-prof/procmaps,
     krlmlr/rlang@f-trace-hook
+SystemRequirements: gcc (>= 5) or clang
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)

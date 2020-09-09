@@ -15,6 +15,11 @@ winch_add_trace_back <- function(trace = rlang::trace_back(bottom = parent.frame
   is_libr <- procmaps::path_is_libr(native_trace$pathname)
   is_libr_idx <- which(is_libr)
 
+  if (length(is_libr_idx) == 0) {
+    warning("winch: libR not found in backtrace, can't merge.", call. = FALSE)
+    return(rlang_trace)
+  }
+
   first_libr <- is_libr_idx[[length(is_libr_idx)]]
 
   native_trace <- native_trace[seq_len(first_libr), ]
