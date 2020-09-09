@@ -3,3 +3,4 @@
 ^README\.Rmd$
 ^src/Makevars$
 ^\.github$
+^CODE_OF_CONDUCT\.md$
