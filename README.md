@@ -1,116 +1,147 @@
-
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 # winch
 
 <!-- badges: start -->
 
-[![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+
 <!-- badges: end -->
 
-The goal of winch is to provide stack traces that combine R and C
-function calls. This is primarily useful for developers of R packages
-where a substantial portion of the code is C or C++.
+The goal of winch is to provide stack traces that combine R and C function calls. This is primarily useful for developers of R packages where a substantial portion of the code is C or C++.
 
 ## Installation
 
-Once on CRAN, you can install the released version of winch from
-[CRAN](https://CRAN.R-project.org) with:
+Once on CRAN, you can install the released version of winch from [CRAN](https://CRAN.R-project.org) with:
 
-``` r
-install.packages("winch")
-```
+<pre class='chroma'>
+<span class='nf'><a href='https://rdrr.io/r/utils/install.packages.html'>install.packages</a></span>(<span class='s'>"winch"</span>)
+</pre>
 
 Install the development version from GitHub with:
 
-``` r
-devtools::install_github("r-lib/winch")
-```
+<pre class='chroma'>
+<span class='k'>devtools</span>::<span class='nf'><a href='https://devtools.r-lib.org//reference/remote-reexports.html'>install_github</a></span>(<span class='s'>"r-lib/winch"</span>)
+</pre>
 
 ## Example
 
-This is an example where an R function calls into C which calls back
-into R, see the second-to-last entry in the trace:
+This is an example where an R function calls into C which calls back into R, see the second-to-last entry in the trace:
 
-``` r
-library(winch)
+<pre class='chroma'>
+<span class='nf'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='k'><a href='https://krlmlr.github.io/r-prof/'>winch</a></span>)
 
-foo <- function() {
-  winch_call(bar)
+<span class='k'>foo</span> <span class='o'>&lt;-</span> <span class='nf'>function</span>() {
+  <span class='nf'>winch_call</span>(<span class='k'>bar</span>)
 }
 
-bar <- function() {
-  winch_trace_back()
+<span class='k'>bar</span> <span class='o'>&lt;-</span> <span class='nf'>function</span>() {
+  <span class='nf'>winch_trace_back</span>()
 }
 
-foo()
-#>      █
-#>   1. ├─rmarkdown::render(...)
-#>   2. │ └─knitr::knit(knit_input, knit_output, envir = envir, quiet = quiet)
-#>   3. │   └─knitr:::process_file(text, output)
-#>   4. │     ├─base::withCallingHandlers(...)
-#>   5. │     ├─knitr:::process_group(group)
-#>   6. │     └─knitr:::process_group.block(group)
-#>   7. │       └─knitr:::call_block(x)
-#>   8. │         └─knitr:::block_exec(params)
-#>   9. │           ├─knitr:::in_dir(...)
-#>  10. │           └─knitr:::evaluate(...)
-#>  11. │             └─evaluate::evaluate(...)
-#>  12. │               └─evaluate:::evaluate_call(...)
-#>  13. │                 ├─evaluate:::timing_fn(...)
-#>  14. │                 ├─base:::handle(...)
-#>  15. │                 ├─base::withCallingHandlers(...)
-#>  16. │                 ├─base::withVisible(eval(expr, envir, enclos))
-#>  17. │                 └─base::eval(expr, envir, enclos)
-#>  18. │                   └─base::eval(expr, envir, enclos)
-#>  19. └─global::foo()
-#>  20.   └─winch::winch_call(bar)
-#>  21.     └─`winch.so(winch_call+0x1c) [0x7f0896862cac]`()
-#>  22.       └─(function () ...
-```
+<span class='nf'>foo</span>()
+<span class='c'>#&gt;                  func               ip</span>
+<span class='c'>#&gt; 1  Rf_NewFrameConfirm 00007f958f270480</span>
+<span class='c'>#&gt; 2             Rf_eval 00007f958f2ba4f0</span>
+<span class='c'>#&gt; 3        R_execMethod 00007f958f2bf550</span>
+<span class='c'>#&gt; 4             Rf_eval 00007f958f2ba4f0</span>
+<span class='c'>#&gt; 5        R_execMethod 00007f958f2bde90</span>
+<span class='c'>#&gt; 6             Rf_eval 00007f958f2ba4f0</span>
+<span class='c'>#&gt; 7             Rf_eval 00007f958f2bc170</span>
+<span class='c'>#&gt; 8     Rf_applyClosure 00007f958f2bd090</span>
+<span class='c'>#&gt; 9             Rf_eval 00007f958f2ba4f0</span>
+<span class='c'>#&gt; 10       R_execMethod 00007f958f2bde90</span>
+<span class='c'>#&gt; 11            Rf_eval 00007f958f2ba4f0</span>
+<span class='c'>#&gt; 12            Rf_eval 00007f958f2bc170</span>
+<span class='c'>#&gt; 13    Rf_applyClosure 00007f958f2bd090</span>
+<span class='c'>#&gt; 14            Rf_eval 00007f958f2ba4f0</span>
+<span class='c'>#&gt; 15         winch_call 00007f957c1474b0</span>
+<span class='c'>#&gt; 16 Rf_NewFrameConfirm 00007f958f26e8a0</span>
+<span class='c'>#&gt; 17 Rf_NewFrameConfirm 00007f958f270480</span>
+<span class='c'>#&gt; 18            Rf_eval 00007f958f2ba4f0</span>
+<span class='c'>#&gt; 19       R_execMethod 00007f958f2bde90</span>
+<span class='c'>#&gt; 20            Rf_eval 00007f958f2ba4f0</span>
+<span class='c'>#&gt; 21            Rf_eval 00007f958f2bc170</span>
+<span class='c'>#&gt; 22    Rf_applyClosure 00007f958f2bd090</span>
+<span class='c'>#&gt; 23            Rf_eval 00007f958f2ba4f0</span>
+<span class='c'>#&gt; 24       R_execMethod 00007f958f2bde90</span>
+<span class='c'>#&gt; 25            Rf_eval 00007f958f2ba4f0</span>
+<span class='c'>#&gt; 26            Rf_eval 00007f958f2bc170</span>
+<span class='c'>#&gt; 27    Rf_applyClosure 00007f958f2bd090</span>
+<span class='c'>#&gt; 28            Rf_eval 00007f958f2ba4f0</span>
+<span class='c'>#&gt; 29     R_forceAndCall 00007f958f2c03a0</span>
+<span class='c'>#&gt; 30           do_Rprof 00007f958f2a4b80</span>
+<span class='c'>#&gt; 31            Rf_eval 00007f958f2ba4f0</span>
+<span class='c'>#&gt; 32            Rf_eval 00007f958f2bc170</span>
+<span class='c'>#&gt; 33    Rf_applyClosure 00007f958f2bd090</span>
+<span class='c'>#&gt;                                        pathname</span>
+<span class='c'>#&gt; 1                        /usr/lib/R/lib/libR.so</span>
+<span class='c'>#&gt; 2                        /usr/lib/R/lib/libR.so</span>
+<span class='c'>#&gt; 3                        /usr/lib/R/lib/libR.so</span>
+<span class='c'>#&gt; 4                        /usr/lib/R/lib/libR.so</span>
+<span class='c'>#&gt; 5                        /usr/lib/R/lib/libR.so</span>
+<span class='c'>#&gt; 6                        /usr/lib/R/lib/libR.so</span>
+<span class='c'>#&gt; 7                        /usr/lib/R/lib/libR.so</span>
+<span class='c'>#&gt; 8                        /usr/lib/R/lib/libR.so</span>
+<span class='c'>#&gt; 9                        /usr/lib/R/lib/libR.so</span>
+<span class='c'>#&gt; 10                       /usr/lib/R/lib/libR.so</span>
+<span class='c'>#&gt; 11                       /usr/lib/R/lib/libR.so</span>
+<span class='c'>#&gt; 12                       /usr/lib/R/lib/libR.so</span>
+<span class='c'>#&gt; 13                       /usr/lib/R/lib/libR.so</span>
+<span class='c'>#&gt; 14                       /usr/lib/R/lib/libR.so</span>
+<span class='c'>#&gt; 15 /home/kirill/git/R/r-prof/winch/src/winch.so</span>
+<span class='c'>#&gt; 16                       /usr/lib/R/lib/libR.so</span>
+<span class='c'>#&gt; 17                       /usr/lib/R/lib/libR.so</span>
+<span class='c'>#&gt; 18                       /usr/lib/R/lib/libR.so</span>
+<span class='c'>#&gt; 19                       /usr/lib/R/lib/libR.so</span>
+<span class='c'>#&gt; 20                       /usr/lib/R/lib/libR.so</span>
+<span class='c'>#&gt; 21                       /usr/lib/R/lib/libR.so</span>
+<span class='c'>#&gt; 22                       /usr/lib/R/lib/libR.so</span>
+<span class='c'>#&gt; 23                       /usr/lib/R/lib/libR.so</span>
+<span class='c'>#&gt; 24                       /usr/lib/R/lib/libR.so</span>
+<span class='c'>#&gt; 25                       /usr/lib/R/lib/libR.so</span>
+<span class='c'>#&gt; 26                       /usr/lib/R/lib/libR.so</span>
+<span class='c'>#&gt; 27                       /usr/lib/R/lib/libR.so</span>
+<span class='c'>#&gt; 28                       /usr/lib/R/lib/libR.so</span>
+<span class='c'>#&gt; 29                       /usr/lib/R/lib/libR.so</span>
+<span class='c'>#&gt; 30                       /usr/lib/R/lib/libR.so</span>
+<span class='c'>#&gt; 31                       /usr/lib/R/lib/libR.so</span>
+<span class='c'>#&gt; 32                       /usr/lib/R/lib/libR.so</span>
+<span class='c'>#&gt; 33                       /usr/lib/R/lib/libR.so</span>
+<span class='c'>#&gt;  [ reached 'max' / getOption("max.print") -- omitted 99 rows ]</span>
+</pre>
 
-`winch_entrace()` is a drop-in replacement for `rlang::entrace()`. This
-cannot be easily demonstrated in a knitr document, see [this GitHub
-Actions
-run](https://github.com/r-prof/winch/runs/960815218?check_suite_focus=true#step:11:53)
-for an example.
+`winch_entrace()` is a drop-in replacement for [`rlang::entrace()`](https://rlang.r-lib.org/reference/entrace.html). This cannot be easily demonstrated in a knitr document, see [this GitHub Actions run](https://github.com/r-prof/winch/runs/960815218?check_suite_focus=true#step:11:53) for an example.
 
-``` r
-library(winch)
+<pre class='chroma'>
+<span class='nf'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='k'><a href='https://krlmlr.github.io/r-prof/'>winch</a></span>)
 
-options(error = winch_entrace, rlang_backtrace_on_error = "full")
+<span class='nf'><a href='https://rdrr.io/r/base/options.html'>options</a></span>(error = <span class='k'>winch_entrace</span>, rlang_backtrace_on_error = <span class='s'>"full"</span>)
 
-foo <- function() {
-  winch_call(function() bar())
+<span class='k'>foo</span> <span class='o'>&lt;-</span> <span class='nf'>function</span>() {
+  <span class='nf'>winch_call</span>(<span class='nf'>function</span>() <span class='nf'><a href='https://rdrr.io/r/grDevices/plotmath.html'>bar</a></span>())
 }
 
-bar <- function() {
-  stop("oops")
+<span class='k'>bar</span> <span class='o'>&lt;-</span> <span class='nf'>function</span>() {
+  <span class='nf'><a href='https://rdrr.io/r/base/stop.html'>stop</a></span>(<span class='s'>"oops"</span>)
 }
 
-foo()
-```
+<span class='nf'>foo</span>()
+</pre>
 
 ## How does it work?
 
-It’s a very crude heuristic. R’s traceback (and also profiling)
-infastructure introduces the notion of a “context”. Every call to an R
-function opens a new context, and closes it when execution of the
-function ends. Unfortunately, no new context is established for native
-code called with `.Call()` or `.External()`. Establishing contexts
-requires precious run time, this might be the reason for this omission.
+It’s a very crude heuristic. R’s traceback (and also profiling) infrastructure introduces the notion of a “context”. Every call to an R function opens a new context, and closes it when execution of the function ends. Unfortunately, no new context is established for native code called with [`.Call()`](https://rdrr.io/r/base/CallExternal.html) or [`.External()`](https://rdrr.io/r/base/CallExternal.html). Establishing contexts requires precious run time, this might be the reason for this omission.
 
-To work around this limitation, the source code of all R functions along
-the call chain is scanned for instances of `.Call` and `.External`. The
-native call stack (obtained via libc’s
-[`backtrace_symbols()`](https://www.gnu.org/software/libc/manual/html_node/Backtraces.html)
-is scanned for chunks of code outside of `libR.so` (R’s main library) –
-these are assumed to correspond to `.Call()` or `.External()`. The
-native traces are embedded as artificial calls into the R stack trace.
+To work around this limitation, the source code of all R functions along the call chain is scanned for instances of `.Call` and `.External`. The native call stack (obtained via libunwind or libbacktrace) is scanned for chunks of code outside of `libR.so` (R’s main library) – these are assumed to correspond to [`.Call()`](https://rdrr.io/r/base/CallExternal.html) or [`.External()`](https://rdrr.io/r/base/CallExternal.html). The native traces are embedded as artificial calls into the R stack trace.
 
 ## Limitations
 
-  - The matching will not be perfect, it still may lead to quicker
-    discovery of the cause of an error.
-  - Currently Linux and macOS only.
+  - The matching will not be perfect, it still may lead to quicker discovery of the cause of an error.
+  - Windows only works on x64, and there the traces can be obtained only for one shared library at a time. See `winch_init_library()` for details.
+
+-----
+
+## Code of Conduct
+
+Please note that the winch project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
