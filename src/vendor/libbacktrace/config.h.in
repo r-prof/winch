@@ -12,6 +12,10 @@
 /* Define to 1 if you have the `clock_gettime' function. */
 #undef HAVE_CLOCK_GETTIME
 
+/* Define to 1 if you have the declaration of `getpagesize', and to 0 if you
+   don't. */
+#undef HAVE_DECL_GETPAGESIZE
+
 /* Define to 1 if you have the declaration of `strnlen', and to 0 if you
    don't. */
 #undef HAVE_DECL_STRNLEN
@@ -96,9 +100,6 @@
 /* Define to the sub-directory in which libtool stores uninstalled libraries.
    */
 #undef LT_OBJDIR
-
-/* Define if MiniDebugInfo is supported. */
-#undef MINI_DEBUG_INFO
 
 /* Define to the address where bug reports for this package should be sent. */
 #undef PACKAGE_BUGREPORT
