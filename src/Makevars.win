@@ -1,13 +1,17 @@
-PKG_CPPFLAGS = -Ilocal/include -DHAVE_LIBBACKTRACE
-PKG_CFLAGS =
+DEBUG = true
+PKG_CPPFLAGS = -Ilocal/include
+PKG_CFLAGS = -DHAVE_LIBBACKTRACE
 LOCAL_LIBS = local/lib/libbacktrace.a
-PKG_LIBS = -l${LOCAL_LIBS}
+PKG_LIBS = ${LOCAL_LIBS}
 
 all: $(SHLIB)
 
 $(SHLIB): ${LOCAL_LIBS}
 
-init.o: local/lib/libbacktrace.a
+build/libbacktrace/Makefile: vendor/libbacktrace/configure
+	mkdir -p build/libbacktrace && cd build/libbacktrace && CXX="$(CXX)" CC="$(CC)" ../../vendor/libbacktrace/configure --disable-host-shared --prefix=$${PWD}/../../local
 
-local/lib/libbacktrace.a:
-	make -C build.win/libbacktrace install
+local/lib/libbacktrace.a: build/libbacktrace/Makefile vendor/libbacktrace/*.c vendor/libbacktrace/*.h
+	make -C build/libbacktrace install
+
+trace_back_backtrace.o: local/lib/libbacktrace.a
