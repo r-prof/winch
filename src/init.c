@@ -25,7 +25,7 @@ static const R_CallMethodDef CallEntries[] = {
   {NULL, NULL, 0}
 };
 
-extern void init_backtrace(const char* argv0);
+extern SEXP init_backtrace(const char* argv0);
 
 export void R_init_winch(DllInfo *dll)
 {
@@ -34,10 +34,6 @@ export void R_init_winch(DllInfo *dll)
 }
 
 SEXP winch_init_library(SEXP argv0) {
-  const char* c_argv0 = NULL;
-  if (argv0 != R_NilValue) {
-    c_argv0 = CHAR(STRING_ELT(argv0, 0));
-  }
-  init_backtrace(c_argv0);
-  return R_NilValue;
+  const char* c_argv0 = CHAR(STRING_ELT(argv0, 0));
+  return init_backtrace(c_argv0);
 }
