@@ -73,11 +73,17 @@ int cb_get_name_ip(void *data, uintptr_t pc,
 
   R_xlen_t pos = cb_data->pos;
 
+  char ip_buf[33];
+  sprintf(ip_buf, "%.16" PRIx64, pc);
+  ip_buf[sizeof(ip_buf) / sizeof(*ip_buf) - 1] = '\0';
+  SEXP chr_ip = Rf_mkCharCE(ip_buf, CE_UTF8);
+  SET_STRING_ELT(out_ip, pos, chr_ip);
+
   if (function != NULL) {
     SET_STRING_ELT(out_name, pos, Rf_mkCharCE(function, CE_UTF8));
   } else {
-    // Default
-    SET_STRING_ELT(out_name, pos, NA_STRING);
+    // Default: string representation of IP
+    SET_STRING_ELT(out_name, pos, chr_ip);
 
     // Best effort
     backtrace_syminfo(
@@ -85,12 +91,6 @@ int cb_get_name_ip(void *data, uintptr_t pc,
       cb_get_name_from_syminfo, cb_ignore_name_from_syminfo, data
     );
   }
-
-  char ip_buf[33];
-  sprintf(ip_buf, "%.16" PRIx64, pc);
-  //snprintf(ip_buf, sizeof(ip_buf) / sizeof(buf), "%p", (void*)pi.start_ip);
-  ip_buf[sizeof(ip_buf) / sizeof(*ip_buf) - 1] = '\0';
-  SET_STRING_ELT(out_ip, pos, Rf_mkCharCE(ip_buf, CE_UTF8));
 
   ++cb_data->pos;
   return 0;
