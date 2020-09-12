@@ -9,6 +9,7 @@
 #include <inttypes.h>
 
 #include <backtrace.h>
+#include "build/libbacktrace/config.h"
 
 void *backtrace_state;
 
@@ -16,17 +17,23 @@ static void backtrace_error_callback_full(void *vdata, const char *msg, int errn
   Rf_error("backtrace failed: %s", msg);
 }
 
+#ifdef BACKTRACE_ELF_SIZE
+const int init_backtrace_return = 0;
+#else
+const int init_backtrace_return = 1;
+#endif
+
 SEXP init_backtrace(const char* argv0, int force) {
 #ifdef BACKTRACE_ELF_SIZE
   if (!force) {
-    Rf_ScalarLogical(0);
+    Rf_ScalarLogical(init_backtrace_return);
   }
 #endif
 
   backtrace_state = backtrace_create_state(
     argv0, 0, backtrace_error_callback_full, NULL
   );
-  return Rf_ScalarLogical(1);
+  return Rf_ScalarLogical(init_backtrace_return);
 }
 
 void cb_error(void* data, const char *msg, int errnum) {

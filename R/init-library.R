@@ -4,10 +4,13 @@ library_env <- new.env(parent = emptyenv())
 winch_init_library <- function(path = NULL, force = FALSE) {
   stopifnot(is.logical(force), length(force) == 1)
 
+  # Windows: give message only for the first call and only if path is NULL
+  # Linux: never give message
+
   if (is.null(path)) {
     # Default to our library, which is compiled with debug info.
     path <- winch_c_init_library$dll[["path"]]
-    need_path_message <- TRUE
+    need_path_message <- is.null(library_env$path)
   } else {
     need_path_message <- FALSE
   }
