@@ -56,24 +56,33 @@ bar <- function() {
 foo()
 ```
 
-`winch_entrace()` is a drop-in replacement for `rlang::entrace()`.
-This cannot be easily demonstrated in a knitr document, see [this GitHub Actions run](https://github.com/r-prof/winch/runs/960815218?check_suite_focus=true#step:11:53) for an example.
+`rlang::entrace()` checks if winch is installed, and adds a native backtrace.
+This cannot be easily demonstrated in a knitr document, the output is copied from [this GitHub Actions run](https://github.com/r-prof/winch/pull/25/checks?check_run_id=1105304366#step:12:33).
 
 ```{r error, eval = FALSE}
-library(winch)
+options(error = rlang::entrace, rlang_backtrace_on_error = "full")
 
-options(error = winch_entrace, rlang_backtrace_on_error = "full")
-
-foo <- function() {
-  winch_call(function() bar())
-}
-
-bar <- function() {
-  stop("oops")
-}
-
-foo()
+vctrs::vec_as_location(quote, 2)
 ```
+
+```
+##[error]Error: Must subset elements with a valid subscript vector.
+✖ Subscript has the wrong type `function`.
+ℹ It must be logical, numeric, or character.
+Backtrace:
+    █
+ 1. ├─vctrs::vec_as_location(quote, 2)
+ 2. │ └─`/vctrs.so`::vctrs_as_location()
+ 3. └─rlang::cnd_signal(...)
+Backtrace:
+    █
+ 1. └─vctrs::vec_as_location(quote, 2)
+ 2.   └─`/vctrs.so`::vctrs_as_location()
+ 3.     └─`/vctrs.so`::vec_as_location_opts()
+ 4.       └─rlang::cnd_signal(...)
+ 5.         └─rlang:::signal_abort(cnd)
+```
+
 
 ## How does it work?
 

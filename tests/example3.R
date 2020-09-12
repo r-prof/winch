@@ -1,4 +1,4 @@
-options(error = winch::winch_entrace, rlang_backtrace_on_error = "full")
+options(error = rlang::entrace, rlang_backtrace_on_error = "full")
 
 winch::winch_init_library(vctrs:::vctrs_init$dll[["path"]])
 
