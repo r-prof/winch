@@ -17,13 +17,17 @@ Imports:
     procmaps (>= 0.0.1.9002),
     rlang (>= 0.4.7.9000)
 Suggests: 
+    knitr,
+    rmarkdown,
     testthat,
     vctrs
+VignetteBuilder: 
+    knitr
 Remotes: 
-    r-prof/procmaps,
-    krlmlr/rlang@f-trace-hook
-SystemRequirements: gcc (>= 5) or clang
+    krlmlr/rlang@f-trace-hook,
+    r-prof/procmaps
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1.9000
+SystemRequirements: gcc (>= 5) or clang
