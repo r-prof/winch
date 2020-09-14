@@ -19,66 +19,115 @@ library(winch)
 ```
 
 
-! Initial SO question: "Can an application programmatically generate its own stacktrace?" https://stackoverflow.com/q/8031742/946850
+- Intro: what is this document about, outline
 
-! why unwinding: https://news.ycombinator.com/item?id=11477039
+## Backtraces
 
-- sjlj vs. seh (why the difference between 32 and 64 bits?):
+- What is it? How to generate in R: `sys.calls()`
 
-    - https://stackoverflow.com/q/15670169/946850
+- What about native code: Initial SO question: "Can an application programmatically generate its own stacktrace?" https://stackoverflow.com/q/8031742/946850
 
-    - https://stat.ethz.ch/pipermail/r-sig-windows/2015q3/000020.html
+    - cite reasons for unwinding from https://news.ycombinator.com/item?id=11477039
 
-    - http://mingw-w64.org/doku.php/contribute
+    - main result: sequence of IP (instruction pointers); function name, file+line and even library name must be deduced manually
+
+- for now we're considering static code; link above links to the problem of dynamic unwinding, *portable* static unwinding is a mess already
+
+- R always has been an interface language, good integration with calling into foreign interfaces. R code often calls into specialized native code for speed or to avoid reimplementation in R
+
+- task: when R code calls into native code (which then might call back into R), generate backtrace that represents chain of function calls from both domains
+
+    - current state: native code hidden from R backtrace
+    
+    - current state: R code is represented as sequence of function calls in `libR.so`
+    
+    - inject relevant bits of native backtrace into R backtrace
+
+- demo, explain
+
+## rlang integration
+
+- must collect backtrace when error occurs
+
+- https://github.com/r-lib/rlang/pull/1039
+
+## Retrieving IP
+
+- several, unfortunately no "one size fits all" solution
+
+- solutions that retrieve IP also find function name (and sometimes file+line) out of the box
+
+- module name separately
+
+- tried execinfo -- pretty bad, not on Windows
+
+- tried libunwind -- great, not on Windows: https://libunwind-devel.nongnu.narkive.com/ahavTcFa/libunwind-and-windows
+
+    - two versions: http://lists.llvm.org/pipermail/cfe-dev/2016-September/050650.html
+
+    - linux version: nongnu-libunwind,  https://www.nongnu.org/libunwind/, https://github.com/libunwind/libunwind
+
+     - clang version: https://bcain-llvm.readthedocs.io/projects/libunwind/en/latest/, https://github.com/llvm/llvm-project/blob/368c02e3ec44e5418626f46abebcc22a69c7f66d/libunwind/include/libunwind.h
+
+- tried libbacktrace -- slightly worse than libunwind, works on Windows mingw64 with a patch, includes file paths, crashes on clang
+
+- reviewed boost stacktrace -- only for printing, https://www.boost.org/doc/libs/master/boost/stacktrace/detail/collect_unwind.ipp
+
+- stacktrace, from 2009: http://stacktrace.sourceforge.net/
+
+- fully native route not considered, e.g. https://programmer.help/blogs/using-the-_unwind_backtrace-function-to-grab-the-backtrace-of-the-c-c-stack.html, http://www.nynaeve.net/?p=99
+
+- need both libunwind (for clang) and libstacktrace (for Windows)
+
+### libunwind gotchas
+
+- need library on Linux, on macOS `-lSystem` seems sufficient
+
+- no file+line information
+
+### libbacktrace gotchas
+
+- vendored library, shipped as part of GCC and also available standalone, with tests!
+
+- libbacktrace btest works out of the box in mingw32, sjlj
+
+- libbacktrace works on mingw64 with gcc patch: https://github.com/r-windows/rtools-packages/pull/148, https://github.com/gcc-mirror/gcc/pull/48
+
+    - documented in libbacktrace issue: https://github.com/ianlancetaylor/libbacktrace/issues/43#issuecomment-687858320
+
+    - gcc bug reported: https://gcc.gnu.org/bugzilla/show_bug.cgi?id=96948
+
+    - patch made available independently
+
+    - patch submitted to rtools-packages: https://github.com/r-windows/rtools-packages/pull/148
+
+    - works somewhat if using region addresses, can slightly patch libbacktrace to achieve this with stock gcc:
+
+- almost as good as libunwind when looking up symbol information, observed difference in some `libR.so` symbols
+
+    ! https://github.com/ianlancetaylor/libbacktrace/pull/38 seems irrelevant
+
+- passes tests on macOS, crashes in winch package
+
+## Retrieving module name
+
+- no portable solution
+
+- existing code from gperftools project packaged as separate package procmaps, on CRAN
+
+    - portability issues on Solaris and Fedora, works on other major platforms
+
+    - rewrite as simple C code, perhaps include into libbacktrace: https://github.com/ianlancetaylor/libbacktrace/issues/53
+    
+## Retrieving file + line
+
+- built into libbacktrace
+
+- addr2line equivalent? https://sourceforge.net/p/elftoolchain/code/HEAD/tree/trunk/addr2line/addr2line.c, https://stackoverflow.com/q/11556321/946850
 
 
-! tried execinfo -- pretty bad, not on Windows
 
-! tried libunwind -- great, not on Windows: https://libunwind-devel.nongnu.narkive.com/ahavTcFa/libunwind-and-windows
-
-    ! two versions: http://lists.llvm.org/pipermail/cfe-dev/2016-September/050650.html
-
-    ! linux version: nongnu-libunwind,  https://www.nongnu.org/libunwind/, https://github.com/libunwind/libunwind
-
-     ! clang version: https://bcain-llvm.readthedocs.io/projects/libunwind/en/latest/, https://github.com/llvm/llvm-project/blob/368c02e3ec44e5418626f46abebcc22a69c7f66d/libunwind/include/libunwind.h
-
-! tried libbacktrace -- slightly worse than libunwind, works on Windows mingw64 with a patch, includes file paths, requires gcc
-
-! reviewed boost stacktrace -- only for printing, https://www.boost.org/doc/libs/master/boost/stacktrace/detail/collect_unwind.ipp
-
-! stacktrace, from 2009: http://stacktrace.sourceforge.net/
-
-! fully native route not considered, e.g. https://programmer.help/blogs/using-the-_unwind_backtrace-function-to-grab-the-backtrace-of-the-c-c-stack.html, http://www.nynaeve.net/?p=99
-
-! need both libunwind (for clang) and libstacktrace (for Windows)
-
-    ! libbacktrace btest works out of the box in mingw32!
-
-    ! libbacktrace works on mingw64 with gcc patch: https://github.com/r-windows/rtools-packages/pull/148, https://github.com/gcc-mirror/gcc/pull/48
-
-        ! documented in libbacktrace issue: https://github.com/ianlancetaylor/libbacktrace/issues/43#issuecomment-687858320
-
-        ! gcc bug reported: https://gcc.gnu.org/bugzilla/show_bug.cgi?id=96948
-
-        ! patch submitted to rtools-packages: https://github.com/r-windows/rtools-packages/pull/148
-
-        ! works somewhat if using region addresses, can slightly patch libbacktrace to achieve this with stock gcc:
-
-    ! almost as good as libunwind when looking up symbol information
-        ! https://github.com/ianlancetaylor/libbacktrace/pull/38 seems irrelevant
-
- 
-
-
-! winch_get_proc_maps() works on Windows -> new package procmaps, portable!
-
-
-! build gcc package in configured rtools, check that it can be installed
-
-! double-check ccache in clean rtools, document usage for R packages
-
-    - need to wait until it's synced with CRAN, or install manually
-
+## Tests
 
 - test on Windows with correct gcc and with wrong gcc, and with old rtools, and with i386
 
@@ -105,40 +154,31 @@ library(winch)
         ! winch segfaults, running gdb requires code-signing it
     ! excluded from build
 
+## Next steps
 
 - file names in backtrace
 
-- test C++ output
+- test C++ output, demangle
 
 - talk to Luke
 
 - file names on macOS
 
-    - RStudio on macOS?
-
-- implement rlang call-in as suggested by Lionel
-
-! tested new magrittr pipe: need to ignore magrittr.so
+    ! RStudio on macOS?
 
 - draft collection of IP addresses and function information for profiling
 
 
-- documentation
+## Further documentation links
 
-    - what does it mean to get backtrace?
+- symbolic backtrace:
 
-    - how to get symbolic backtrace?
-
-        - dwarf (http://kamalmarhubi.com/blog/2016/07/25/some-things-i-learned-about-libdwarf/), elf, ...
-
-    - mapping addresses to libraries
-
-    - addr2line equivalent? https://sourceforge.net/p/elftoolchain/code/HEAD/tree/trunk/addr2line/addr2line.c, https://stackoverflow.com/q/11556321/946850
+    - dwarf (http://kamalmarhubi.com/blog/2016/07/25/some-things-i-learned-about-libdwarf/), elf, ...
 
 
 ! related project in Nim: https://github.com/timotheecour/Nim/issues/49
 
-
+## Related
 
 ! r-windows: submitted ccache pull request -- package and usage
 
@@ -162,3 +202,23 @@ library(winch)
 
 
 ! Accessing R_GlobalContext gives CRAN error
+
+
+## Technical details
+
+- sjlj vs. seh (why the difference between 32 and 64 bits?):
+
+    - https://stackoverflow.com/q/15670169/946850
+
+    - https://stat.ethz.ch/pipermail/r-sig-windows/2015q3/000020.html
+
+    - http://mingw-w64.org/doku.php/contribute
+
+
+## Trivia
+
+! build gcc package in configured rtools, check that it can be installed
+
+! double-check ccache in clean rtools, document usage for R packages
+
+    - need to wait until it's synced with CRAN, or install manually
