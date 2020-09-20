@@ -1,7 +1,7 @@
 #' @export
 winch_add_trace_back <- function(trace = rlang::trace_back(bottom = parent.frame())) {
   # Avoid recursion
-  rlang::local_options("rlang:::trace_hook" = NULL)
+  rlang::local_options(rlang_trace_use_winch = NULL)
   rlang_trace <- trace
 
   native_trace <- winch_trace_back()
