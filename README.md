@@ -41,39 +41,39 @@ This is an example where an R function calls into C which calls back into R, see
 
 <span class='nf'>foo</span>()
 <span class='c'>#&gt;                  func               ip</span>
-<span class='c'>#&gt; 1  Rf_NewFrameConfirm 00007fe3f38db480</span>
-<span class='c'>#&gt; 2             Rf_eval 00007fe3f39254f0</span>
-<span class='c'>#&gt; 3        R_execMethod 00007fe3f392a550</span>
-<span class='c'>#&gt; 4             Rf_eval 00007fe3f39254f0</span>
-<span class='c'>#&gt; 5        R_execMethod 00007fe3f3928e90</span>
-<span class='c'>#&gt; 6             Rf_eval 00007fe3f39254f0</span>
-<span class='c'>#&gt; 7             Rf_eval 00007fe3f3927170</span>
-<span class='c'>#&gt; 8     Rf_applyClosure 00007fe3f3928090</span>
-<span class='c'>#&gt; 9             Rf_eval 00007fe3f39254f0</span>
-<span class='c'>#&gt; 10       R_execMethod 00007fe3f3928e90</span>
-<span class='c'>#&gt; 11            Rf_eval 00007fe3f39254f0</span>
-<span class='c'>#&gt; 12            Rf_eval 00007fe3f3927170</span>
-<span class='c'>#&gt; 13    Rf_applyClosure 00007fe3f3928090</span>
-<span class='c'>#&gt; 14            Rf_eval 00007fe3f39254f0</span>
-<span class='c'>#&gt; 15         winch_call 00007fe3e07b2500</span>
-<span class='c'>#&gt; 16 Rf_NewFrameConfirm 00007fe3f38d98a0</span>
-<span class='c'>#&gt; 17 Rf_NewFrameConfirm 00007fe3f38db480</span>
-<span class='c'>#&gt; 18            Rf_eval 00007fe3f39254f0</span>
-<span class='c'>#&gt; 19       R_execMethod 00007fe3f3928e90</span>
-<span class='c'>#&gt; 20            Rf_eval 00007fe3f39254f0</span>
-<span class='c'>#&gt; 21            Rf_eval 00007fe3f3927170</span>
-<span class='c'>#&gt; 22    Rf_applyClosure 00007fe3f3928090</span>
-<span class='c'>#&gt; 23            Rf_eval 00007fe3f39254f0</span>
-<span class='c'>#&gt; 24       R_execMethod 00007fe3f3928e90</span>
-<span class='c'>#&gt; 25            Rf_eval 00007fe3f39254f0</span>
-<span class='c'>#&gt; 26            Rf_eval 00007fe3f3927170</span>
-<span class='c'>#&gt; 27    Rf_applyClosure 00007fe3f3928090</span>
-<span class='c'>#&gt; 28            Rf_eval 00007fe3f39254f0</span>
-<span class='c'>#&gt; 29     R_forceAndCall 00007fe3f392b3a0</span>
-<span class='c'>#&gt; 30           do_Rprof 00007fe3f390fb80</span>
-<span class='c'>#&gt; 31            Rf_eval 00007fe3f39254f0</span>
-<span class='c'>#&gt; 32            Rf_eval 00007fe3f3927170</span>
-<span class='c'>#&gt; 33    Rf_applyClosure 00007fe3f3928090</span>
+<span class='c'>#&gt; 1  Rf_NewFrameConfirm 00007f0db4bd3480</span>
+<span class='c'>#&gt; 2             Rf_eval 00007f0db4c1d4f0</span>
+<span class='c'>#&gt; 3        R_execMethod 00007f0db4c22550</span>
+<span class='c'>#&gt; 4             Rf_eval 00007f0db4c1d4f0</span>
+<span class='c'>#&gt; 5        R_execMethod 00007f0db4c20e90</span>
+<span class='c'>#&gt; 6             Rf_eval 00007f0db4c1d4f0</span>
+<span class='c'>#&gt; 7             Rf_eval 00007f0db4c1f170</span>
+<span class='c'>#&gt; 8     Rf_applyClosure 00007f0db4c20090</span>
+<span class='c'>#&gt; 9             Rf_eval 00007f0db4c1d4f0</span>
+<span class='c'>#&gt; 10       R_execMethod 00007f0db4c20e90</span>
+<span class='c'>#&gt; 11            Rf_eval 00007f0db4c1d4f0</span>
+<span class='c'>#&gt; 12            Rf_eval 00007f0db4c1f170</span>
+<span class='c'>#&gt; 13    Rf_applyClosure 00007f0db4c20090</span>
+<span class='c'>#&gt; 14            Rf_eval 00007f0db4c1d4f0</span>
+<span class='c'>#&gt; 15         winch_call 00007f0da1aa5500</span>
+<span class='c'>#&gt; 16 Rf_NewFrameConfirm 00007f0db4bd18a0</span>
+<span class='c'>#&gt; 17 Rf_NewFrameConfirm 00007f0db4bd3480</span>
+<span class='c'>#&gt; 18            Rf_eval 00007f0db4c1d4f0</span>
+<span class='c'>#&gt; 19       R_execMethod 00007f0db4c20e90</span>
+<span class='c'>#&gt; 20            Rf_eval 00007f0db4c1d4f0</span>
+<span class='c'>#&gt; 21            Rf_eval 00007f0db4c1f170</span>
+<span class='c'>#&gt; 22    Rf_applyClosure 00007f0db4c20090</span>
+<span class='c'>#&gt; 23            Rf_eval 00007f0db4c1d4f0</span>
+<span class='c'>#&gt; 24       R_execMethod 00007f0db4c20e90</span>
+<span class='c'>#&gt; 25            Rf_eval 00007f0db4c1d4f0</span>
+<span class='c'>#&gt; 26            Rf_eval 00007f0db4c1f170</span>
+<span class='c'>#&gt; 27    Rf_applyClosure 00007f0db4c20090</span>
+<span class='c'>#&gt; 28            Rf_eval 00007f0db4c1d4f0</span>
+<span class='c'>#&gt; 29     R_forceAndCall 00007f0db4c233a0</span>
+<span class='c'>#&gt; 30           do_Rprof 00007f0db4c07b80</span>
+<span class='c'>#&gt; 31            Rf_eval 00007f0db4c1d4f0</span>
+<span class='c'>#&gt; 32            Rf_eval 00007f0db4c1f170</span>
+<span class='c'>#&gt; 33    Rf_applyClosure 00007f0db4c20090</span>
 <span class='c'>#&gt;                                        pathname</span>
 <span class='c'>#&gt; 1                        /usr/lib/R/lib/libR.so</span>
 <span class='c'>#&gt; 2                        /usr/lib/R/lib/libR.so</span>
@@ -114,26 +114,23 @@ This is an example where an R function calls into C which calls back into R, see
 [`rlang::entrace()`](https://rlang.r-lib.org/reference/entrace.html) checks if winch is installed, and adds a native backtrace. This cannot be easily demonstrated in a knitr document, the output is copied from [this GitHub Actions run](https://github.com/r-prof/winch/pull/25/checks?check_run_id=1105304366#step:12:33).
 
 <pre class='chroma'>
-<span class='nf'><a href='https://rdrr.io/r/base/options.html'>options</a></span>(error = <span class='k'>rlang</span>::<span class='k'><a href='https://rlang.r-lib.org/reference/entrace.html'>entrace</a></span>, rlang_backtrace_on_error = <span class='s'>"full"</span>)
+<span class='nf'><a href='https://rdrr.io/r/base/options.html'>options</a></span>(
+  error = <span class='k'>rlang</span>::<span class='k'><a href='https://rlang.r-lib.org/reference/entrace.html'>entrace</a></span>,
+  rlang_backtrace_on_error = <span class='s'>"full"</span>,
+  rlang_trace_use_winch = <span class='m'>1L</span>
+)
 
 <span class='k'>vctrs</span>::<span class='nf'><a href='https://vctrs.r-lib.org/reference/vec_as_location.html'>vec_as_location</a></span>(<span class='k'>quote</span>, <span class='m'>2</span>)
 </pre>
 
-    ##[error]Error: Must subset elements with a valid subscript vector.
+    Error: Must subset elements with a valid subscript vector.
     ✖ Subscript has the wrong type `function`.
     ℹ It must be logical, numeric, or character.
     Backtrace:
         █
      1. ├─vctrs::vec_as_location(quote, 2)
      2. │ └─`/vctrs.so`::vctrs_as_location()
-     3. └─rlang::cnd_signal(...)
-    Backtrace:
-        █
-     1. └─vctrs::vec_as_location(quote, 2)
-     2.   └─`/vctrs.so`::vctrs_as_location()
-     3.     └─`/vctrs.so`::vec_as_location_opts()
-     4.       └─rlang::cnd_signal(...)
-     5.         └─rlang:::signal_abort(cnd)
+     3. └─rlang::cnd_signal(...) /home/kirill/git/R/vctrs/R/subscript-loc.R:64:2
 
 ## How does it work?
 

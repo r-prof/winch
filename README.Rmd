@@ -60,27 +60,24 @@ foo()
 This cannot be easily demonstrated in a knitr document, the output is copied from [this GitHub Actions run](https://github.com/r-prof/winch/pull/25/checks?check_run_id=1105304366#step:12:33).
 
 ```{r error, eval = FALSE}
-options(error = rlang::entrace, rlang_backtrace_on_error = "full")
+options(
+  error = rlang::entrace,
+  rlang_backtrace_on_error = "full",
+  rlang_trace_use_winch = 1L
+)
 
 vctrs::vec_as_location(quote, 2)
 ```
 
 ```
-##[error]Error: Must subset elements with a valid subscript vector.
+Error: Must subset elements with a valid subscript vector.
 ✖ Subscript has the wrong type `function`.
 ℹ It must be logical, numeric, or character.
 Backtrace:
     █
  1. ├─vctrs::vec_as_location(quote, 2)
  2. │ └─`/vctrs.so`::vctrs_as_location()
- 3. └─rlang::cnd_signal(...)
-Backtrace:
-    █
- 1. └─vctrs::vec_as_location(quote, 2)
- 2.   └─`/vctrs.so`::vctrs_as_location()
- 3.     └─`/vctrs.so`::vec_as_location_opts()
- 4.       └─rlang::cnd_signal(...)
- 5.         └─rlang:::signal_abort(cnd)
+ 3. └─rlang::cnd_signal(...) /home/kirill/git/R/vctrs/R/subscript-loc.R:64:2
 ```
 
 
