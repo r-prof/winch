@@ -21,6 +21,18 @@ library(winch)
 
 - Intro: what is this document about, outline
 
+    - brief history of the "jointprof" project
+    
+        - use gperftools to record in parallel
+        
+        - requires parsing/processing alien data format: helper package
+        
+        - works only on Linux, requires patch on Mac, overall very brittle
+        
+        - hiatus, proffer package donated
+        
+    - fresh start: more controlled solution to the complicated problem of combining stack traces
+
 ## Backtraces
 
 - What is it? How to generate in R: `sys.calls()`
@@ -28,12 +40,14 @@ library(winch)
 - What about native code: Initial SO question: "Can an application programmatically generate its own stacktrace?" https://stackoverflow.com/q/8031742/946850
 
     - cite reasons for unwinding from https://news.ycombinator.com/item?id=11477039
+    
+    - provided by the compiler or by specialized libraries
 
-    - main result: sequence of IP (instruction pointers); function name, file+line and even library name must be deduced manually
+    - main result: sequence of IP (instruction pointers); function name, file+line and even library name must be deduced manually; often with library support
 
 - for now we're considering static code; link above links to the problem of dynamic unwinding, *portable* static unwinding is a mess already
 
-- R always has been an interface language, good integration with calling into foreign interfaces. R code often calls into specialized native code for speed or to avoid reimplementation in R
+- R always has been an interface language, good integration with calling into foreign interfaces. R code often calls into specialized native code for speed or to avoid reimplementation in R.
 
 - task: when R code calls into native code (which then might call back into R), generate backtrace that represents chain of function calls from both domains
 
@@ -41,19 +55,92 @@ library(winch)
     
     - current state: R code is represented as sequence of function calls in `libR.so`
     
-    - inject relevant bits of native backtrace into R backtrace
+    - solution: inject relevant bits of native backtrace into R backtrace
 
-- demo, explain
+- demo: `winch_call()` calls an R function from C code, solely for demonstration. The R function is given as argument. The roundtrip into C code is shown as `.Call()` entries without further detail.
+
+```{r}
+library(winch)
+
+foo <- function() {
+  winch_call(bar)
+}
+
+bar <- function() {
+  winch_call(baz)
+}
+
+baz <- function() {
+  sys.calls()
+}
+
+foo()
+```
+
+- `winch_trace_back()` returns the native backtrace as an R data frame. When reviewing the first entries, the native calls from `winch_call()` are visible.
+
+
+```{r}
+baz <- function() {
+  winch_trace_back()
+}
+
+head(foo(), 25)
+```
+
+- Relevant information: native function name, library name
+
+- more details to add: file+line, remains open issue
+
+- `winch_trace_back()` is a low-level function, corner stone for joint backtraces provided by `winch_add_trace_back()`
 
 ## rlang integration
 
-- must collect backtrace when error occurs
+- must collect backtrace when error occurs, in `trace_back()`
 
 - https://github.com/r-lib/rlang/pull/1039
 
+- demo:
+
+```{r}
+options(rlang_trace_use_winch = TRUE)
+
+baz <- function() {
+  rlang::trace_back()
+}
+
+foo()
+```
+
+
+- demo: The vctrs package uses C for performance-critical parts, and often calls back into R for e.g. S3 dispatch or error reporting. Example: backtrace after an error.
+
+```{r error, eval = FALSE}
+options(
+  error = rlang::entrace,
+  rlang_backtrace_on_error = "full",
+  rlang_trace_use_winch = 1L
+)
+
+vctrs::vec_as_location(quote, 2)
+```
+
+```
+Error: Must subset elements with a valid subscript vector.
+✖ Subscript has the wrong type `function`.
+ℹ It must be logical, numeric, or character.
+Backtrace:
+    █
+ 1. ├─vctrs::vec_as_location(quote, 2)
+ 2. │ └─`/vctrs.so`::vctrs_as_location()
+ 3. └─rlang::cnd_signal(...) /home/kirill/git/R/vctrs/R/subscript-loc.R:64:2
+```
+
+- The remainder of the document discusses technical details and caveats.
+
 ## Retrieving IP
 
-- several, unfortunately no "one size fits all" solution
+- several options, unfortunately no "one size fits all" solution
 
 - solutions that retrieve IP also find function name (and sometimes file+line) out of the box
 
@@ -101,7 +188,7 @@ library(winch)
 
     - patch submitted to rtools-packages: https://github.com/r-windows/rtools-packages/pull/148
 
-    - works somewhat if using region addresses, can slightly patch libbacktrace to achieve this with stock gcc:
+    - works somewhat if using region addresses, can slightly patch libbacktrace to achieve this with stock gcc: https://github.com/ianlancetaylor/libbacktrace/pull/54, rejected upstream, good enough for us
 
 - almost as good as libunwind when looking up symbol information, observed difference in some `libR.so` symbols
 
@@ -115,7 +202,7 @@ library(winch)
 
 - existing code from gperftools project packaged as separate package procmaps, on CRAN
 
-    - portability issues on Solaris and Fedora, works on other major platforms
+    - too complex, update submitted that gets rid of `./configure` script and more unneeded code.
 
     - rewrite as simple C code, perhaps include into libbacktrace: https://github.com/ianlancetaylor/libbacktrace/issues/53
     
@@ -123,8 +210,9 @@ library(winch)
 
 - built into libbacktrace
 
-- addr2line equivalent? https://sourceforge.net/p/elftoolchain/code/HEAD/tree/trunk/addr2line/addr2line.c, https://stackoverflow.com/q/11556321/946850
+    - doesn't work on macOS
 
+- addr2line equivalent on Mac? https://sourceforge.net/p/elftoolchain/code/HEAD/tree/trunk/addr2line/addr2line.c, https://stackoverflow.com/q/11556321/946850
 
 
 ## Tests
@@ -152,21 +240,24 @@ library(winch)
         - probably the same as https://github.com/ianlancetaylor/libbacktrace/issues/53
 
         ! winch segfaults, running gdb requires code-signing it
+
     ! excluded from build
+
+- Tested inside RStudio
 
 ## Next steps
 
 - file names in backtrace
 
+    - Windows + Linux: easier in libbacktrace
+    
+    - macOS: requires debugging
+
 - test C++ output, demangle
 
-- talk to Luke
+- get feedback from R core, especially Luke Tierney
 
-- file names on macOS
-
-    ! RStudio on macOS?
-
-- draft collection of IP addresses and function information for profiling
+- collection of IP addresses and function information for profiling
 
 
 ## Further documentation links
@@ -174,7 +265,6 @@ library(winch)
 - symbolic backtrace:
 
     - dwarf (http://kamalmarhubi.com/blog/2016/07/25/some-things-i-learned-about-libdwarf/), elf, ...
-
 
 ! related project in Nim: https://github.com/timotheecour/Nim/issues/49
 
@@ -187,6 +277,7 @@ library(winch)
     - pending: caching for R packages, https://github.com/r-windows/rtools-packages/issues/143
 
     - install or provide ag on msys2: https://packages.msys2.org/package/mingw-w64-x86_64-ag?repo=mingw64
+
 ! libbacktrace: implemented GitHub Actions, https://github.com/ianlancetaylor/libbacktrace/pull/51
 
 
