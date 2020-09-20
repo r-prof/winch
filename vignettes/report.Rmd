@@ -21,16 +21,6 @@ library(winch)
 
 - Intro: what is this document about, outline
 
-    - brief history of the "jointprof" project
-    
-        - use gperftools to record in parallel
-        
-        - requires parsing/processing alien data format: helper package
-        
-        - works only on Linux, requires patch on Mac, overall very brittle
-        
-        - hiatus, proffer package donated
-        
     - fresh start: more controlled solution to the complicated problem of combining stack traces
 
 ## Backtraces
@@ -258,6 +248,17 @@ Backtrace:
 - get feedback from R core, especially Luke Tierney
 
 - collection of IP addresses and function information for profiling
+
+
+## History: jointprof part 1
+
+- use gperftools to record in parallel
+
+- requires parsing/processing alien data format: helper package
+
+- works only on Linux, requires patch on Mac, overall very brittle
+
+- hiatus, proffer package donated
 
 
 ## Further documentation links
