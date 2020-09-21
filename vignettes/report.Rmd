@@ -19,32 +19,90 @@ library(winch)
 ```
 
 
-- Intro: what is this document about, outline
+This document describes the concluding efforts of the "Joint Profiling of Native and R Code" project.
+It describes two new packages, winch and its helper package procmaps.
+After a definition of the problem, the packages' features and technical caveats are described.
+A connection to the first part of the project is established, with an outline of work still to be done.
 
-    - fresh start: more controlled solution to the complicated problem of combining stack traces
+The winch package allows combining native and R stack traces in a controlled way, for now outside of a profiling context.
+This deviates from the original goal of the project, with good reason: robust combined stack traces are a cornerstone for joint profiling, and useful independently.
 
-## Backtraces
 
-- What is it? How to generate in R: `sys.calls()`
+## Stack traces
 
-- What about native code: Initial SO question: "Can an application programmatically generate its own stacktrace?" https://stackoverflow.com/q/8031742/946850
+A [*stack trace*](https://en.wikipedia.org/wiki/Stack_trace) is a sequence of code locations that describes the execution path from a program's main entry point to a specific point of interest.
+Each entry represents a nested function call.
 
-    - cite reasons for unwinding from https://news.ycombinator.com/item?id=11477039
-    
-    - provided by the compiler or by specialized libraries
+Use cases include ([source](https://blog.reverberate.org/2013/05/deep-wizardry-stack-unwinding.html)):
 
-    - main result: sequence of IP (instruction pointers); function name, file+line and even library name must be deduced manually; often with library support
+> 1. In a debugger, to show the user the stack.
+> 2. In a profiler, to take a sample of the stack.
+> 3. From the program itself (like from a crash handler to show the stack).
 
-- for now we're considering static code; link above links to the problem of dynamic unwinding, *portable* static unwinding is a mess already
+In R, stack traces can be obtained via `sys.calls()`:
 
-- R always has been an interface language, good integration with calling into foreign interfaces. R code often calls into specialized native code for speed or to avoid reimplementation in R.
+```{r}
+foo <- function() {
+  bar()
+}
 
-- task: when R code calls into native code (which then might call back into R), generate backtrace that represents chain of function calls from both domains
+bar <- function() {
+  baz()
+}
 
-    - current state: native code hidden from R backtrace
-    
-    - current state: R code is represented as sequence of function calls in `libR.so`
-    
+baz <- function() {
+  sys.calls()
+}
+
+foo()
+```
+
+`rlang::trace_back()` is a wrapper that displays as a tree and creates better output in the presence of lazy evaluation.
+In our simple example, this doesn't matter, the tree is a sequence.
+
+```{r}
+baz <- function() {
+  rlang::trace_back()
+}
+
+foo()
+```
+
+R is an interpreted language, it can be expected that it knows how to track the execution state.
+(It is much more surprising that it allows programs to compute on that execution state -- on the other hand, R has very strong reflection abilities.)
+How do we achieve this for native code? [Can an application programmatically generate its own stack trace?](https://stackoverflow.com/q/8031742/946850)?
+
+For native code, this is provided by the compiler or by specialized libraries.
+The main result is a sequence of instruction pointers (IP for short): addresses in the process's memory from where function calls occurred.
+In some cases, additional information such as the function name is provided.
+In general, function name, file + line information and even library name must be deduced separately, using other specialized libraries.
+
+The winch package wraps two libraries (for portability across different OSs) that help obtain IP sequences and function names.
+This functionality is accessible via `winch::winch_trace_back()`.
+For demonstration purposes, this is what the native stack trace looks like when this document is rendered.
+The function names are mostly internal to R, this means we're running only interpreted (or JIT-compiled) R code:
+
+```{r}
+library(winch)
+
+baz <- function() {
+  winch_trace_back()
+}
+
+trace <- foo()
+nrow(trace)
+head(trace)
+table(trace$pathname)
+```
+
+R always has been an interface language, with excellent integration of calling into foreign interfaces. 
+R code often calls into specialized native code for speed or to avoid reimplementation in R.
+Due to this duality, it is helpful to access both kinds of stack trace: R and native.
+
+These stack traces are not very helpful if taken separately.
+Native code is hidden from R backtrace, and R code is represented as sequence of function calls in `libR.so` or equivalent.
+Fusing these stack traces allows representing the chain of function calls from both domains when R code calls into native code (which then might call back into R).
+
     - solution: inject relevant bits of native backtrace into R backtrace
 
 - demo: `winch_call()` calls an R function from C code, solely for demonstration. The R function is given as argument. The roundtrip into C code is shown as `.Call()` entries without further detail.
