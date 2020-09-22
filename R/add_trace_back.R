@@ -67,29 +67,60 @@ winch_add_trace_back <- function(trace = rlang::trace_back(bottom = parent.frame
     length(native_trace_chunks) <- length(r_fun_has_call_idx)
   }
 
-  append_native_chunk <- function(trace, idx, native) {
-    new_calls <- Map(
+  insert_native_chunk <- function(trace, idx, native) {
+    added_calls <- Map(
       basename(native$pathname),
       native$func,
       f = function(basename, func) bquote(`::`(.(as.name(paste0("/", basename))), .(as.name(func)))())
     )
-    trace$calls <- c(trace$calls, new_calls)
-    new_idx <- max(trace$indices) + seq_along(new_calls)
+
+    old_size <- length(trace$calls)
+    new_size <- old_size + length(added_calls)
+    if (old_size == new_size) {
+      # Nothing to do
+      return(native)
+    }
+
+    # Prepare for pasting
+    added_idx <- seq.int(idx + 1L, length.out = length(added_calls))
+    added_parents <- lag(added_idx, default = idx)
+    rechain_idx <- added_idx[[length(added_idx)]]
+
+    # Create translation table
+    xlat <- c(
+      seq_len(idx),
+      seq.int(idx + length(added_calls) + 1L, length.out = old_size - idx)
+    )
+    xlat1 <- c(0L, xlat)
+
+    # Move
+    new_parents <- rep(-1L, new_size)
+    new_parents[xlat] <- xlat1[trace$parents + 1L]
+
+    new_calls <- rep(NULL, new_size)
+    new_calls[xlat] <- trace$calls
+
+    new_idx <- seq_len(new_size)
 
     # Rechain existing
-    parents_fix_idx <- trace$parents == idx
-    grandparents_fix_idx <- (trace$parents == trace$parents[[idx]] & seq_along(trace$parents) > idx)
-    trace$parents[parents_fix_idx | grandparents_fix_idx] <- new_idx[[length(new_idx)]]
+    parents_fix_idx <- new_parents == idx
+    grandparents_fix_idx <- (new_parents == new_parents[[idx]] & seq_along(new_parents) > idx)
+    new_parents[parents_fix_idx | grandparents_fix_idx] <- rechain_idx
 
-    # Chain new
-    trace$parents <- c(trace$parents, lag(new_idx, default = idx))
-    trace$indices <- c(trace$indices, new_idx)
+    # Paste (after rechaining!)
+    new_parents[added_idx] <- added_parents
+    new_calls[added_idx] <- added_calls
+
+    # Use new
+    trace$calls <- new_calls
+    trace$parents <- new_parents
+    trace$indices <- new_idx
 
     trace
   }
 
   for (i in seq_along(r_fun_has_call_idx)) {
-    rlang_trace <- append_native_chunk(rlang_trace, r_fun_has_call_idx[[i]], native_trace_chunks[[i]])
+    rlang_trace <- insert_native_chunk(rlang_trace, r_fun_has_call_idx[[i]], native_trace_chunks[[i]])
   }
 
   class(rlang_trace) <- c("winch_trace", class(rlang_trace))
