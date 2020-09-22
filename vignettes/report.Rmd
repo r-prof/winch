@@ -210,17 +210,15 @@ Error: Must subset elements with a valid subscript vector.
 ℹ It must be logical, numeric, or character.
 Backtrace:
     █
- 1. ├─vctrs::vec_as_location(quote, 2)
- 2. │ └─`/vctrs.so`::vctrs_as_location()
- 3. └─rlang::cnd_signal(...) /home/kirill/git/R/vctrs/R/subscript-loc.R:64:2
+ 1. └─vctrs::vec_as_location(quote, 2)
+ 2.   └─`/vctrs.so`::vctrs_as_location()
+ 3.     └─`/vctrs.so`::vec_as_location_opts()
 ```
 
 A bare-bones solution that enhances `sys.calls()` and `sys.frames()` and is usable outside of rlang remains an open issue.
 Also, Windows users currently need `winch::winch_init_library()` to trace errors in their library, this is a [limitation of the upstream library](https://github.com/ianlancetaylor/libbacktrace/issues/53).
 
 The remainder of the document discusses technical details and caveats.
-
-FIXME: Why does example3.R prints two backtraces, and the second looks better?
 
 ## Retrieving IP
 

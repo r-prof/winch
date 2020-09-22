@@ -111,7 +111,7 @@ This is an example where an R function calls into C which calls back into R, see
 <span class='c'>#&gt;  [ reached 'max' / getOption("max.print") -- omitted 99 rows ]</span>
 </pre>
 
-[`rlang::entrace()`](https://rlang.r-lib.org/reference/entrace.html) checks if winch is installed, and adds a native backtrace. This cannot be easily demonstrated in a knitr document, the output is copied from [this GitHub Actions run](https://github.com/r-prof/winch/pull/25/checks?check_run_id=1105304366#step:12:33).
+[`rlang::entrace()`](https://rlang.r-lib.org/reference/entrace.html) checks if winch is installed, and adds a native backtrace. This cannot be easily demonstrated in a knitr document, the output is copied from [this GitHub Actions run](https://github.com/r-prof/winch/runs/1147640026?check_suite_focus=true#step:12:169).
 
 <pre class='chroma'>
 <span class='nf'><a href='https://rdrr.io/r/base/options.html'>options</a></span>(
@@ -128,9 +128,9 @@ This is an example where an R function calls into C which calls back into R, see
     ℹ It must be logical, numeric, or character.
     Backtrace:
         █
-     1. ├─vctrs::vec_as_location(quote, 2)
-     2. │ └─`/vctrs.so`::vctrs_as_location()
-     3. └─rlang::cnd_signal(...) /home/kirill/git/R/vctrs/R/subscript-loc.R:64:2
+     1. └─vctrs::vec_as_location(quote, 2)
+     2.   └─`/vctrs.so`::vctrs_as_location()
+     3.     └─`/vctrs.so`::vec_as_location_opts()
 
 ## How does it work?
 

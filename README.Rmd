@@ -57,7 +57,7 @@ foo()
 ```
 
 `rlang::entrace()` checks if winch is installed, and adds a native backtrace.
-This cannot be easily demonstrated in a knitr document, the output is copied from [this GitHub Actions run](https://github.com/r-prof/winch/pull/25/checks?check_run_id=1105304366#step:12:33).
+This cannot be easily demonstrated in a knitr document, the output is copied from [this GitHub Actions run](https://github.com/r-prof/winch/runs/1147640026?check_suite_focus=true#step:12:169).
 
 ```{r error, eval = FALSE}
 options(
@@ -75,10 +75,10 @@ Error: Must subset elements with a valid subscript vector.
 ℹ It must be logical, numeric, or character.
 Backtrace:
     █
- 1. ├─vctrs::vec_as_location(quote, 2)
- 2. │ └─`/vctrs.so`::vctrs_as_location()
- 3. └─rlang::cnd_signal(...) /home/kirill/git/R/vctrs/R/subscript-loc.R:64:2
-```
+ 1. └─vctrs::vec_as_location(quote, 2)
+ 2.   └─`/vctrs.so`::vctrs_as_location()
+ 3.     └─`/vctrs.so`::vec_as_location_opts()
+ ```
 
 
 ## How does it work?
