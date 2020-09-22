@@ -220,23 +220,26 @@ Also, Windows users currently need `winch::winch_init_library()` to trace errors
 
 The remainder of the document discusses technical details and caveats.
 
-## Retrieving IP
+## Technical details
 
-- several options, unfortunately no "one size fits all" solution
+Stack unwinding, or retrieving the sequence of IPs for the stack trace, is dependent on the compiler, and also on the executable format used.
+As the [blog post already linked above](https://blog.reverberate.org/2013/05/deep-wizardry-stack-unwinding.html) puts it,
 
-- solutions that retrieve IP also find function name (and sometimes file+line) out of the box
+> Stack unwinding ... [is an] esoteric topic [that] lies at the intersection of compilers, linkers, loaders, debuggers, ABIs, and language runtimes. There is precious little documentation about it and, from what I can tell, a small handful of guys who answer all the questions about it.
 
-- module name separately
+It's not surprising that there is no portable "one size fits all" solution.
+Some but not all options give the function name for each entry, sometimes file + line information is available too.
+Determining the shared library that provided the code seems to be an entirely separate topic.
 
-- tried execinfo -- pretty bad, not on Windows
+### Retrieving IPs
 
-- tried libunwind -- great, not on Windows: https://libunwind-devel.nongnu.narkive.com/ahavTcFa/libunwind-and-windows
+The libc function [`execinfo()`](https://www.gnu.org/software/libc/manual/html_node/Backtraces.html) was a first obvious candidate.
+It works well enough on mainstream Linux, but not on Windows.
+Also, function names were not discovered reliably.
 
-    - two versions: http://lists.llvm.org/pipermail/cfe-dev/2016-September/050650.html
-
-    - linux version: nongnu-libunwind,  https://www.nongnu.org/libunwind/, https://github.com/libunwind/libunwind
-
-     - clang version: https://bcain-llvm.readthedocs.io/projects/libunwind/en/latest/, https://github.com/llvm/llvm-project/blob/368c02e3ec44e5418626f46abebcc22a69c7f66d/libunwind/include/libunwind.h
+The libunwind library supports similar functionality and discovers function names more reliably.
+Unfortunately, it also [does not work on Windows](https://libunwind-devel.nongnu.narkive.com/ahavTcFa/libunwind-and-windows).
+What's more, there are [two implementations](http://lists.llvm.org/pipermail/cfe-dev/2016-September/050650.html): the [macOS implementation](https://bcain-llvm.readthedocs.io/projects/libunwind/en/latest/), part of clang, is a newer rewrite of the original [non-GNU implementation](https://www.nongnu.org/libunwind/) that is [available on GitHub](https://github.com/libunwind/libunwind).
 
 - tried libbacktrace -- slightly worse than libunwind, works on Windows mingw64 with a patch, includes file paths, crashes on clang
 
