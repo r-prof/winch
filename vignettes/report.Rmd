@@ -254,7 +254,7 @@ Therefore, I settled with a combination of libbacktrace and libunwind, depending
 - On Linux, use libunwind, because it gives slightly better results
     - Possible to use libbacktrace
 - On macOS, use libunwind, because libbacktrace doesn't work in this setting yet
-- On Windows, use libbacktrace, because it's the only option
+- On Windows and Solaris, use libbacktrace, because it's the only option
 
 The `execinfo()` approach is no longer used because libunwind is clearly better.
 
@@ -269,27 +269,21 @@ The `execinfo()` approach is no longer used because libunwind is clearly better.
 
 ### libbacktrace on Windows
 
-While libbacktrace compiles out of the box in the rtools40 toolchain, its tests fail for 64-bit builds.
-
-
-
-- libbacktrace works on mingw64 with gcc patch: https://github.com/r-windows/rtools-packages/pull/148, https://github.com/gcc-mirror/gcc/pull/48
+- libbacktrace works on mingw64 with gcc patch: https://github.com/gcc-mirror/gcc/pull/48
 
     - documented in libbacktrace issue: https://github.com/ianlancetaylor/libbacktrace/issues/43#issuecomment-687858320
 
     - gcc bug reported: https://gcc.gnu.org/bugzilla/show_bug.cgi?id=96948
 
-    - patch made available independently
+    - patches by me and by Martin Storsjö: https://gcc.gnu.org/pipermail/gcc-patches/2020-September/553418.html 
 
     - patch submitted to rtools-packages: https://github.com/r-windows/rtools-packages/pull/148
 
-    - works somewhat if using region addresses, can slightly patch libbacktrace to achieve this with stock gcc: https://github.com/ianlancetaylor/libbacktrace/pull/54, rejected upstream, good enough for us
+    - works somewhat if using region addresses, can slightly patch libbacktrace to achieve this with stock gcc: https://github.com/ianlancetaylor/libbacktrace/pull/54, rejected upstream, applied in winch
 
 - almost as good as libunwind when looking up symbol information, observed difference in some `libR.so` symbols
 
     ! https://github.com/ianlancetaylor/libbacktrace/pull/38 seems irrelevant
-
-- passes tests on macOS, crashes in winch package
 
 ### Options not considered
 
