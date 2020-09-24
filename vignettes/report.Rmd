@@ -241,13 +241,19 @@ The libunwind library supports similar functionality and discovers function name
 Unfortunately, it also [does not work on Windows](https://libunwind-devel.nongnu.narkive.com/ahavTcFa/libunwind-and-windows).
 What's more, there are [two implementations](http://lists.llvm.org/pipermail/cfe-dev/2016-September/050650.html): the [macOS implementation](https://bcain-llvm.readthedocs.io/projects/libunwind/en/latest/), part of clang, is a newer rewrite of the original [non-GNU implementation](https://www.nongnu.org/libunwind/) that is [available on GitHub](https://github.com/libunwind/libunwind).
 
-- tried libbacktrace -- slightly worse than libunwind, works on Windows mingw64 with a patch, includes file paths, crashes on clang
+The [libbacktrace library](https://github.com/ianlancetaylor/libbacktrace), part of GCC and also available standalone, seems to give slightly worse results for the detection of function names.
+On the up side, it is portable, with support for Windows ([MSYS2](https://www.msys2.org/), on which the most recent [rtools](https://cran.r-project.org/bin/windows/Rtools/) is based).
+It also gives file + line information for each stack frame.
 
-- reviewed boost stacktrace -- only for printing, https://www.boost.org/doc/libs/master/boost/stacktrace/detail/collect_unwind.ipp
+Other options:
 
-- stacktrace, from 2009: http://stacktrace.sourceforge.net/
+- I haven't tried [boost stacktrace](https://www.boost.org/doc/libs/master/boost/stacktrace/detail/collect_unwind.ipp) yet
 
-- fully native route not considered, e.g. https://programmer.help/blogs/using-the-_unwind_backtrace-function-to-grab-the-backtrace-of-the-c-c-stack.html, http://www.nynaeve.net/?p=99
+- The [stacktrace](http://stacktrace.sourceforge.net/) library is from 2009, was last changed 2013
+
+- I haven't considered going a [fully native route](https://programmer.help/blogs/using-the-_unwind_backtrace-function-to-grab-the-backtrace-of-the-c-c-stack.html) without library suport, this would amount to rewriting large parts of existing library code.
+
+FIXME: What is http://www.nynaeve.net/?p=99
 
 - need both libunwind (for clang) and libstacktrace (for Windows)
 
