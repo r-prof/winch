@@ -29,7 +29,7 @@ elif [[ "$OSTYPE" == "msys"* ]]; then
   PKG_CFLAGS=""
   PKG_LIBBACKTRACE="-DHAVE_LIBBACKTRACE"
   LOCAL_LIBS="local/lib/libbacktrace.a"
-  PKG_LIBS="-lSystem"
+  PKG_LIBS=""
 else
   PKG_LIBUNWIND="-DHAVE_LIBUNWIND"
   PKG_LIBBACKTRACE="-DHAVE_LIBBACKTRACE"
