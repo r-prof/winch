@@ -19,6 +19,8 @@ PKG_TEST_HEADER="<libunwind.h>"
 
 # pkg-config values (if available)
 if [[ "$OSTYPE" == "darwin"* ]]; then
+  # -lSystem sufficient on the Mac, no installation needed
+  # (will check anyway)
   PKG_CFLAGS=""
   PKG_LIBUNWIND="-DHAVE_LIBUNWIND"
   LOCAL_LIBS=""
