@@ -225,7 +225,7 @@ The remainder of the document discusses technical details and caveats.
 Stack unwinding, or retrieving the sequence of IPs for the stack trace, is dependent on the compiler, and also on the executable format used.
 As the [blog post already linked above](https://blog.reverberate.org/2013/05/deep-wizardry-stack-unwinding.html) puts it,
 
-> Stack unwinding ... [is an] esoteric topic [that] lies at the intersection of compilers, linkers, loaders, debuggers, ABIs, and language runtimes. There is precious little documentation about it and, from what I can tell, a small handful of guys who answer all the questions about it.
+> stack unwinding ... [is an] esoteric topic [that] lies at the intersection of compilers, linkers, loaders, debuggers, ABIs, and language runtimes. There is precious little documentation about it and, from what I can tell, a small handful of guys who answer all the questions about it.
 
 It's not surprising that there is no portable "one size fits all" solution.
 Some but not all options give the function name for each entry, sometimes file + line information is available too.
@@ -233,41 +233,45 @@ Determining the shared library that provided the code seems to be an entirely se
 
 ### Retrieving IPs
 
-The libc function [`execinfo()`](https://www.gnu.org/software/libc/manual/html_node/Backtraces.html) was a first obvious candidate.
-It works well enough on mainstream Linux, but not on Windows.
-Also, function names were not discovered reliably.
+I experimented with the following options:
 
-The libunwind library supports similar functionality and discovers function names more reliably.
-Unfortunately, it also [does not work on Windows](https://libunwind-devel.nongnu.narkive.com/ahavTcFa/libunwind-and-windows).
-What's more, there are [two implementations](http://lists.llvm.org/pipermail/cfe-dev/2016-September/050650.html): the [macOS implementation](https://bcain-llvm.readthedocs.io/projects/libunwind/en/latest/), part of clang, is a newer rewrite of the original [non-GNU implementation](https://www.nongnu.org/libunwind/) that is [available on GitHub](https://github.com/libunwind/libunwind).
+1. The libc function [`execinfo()`](https://www.gnu.org/software/libc/manual/html_node/Backtraces.html) was a first obvious candidate.
+    It works well enough on mainstream Linux, but not on Windows.
+Also, function names were not discovered reliably, in particular for optimized code.
 
-The [libbacktrace library](https://github.com/ianlancetaylor/libbacktrace), part of GCC and also available standalone, seems to give slightly worse results for the detection of function names.
-On the up side, it is portable, with support for Windows ([MSYS2](https://www.msys2.org/), on which the most recent [rtools](https://cran.r-project.org/bin/windows/Rtools/) is based).
-It also gives file + line information for each stack frame.
+2. The libunwind library supports similar functionality and discovers function names more reliably.
+    Unfortunately, it also [does not work on Windows](https://libunwind-devel.nongnu.narkive.com/ahavTcFa/libunwind-and-windows).
+    What's more, there are [two implementations](http://lists.llvm.org/pipermail/cfe-dev/2016-September/050650.html): the [macOS implementation](https://bcain-llvm.readthedocs.io/projects/libunwind/en/latest/), part of clang, is a newer rewrite of the original [non-GNU implementation](https://www.nongnu.org/libunwind/) that is [available on GitHub](https://github.com/libunwind/libunwind).
 
-Other options:
+3. The [libbacktrace library](https://github.com/ianlancetaylor/libbacktrace), part of GCC and also available standalone, with its own tests, seems to give slightly worse results for the detection of function names.
+    On the up side, it is portable, with support for Windows ([MSYS2](https://www.msys2.org/), on which the most recent [rtools](https://cran.r-project.org/bin/windows/Rtools/) is based).
+    It also gives file + line information for each stack frame.
 
-- I haven't tried [boost stacktrace](https://www.boost.org/doc/libs/master/boost/stacktrace/detail/collect_unwind.ipp) yet
+Wrapping the libbacktrace library looks like the best option in terms of portability and features.
+Unfortunately, it currently fails on macOS.
+Therefore, I settled with a combination of libbacktrace and libunwind, depending on the platform:
 
-- The [stacktrace](http://stacktrace.sourceforge.net/) library is from 2009, was last changed 2013
+- On Linux, use libunwind, because it gives slightly better results
+    - Possible to use libbacktrace
+- On macOS, use libunwind, because libbacktrace doesn't work in this setting yet
+- On Windows, use libbacktrace, because it's the only option
 
-- I haven't considered going a [fully native route](https://programmer.help/blogs/using-the-_unwind_backtrace-function-to-grab-the-backtrace-of-the-c-c-stack.html) without library suport, this would amount to rewriting large parts of existing library code.
+The `execinfo()` approach is no longer used because libunwind is clearly better.
 
-FIXME: What is http://www.nynaeve.net/?p=99
+### libbacktrace on the Mac
 
-- need both libunwind (for clang) and libstacktrace (for Windows)
+- The libbacktrace tests succeed
 
-### libunwind gotchas
+- The winch package can be built with libbacktrace enabled
 
-- need library on Linux, on macOS `-lSystem` seems sufficient
+- Running the winch examples gives a segmentation fault
 
-- no file+line information
 
-### libbacktrace gotchas
+### libbacktrace on Windows
 
-- vendored library, shipped as part of GCC and also available standalone, with tests!
+While libbacktrace compiles out of the box in the rtools40 toolchain, its tests fail for 64-bit builds.
 
-- libbacktrace btest works out of the box in mingw32, sjlj
+
 
 - libbacktrace works on mingw64 with gcc patch: https://github.com/r-windows/rtools-packages/pull/148, https://github.com/gcc-mirror/gcc/pull/48
 
@@ -286,6 +290,14 @@ FIXME: What is http://www.nynaeve.net/?p=99
     ! https://github.com/ianlancetaylor/libbacktrace/pull/38 seems irrelevant
 
 - passes tests on macOS, crashes in winch package
+
+### Options not considered
+
+- I haven't tried [boost stacktrace](https://www.boost.org/doc/libs/master/boost/stacktrace/detail/collect_unwind.ipp) yet
+
+- The [stacktrace](http://stacktrace.sourceforge.net/) library is from 2009, was last changed 2013
+
+- I haven't considered going a [fully native route](https://programmer.help/blogs/using-the-_unwind_backtrace-function-to-grab-the-backtrace-of-the-c-c-stack.html) without library suport, this would amount to rewriting large parts of existing library code.
 
 ## Retrieving module name
 
