@@ -245,6 +245,33 @@ This is a [limitation of the upstream library](https://github.com/ianlancetaylor
 
 On Windows, 64-bit R is required.
 
+
+## Next steps
+
+- file names in backtrace
+
+    - Windows + Linux: easier in libbacktrace
+    
+    - macOS: requires debugging
+
+- test C++ output, demangle
+
+- get feedback from R core, especially Luke Tierney
+
+- collection of IP addresses and function information for profiling
+
+
+## History: jointprof part 1
+
+- use gperftools to record in parallel
+
+- requires parsing/processing alien data format: helper package
+
+- works only on Linux, requires patch on Mac, overall very brittle
+
+- hiatus, proffer package donated
+
+
 The remainder of the document discusses technical details and caveats.
 
 ## Technical details
@@ -350,32 +377,6 @@ Unfortunately it currently does not work on macOS:
 The gperftools library relies on the `addr2line` executable for retrieving file + line information ([source](https://sourceforge.net/p/elftoolchain/code/HEAD/tree/trunk/addr2line/addr2line.c), [relevant StackOverflow question](https://stackoverflow.com/q/11556321/946850)).
 
 Once a fully portable solution is found, this information should be provided by `winch_add_trace_back()`.
-
-
-## Next steps
-
-- file names in backtrace
-
-    - Windows + Linux: easier in libbacktrace
-    
-    - macOS: requires debugging
-
-- test C++ output, demangle
-
-- get feedback from R core, especially Luke Tierney
-
-- collection of IP addresses and function information for profiling
-
-
-## History: jointprof part 1
-
-- use gperftools to record in parallel
-
-- requires parsing/processing alien data format: helper package
-
-- works only on Linux, requires patch on Mac, overall very brittle
-
-- hiatus, proffer package donated
 
 
 ## Further documentation links
