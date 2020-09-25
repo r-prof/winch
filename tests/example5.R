@@ -15,4 +15,6 @@ bar <- function() {
   winch_stop("oops")
 }
 
-foo() %>% identity()
+if (winch_available()) {
+  foo() %>% identity()
+}

@@ -12,4 +12,6 @@ baz0 <- function() {
   winch_add_trace_back()
 }
 
-foo0()
+if (winch_available()) {
+  foo0()
+}

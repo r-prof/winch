@@ -14,4 +14,6 @@ bar <- function() {
   stop("oops")
 }
 
-foo()
+if (winch_available()) {
+  foo()
+}

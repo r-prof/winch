@@ -1,5 +1,3 @@
-default_method <- NULL
-
 #' @export
 winch_trace_back <- function() {
   winch_init_library()

@@ -30,6 +30,6 @@ SEXP winch_trace_back_default_method() {
 #elif defined(HAVE_LIBBACKTRACE)
   return Rf_ScalarInteger(2);
 #else
-  Rf_error("No traceback method available for this platform.");
+  return Rf_ScalarInteger(0);
 #endif
 }
