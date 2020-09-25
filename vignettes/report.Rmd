@@ -234,13 +234,16 @@ Backtrace:
 
 A bare-bones solution that enhances `sys.calls()` and `sys.frames()` and is usable outside of rlang remains an open issue.
 
-### Prerequisites
+### Limitations on Windows
 
 Building an R package on Linux and Windows seems to include the necessary debugging information that helps libunwind and libbacktrace.
 On Windows, it seems necessary to set `DEBUG=true`, e.g. in `~/.R/Makevars`.
 This adds `-gdwarf-2` to the compiler flags.
 
-Also, Windows users currently need `winch::winch_init_library()` to trace errors in their library, this is a [limitation of the upstream library](https://github.com/ianlancetaylor/libbacktrace/issues/53).
+Also, Windows users currently need `winch::winch_init_library()` to trace errors in their library.
+This is a [limitation of the upstream library](https://github.com/ianlancetaylor/libbacktrace/issues/53).
+
+On Windows, 64-bit R is required.
 
 The remainder of the document discusses technical details and caveats.
 
@@ -338,39 +341,16 @@ This information is also relevant for profiling, so that the costs of each sourc
 
 The libbacktrace library optionally provides file + line information for each entry in the stack trace.
 
-Unfortunately it currently does not work on macOS.
+Unfortunately it currently does not work on macOS:
+
+- Its internal tests show "libbacktrace: no debug info in Mach-O executable", perhaps related to [an issue that also limits usability on Windows](https://github.com/ianlancetaylor/libbacktrace/issues/53)
+
+- Using libbacktrace in winch gives a segmentation fault.
+
 The gperftools library relies on the `addr2line` executable for retrieving file + line information ([source](https://sourceforge.net/p/elftoolchain/code/HEAD/tree/trunk/addr2line/addr2line.c), [relevant StackOverflow question](https://stackoverflow.com/q/11556321/946850)).
 
 Once a fully portable solution is found, this information should be provided by `winch_add_trace_back()`.
 
-
-## Tests
-
-- test on Windows with correct gcc and with wrong gcc, and with old rtools, and with i386
-
-    ! Build with debug info using R CMD INSTALL --debug . or by setting the DEBUG environment variable, adds -gdwarf-2 -- this is wonderful
-
-    ! for pecoff, need to add symbolic and debug information for every library, not only for the main one: https://github.com/ianlancetaylor/libbacktrace/issues/53
-
-        ! workaround: add symbolic and debug information for active file
-
-    ! use instruction pointer in absence of syminfo (both libunwind and libbacktrace)
-
-    ! i386 won't work, backtrace is terminated prematurely
-
-        ! exclude in tests
-
-! we can build libbacktrace on macOS with clang, but doesn't run
-
-    - btest gives "libbacktrace: no debug info in Mach-O executable"
-
-        - probably the same as https://github.com/ianlancetaylor/libbacktrace/issues/53
-
-        ! winch segfaults, running gdb requires code-signing it
-
-    ! excluded from build
-
-- Tested inside RStudio
 
 ## Next steps
 
