@@ -141,6 +141,10 @@ find_calls <- function(x) {
     fun <- x[[1L]]
     if (identical(fun, quote(.Call))) {
       x[[2L]]
+    } else if (identical(fun, quote(.External))) {
+      x[[2L]]
+    } else if (identical(fun, quote(.External2))) {
+      x[[2L]]
     } else {
       out <- lapply(as.list(x)[-1], find_calls)
       unlist(out)
