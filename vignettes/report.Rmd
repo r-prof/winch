@@ -14,16 +14,16 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+```{r setup, include = FALSE}
 library(winch)
 ```
 
 
 This document describes the concluding efforts of the "Joint Profiling of Native and R Code" project.
 It describes two new packages, winch and its helper package procmaps.
-After a definition of the problem, the packages' features and technical caveats are described.
-A connection to the first part of the project is established, with an outline of work still to be done.
-It also serves as a scratch pad for links and other bits of information that don't fit elsewhere.
+After a definition of the problem, the packages' features are described, with an outline of work still to be done.
+It concludes with a discussion of technical caveats and a connection to the first part of the project.
+The appendix is a scratch pad for links and other bits of information that don't fit elsewhere.
 
 The winch package allows combining native and R stack traces in a controlled way, for now outside of a profiling context.
 This deviates from the original goal of the project, with good reason: robust combined stack traces are a cornerstone for joint profiling, and useful independently.
@@ -83,7 +83,7 @@ tail(foo(), 5)
 
 R is an interpreted language, it can be expected that it knows how to track the execution state.
 (It is much more surprising that it allows programs to compute on their own execution state -- R has very strong support for [reflection](https://en.wikipedia.org/wiki/Reflection_(computer_programming)) indeed.)
-How do we achieve this for native code? [Can an application programmatically generate its own stack trace?](https://stackoverflow.com/q/8031742/946850)?
+How do we achieve this for native code? [Can an application programmatically generate its own stack trace?](https://stackoverflow.com/q/8031742/946850)
 
 For native code, this is provided by the compiler or by specialized libraries.
 The main result is a sequence of instruction pointers (IP for short): addresses in the process's memory from where function calls occurred.
@@ -93,7 +93,7 @@ In general, function name, file + line information and even library name must be
 The winch package wraps two libraries (for portability across different OSes) that help obtain IP sequences and function names.
 This functionality is accessible via `winch::winch_trace_back()`.
 For demonstration purposes, this is what the native stack trace looks like for our double roundtrip.
-Calls into native code can be deduced from the different `pathname` value:
+Calls into native code can be deduced from the `pathname` column:
 
 ```{r}
 library(winch)
