@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Portable Native and Joint Stack Traces • winch</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">winch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.0.9000</span>
       </span>
     </div>
 
@@ -97,51 +97,51 @@
 <a href="#example" class="anchor"></a>Example</h2>
 <p>This is an example where an R function calls into C which calls back into R, see the second-to-last entry in the trace:</p>
 <pre class="chroma">
-<span class="nf"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="k"><a href="https://krlmlr.github.io/r-prof/">winch</a></span>)
+<span class="nf"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="k"><a href="https://r-prof.github.io/winch/">winch</a></span>)
 
 <span class="k">foo</span> <span class="o">&lt;-</span> <span class="nf">function</span>() {
-  <span class="nf">winch_call</span>(<span class="k">bar</span>)
+  <span class="nf"><a href="https://r-prof.github.io/winch/reference/winch_call.html">winch_call</a></span>(<span class="k">bar</span>)
 }
 
 <span class="k">bar</span> <span class="o">&lt;-</span> <span class="nf">function</span>() {
-  <span class="nf">winch_trace_back</span>()
+  <span class="nf"><a href="https://r-prof.github.io/winch/reference/winch_trace_back.html">winch_trace_back</a></span>()
 }
 
 <span class="nf">foo</span>()
 <span class="c">#&gt;                  func               ip</span>
-<span class="c">#&gt; 1  Rf_NewFrameConfirm 00007f0db4bd3480</span>
-<span class="c">#&gt; 2             Rf_eval 00007f0db4c1d4f0</span>
-<span class="c">#&gt; 3        R_execMethod 00007f0db4c22550</span>
-<span class="c">#&gt; 4             Rf_eval 00007f0db4c1d4f0</span>
-<span class="c">#&gt; 5        R_execMethod 00007f0db4c20e90</span>
-<span class="c">#&gt; 6             Rf_eval 00007f0db4c1d4f0</span>
-<span class="c">#&gt; 7             Rf_eval 00007f0db4c1f170</span>
-<span class="c">#&gt; 8     Rf_applyClosure 00007f0db4c20090</span>
-<span class="c">#&gt; 9             Rf_eval 00007f0db4c1d4f0</span>
-<span class="c">#&gt; 10       R_execMethod 00007f0db4c20e90</span>
-<span class="c">#&gt; 11            Rf_eval 00007f0db4c1d4f0</span>
-<span class="c">#&gt; 12            Rf_eval 00007f0db4c1f170</span>
-<span class="c">#&gt; 13    Rf_applyClosure 00007f0db4c20090</span>
-<span class="c">#&gt; 14            Rf_eval 00007f0db4c1d4f0</span>
-<span class="c">#&gt; 15         winch_call 00007f0da1aa5500</span>
-<span class="c">#&gt; 16 Rf_NewFrameConfirm 00007f0db4bd18a0</span>
-<span class="c">#&gt; 17 Rf_NewFrameConfirm 00007f0db4bd3480</span>
-<span class="c">#&gt; 18            Rf_eval 00007f0db4c1d4f0</span>
-<span class="c">#&gt; 19       R_execMethod 00007f0db4c20e90</span>
-<span class="c">#&gt; 20            Rf_eval 00007f0db4c1d4f0</span>
-<span class="c">#&gt; 21            Rf_eval 00007f0db4c1f170</span>
-<span class="c">#&gt; 22    Rf_applyClosure 00007f0db4c20090</span>
-<span class="c">#&gt; 23            Rf_eval 00007f0db4c1d4f0</span>
-<span class="c">#&gt; 24       R_execMethod 00007f0db4c20e90</span>
-<span class="c">#&gt; 25            Rf_eval 00007f0db4c1d4f0</span>
-<span class="c">#&gt; 26            Rf_eval 00007f0db4c1f170</span>
-<span class="c">#&gt; 27    Rf_applyClosure 00007f0db4c20090</span>
-<span class="c">#&gt; 28            Rf_eval 00007f0db4c1d4f0</span>
-<span class="c">#&gt; 29     R_forceAndCall 00007f0db4c233a0</span>
-<span class="c">#&gt; 30           do_Rprof 00007f0db4c07b80</span>
-<span class="c">#&gt; 31            Rf_eval 00007f0db4c1d4f0</span>
-<span class="c">#&gt; 32            Rf_eval 00007f0db4c1f170</span>
-<span class="c">#&gt; 33    Rf_applyClosure 00007f0db4c20090</span>
+<span class="c">#&gt; 1  Rf_NewFrameConfirm 00007efcabb59480</span>
+<span class="c">#&gt; 2             Rf_eval 00007efcabba34f0</span>
+<span class="c">#&gt; 3        R_execMethod 00007efcabba8550</span>
+<span class="c">#&gt; 4             Rf_eval 00007efcabba34f0</span>
+<span class="c">#&gt; 5        R_execMethod 00007efcabba6e90</span>
+<span class="c">#&gt; 6             Rf_eval 00007efcabba34f0</span>
+<span class="c">#&gt; 7             Rf_eval 00007efcabba5170</span>
+<span class="c">#&gt; 8     Rf_applyClosure 00007efcabba6090</span>
+<span class="c">#&gt; 9             Rf_eval 00007efcabba34f0</span>
+<span class="c">#&gt; 10       R_execMethod 00007efcabba6e90</span>
+<span class="c">#&gt; 11            Rf_eval 00007efcabba34f0</span>
+<span class="c">#&gt; 12            Rf_eval 00007efcabba5170</span>
+<span class="c">#&gt; 13    Rf_applyClosure 00007efcabba6090</span>
+<span class="c">#&gt; 14            Rf_eval 00007efcabba34f0</span>
+<span class="c">#&gt; 15         winch_call 00007efc98a2c240</span>
+<span class="c">#&gt; 16 Rf_NewFrameConfirm 00007efcabb578a0</span>
+<span class="c">#&gt; 17 Rf_NewFrameConfirm 00007efcabb59480</span>
+<span class="c">#&gt; 18            Rf_eval 00007efcabba34f0</span>
+<span class="c">#&gt; 19       R_execMethod 00007efcabba6e90</span>
+<span class="c">#&gt; 20            Rf_eval 00007efcabba34f0</span>
+<span class="c">#&gt; 21            Rf_eval 00007efcabba5170</span>
+<span class="c">#&gt; 22    Rf_applyClosure 00007efcabba6090</span>
+<span class="c">#&gt; 23            Rf_eval 00007efcabba34f0</span>
+<span class="c">#&gt; 24       R_execMethod 00007efcabba6e90</span>
+<span class="c">#&gt; 25            Rf_eval 00007efcabba34f0</span>
+<span class="c">#&gt; 26            Rf_eval 00007efcabba5170</span>
+<span class="c">#&gt; 27    Rf_applyClosure 00007efcabba6090</span>
+<span class="c">#&gt; 28            Rf_eval 00007efcabba34f0</span>
+<span class="c">#&gt; 29     R_forceAndCall 00007efcabba93a0</span>
+<span class="c">#&gt; 30           do_Rprof 00007efcabb8db80</span>
+<span class="c">#&gt; 31            Rf_eval 00007efcabba34f0</span>
+<span class="c">#&gt; 32            Rf_eval 00007efcabba5170</span>
+<span class="c">#&gt; 33    Rf_applyClosure 00007efcabba6090</span>
 <span class="c">#&gt;                                        pathname</span>
 <span class="c">#&gt; 1                        /usr/lib/R/lib/libR.so</span>
 <span class="c">#&gt; 2                        /usr/lib/R/lib/libR.so</span>
@@ -208,7 +208,7 @@
 <a href="#limitations" class="anchor"></a>Limitations</h2>
 <ul>
 <li>The matching will not be perfect, it still may lead to quicker discovery of the cause of an error.</li>
-<li>Windows only works on x64, and there the traces can be obtained only for one shared library at a time. See <code><a href="reference/winch_init_library.html">winch_init_library()</a></code> for details.</li>
+<li>Windows only works on x64, and there the traces can be obtained only for one shared library at a time. See <a href="https://r-prof.github.io/winch/reference/winch_init_library.html"><code>winch_init_library()</code></a> for details.</li>
 </ul>
 <hr>
 </div>
@@ -245,7 +245,8 @@
 <div class="developers">
 <h2>Developers</h2>
 <ul class="list-unstyled">
-<li>Kirill Müller <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-1416-3412" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>
+<a href="http://krlmlr.info">Kirill Müller</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-1416-3412" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>Ian Lance Taylor <br><small class="roles"> Author </small>  <br><small>(Bundled libbacktrace library)</small>
 </li>
 <li><a href="authors.html">All authors...</a></li>
@@ -256,6 +257,8 @@
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://www.tidyverse.org/lifecycle/#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
+<li><a href="https://github.com/r-prof/winch/actions"><img src="https://github.com/r-prof/winch/workflows/rcc/badge.svg" alt="R build status"></a></li>
+<li><a href="https://CRAN.R-project.org/package=winch"><img src="https://www.r-pkg.org/badges/version/winch" alt="CRAN status"></a></li>
 </ul>
 </div>
 </div>
@@ -263,7 +266,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Kirill Müller, Ian Lance Taylor.</p>
+  <p>Developed by <a href="http://krlmlr.info">Kirill Müller</a>, Ian Lance Taylor.</p>
 </div>
 
 <div class="pkgdown">

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Joint stack traces • winch</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">winch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.0.9000</span>
       </span>
     </div>
 
@@ -124,7 +124,7 @@
 <span class="co">#&gt; [[3]]</span>
 <span class="co">#&gt; baz()</span>
 </pre></div>
-<p>If native code is called, this can be deduced from the presence of <code><a href="https://rdrr.io/r/base/CallExternal.html">.Call()</a></code> or similar entries. No further detail is available. This is seen when replacing function calls with <code><a href="../reference/winch_call.html">winch::winch_call()</a></code>, which simulates a roundtrip from native code into R by calling a function passed as argument from C code. The example becomes a double roundtrip: R → native → R → native → R.</p>
+<p>Native code cannot easily be deduced from the stack trace. This is seen when replacing function calls with <code><a href="../reference/winch_call.html">winch::winch_call()</a></code>, which simulates a roundtrip from native code into R by calling a function passed as argument from C code. The example becomes a double roundtrip: R → native → R → native → R.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://r-prof.github.io/winch">winch</a></span>)
 
@@ -156,6 +156,41 @@
 <span class="co">#&gt;   sys.calls()</span>
 <span class="co">#&gt; })()</span>
 </pre></div>
+<p>A bit of guesswork is required here: we can inspect the bodies of the functions in the call stack to check for calls to <code><a href="https://rdrr.io/r/base/CallExternal.html">.Call()</a></code>, <code><a href="https://rdrr.io/r/base/CallExternal.html">.External()</a></code> or <code><a href="https://rdrr.io/r/base/Foreign-internal.html">.External2()</a></code>. In our example the candidates are located at indexes 2 and 4:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="kw">baz</span> <span class="op">&lt;-</span> <span class="fu">function</span>() {
+  <span class="kw">funs</span> <span class="op">&lt;-</span> <span class="kw">winch</span>:::<span class="fu">sys_functions</span>()
+  <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span>(<span class="kw">funs</span>, <span class="kw">body</span>)
+}
+
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="fu">foo</span>(), <span class="fl">5</span>)
+<span class="co">#&gt; [[1]]</span>
+<span class="co">#&gt; {</span>
+<span class="co">#&gt;     funs &lt;- winch:::sys_functions()</span>
+<span class="co">#&gt;     lapply(funs, body)</span>
+<span class="co">#&gt; }</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[2]]</span>
+<span class="co">#&gt; {</span>
+<span class="co">#&gt;     .Call(winch_c_call, fun, env)</span>
+<span class="co">#&gt; }</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[3]]</span>
+<span class="co">#&gt; {</span>
+<span class="co">#&gt;     winch_call(baz)</span>
+<span class="co">#&gt; }</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[4]]</span>
+<span class="co">#&gt; {</span>
+<span class="co">#&gt;     .Call(winch_c_call, fun, env)</span>
+<span class="co">#&gt; }</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[5]]</span>
+<span class="co">#&gt; {</span>
+<span class="co">#&gt;     winch_call(bar)</span>
+<span class="co">#&gt; }</span>
+</pre></div>
+<p>It would be much more accurate if the information was available directly in the stack trace. This would require changes to base R.</p>
 </div>
 <div id="native-code" class="section level3">
 <h3 class="hasAnchor">
@@ -163,9 +198,7 @@
 <p>R is an interpreted language, it can be expected that it knows how to track the execution state. (It is much more surprising that it allows programs to compute on their own execution state – R has very strong support for <a href="https://en.wikipedia.org/wiki/Reflection_(computer_programming)">reflection</a> indeed.) How do we achieve this for native code? <a href="https://stackoverflow.com/q/8031742/946850">Can an application programmatically generate its own stack trace?</a></p>
 <p>For native code, this is provided by the compiler or by specialized libraries. The main result is a sequence of instruction pointers (IP for short): addresses in the process’s memory from where function calls occurred. In some cases, additional information such as the function name is provided. In general, function name, file + line information and even library name must be deduced separately, using other specialized libraries.</p>
 <p>The winch package wraps two libraries (for portability across different OSes) that help obtain IP sequences and function names. This functionality is accessible via <code><a href="../reference/winch_trace_back.html">winch::winch_trace_back()</a></code>. For demonstration purposes, this is what the native stack trace looks like for our double roundtrip. Calls into native code can be deduced from the <code>pathname</code> column:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://r-prof.github.io/winch">winch</a></span>)
-
+<div class="sourceCode" id="cb4"><pre class="downlit">
 <span class="kw">baz</span> <span class="op">&lt;-</span> <span class="fu">function</span>() {
   <span class="fu"><a href="../reference/winch_trace_back.html">winch_trace_back</a></span>()
 }
@@ -175,31 +208,31 @@
 <span class="co">#&gt; [1] 227</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="kw">trace</span>, <span class="fl">25</span>)
 <span class="co">#&gt;               func               ip</span>
-<span class="co">#&gt; 1           bcEval 00007efe048c9260</span>
-<span class="co">#&gt; 2          Rf_eval 00007efe048debd0</span>
-<span class="co">#&gt; 3    R_execClosure 00007efe048e0850</span>
-<span class="co">#&gt; 4  Rf_applyClosure 00007efe048e1770</span>
-<span class="co">#&gt; 5          Rf_eval 00007efe048debd0</span>
-<span class="co">#&gt; 6         do_begin 00007efe048e2570</span>
-<span class="co">#&gt; 7          Rf_eval 00007efe048debd0</span>
-<span class="co">#&gt; 8    R_execClosure 00007efe048e0850</span>
-<span class="co">#&gt; 9  Rf_applyClosure 00007efe048e1770</span>
-<span class="co">#&gt; 10         Rf_eval 00007efe048debd0</span>
-<span class="co">#&gt; 11      winch_call 00007efded6a55b0</span>
-<span class="co">#&gt; 12     R_doDotCall 00007efe04892f80</span>
-<span class="co">#&gt; 13          bcEval 00007efe048c9260</span>
-<span class="co">#&gt; 14         Rf_eval 00007efe048debd0</span>
-<span class="co">#&gt; 15   R_execClosure 00007efe048e0850</span>
-<span class="co">#&gt; 16 Rf_applyClosure 00007efe048e1770</span>
-<span class="co">#&gt; 17          bcEval 00007efe048c9260</span>
-<span class="co">#&gt; 18         Rf_eval 00007efe048debd0</span>
-<span class="co">#&gt; 19   R_execClosure 00007efe048e0850</span>
-<span class="co">#&gt; 20 Rf_applyClosure 00007efe048e1770</span>
-<span class="co">#&gt; 21         Rf_eval 00007efe048debd0</span>
-<span class="co">#&gt; 22      winch_call 00007efded6a55b0</span>
-<span class="co">#&gt; 23     R_doDotCall 00007efe04892f80</span>
-<span class="co">#&gt; 24          bcEval 00007efe048c9260</span>
-<span class="co">#&gt; 25         Rf_eval 00007efe048debd0</span>
+<span class="co">#&gt; 1           bcEval 00007f1b32f7f260</span>
+<span class="co">#&gt; 2          Rf_eval 00007f1b32f94bd0</span>
+<span class="co">#&gt; 3    R_execClosure 00007f1b32f96850</span>
+<span class="co">#&gt; 4  Rf_applyClosure 00007f1b32f97770</span>
+<span class="co">#&gt; 5          Rf_eval 00007f1b32f94bd0</span>
+<span class="co">#&gt; 6         do_begin 00007f1b32f98570</span>
+<span class="co">#&gt; 7          Rf_eval 00007f1b32f94bd0</span>
+<span class="co">#&gt; 8    R_execClosure 00007f1b32f96850</span>
+<span class="co">#&gt; 9  Rf_applyClosure 00007f1b32f97770</span>
+<span class="co">#&gt; 10         Rf_eval 00007f1b32f94bd0</span>
+<span class="co">#&gt; 11      winch_call 00007f1b1bd5b5b0</span>
+<span class="co">#&gt; 12     R_doDotCall 00007f1b32f48f80</span>
+<span class="co">#&gt; 13          bcEval 00007f1b32f7f260</span>
+<span class="co">#&gt; 14         Rf_eval 00007f1b32f94bd0</span>
+<span class="co">#&gt; 15   R_execClosure 00007f1b32f96850</span>
+<span class="co">#&gt; 16 Rf_applyClosure 00007f1b32f97770</span>
+<span class="co">#&gt; 17          bcEval 00007f1b32f7f260</span>
+<span class="co">#&gt; 18         Rf_eval 00007f1b32f94bd0</span>
+<span class="co">#&gt; 19   R_execClosure 00007f1b32f96850</span>
+<span class="co">#&gt; 20 Rf_applyClosure 00007f1b32f97770</span>
+<span class="co">#&gt; 21         Rf_eval 00007f1b32f94bd0</span>
+<span class="co">#&gt; 22      winch_call 00007f1b1bd5b5b0</span>
+<span class="co">#&gt; 23     R_doDotCall 00007f1b32f48f80</span>
+<span class="co">#&gt; 24          bcEval 00007f1b32f7f260</span>
+<span class="co">#&gt; 25         Rf_eval 00007f1b32f94bd0</span>
 <span class="co">#&gt;                                               pathname</span>
 <span class="co">#&gt; 1                       /opt/R/4.0.2/lib/R/lib/libR.so</span>
 <span class="co">#&gt; 2                       /opt/R/4.0.2/lib/R/lib/libR.so</span>
@@ -258,7 +291,7 @@ bar()                libR.so::... (repeated)
 foo()                libR.so::... (repeated)</code></pre>
 <p>Combining stack traces now means pairing corresponding <code><a href="https://rdrr.io/r/base/CallExternal.html">.Call()</a></code> entries with native traces from other modules than <code>libR.so</code>, denoted by <code>&lt;--&gt;</code> in the above example.</p>
 <p>The winch package implements this on top of <code><a href="https://rlang.r-lib.org/reference/trace_back.html">rlang::trace_back()</a></code>, a wrapper around <code><a href="https://rdrr.io/r/base/sys.parent.html">sys.calls()</a></code> that displays as a tree and creates better output in the presence of lazy evaluation.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
+<div class="sourceCode" id="cb6"><pre class="downlit">
 <span class="kw">baz</span> <span class="op">&lt;-</span> <span class="fu">function</span>() {
   <span class="kw">rlang</span>::<span class="fu"><a href="https://rlang.r-lib.org/reference/trace_back.html">trace_back</a></span>()
 }
@@ -272,7 +305,7 @@ foo()                libR.so::... (repeated)</code></pre>
  4.     ├─winch::winch_call(baz)
  5.     └─(function () ... R/call.R:4:2</code></pre>
 <p>The function <code><a href="../reference/winch_add_trace_back.html">winch::winch_add_trace_back()</a></code> enriches an rlang stack trace with relevant parts of the native stack trace, by pairing <code><a href="https://rdrr.io/r/base/CallExternal.html">.Call()</a></code> and similar entries with native code from outside of <code>libR.so</code>, as described above.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit">
+<div class="sourceCode" id="cb8"><pre class="downlit">
 <span class="kw">baz</span> <span class="op">&lt;-</span> <span class="fu">function</span>() {
   <span class="kw">trace</span> <span class="op">&lt;-</span> <span class="kw">rlang</span>::<span class="fu"><a href="https://rlang.r-lib.org/reference/trace_back.html">trace_back</a></span>()
   <span class="fu"><a href="../reference/winch_add_trace_back.html">winch_add_trace_back</a></span>(<span class="kw">trace</span>)
@@ -289,7 +322,7 @@ foo()                libR.so::... (repeated)</code></pre>
  6.           └─`/winch.so`::winch_call()
  7.             └─(function () ... R/call.R:4:2</code></pre>
 <p>Stack traces must be collected at the time that the error occurs, this includes calls to <code><a href="https://rlang.r-lib.org/reference/abort.html">rlang::abort()</a></code> which already collect a stack trace. The integration is a <a href="https://github.com/r-lib/rlang/pull/1039">small change to rlang</a> that calls <code><a href="../reference/winch_add_trace_back.html">winch_add_trace_back()</a></code> during collection if winch is installed and the <code>rlang_trace_use_winch</code> option is identical to <code>1L</code>. With this option set, manual addition of the native stack trace is no longer necessary.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit">
+<div class="sourceCode" id="cb10"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span>(rlang_trace_use_winch = <span class="fl">1L</span>)
 
 <span class="kw">baz</span> <span class="op">&lt;-</span> <span class="fu">function</span>() {
@@ -307,7 +340,7 @@ foo()                libR.so::... (repeated)</code></pre>
  6.           └─`/winch.so`::winch_call()
  7.             └─(function () ... R/call.R:4:2</code></pre>
 <p>The vctrs package uses C for performance-critical parts, and often calls back into R for e.g. S3 dispatch or error reporting. The example below triggers an error: native code calls into R for actually throwing the error.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit">
+<div class="sourceCode" id="cb12"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span>(
   error = <span class="kw">rlang</span>::<span class="kw"><a href="https://rlang.r-lib.org/reference/entrace.html">entrace</a></span>,
   rlang_backtrace_on_error = <span class="st">"full"</span>,
@@ -513,7 +546,7 @@ Backtrace:
 
 
       <footer><div class="copyright">
-  <p>Developed by Kirill Müller, Ian Lance Taylor.</p>
+  <p>Developed by <a href="http://krlmlr.info">Kirill Müller</a>, Ian Lance Taylor.</p>
 </div>
 
 <div class="pkgdown">
