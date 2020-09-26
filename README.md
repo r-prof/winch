@@ -4,7 +4,7 @@
 
 <!-- badges: start -->
 
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental) [![R build status](https://github.com/r-prof/winch/workflows/rcc/badge.svg)](https://github.com/r-prof/winch/actions) [![Codecov test coverage](https://codecov.io/gh/r-prof/winch/branch/master/graph/badge.svg)](https://codecov.io/gh/r-prof/winch?branch=master) [![CRAN status](https://www.r-pkg.org/badges/version/winch)](https://CRAN.R-project.org/package=winch)
 
 <!-- badges: end -->
 
@@ -29,51 +29,51 @@ Install the development version from GitHub with:
 This is an example where an R function calls into C which calls back into R, see the second-to-last entry in the trace:
 
 <pre class='chroma'>
-<span class='nf'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='k'><a href='https://krlmlr.github.io/r-prof/'>winch</a></span>)
+<span class='nf'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='k'><a href='https://r-prof.github.io/winch/'>winch</a></span>)
 
 <span class='k'>foo</span> <span class='o'>&lt;-</span> <span class='nf'>function</span>() {
-  <span class='nf'>winch_call</span>(<span class='k'>bar</span>)
+  <span class='nf'><a href='https://r-prof.github.io/winch/reference/winch_call.html'>winch_call</a></span>(<span class='k'>bar</span>)
 }
 
 <span class='k'>bar</span> <span class='o'>&lt;-</span> <span class='nf'>function</span>() {
-  <span class='nf'>winch_trace_back</span>()
+  <span class='nf'><a href='https://r-prof.github.io/winch/reference/winch_trace_back.html'>winch_trace_back</a></span>()
 }
 
 <span class='nf'>foo</span>()
 <span class='c'>#&gt;                  func               ip</span>
-<span class='c'>#&gt; 1  Rf_NewFrameConfirm 00007f0db4bd3480</span>
-<span class='c'>#&gt; 2             Rf_eval 00007f0db4c1d4f0</span>
-<span class='c'>#&gt; 3        R_execMethod 00007f0db4c22550</span>
-<span class='c'>#&gt; 4             Rf_eval 00007f0db4c1d4f0</span>
-<span class='c'>#&gt; 5        R_execMethod 00007f0db4c20e90</span>
-<span class='c'>#&gt; 6             Rf_eval 00007f0db4c1d4f0</span>
-<span class='c'>#&gt; 7             Rf_eval 00007f0db4c1f170</span>
-<span class='c'>#&gt; 8     Rf_applyClosure 00007f0db4c20090</span>
-<span class='c'>#&gt; 9             Rf_eval 00007f0db4c1d4f0</span>
-<span class='c'>#&gt; 10       R_execMethod 00007f0db4c20e90</span>
-<span class='c'>#&gt; 11            Rf_eval 00007f0db4c1d4f0</span>
-<span class='c'>#&gt; 12            Rf_eval 00007f0db4c1f170</span>
-<span class='c'>#&gt; 13    Rf_applyClosure 00007f0db4c20090</span>
-<span class='c'>#&gt; 14            Rf_eval 00007f0db4c1d4f0</span>
-<span class='c'>#&gt; 15         winch_call 00007f0da1aa5500</span>
-<span class='c'>#&gt; 16 Rf_NewFrameConfirm 00007f0db4bd18a0</span>
-<span class='c'>#&gt; 17 Rf_NewFrameConfirm 00007f0db4bd3480</span>
-<span class='c'>#&gt; 18            Rf_eval 00007f0db4c1d4f0</span>
-<span class='c'>#&gt; 19       R_execMethod 00007f0db4c20e90</span>
-<span class='c'>#&gt; 20            Rf_eval 00007f0db4c1d4f0</span>
-<span class='c'>#&gt; 21            Rf_eval 00007f0db4c1f170</span>
-<span class='c'>#&gt; 22    Rf_applyClosure 00007f0db4c20090</span>
-<span class='c'>#&gt; 23            Rf_eval 00007f0db4c1d4f0</span>
-<span class='c'>#&gt; 24       R_execMethod 00007f0db4c20e90</span>
-<span class='c'>#&gt; 25            Rf_eval 00007f0db4c1d4f0</span>
-<span class='c'>#&gt; 26            Rf_eval 00007f0db4c1f170</span>
-<span class='c'>#&gt; 27    Rf_applyClosure 00007f0db4c20090</span>
-<span class='c'>#&gt; 28            Rf_eval 00007f0db4c1d4f0</span>
-<span class='c'>#&gt; 29     R_forceAndCall 00007f0db4c233a0</span>
-<span class='c'>#&gt; 30           do_Rprof 00007f0db4c07b80</span>
-<span class='c'>#&gt; 31            Rf_eval 00007f0db4c1d4f0</span>
-<span class='c'>#&gt; 32            Rf_eval 00007f0db4c1f170</span>
-<span class='c'>#&gt; 33    Rf_applyClosure 00007f0db4c20090</span>
+<span class='c'>#&gt; 1  Rf_NewFrameConfirm 00007efcabb59480</span>
+<span class='c'>#&gt; 2             Rf_eval 00007efcabba34f0</span>
+<span class='c'>#&gt; 3        R_execMethod 00007efcabba8550</span>
+<span class='c'>#&gt; 4             Rf_eval 00007efcabba34f0</span>
+<span class='c'>#&gt; 5        R_execMethod 00007efcabba6e90</span>
+<span class='c'>#&gt; 6             Rf_eval 00007efcabba34f0</span>
+<span class='c'>#&gt; 7             Rf_eval 00007efcabba5170</span>
+<span class='c'>#&gt; 8     Rf_applyClosure 00007efcabba6090</span>
+<span class='c'>#&gt; 9             Rf_eval 00007efcabba34f0</span>
+<span class='c'>#&gt; 10       R_execMethod 00007efcabba6e90</span>
+<span class='c'>#&gt; 11            Rf_eval 00007efcabba34f0</span>
+<span class='c'>#&gt; 12            Rf_eval 00007efcabba5170</span>
+<span class='c'>#&gt; 13    Rf_applyClosure 00007efcabba6090</span>
+<span class='c'>#&gt; 14            Rf_eval 00007efcabba34f0</span>
+<span class='c'>#&gt; 15         winch_call 00007efc98a2c240</span>
+<span class='c'>#&gt; 16 Rf_NewFrameConfirm 00007efcabb578a0</span>
+<span class='c'>#&gt; 17 Rf_NewFrameConfirm 00007efcabb59480</span>
+<span class='c'>#&gt; 18            Rf_eval 00007efcabba34f0</span>
+<span class='c'>#&gt; 19       R_execMethod 00007efcabba6e90</span>
+<span class='c'>#&gt; 20            Rf_eval 00007efcabba34f0</span>
+<span class='c'>#&gt; 21            Rf_eval 00007efcabba5170</span>
+<span class='c'>#&gt; 22    Rf_applyClosure 00007efcabba6090</span>
+<span class='c'>#&gt; 23            Rf_eval 00007efcabba34f0</span>
+<span class='c'>#&gt; 24       R_execMethod 00007efcabba6e90</span>
+<span class='c'>#&gt; 25            Rf_eval 00007efcabba34f0</span>
+<span class='c'>#&gt; 26            Rf_eval 00007efcabba5170</span>
+<span class='c'>#&gt; 27    Rf_applyClosure 00007efcabba6090</span>
+<span class='c'>#&gt; 28            Rf_eval 00007efcabba34f0</span>
+<span class='c'>#&gt; 29     R_forceAndCall 00007efcabba93a0</span>
+<span class='c'>#&gt; 30           do_Rprof 00007efcabb8db80</span>
+<span class='c'>#&gt; 31            Rf_eval 00007efcabba34f0</span>
+<span class='c'>#&gt; 32            Rf_eval 00007efcabba5170</span>
+<span class='c'>#&gt; 33    Rf_applyClosure 00007efcabba6090</span>
 <span class='c'>#&gt;                                        pathname</span>
 <span class='c'>#&gt; 1                        /usr/lib/R/lib/libR.so</span>
 <span class='c'>#&gt; 2                        /usr/lib/R/lib/libR.so</span>
@@ -141,7 +141,7 @@ To work around this limitation, the source code of all R functions along the cal
 ## Limitations
 
   - The matching will not be perfect, it still may lead to quicker discovery of the cause of an error.
-  - Windows only works on x64, and there the traces can be obtained only for one shared library at a time. See `winch_init_library()` for details.
+  - Windows only works on x64, and there the traces can be obtained only for one shared library at a time. See [`winch_init_library()`](https://r-prof.github.io/winch/reference/winch_init_library.html) for details.
 
 -----
 
