@@ -317,7 +317,7 @@ The `execinfo()` approach is no longer used because libunwind is clearly better.
 
     - gcc bug reported: https://gcc.gnu.org/bugzilla/show_bug.cgi?id=96948
 
-    - patches by me and by Martin Storsjö: https://gcc.gnu.org/pipermail/gcc-patches/2020-September/553418.html 
+    - patches by me and by Martin Storsjö: https://gcc.gnu.org/pipermail/gcc-patches/2020-September/553418.html
 
     - patch submitted to rtools-packages: https://github.com/r-windows/rtools-packages/pull/148
 
