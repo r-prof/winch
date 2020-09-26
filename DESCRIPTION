@@ -31,8 +31,7 @@ Suggests:
     rmarkdown,
     RSQLite,
     testthat,
-    vctrs,
-    covr
+    vctrs
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
