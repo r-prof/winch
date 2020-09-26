@@ -17,7 +17,9 @@ Imports:
     procmaps (>= 0.0.1.9002),
     rlang (>= 0.4.7.9000)
 Suggests: 
+    DBI,
     knitr,
+    magrittr,
     rmarkdown,
     RSQLite,
     testthat,
