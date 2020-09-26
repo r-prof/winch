@@ -27,7 +27,7 @@ Suggests:
     DBI,
     knitr,
     magrittr,
-    rlang (>= 0.4.7.9000),
+    rlang,
     rmarkdown,
     RSQLite,
     testthat,
@@ -35,8 +35,6 @@ Suggests:
     covr
 VignetteBuilder: 
     knitr
-Remotes: 
-    krlmlr/rlang@f-trace-hook
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
