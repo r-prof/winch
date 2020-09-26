@@ -49,10 +49,12 @@ winch_add_trace_back <- function(trace = rlang::trace_back(bottom = parent.frame
   native_trace <- native_trace[seq_len(first_libr), ]
   is_libr <- is_libr[seq_len(first_libr)]
 
+  # No native code called?
   if (all(is_libr)) {
     return(rlang_trace)
   }
 
+  # Compute chunks of native stack traces between libR.so traces
   is_libr_rle <- rle(cumsum(is_libr))
   is_native_rle_idx <- which(is_libr_rle$lengths != 1)
   native_idx_len <- is_libr_rle$lengths[is_native_rle_idx] - 1L
@@ -61,19 +63,14 @@ winch_add_trace_back <- function(trace = rlang::trace_back(bottom = parent.frame
     native_trace[seq.int(end, by = -1L, length.out = len), ]
   })
 
+  # Find all functions in the stack trace that call .Call(),
+  # .External() or .External2()
   r_funs <- sys_functions()
-  # Must be separate, sys_functions() is very brittle
+  # The sys_functions() call must be separate, it is very brittle
   r_funs <- utils::tail(r_funs, rlang::trace_length(trace))
   r_funs <- rev(r_funs)
   r_fun_bodies <- lapply(r_funs, body)
   r_fun_calls <- lapply(r_fun_bodies, find_calls)
-
-  # r_fun_ids <- Map(r_fun_calls, r_funs, f = function(calls, fun) {
-  #   lapply(calls, eval, environment(fun))
-  # })
-  #
-  # r_fun_names <- lapply(r_fun_ids, lapply, `[[`, "name")
-  # r_fun_names_chr <- lapply(r_fun_names, unlist)
 
   r_fun_has_call_idx <- which(lengths(r_fun_calls) > 0)
   if (length(r_fun_has_call_idx) == 0) {
@@ -82,6 +79,7 @@ winch_add_trace_back <- function(trace = rlang::trace_back(bottom = parent.frame
   }
 
   if (length(r_fun_has_call_idx) > length(native_trace_chunks)) {
+    # Are there too many occurrences of .Call() etc.? Omit
     length(r_fun_has_call_idx) <- length(native_trace_chunks)
   } else if (length(r_fun_has_call_idx) < length(native_trace_chunks)) {
     # Did we miss a call into native? Append at end
@@ -91,62 +89,7 @@ winch_add_trace_back <- function(trace = rlang::trace_back(bottom = parent.frame
     length(native_trace_chunks) <- length(r_fun_has_call_idx)
   }
 
-  insert_native_chunk <- function(trace, idx, native) {
-    added_calls <- Map(
-      basename(native$pathname),
-      native$func,
-      f = function(basename, func) as.call(list(call(
-        "::",
-        as.name(paste0("/", basename)),
-        as.name(func)
-      )))
-    )
-
-    old_size <- length(trace$calls)
-    new_size <- old_size + length(added_calls)
-    if (old_size == new_size) {
-      # Nothing to do
-      return(native)
-    }
-
-    # Prepare for pasting
-    added_idx <- seq.int(idx + 1L, length.out = length(added_calls))
-    added_parents <- lag(added_idx, default = idx)
-    rechain_idx <- added_idx[[length(added_idx)]]
-
-    # Create translation table
-    xlat <- c(
-      seq_len(idx),
-      seq.int(idx + length(added_calls) + 1L, length.out = old_size - idx)
-    )
-    xlat1 <- c(0L, xlat)
-
-    # Move
-    new_parents <- rep(-1L, new_size)
-    new_parents[xlat] <- xlat1[trace$parents + 1L]
-
-    new_calls <- rep(NULL, new_size)
-    new_calls[xlat] <- trace$calls
-
-    new_idx <- seq_len(new_size)
-
-    # Rechain existing
-    parents_fix_idx <- new_parents == idx
-    grandparents_fix_idx <- (new_parents == new_parents[[idx]] & seq_along(new_parents) > idx)
-    new_parents[parents_fix_idx | grandparents_fix_idx] <- rechain_idx
-
-    # Paste (after rechaining!)
-    new_parents[added_idx] <- added_parents
-    new_calls[added_idx] <- added_calls
-
-    # Use new
-    trace$calls <- new_calls
-    trace$parents <- new_parents
-    trace$indices <- new_idx
-
-    trace
-  }
-
+  # Insert native stack trace chunks into R stack trace
   for (i in seq_along(r_fun_has_call_idx)) {
     rlang_trace <- insert_native_chunk(rlang_trace, r_fun_has_call_idx[[i]], native_trace_chunks[[i]])
   }
@@ -180,4 +123,60 @@ find_calls <- function(x) {
   } else {
     NULL
   }
+}
+
+insert_native_chunk <- function(trace, idx, native) {
+  added_calls <- Map(
+    basename(native$pathname),
+    native$func,
+    f = function(basename, func) as.call(list(call(
+      "::",
+      as.name(paste0("/", basename)),
+      as.name(func)
+    )))
+  )
+
+  old_size <- length(trace$calls)
+  new_size <- old_size + length(added_calls)
+  if (old_size == new_size) {
+    # Nothing to do
+    return(native)
+  }
+
+  # Prepare for pasting
+  added_idx <- seq.int(idx + 1L, length.out = length(added_calls))
+  added_parents <- lag(added_idx, default = idx)
+  rechain_idx <- added_idx[[length(added_idx)]]
+
+  # Create translation table
+  xlat <- c(
+    seq_len(idx),
+    seq.int(idx + length(added_calls) + 1L, length.out = old_size - idx)
+  )
+  xlat1 <- c(0L, xlat)
+
+  # Move
+  new_parents <- rep(-1L, new_size)
+  new_parents[xlat] <- xlat1[trace$parents + 1L]
+
+  new_calls <- rep(NULL, new_size)
+  new_calls[xlat] <- trace$calls
+
+  new_idx <- seq_len(new_size)
+
+  # Rechain existing
+  parents_fix_idx <- new_parents == idx
+  grandparents_fix_idx <- (new_parents == new_parents[[idx]] & seq_along(new_parents) > idx)
+  new_parents[parents_fix_idx | grandparents_fix_idx] <- rechain_idx
+
+  # Paste (after rechaining!)
+  new_parents[added_idx] <- added_parents
+  new_calls[added_idx] <- added_calls
+
+  # Use new
+  trace$calls <- new_calls
+  trace$parents <- new_parents
+  trace$indices <- new_idx
+
+  trace
 }
