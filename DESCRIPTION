@@ -31,7 +31,8 @@ Suggests:
     rmarkdown,
     RSQLite,
     testthat,
-    vctrs
+    vctrs,
+    covr
 VignetteBuilder: 
     knitr
 Remotes: 

@@ -60,8 +60,7 @@ baz <- function() {
 tail(foo(), 3)
 ```
 
-If native code is called, this can be deduced from the presence of `.Call()` or similar entries.
-No further detail is available.
+Native code cannot easily be deduced from the stack trace.
 This is seen when replacing function calls with `winch::winch_call()`, which simulates a roundtrip from native code into R by calling a function passed as argument from C code.
 The example becomes a double roundtrip: R → native → R → native → R.
 
@@ -78,6 +77,21 @@ bar <- function() {
 
 tail(foo(), 5)
 ```
+
+A bit of guesswork is required here: we can inspect the bodies of the functions in the call stack to check for calls to `.Call()`, `.External()` or `.External2()`.
+In our example the candidates are located at indexes 2 and 4:
+
+```{r}
+baz <- function() {
+  funs <- winch:::sys_functions()
+  lapply(funs, body)
+}
+
+head(foo(), 5)
+```
+
+It would be much more accurate if the information was available directly in the stack trace.
+This would require changes to base R.
 
 ### Native code
 
@@ -96,8 +110,6 @@ For demonstration purposes, this is what the native stack trace looks like for o
 Calls into native code can be deduced from the `pathname` column:
 
 ```{r}
-library(winch)
-
 baz <- function() {
   winch_trace_back()
 }
