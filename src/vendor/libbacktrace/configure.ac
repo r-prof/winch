@@ -140,9 +140,7 @@ else
 fi
 AC_SUBST(EXTRA_FLAGS)
 
-ACX_PROG_CC_WARNING_OPTS([-W -Wall -Wwrite-strings -Wstrict-prototypes \
-			  -Wmissing-prototypes -Wold-style-definition \
-			  -Wmissing-format-attribute -Wcast-qual],
+ACX_PROG_CC_WARNING_OPTS([-Wall],
 			  [WARN_FLAGS])
 
 if test -n "${with_target_subdir}"; then

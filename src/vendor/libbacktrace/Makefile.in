@@ -165,7 +165,7 @@ am__aclocal_m4_deps = $(top_srcdir)/config/lead-dot.m4 \
 	$(top_srcdir)/config/ltoptions.m4 \
 	$(top_srcdir)/config/ltsugar.m4 \
 	$(top_srcdir)/config/ltversion.m4 \
-	$(top_srcdir)/config/lt~obsolete.m4 \
+	$(top_srcdir)/config/lt-obsolete.m4 \
 	$(top_srcdir)/config/multi.m4 $(top_srcdir)/config/override.m4 \
 	$(top_srcdir)/config/unwind_ipinfo.m4 \
 	$(top_srcdir)/config/warnings.m4 $(top_srcdir)/configure.ac

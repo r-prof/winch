@@ -11918,9 +11918,7 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
 
 WARN_FLAGS=
 save_CFLAGS="$CFLAGS"
-for real_option in -W -Wall -Wwrite-strings -Wstrict-prototypes \
-			  -Wmissing-prototypes -Wold-style-definition \
-			  -Wmissing-format-attribute -Wcast-qual; do
+for real_option in -Wall; do
   # Do the check with the no- prefix removed since gcc silently
   # accepts any -Wno-* option on purpose
   case $real_option in
