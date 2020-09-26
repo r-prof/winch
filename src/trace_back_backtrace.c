@@ -64,9 +64,6 @@ void cb_get_name_from_syminfo(void *data, uintptr_t pc,
 
   R_xlen_t pos = cb_data->pos;
 
-  fprintf(stderr, "pc: %lx\n", pc);
-  fprintf(stderr, "symname: %lx\n", symval);
-
   if (symname != NULL) {
     SET_STRING_ELT(out_name, pos, Rf_mkCharCE(symname, CE_UTF8));
   }
@@ -111,8 +108,6 @@ int cb_get_name_ip(void *data, uintptr_t pc,
 }
 
 SEXP winch_trace_back_backtrace() {
-  backtrace_print(backtrace_state, 1, stderr);
-
   R_xlen_t size = 0;
   backtrace_full(backtrace_state, 1, cb_increment_size, cb_error, &size);
 
