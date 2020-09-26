@@ -1,4 +1,34 @@
+#' Native stack trace
+#'
+#' This function returns the native stack trace as a data frame.
+#' Each native stack frame corresponds to one row in the returned data frame.
+#' Deep function calls come first, the last row corresponds to the
+#' running process's entry point.
+#'
+#' On Windows, call [winch_init_library()] to return function names
+#' for a specific package.
+#'
+#' @return A data frame with the columns:
+#'
+#' - `func`: function name
+#' - `ip`: instruction pointer
+#' - `pathname`: path to shared library
+#'
+#' @seealso [sys.calls()] for the R equivalent.
+#'
 #' @export
+#' @examples
+#' winch_trace_back()
+#'
+#' foo <- function() {
+#'   winch_call(bar)
+#' }
+#'
+#' bar <- function() {
+#'   winch_trace_back()
+#' }
+#'
+#' foo()
 winch_trace_back <- function() {
   winch_init_library()
 

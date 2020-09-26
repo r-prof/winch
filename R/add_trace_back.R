@@ -1,5 +1,28 @@
+#' Enrich an rlang traceback with details on native calls
+#'
+#' This function uses the native stack trace returned from [winch_trace_back()]
+#' to add details on native function calls to an rlang traceback object.
+#' It is intended to be called by rlang.
+#'
+#' @param trace An rlang traceback as returned by [rlang::trace_back()].
+#'
 #' @export
+#' @examplesIf requireNamespace("rlang", quietly = TRUE)
+#' foo <- function() {
+#'   winch_call(bar)
+#' }
+#'
+#' bar <- function() {
+#'   trace <- rlang::trace_back()
+#'   winch_add_trace_back(trace)
+#' }
+#'
+#' foo()
 winch_add_trace_back <- function(trace = rlang::trace_back(bottom = parent.frame())) {
+  if (!winch_available()) {
+    return(trace)
+  }
+
   # Avoid recursion
   rlang::local_options(rlang_trace_use_winch = NULL)
   rlang_trace <- trace
