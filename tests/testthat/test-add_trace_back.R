@@ -9,6 +9,7 @@ test_that("traceback unchanged if no native code", {
 test_that("traceback changed if native code", {
   skip_on_cran()
   skip_if_not_installed("rlang")
+  skip_if(.Platform$r_arch == "i386")
 
   foo <- function(fun) {
     winch_call(fun)
