@@ -12,7 +12,7 @@ winch_call(fun, env = parent.frame())
 \item{env}{The environment in which to evaluate the function call.}
 }
 \value{
-
+The return value of \code{fun()}.
 }
 \description{
 Primarily intended for testing.

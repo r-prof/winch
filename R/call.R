@@ -7,7 +7,7 @@
 #'
 #' @seealso [winch_stop()]
 #'
-#' @return
+#' @return The return value of `fun()`.
 #' @export
 #' @examples
 #' foo <- function() {
