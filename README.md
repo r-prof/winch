@@ -4,7 +4,7 @@
 
 <!-- badges: start -->
 
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental) [![R build status](https://github.com/r-prof/winch/workflows/rcc/badge.svg)](https://github.com/r-prof/winch/actions) [![Codecov test coverage](https://codecov.io/gh/r-prof/winch/branch/master/graph/badge.svg)](https://codecov.io/gh/r-prof/winch?branch=master) [![CRAN status](https://www.r-pkg.org/badges/version/winch)](https://CRAN.R-project.org/package=winch)
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental) [![R build status](https://github.com/r-prof/winch/workflows/rcc/badge.svg)](https://github.com/r-prof/winch/actions) [![CRAN status](https://www.r-pkg.org/badges/version/winch)](https://CRAN.R-project.org/package=winch)
 
 <!-- badges: end -->
 
