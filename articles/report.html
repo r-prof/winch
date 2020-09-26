@@ -55,7 +55,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/krlmlr/r-prof/">
+  <a href="https://github.com/r-prof/winch/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -76,7 +76,7 @@
       <h1 data-toc-skip>Joint stack traces</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/krlmlr/r-prof/blob/master/vignettes/report.Rmd"><code>vignettes/report.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/r-prof/winch/blob/master/vignettes/report.Rmd"><code>vignettes/report.Rmd</code></a></small>
       <div class="hidden name"><code>report.Rmd</code></div>
 
     </div>
@@ -124,16 +124,16 @@
 <span class="co">#&gt; [[3]]</span>
 <span class="co">#&gt; baz()</span>
 </pre></div>
-<p>If native code is called, this can be deduced from the presence of <code><a href="https://rdrr.io/r/base/CallExternal.html">.Call()</a></code> or similar entries. No further detail is available. This is seen when replacing function calls with <code>winch::winch_call()</code>, which simulates a roundtrip from native code into R by calling a function passed as argument from C code. The example becomes a double roundtrip: R → native → R → native → R.</p>
+<p>If native code is called, this can be deduced from the presence of <code><a href="https://rdrr.io/r/base/CallExternal.html">.Call()</a></code> or similar entries. No further detail is available. This is seen when replacing function calls with <code><a href="../reference/winch_call.html">winch::winch_call()</a></code>, which simulates a roundtrip from native code into R by calling a function passed as argument from C code. The example becomes a double roundtrip: R → native → R → native → R.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://krlmlr.github.io/r-prof">winch</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://r-prof.github.io/winch">winch</a></span>)
 
 <span class="kw">foo</span> <span class="op">&lt;-</span> <span class="fu">function</span>() {
-  <span class="fu">winch_call</span>(<span class="kw">bar</span>)
+  <span class="fu"><a href="../reference/winch_call.html">winch_call</a></span>(<span class="kw">bar</span>)
 }
 
 <span class="kw">bar</span> <span class="op">&lt;-</span> <span class="fu">function</span>() {
-  <span class="fu">winch_call</span>(<span class="kw">baz</span>)
+  <span class="fu"><a href="../reference/winch_call.html">winch_call</a></span>(<span class="kw">baz</span>)
 }
 
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span>(<span class="fu">foo</span>(), <span class="fl">5</span>)
@@ -162,12 +162,12 @@
 <a href="#native-code" class="anchor"></a>Native code</h3>
 <p>R is an interpreted language, it can be expected that it knows how to track the execution state. (It is much more surprising that it allows programs to compute on their own execution state – R has very strong support for <a href="https://en.wikipedia.org/wiki/Reflection_(computer_programming)">reflection</a> indeed.) How do we achieve this for native code? <a href="https://stackoverflow.com/q/8031742/946850">Can an application programmatically generate its own stack trace?</a></p>
 <p>For native code, this is provided by the compiler or by specialized libraries. The main result is a sequence of instruction pointers (IP for short): addresses in the process’s memory from where function calls occurred. In some cases, additional information such as the function name is provided. In general, function name, file + line information and even library name must be deduced separately, using other specialized libraries.</p>
-<p>The winch package wraps two libraries (for portability across different OSes) that help obtain IP sequences and function names. This functionality is accessible via <code>winch::winch_trace_back()</code>. For demonstration purposes, this is what the native stack trace looks like for our double roundtrip. Calls into native code can be deduced from the <code>pathname</code> column:</p>
+<p>The winch package wraps two libraries (for portability across different OSes) that help obtain IP sequences and function names. This functionality is accessible via <code><a href="../reference/winch_trace_back.html">winch::winch_trace_back()</a></code>. For demonstration purposes, this is what the native stack trace looks like for our double roundtrip. Calls into native code can be deduced from the <code>pathname</code> column:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://krlmlr.github.io/r-prof">winch</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://r-prof.github.io/winch">winch</a></span>)
 
 <span class="kw">baz</span> <span class="op">&lt;-</span> <span class="fu">function</span>() {
-  <span class="fu">winch_trace_back</span>()
+  <span class="fu"><a href="../reference/winch_trace_back.html">winch_trace_back</a></span>()
 }
 
 <span class="kw">trace</span> <span class="op">&lt;-</span> <span class="fu">foo</span>()
@@ -175,31 +175,31 @@
 <span class="co">#&gt; [1] 227</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="kw">trace</span>, <span class="fl">25</span>)
 <span class="co">#&gt;               func               ip</span>
-<span class="co">#&gt; 1           bcEval 00007faa00f43260</span>
-<span class="co">#&gt; 2          Rf_eval 00007faa00f58bd0</span>
-<span class="co">#&gt; 3    R_execClosure 00007faa00f5a850</span>
-<span class="co">#&gt; 4  Rf_applyClosure 00007faa00f5b770</span>
-<span class="co">#&gt; 5          Rf_eval 00007faa00f58bd0</span>
-<span class="co">#&gt; 6         do_begin 00007faa00f5c570</span>
-<span class="co">#&gt; 7          Rf_eval 00007faa00f58bd0</span>
-<span class="co">#&gt; 8    R_execClosure 00007faa00f5a850</span>
-<span class="co">#&gt; 9  Rf_applyClosure 00007faa00f5b770</span>
-<span class="co">#&gt; 10         Rf_eval 00007faa00f58bd0</span>
-<span class="co">#&gt; 11      winch_call 00007fa9e9d1e890</span>
-<span class="co">#&gt; 12     R_doDotCall 00007faa00f0cf80</span>
-<span class="co">#&gt; 13          bcEval 00007faa00f43260</span>
-<span class="co">#&gt; 14         Rf_eval 00007faa00f58bd0</span>
-<span class="co">#&gt; 15   R_execClosure 00007faa00f5a850</span>
-<span class="co">#&gt; 16 Rf_applyClosure 00007faa00f5b770</span>
-<span class="co">#&gt; 17          bcEval 00007faa00f43260</span>
-<span class="co">#&gt; 18         Rf_eval 00007faa00f58bd0</span>
-<span class="co">#&gt; 19   R_execClosure 00007faa00f5a850</span>
-<span class="co">#&gt; 20 Rf_applyClosure 00007faa00f5b770</span>
-<span class="co">#&gt; 21         Rf_eval 00007faa00f58bd0</span>
-<span class="co">#&gt; 22      winch_call 00007fa9e9d1e890</span>
-<span class="co">#&gt; 23     R_doDotCall 00007faa00f0cf80</span>
-<span class="co">#&gt; 24          bcEval 00007faa00f43260</span>
-<span class="co">#&gt; 25         Rf_eval 00007faa00f58bd0</span>
+<span class="co">#&gt; 1           bcEval 00007efe048c9260</span>
+<span class="co">#&gt; 2          Rf_eval 00007efe048debd0</span>
+<span class="co">#&gt; 3    R_execClosure 00007efe048e0850</span>
+<span class="co">#&gt; 4  Rf_applyClosure 00007efe048e1770</span>
+<span class="co">#&gt; 5          Rf_eval 00007efe048debd0</span>
+<span class="co">#&gt; 6         do_begin 00007efe048e2570</span>
+<span class="co">#&gt; 7          Rf_eval 00007efe048debd0</span>
+<span class="co">#&gt; 8    R_execClosure 00007efe048e0850</span>
+<span class="co">#&gt; 9  Rf_applyClosure 00007efe048e1770</span>
+<span class="co">#&gt; 10         Rf_eval 00007efe048debd0</span>
+<span class="co">#&gt; 11      winch_call 00007efded6a55b0</span>
+<span class="co">#&gt; 12     R_doDotCall 00007efe04892f80</span>
+<span class="co">#&gt; 13          bcEval 00007efe048c9260</span>
+<span class="co">#&gt; 14         Rf_eval 00007efe048debd0</span>
+<span class="co">#&gt; 15   R_execClosure 00007efe048e0850</span>
+<span class="co">#&gt; 16 Rf_applyClosure 00007efe048e1770</span>
+<span class="co">#&gt; 17          bcEval 00007efe048c9260</span>
+<span class="co">#&gt; 18         Rf_eval 00007efe048debd0</span>
+<span class="co">#&gt; 19   R_execClosure 00007efe048e0850</span>
+<span class="co">#&gt; 20 Rf_applyClosure 00007efe048e1770</span>
+<span class="co">#&gt; 21         Rf_eval 00007efe048debd0</span>
+<span class="co">#&gt; 22      winch_call 00007efded6a55b0</span>
+<span class="co">#&gt; 23     R_doDotCall 00007efe04892f80</span>
+<span class="co">#&gt; 24          bcEval 00007efe048c9260</span>
+<span class="co">#&gt; 25         Rf_eval 00007efe048debd0</span>
 <span class="co">#&gt;                                               pathname</span>
 <span class="co">#&gt; 1                       /opt/R/4.0.2/lib/R/lib/libR.so</span>
 <span class="co">#&gt; 2                       /opt/R/4.0.2/lib/R/lib/libR.so</span>
@@ -237,7 +237,7 @@
 <span class="co">#&gt;                      /opt/R/4.0.2/lib/R/lib/libR.so </span>
 <span class="co">#&gt;                                                 222</span>
 </pre></div>
-<p><code>winch_trace_back()</code> is a low-level function not intended to be called by the user. It is a corner stone for joint backtraces provided by <code>winch_add_trace_back()</code>, as shown in the next section. For now, <code>winch_trace_back()</code> provides the native function name and the library name on all tested platforms (Linux, macOS, Windows). Information about file + line remains an open issue.</p>
+<p><code><a href="../reference/winch_trace_back.html">winch_trace_back()</a></code> is a low-level function not intended to be called by the user. It is a corner stone for joint backtraces provided by <code><a href="../reference/winch_add_trace_back.html">winch_add_trace_back()</a></code>, as shown in the next section. For now, <code><a href="../reference/winch_trace_back.html">winch_trace_back()</a></code> provides the native function name and the library name on all tested platforms (Linux, macOS, Windows). Information about file + line remains an open issue.</p>
 </div>
 <div id="r-code-native-code" class="section level3">
 <h3 class="hasAnchor">
@@ -271,11 +271,11 @@ foo()                libR.so::... (repeated)</code></pre>
  3.   └─(function () ... R/call.R:4:2
  4.     ├─winch::winch_call(baz)
  5.     └─(function () ... R/call.R:4:2</code></pre>
-<p>The function <code>winch::winch_add_trace_back()</code> enriches an rlang stack trace with relevant parts of the native stack trace, by pairing <code><a href="https://rdrr.io/r/base/CallExternal.html">.Call()</a></code> and similar entries with native code from outside of <code>libR.so</code>, as described above.</p>
+<p>The function <code><a href="../reference/winch_add_trace_back.html">winch::winch_add_trace_back()</a></code> enriches an rlang stack trace with relevant parts of the native stack trace, by pairing <code><a href="https://rdrr.io/r/base/CallExternal.html">.Call()</a></code> and similar entries with native code from outside of <code>libR.so</code>, as described above.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit">
 <span class="kw">baz</span> <span class="op">&lt;-</span> <span class="fu">function</span>() {
   <span class="kw">trace</span> <span class="op">&lt;-</span> <span class="kw">rlang</span>::<span class="fu"><a href="https://rlang.r-lib.org/reference/trace_back.html">trace_back</a></span>()
-  <span class="fu">winch_add_trace_back</span>(<span class="kw">trace</span>)
+  <span class="fu"><a href="../reference/winch_add_trace_back.html">winch_add_trace_back</a></span>(<span class="kw">trace</span>)
 }
 
 <span class="fu">foo</span>()
@@ -288,7 +288,7 @@ foo()                libR.so::... (repeated)</code></pre>
  5.         └─winch::winch_call(baz)
  6.           └─`/winch.so`::winch_call()
  7.             └─(function () ... R/call.R:4:2</code></pre>
-<p>Stack traces must be collected at the time that the error occurs, this includes calls to <code><a href="https://rlang.r-lib.org/reference/abort.html">rlang::abort()</a></code> which already collect a stack trace. The integration is a <a href="https://github.com/r-lib/rlang/pull/1039">small change to rlang</a> that calls <code>winch_add_trace_back()</code> during collection if winch is installed and the <code>rlang_trace_use_winch</code> option is identical to <code>1L</code>. With this option set, manual addition of the native stack trace is no longer necessary.</p>
+<p>Stack traces must be collected at the time that the error occurs, this includes calls to <code><a href="https://rlang.r-lib.org/reference/abort.html">rlang::abort()</a></code> which already collect a stack trace. The integration is a <a href="https://github.com/r-lib/rlang/pull/1039">small change to rlang</a> that calls <code><a href="../reference/winch_add_trace_back.html">winch_add_trace_back()</a></code> during collection if winch is installed and the <code>rlang_trace_use_winch</code> option is identical to <code>1L</code>. With this option set, manual addition of the native stack trace is no longer necessary.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span>(rlang_trace_use_winch = <span class="fl">1L</span>)
 
@@ -330,7 +330,7 @@ Backtrace:
 <h3 class="hasAnchor">
 <a href="#limitations-on-windows" class="anchor"></a>Limitations on Windows</h3>
 <p>Building an R package on Linux and Windows seems to include the necessary debugging information that helps libunwind and libbacktrace. On Windows, it seems necessary to set <code>DEBUG=true</code>, e.g. in <code>~/.R/Makevars</code>. This adds <code>-gdwarf-2</code> to the compiler flags.</p>
-<p>Also, Windows users currently need <code>winch::winch_init_library()</code> to trace errors in their library. This is a <a href="https://github.com/ianlancetaylor/libbacktrace/issues/53">limitation of the upstream library</a>.</p>
+<p>Also, Windows users currently need <code><a href="../reference/winch_init_library.html">winch::winch_init_library()</a></code> to trace errors in their library. This is a <a href="https://github.com/ianlancetaylor/libbacktrace/issues/53">limitation of the upstream library</a>.</p>
 <p>On Windows, 64-bit R is required.</p>
 </div>
 </div>
@@ -434,7 +434,7 @@ Backtrace:
 <li><p>Using libbacktrace in winch gives a segmentation fault.</p></li>
 </ul>
 <p>The gperftools library relies on the <code>addr2line</code> executable for retrieving file + line information (<a href="https://sourceforge.net/p/elftoolchain/code/HEAD/tree/trunk/addr2line/addr2line.c">source</a>, <a href="https://stackoverflow.com/q/11556321/946850">relevant StackOverflow question</a>).</p>
-<p>Once a fully portable solution is found, this information should be provided by <code>winch_add_trace_back()</code>.</p>
+<p>Once a fully portable solution is found, this information should be provided by <code><a href="../reference/winch_add_trace_back.html">winch_add_trace_back()</a></code>.</p>
 </div>
 </div>
 <div id="history-jointprof-part-1" class="section level2">
@@ -513,7 +513,7 @@ Backtrace:
 
 
       <footer><div class="copyright">
-  <p>Developed by Kirill Müller.</p>
+  <p>Developed by Kirill Müller, Ian Lance Taylor.</p>
 </div>
 
 <div class="pkgdown">
