@@ -71,7 +71,11 @@ winch_add_trace_back <- function(trace = rlang::trace_back(bottom = parent.frame
     added_calls <- Map(
       basename(native$pathname),
       native$func,
-      f = function(basename, func) bquote(`::`(.(as.name(paste0("/", basename))), .(as.name(func)))())
+      f = function(basename, func) as.call(list(call(
+        "::",
+        as.name(paste0("/", basename)),
+        as.name(func)
+      )))
     )
 
     old_size <- length(trace$calls)
