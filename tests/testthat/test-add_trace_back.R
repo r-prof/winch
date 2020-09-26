@@ -3,7 +3,7 @@ test_that("traceback unchanged if no native code", {
   skip_if_not_installed("rlang")
 
   trace <- rlang::trace_back()
-  expect_identical(winch_add_trace_back(trace), trace)
+  expect_identical(unclass(winch_add_trace_back(trace)), unclass(trace))
 })
 
 test_that("traceback changed if native code", {
