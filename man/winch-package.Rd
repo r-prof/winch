@@ -4,21 +4,32 @@
 \name{winch-package}
 \alias{winch}
 \alias{winch-package}
-\title{winch: What the Package Does (One Line, Title Case)}
+\title{winch: Portable Native and Joint Stack Traces}
 \description{
-What the package does (one paragraph).
+Obtain the native stack trace and fuse it with R's
+    stack trace for easier debugging of R packages with native code.
 }
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://krlmlr.github.io/r-prof/}
-  \item \url{https://github.com/krlmlr/r-prof}
-  \item Report bugs at \url{https://github.com/krlmlr/r-prof/issues}
+  \item \url{https://r-prof.github.io/winch/}
+  \item \url{https://github.com/r-prof/winch}
+  \item Report bugs at \url{https://github.com/r-prof/winch/issues}
 }
 
 }
 \author{
 \strong{Maintainer}: Kirill Müller \email{krlmlr+r@mailbox.org} (\href{https://orcid.org/0000-0002-1416-3412}{ORCID})
+
+Authors:
+\itemize{
+  \item Ian Lance Taylor (Bundled libbacktrace library)
+}
+
+Other contributors:
+\itemize{
+  \item Free Software Foundation (Bundled libbacktrace library) [copyright holder]
+}
 
 }
 \keyword{internal}
