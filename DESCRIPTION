@@ -1,25 +1,33 @@
 Package: winch
-Title: What the Package Does (One Line, Title Case)
+Title: Portable Native and Joint Stack Traces
 Version: 0.0.0.9000
 Date: 2020-07-21
 Authors@R: 
-    person(given = "Kirill",
-           family = "Müller",
-           role = c("aut", "cre"),
-           email = "krlmlr+r@mailbox.org",
-           comment = c(ORCID = "0000-0002-1416-3412"))
-Description: What the package does (one paragraph).
+    c(person(given = "Kirill",
+             family = "Müller",
+             role = c("aut", "cre"),
+             email = "krlmlr+r@mailbox.org",
+             comment = c(ORCID = "0000-0002-1416-3412")),
+      person(given = "Ian Lance",
+             family = "Taylor",
+             role = "aut",
+             comment = "Bundled libbacktrace library"),
+      person(given = "Free Software Foundation",
+             role = "cph",
+             comment = "Bundled libbacktrace library"))
+Description: Obtain the native stack trace and fuse it with R's
+    stack trace for easier debugging of R packages with native code.
 License: GPL-3
-URL: https://krlmlr.github.io/r-prof/,
-    https://github.com/krlmlr/r-prof
-BugReports: https://github.com/krlmlr/r-prof/issues
+URL: https://r-prof.github.io/winch/,
+    https://github.com/r-prof/winch
+BugReports: https://github.com/r-prof/winch/issues
 Imports: 
-    procmaps (>= 0.0.1.9002),
-    rlang (>= 0.4.7.9000)
+    procmaps (>= 0.0.2)
 Suggests: 
     DBI,
     knitr,
     magrittr,
+    rlang (>= 0.4.7.9000),
     rmarkdown,
     RSQLite,
     testthat,
@@ -27,10 +35,8 @@ Suggests:
 VignetteBuilder: 
     knitr
 Remotes: 
-    krlmlr/rlang@f-trace-hook,
-    r-prof/procmaps
+    krlmlr/rlang@f-trace-hook
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1.9000
-SystemRequirements: gcc (>= 5) or clang
