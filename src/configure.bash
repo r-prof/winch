@@ -40,9 +40,9 @@ else
   WINCH_LOCAL_LIBS="local/lib/libbacktrace.a"
 
   if [ $(command -v pkg-config) ]; then
-    PKGCONFIG_CFLAGS=$(pkg-config --cflags --silence-errors ${PKG_CONFIG_NAME})
-    PKGCONFIG_LIBS=$(pkg-config --libs --silence-errors ${PKG_CONFIG_NAME})
-    PKGCONFIG_MODVERSION=$(pkg-config --modversion --silence-errors ${PKG_CONFIG_NAME})
+    PKGCONFIG_CFLAGS=$(pkg-config --cflags --silence-errors ${PKG_CONFIG_NAME} || true)
+    PKGCONFIG_LIBS=$(pkg-config --libs --silence-errors ${PKG_CONFIG_NAME} || true)
+    PKGCONFIG_MODVERSION=$(pkg-config --modversion --silence-errors ${PKG_CONFIG_NAME} || true)
   fi
 fi
 
@@ -77,7 +77,7 @@ echo "#include $PKG_TEST_HEADER" | ${CC} ${CPPFLAGS} ${PKG_CFLAGS} ${CFLAGS} -E 
 # Customize the error
 if [ $R_CONFIG_ERROR ]; then
   echo "------------------------- ANTICONF ERROR ---------------------------"
-  echo "Configuration failed because $PKG_CONFIG_NAME was not found. Try installing:"
+  echo "$PKG_CONFIG_NAME was not found. Try installing:"
   echo " * deb: $PKG_DEB_NAME (Debian, Ubuntu, etc)"
   echo " * rpm: $PKG_RPM_NAME (Fedora, EPEL)"
   echo " * from source: $PKG_URL"
@@ -88,7 +88,9 @@ if [ $R_CONFIG_ERROR ]; then
   echo "and LIB_DIR manually via:"
   echo "R CMD INSTALL --configure-vars='INCLUDE_DIR=... LIB_DIR=...'"
   echo "--------------------------------------------------------------------"
-  exit 1;
+  echo "Proceeding without $PKG_CONFIG_NAME."
+  PKG_LIBUNWIND=""
+  PKG_CFLAGS="$PKG_LIBBACKTRACE"
 fi
 
 fi # if [ -n "$PKG_LIBUNWIND" ]; then
