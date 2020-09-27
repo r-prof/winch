@@ -59,16 +59,20 @@ winch_add_trace_back <- function(trace = rlang::trace_back(bottom = parent.frame
   is_native_rle_idx <- which(is_libr_rle$lengths != 1)
   native_idx_len <- is_libr_rle$lengths[is_native_rle_idx] - 1L
   native_idx_end <- cumsum(is_libr_rle$lengths)[is_native_rle_idx]
-  native_trace_chunks <- Map(native_idx_end, native_idx_len, f = function(end, len) {
+  native_trace_chunks <- rev(Map(native_idx_end, native_idx_len, f = function(end, len) {
     native_trace[seq.int(end, by = -1L, length.out = len), ]
-  })
+  }))
 
   # Find all functions in the stack trace that call .Call(),
   # .External() or .External2()
   r_funs <- sys_functions()
   # The sys_functions() call must be separate, it is very brittle
-  r_funs <- utils::tail(r_funs, rlang::trace_length(trace))
-  r_funs <- rev(r_funs)
+
+  # At this point the frames after bottom have been chopped off, if any.
+  # We're doing the same here with head()
+  r_funs <- utils::head(r_funs, rlang::trace_length(trace))
+
+  # Find calls in functions' bodies
   r_fun_bodies <- lapply(r_funs, body)
   r_fun_calls <- lapply(r_fun_bodies, find_calls)
 
@@ -90,7 +94,9 @@ winch_add_trace_back <- function(trace = rlang::trace_back(bottom = parent.frame
   }
 
   # Insert native stack trace chunks into R stack trace
-  for (i in seq_along(r_fun_has_call_idx)) {
+  # Reverse order is important to avoid index shifts after inserting
+  # into the trace
+  for (i in rev(seq_along(r_fun_has_call_idx))) {
     rlang_trace <- insert_native_chunk(rlang_trace, r_fun_has_call_idx[[i]], native_trace_chunks[[i]])
   }
 
@@ -103,7 +109,7 @@ lag <- function(x, default = NA) {
 }
 
 sys_functions <- function() {
-  idx <- seq(-2, -sys.nframe(), by = -1)
+  idx <- seq_len(sys.nframe() - 2L)
   lapply(idx, sys.function)
 }
 
