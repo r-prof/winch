@@ -395,7 +395,7 @@ Will Landau contributed the proffer package to the project, a drop-in replacemen
 
 Scratch pad for information that doesn't fit elsewhere.
 
-## Further documentation links
+### Further documentation links
 
 - symbolic backtrace:
 
@@ -403,7 +403,7 @@ Scratch pad for information that doesn't fit elsewhere.
 
 - related project in Nim: https://github.com/timotheecour/Nim/issues/49
 
-## Accompanying work
+### Accompanying work
 
 - r-windows: submitted ccache pull request -- package and usage
 
@@ -424,7 +424,7 @@ Scratch pad for information that doesn't fit elsewhere.
     - https://gcc.gnu.org/bugzilla/show_bug.cgi?id=66570
 
 
-## Technical details
+### Technical details
 
 - sjlj vs. seh (why the difference between 32 and 64 bits?):
 
