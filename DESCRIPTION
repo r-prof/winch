@@ -27,6 +27,7 @@ Suggests:
     DBI,
     knitr,
     magrittr,
+    purrr,
     rlang,
     rmarkdown,
     RSQLite,
