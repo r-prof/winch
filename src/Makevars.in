@@ -1,12 +1,12 @@
 @header@
 PKG_CPPFLAGS = -Ilocal/include
 PKG_CFLAGS = @cflags@
-LOCAL_LIBS = @local_libs@
-PKG_LIBS = @libs@ ${LOCAL_LIBS}
+WINCH_LOCAL_LIBS = @winch_local_libs@
+PKG_LIBS = @libs@ ${WINCH_LOCAL_LIBS}
 
 all: $(SHLIB)
 
-$(SHLIB): ${LOCAL_LIBS}
+$(SHLIB): ${WINCH_LOCAL_LIBS}
 
 build/libbacktrace/Makefile: vendor/libbacktrace/configure
 	mkdir -p build/libbacktrace && cd build/libbacktrace && ../../vendor/libbacktrace/configure --disable-host-shared --prefix=$${PWD}/../../local

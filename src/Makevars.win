@@ -1,12 +1,12 @@
 DEBUG = true
 PKG_CPPFLAGS = -Ilocal/include
 PKG_CFLAGS = -DHAVE_LIBBACKTRACE
-LOCAL_LIBS = local/lib/libbacktrace.a
-PKG_LIBS = ${LOCAL_LIBS}
+WINCH_LOCAL_LIBS = local/lib/libbacktrace.a
+PKG_LIBS = ${WINCH_LOCAL_LIBS}
 
 all: $(SHLIB)
 
-$(SHLIB): ${LOCAL_LIBS}
+$(SHLIB): ${WINCH_LOCAL_LIBS}
 
 build/libbacktrace/Makefile: vendor/libbacktrace/configure
 	mkdir -p build/libbacktrace && cd build/libbacktrace && CC="$(CC)" AR="$(AR)" RANLIB="$(RANLIB)" ../../vendor/libbacktrace/configure --disable-host-shared --prefix=$${PWD}/../../local

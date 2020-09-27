@@ -23,21 +23,21 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   # (will check anyway)
   PKG_CFLAGS=""
   PKG_LIBUNWIND="-DHAVE_LIBUNWIND"
-  LOCAL_LIBS=""
+  WINCH_LOCAL_LIBS=""
   PKG_LIBS="-lSystem"
 elif [[ "$OSTYPE" == "msys"* ]]; then
   PKG_CFLAGS=""
   PKG_LIBBACKTRACE="-DHAVE_LIBBACKTRACE"
-  LOCAL_LIBS="local/lib/libbacktrace.a"
+  WINCH_LOCAL_LIBS="local/lib/libbacktrace.a"
   PKG_LIBS=""
 elif [[ "$OSTYPE" == "solaris"* ]]; then
   PKG_CFLAGS=""
-  LOCAL_LIBS=""
+  WINCH_LOCAL_LIBS=""
   PKG_LIBS=""
 else
   PKG_LIBUNWIND="-DHAVE_LIBUNWIND"
   PKG_LIBBACKTRACE="-DHAVE_LIBBACKTRACE"
-  LOCAL_LIBS="local/lib/libbacktrace.a"
+  WINCH_LOCAL_LIBS="local/lib/libbacktrace.a"
 
   if [ $(command -v pkg-config) ]; then
     PKGCONFIG_CFLAGS=$(pkg-config --cflags --silence-errors ${PKG_CONFIG_NAME})
@@ -95,7 +95,7 @@ fi # if [ -n "$PKG_LIBUNWIND" ]; then
 
 
 # Write to Makevars
-sed -e "s|@cflags@|$PKG_CFLAGS|" -e "s|@libs@|$PKG_LIBS|" -e "s|@local_libs@|$LOCAL_LIBS|" -e "s|@header@|# Generated from Makevars.in, do not edit by hand|" Makevars.in > Makevars.new
+sed -e "s|@cflags@|$PKG_CFLAGS|" -e "s|@libs@|$PKG_LIBS|" -e "s|@winch_local_libs@|$WINCH_LOCAL_LIBS|" -e "s|@header@|# Generated from Makevars.in, do not edit by hand|" Makevars.in > Makevars.new
 if [ ! -f Makevars ] || (which diff > /dev/null && ! diff -q Makevars Makevars.new); then
   cp -f Makevars.new Makevars
 fi
