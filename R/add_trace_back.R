@@ -67,8 +67,12 @@ winch_add_trace_back <- function(trace = rlang::trace_back(bottom = parent.frame
   # .External() or .External2()
   r_funs <- sys_functions()
   # The sys_functions() call must be separate, it is very brittle
-  r_funs <- utils::tail(r_funs, rlang::trace_length(trace))
-  r_funs <- rev(r_funs)
+
+  # At this point the frames after bottom have been chopped off, if any.
+  # We're doing the same here with head()
+  r_funs <- utils::head(r_funs, rlang::trace_length(trace))
+
+  # Find calls in functions' bodies
   r_fun_bodies <- lapply(r_funs, body)
   r_fun_calls <- lapply(r_fun_bodies, find_calls)
 
@@ -105,7 +109,7 @@ lag <- function(x, default = NA) {
 }
 
 sys_functions <- function() {
-  idx <- seq(-2, -sys.nframe(), by = -1)
+  idx <- seq_len(sys.nframe() - 2L)
   lapply(idx, sys.function)
 }
 

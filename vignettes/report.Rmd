@@ -87,7 +87,7 @@ baz <- function() {
   lapply(funs, body)
 }
 
-head(foo(), 5)
+tail(foo(), 5)
 ```
 
 It would be much more accurate if the information was available directly in the stack trace.
