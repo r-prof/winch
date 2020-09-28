@@ -345,7 +345,7 @@ The `execinfo()` approach is no longer used because libunwind is clearly better.
 
 - The [stacktrace](http://stacktrace.sourceforge.net/) library is from 2009, was last changed 2013
 
-- I haven't considered going a [fully native route](https://programmer.help/blogs/using-the-_unwind_backtrace-function-to-grab-the-backtrace-of-the-c-c-stack.html) without library suport, this would amount to rewriting large parts of existing library code.
+- I haven't considered going a [fully native route](https://programmer.help/blogs/using-the-_unwind_backtrace-function-to-grab-the-backtrace-of-the-c-c-stack.html) without library support, this would amount to rewriting large parts of existing library code.
 
 ### Retrieving module name
 
