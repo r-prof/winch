@@ -1,4 +1,4 @@
-#' Report: https://r-prof.github.io/winch/dev/articles/report.html$
+#' Report: https://r-prof.github.io/winch/dev/articles/report.html
 #'
 #' Next steps:
 #'

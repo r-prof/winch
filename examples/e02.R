@@ -10,7 +10,7 @@ foo <- function() {
 }
 
 bar <- function() {
-  for (i in 1:1000) baz()
+  for (i in 1:100) baz()
 }
 
 baz <- function() {
@@ -19,6 +19,6 @@ baz <- function() {
 
 profvis::profvis(foo())
 
-Rprof(line.profiling = TRUE, filter.callframes = TRUE)
-foo()
-Rprof(NULL)
+# Rprof(line.profiling = TRUE, filter.callframes = TRUE)
+# foo()
+# Rprof(NULL)
