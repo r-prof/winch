@@ -28,6 +28,7 @@ Authors:
 
 Other contributors:
 \itemize{
+  \item R Consortium [funder]
   \item Free Software Foundation (Bundled libbacktrace library) [copyright holder]
 }
 
