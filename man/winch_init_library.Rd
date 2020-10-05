@@ -22,7 +22,7 @@ Call this function to set the library for which to obtain symbols.
 }
 \examples{
 \dontshow{if (requireNamespace("rlang", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-winch_init_library(rlang:::.__NAMESPACE__.$DLLs[[1]][["path"]])
+winch_init_library(getLoadedDLLs()[["rlang"]][["path"]])
 \dontshow{\}) # examplesIf}
 }
 \seealso{

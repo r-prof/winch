@@ -6,7 +6,7 @@
 ^src/local
 ^\.github$
 ^CODE_OF_CONDUCT\.md$
-^codecov\.yml$
 ^_pkgdown\.yml$
 ^CRAN-RELEASE$
 ^examples$
+^cran-comments\.md$

@@ -8,6 +8,8 @@ Authors@R:
              role = c("aut", "cre"),
              email = "krlmlr+r@mailbox.org",
              comment = c(ORCID = "0000-0002-1416-3412")),
+      person(given = "R Consortium",
+             role = "fnd"),
       person(given = "Ian Lance",
              family = "Taylor",
              role = "aut",
@@ -27,16 +29,14 @@ Suggests:
     DBI,
     knitr,
     magrittr,
-    rlang (>= 0.4.7.9000),
+    purrr,
+    rlang,
     rmarkdown,
     RSQLite,
     testthat,
-    vctrs,
-    covr
+    vctrs
 VignetteBuilder: 
     knitr
-Remotes: 
-    krlmlr/rlang@f-trace-hook
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
