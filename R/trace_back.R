@@ -17,7 +17,7 @@
 #' @seealso [sys.calls()] for the R equivalent.
 #'
 #' @export
-#' @examples
+#' @examplesIf winch_available()
 #' winch_trace_back()
 #'
 #' foo <- function() {
