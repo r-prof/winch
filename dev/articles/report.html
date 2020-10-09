@@ -106,19 +106,19 @@
 <a href="#r-code" class="anchor"></a>R code</h3>
 <p>In R, stack traces can be obtained via <code><a href="https://rdrr.io/r/base/sys.parent.html">sys.calls()</a></code>:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="kw">foo</span> <span class="op">&lt;-</span> <span class="fu">function</span>() {
-  <span class="fu"><a href="https://rdrr.io/r/grDevices/plotmath.html">bar</a></span>()
-}
+<span class="va">foo</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu"><a href="https://rdrr.io/r/grDevices/plotmath.html">bar</a></span><span class="op">(</span><span class="op">)</span>
+<span class="op">}</span>
 
-<span class="kw">bar</span> <span class="op">&lt;-</span> <span class="fu">function</span>() {
-  <span class="fu">baz</span>()
-}
+<span class="va">bar</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu">baz</span><span class="op">(</span><span class="op">)</span>
+<span class="op">}</span>
 
-<span class="kw">baz</span> <span class="op">&lt;-</span> <span class="fu">function</span>() {
-  <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html">sys.calls</a></span>()
-}
+<span class="va">baz</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html">sys.calls</a></span><span class="op">(</span><span class="op">)</span>
+<span class="op">}</span>
 
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span>(<span class="fu">foo</span>(), <span class="fl">3</span>)
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="fu">foo</span><span class="op">(</span><span class="op">)</span>, <span class="fl">3</span><span class="op">)</span>
 <span class="co">#&gt; [[1]]</span>
 <span class="co">#&gt; foo()</span>
 <span class="co">#&gt; </span>
@@ -126,21 +126,20 @@
 <span class="co">#&gt; bar()</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; [[3]]</span>
-<span class="co">#&gt; baz()</span>
-</pre></div>
+<span class="co">#&gt; baz()</span></pre></div>
 <p>Native code cannot easily be deduced from the stack trace. This is seen when replacing function calls with <code><a href="../reference/winch_call.html">winch::winch_call()</a></code>, which simulates a roundtrip from native code into R by calling a function passed as argument from C code. The example becomes a double roundtrip: R → native → R → native → R.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://r-prof.github.io/winch">winch</a></span>)
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-prof.github.io/winch/">winch</a></span><span class="op">)</span>
 
-<span class="kw">foo</span> <span class="op">&lt;-</span> <span class="fu">function</span>() {
-  <span class="fu"><a href="../reference/winch_call.html">winch_call</a></span>(<span class="kw">bar</span>)
-}
+<span class="va">foo</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu"><a href="../reference/winch_call.html">winch_call</a></span><span class="op">(</span><span class="va">bar</span><span class="op">)</span>
+<span class="op">}</span>
 
-<span class="kw">bar</span> <span class="op">&lt;-</span> <span class="fu">function</span>() {
-  <span class="fu"><a href="../reference/winch_call.html">winch_call</a></span>(<span class="kw">baz</span>)
-}
+<span class="va">bar</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu"><a href="../reference/winch_call.html">winch_call</a></span><span class="op">(</span><span class="va">baz</span><span class="op">)</span>
+<span class="op">}</span>
 
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span>(<span class="fu">foo</span>(), <span class="fl">5</span>)
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="fu">foo</span><span class="op">(</span><span class="op">)</span>, <span class="fl">5</span><span class="op">)</span>
 <span class="co">#&gt; [[1]]</span>
 <span class="co">#&gt; foo()</span>
 <span class="co">#&gt; </span>
@@ -158,16 +157,15 @@
 <span class="co">#&gt; [[5]]</span>
 <span class="co">#&gt; (function() {</span>
 <span class="co">#&gt;   sys.calls()</span>
-<span class="co">#&gt; })()</span>
-</pre></div>
+<span class="co">#&gt; })()</span></pre></div>
 <p>A bit of guesswork is required here: we can inspect the bodies of the functions in the call stack to check for calls to <code><a href="https://rdrr.io/r/base/CallExternal.html">.Call()</a></code>, <code><a href="https://rdrr.io/r/base/CallExternal.html">.External()</a></code> or <code><a href="https://rdrr.io/r/base/Foreign-internal.html">.External2()</a></code>. In our example the candidates are located at indexes 2 and 4:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="kw">baz</span> <span class="op">&lt;-</span> <span class="fu">function</span>() {
-  <span class="kw">funs</span> <span class="op">&lt;-</span> <span class="kw">winch</span>:::<span class="fu">sys_functions</span>()
-  <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span>(<span class="kw">funs</span>, <span class="kw">body</span>)
-}
+<span class="va">baz</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">funs</span> <span class="op">&lt;-</span> <span class="fu">winch</span><span class="fu">:::</span><span class="fu">sys_functions</span><span class="op">(</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">funs</span>, <span class="va">body</span><span class="op">)</span>
+<span class="op">}</span>
 
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span>(<span class="fu">foo</span>(), <span class="fl">5</span>)
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="fu">foo</span><span class="op">(</span><span class="op">)</span>, <span class="fl">5</span><span class="op">)</span>
 <span class="co">#&gt; [[1]]</span>
 <span class="co">#&gt; UseMethod("tail")</span>
 <span class="co">#&gt; </span>
@@ -189,8 +187,7 @@
 <span class="co">#&gt; [[5]]</span>
 <span class="co">#&gt; {</span>
 <span class="co">#&gt;     .Call(winch_c_call, fun, env)</span>
-<span class="co">#&gt; }</span>
-</pre></div>
+<span class="co">#&gt; }</span></pre></div>
 <p>It would be much more accurate if the information was available directly in the stack trace. This would require changes to base R.</p>
 </div>
 <div id="native-code" class="section level3">
@@ -200,40 +197,40 @@
 <p>For native code, this is provided by the compiler or by specialized libraries. The main result is a sequence of instruction pointers (IP for short): addresses in the process’s memory from where function calls occurred. In some cases, additional information such as the function name is provided. In general, function name, file + line information and even library name must be deduced separately, using other specialized libraries.</p>
 <p>The winch package wraps two libraries (for portability across different OSes) that help obtain IP sequences and function names. This functionality is accessible via <code><a href="../reference/winch_trace_back.html">winch::winch_trace_back()</a></code>. For demonstration purposes, this is what the native stack trace looks like for our double roundtrip. Calls into native code can be deduced from the <code>pathname</code> column:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="kw">baz</span> <span class="op">&lt;-</span> <span class="fu">function</span>() {
-  <span class="fu"><a href="../reference/winch_trace_back.html">winch_trace_back</a></span>()
-}
+<span class="va">baz</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu"><a href="../reference/winch_trace_back.html">winch_trace_back</a></span><span class="op">(</span><span class="op">)</span>
+<span class="op">}</span>
 
-<span class="kw">trace</span> <span class="op">&lt;-</span> <span class="fu">foo</span>()
-<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(<span class="kw">trace</span>)
+<span class="va">trace</span> <span class="op">&lt;-</span> <span class="fu">foo</span><span class="op">(</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">trace</span><span class="op">)</span>
 <span class="co">#&gt; [1] 227</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="kw">trace</span>, <span class="fl">25</span>)
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">trace</span>, <span class="fl">25</span><span class="op">)</span>
 <span class="co">#&gt;               func               ip</span>
-<span class="co">#&gt; 1           bcEval 00007f748739e260</span>
-<span class="co">#&gt; 2          Rf_eval 00007f74873b3bd0</span>
-<span class="co">#&gt; 3    R_execClosure 00007f74873b5850</span>
-<span class="co">#&gt; 4  Rf_applyClosure 00007f74873b6770</span>
-<span class="co">#&gt; 5          Rf_eval 00007f74873b3bd0</span>
-<span class="co">#&gt; 6         do_begin 00007f74873b7570</span>
-<span class="co">#&gt; 7          Rf_eval 00007f74873b3bd0</span>
-<span class="co">#&gt; 8    R_execClosure 00007f74873b5850</span>
-<span class="co">#&gt; 9  Rf_applyClosure 00007f74873b6770</span>
-<span class="co">#&gt; 10         Rf_eval 00007f74873b3bd0</span>
-<span class="co">#&gt; 11      winch_call 00007f747017a5b0</span>
-<span class="co">#&gt; 12     R_doDotCall 00007f7487367f80</span>
-<span class="co">#&gt; 13          bcEval 00007f748739e260</span>
-<span class="co">#&gt; 14         Rf_eval 00007f74873b3bd0</span>
-<span class="co">#&gt; 15   R_execClosure 00007f74873b5850</span>
-<span class="co">#&gt; 16 Rf_applyClosure 00007f74873b6770</span>
-<span class="co">#&gt; 17          bcEval 00007f748739e260</span>
-<span class="co">#&gt; 18         Rf_eval 00007f74873b3bd0</span>
-<span class="co">#&gt; 19   R_execClosure 00007f74873b5850</span>
-<span class="co">#&gt; 20 Rf_applyClosure 00007f74873b6770</span>
-<span class="co">#&gt; 21         Rf_eval 00007f74873b3bd0</span>
-<span class="co">#&gt; 22      winch_call 00007f747017a5b0</span>
-<span class="co">#&gt; 23     R_doDotCall 00007f7487367f80</span>
-<span class="co">#&gt; 24          bcEval 00007f748739e260</span>
-<span class="co">#&gt; 25         Rf_eval 00007f74873b3bd0</span>
+<span class="co">#&gt; 1           bcEval 00007f473b095260</span>
+<span class="co">#&gt; 2          Rf_eval 00007f473b0aabd0</span>
+<span class="co">#&gt; 3    R_execClosure 00007f473b0ac850</span>
+<span class="co">#&gt; 4  Rf_applyClosure 00007f473b0ad770</span>
+<span class="co">#&gt; 5          Rf_eval 00007f473b0aabd0</span>
+<span class="co">#&gt; 6         do_begin 00007f473b0ae570</span>
+<span class="co">#&gt; 7          Rf_eval 00007f473b0aabd0</span>
+<span class="co">#&gt; 8    R_execClosure 00007f473b0ac850</span>
+<span class="co">#&gt; 9  Rf_applyClosure 00007f473b0ad770</span>
+<span class="co">#&gt; 10         Rf_eval 00007f473b0aabd0</span>
+<span class="co">#&gt; 11      winch_call 00007f47243355b0</span>
+<span class="co">#&gt; 12     R_doDotCall 00007f473b05ef80</span>
+<span class="co">#&gt; 13          bcEval 00007f473b095260</span>
+<span class="co">#&gt; 14         Rf_eval 00007f473b0aabd0</span>
+<span class="co">#&gt; 15   R_execClosure 00007f473b0ac850</span>
+<span class="co">#&gt; 16 Rf_applyClosure 00007f473b0ad770</span>
+<span class="co">#&gt; 17          bcEval 00007f473b095260</span>
+<span class="co">#&gt; 18         Rf_eval 00007f473b0aabd0</span>
+<span class="co">#&gt; 19   R_execClosure 00007f473b0ac850</span>
+<span class="co">#&gt; 20 Rf_applyClosure 00007f473b0ad770</span>
+<span class="co">#&gt; 21         Rf_eval 00007f473b0aabd0</span>
+<span class="co">#&gt; 22      winch_call 00007f47243355b0</span>
+<span class="co">#&gt; 23     R_doDotCall 00007f473b05ef80</span>
+<span class="co">#&gt; 24          bcEval 00007f473b095260</span>
+<span class="co">#&gt; 25         Rf_eval 00007f473b0aabd0</span>
 <span class="co">#&gt;                                               pathname</span>
 <span class="co">#&gt; 1                       /opt/R/4.0.2/lib/R/lib/libR.so</span>
 <span class="co">#&gt; 2                       /opt/R/4.0.2/lib/R/lib/libR.so</span>
@@ -260,7 +257,7 @@
 <span class="co">#&gt; 23                      /opt/R/4.0.2/lib/R/lib/libR.so</span>
 <span class="co">#&gt; 24                      /opt/R/4.0.2/lib/R/lib/libR.so</span>
 <span class="co">#&gt; 25                      /opt/R/4.0.2/lib/R/lib/libR.so</span>
-<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="kw">trace</span><span class="op">$</span><span class="kw">pathname</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">trace</span><span class="op">$</span><span class="va">pathname</span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; /home/runner/work/_temp/Library/winch/libs/winch.so </span>
 <span class="co">#&gt;                                                   2 </span>
@@ -269,8 +266,7 @@
 <span class="co">#&gt;                       /opt/R/4.0.2/lib/R/bin/exec/R </span>
 <span class="co">#&gt;                                                   2 </span>
 <span class="co">#&gt;                      /opt/R/4.0.2/lib/R/lib/libR.so </span>
-<span class="co">#&gt;                                                 222</span>
-</pre></div>
+<span class="co">#&gt;                                                 222</span></pre></div>
 <p><code><a href="../reference/winch_trace_back.html">winch_trace_back()</a></code> is a low-level function not intended to be called by the user. It is a corner stone for joint backtraces provided by <code><a href="../reference/winch_add_trace_back.html">winch_add_trace_back()</a></code>, as shown in the next section. For now, <code><a href="../reference/winch_trace_back.html">winch_trace_back()</a></code> provides the native function name and the library name on all tested platforms (Linux, macOS, Windows). Information about file + line remains an open issue.</p>
 </div>
 <div id="r-code-native-code" class="section level3">
@@ -293,12 +289,11 @@ foo()                libR.so::... (repeated)</code></pre>
 <p>Combining stack traces now means pairing corresponding <code><a href="https://rdrr.io/r/base/CallExternal.html">.Call()</a></code> entries with native traces from other modules than <code>libR.so</code>, denoted by <code>&lt;--&gt;</code> in the above example.</p>
 <p>The winch package implements this on top of <code><a href="https://rlang.r-lib.org/reference/trace_back.html">rlang::trace_back()</a></code>, a wrapper around <code><a href="https://rdrr.io/r/base/sys.parent.html">sys.calls()</a></code> that displays as a tree and creates better output in the presence of lazy evaluation.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="kw">baz</span> <span class="op">&lt;-</span> <span class="fu">function</span>() {
-  <span class="kw">rlang</span>::<span class="fu"><a href="https://rlang.r-lib.org/reference/trace_back.html">trace_back</a></span>()
-}
+<span class="va">baz</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/trace_back.html">trace_back</a></span><span class="op">(</span><span class="op">)</span>
+<span class="op">}</span>
 
-<span class="fu">foo</span>()
-</pre></div>
+<span class="fu">foo</span><span class="op">(</span><span class="op">)</span></pre></div>
 <pre><code>    █
  1. └─global::foo()
  2.   ├─winch::winch_call(bar)
@@ -307,13 +302,12 @@ foo()                libR.so::... (repeated)</code></pre>
  5.     └─(function () ... R/call.R:4:2</code></pre>
 <p>The function <code><a href="../reference/winch_add_trace_back.html">winch::winch_add_trace_back()</a></code> enriches an rlang stack trace with relevant parts of the native stack trace, by pairing <code><a href="https://rdrr.io/r/base/CallExternal.html">.Call()</a></code> and similar entries with native code from outside of <code>libR.so</code>, as described above.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit">
-<span class="kw">baz</span> <span class="op">&lt;-</span> <span class="fu">function</span>() {
-  <span class="kw">trace</span> <span class="op">&lt;-</span> <span class="kw">rlang</span>::<span class="fu"><a href="https://rlang.r-lib.org/reference/trace_back.html">trace_back</a></span>()
-  <span class="fu"><a href="../reference/winch_add_trace_back.html">winch_add_trace_back</a></span>(<span class="kw">trace</span>)
-}
+<span class="va">baz</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">trace</span> <span class="op">&lt;-</span> <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/trace_back.html">trace_back</a></span><span class="op">(</span><span class="op">)</span>
+  <span class="fu"><a href="../reference/winch_add_trace_back.html">winch_add_trace_back</a></span><span class="op">(</span><span class="va">trace</span><span class="op">)</span>
+<span class="op">}</span>
 
-<span class="fu">foo</span>()
-</pre></div>
+<span class="fu">foo</span><span class="op">(</span><span class="op">)</span></pre></div>
 <pre><code>    █
  1. └─global::foo()
  2.   └─winch::winch_call(bar)
@@ -324,14 +318,13 @@ foo()                libR.so::... (repeated)</code></pre>
  7.             └─(function () ... R/call.R:4:2</code></pre>
 <p>Stack traces must be collected at the time that the error occurs, this includes calls to <code><a href="https://rlang.r-lib.org/reference/abort.html">rlang::abort()</a></code> which already collect a stack trace. The integration is a <a href="https://github.com/r-lib/rlang/pull/1039">small change to rlang</a> that calls <code><a href="../reference/winch_add_trace_back.html">winch_add_trace_back()</a></code> during collection if winch is installed and the <code>rlang_trace_use_winch</code> option is identical to <code>1L</code>. With this option set, manual addition of the native stack trace is no longer necessary.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span>(rlang_trace_use_winch = <span class="fl">1L</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>rlang_trace_use_winch <span class="op">=</span> <span class="fl">1L</span><span class="op">)</span>
 
-<span class="kw">baz</span> <span class="op">&lt;-</span> <span class="fu">function</span>() {
-  <span class="kw">rlang</span>::<span class="fu"><a href="https://rlang.r-lib.org/reference/trace_back.html">trace_back</a></span>()
-}
+<span class="va">baz</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/trace_back.html">trace_back</a></span><span class="op">(</span><span class="op">)</span>
+<span class="op">}</span>
 
-<span class="fu">foo</span>()
-</pre></div>
+<span class="fu">foo</span><span class="op">(</span><span class="op">)</span></pre></div>
 <pre><code>    █
  1. └─global::foo()
  2.   └─winch::winch_call(bar)
@@ -342,14 +335,13 @@ foo()                libR.so::... (repeated)</code></pre>
  7.             └─(function () ... R/call.R:4:2</code></pre>
 <p>The vctrs package uses C for performance-critical parts, and often calls back into R for e.g. S3 dispatch or error reporting. The example below triggers an error: native code calls into R for actually throwing the error.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span>(
-  error = <span class="kw">rlang</span>::<span class="kw"><a href="https://rlang.r-lib.org/reference/entrace.html">entrace</a></span>,
-  rlang_backtrace_on_error = <span class="st">"full"</span>,
-  rlang_trace_use_winch = <span class="fl">1L</span>
-)
+<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>
+  error <span class="op">=</span> <span class="fu">rlang</span><span class="fu">::</span><span class="va"><a href="https://rlang.r-lib.org/reference/entrace.html">entrace</a></span>,
+  rlang_backtrace_on_error <span class="op">=</span> <span class="st">"full"</span>,
+  rlang_trace_use_winch <span class="op">=</span> <span class="fl">1L</span>
+<span class="op">)</span>
 
-<span class="kw">vctrs</span>::<span class="fu"><a href="https://vctrs.r-lib.org/reference/vec_as_location.html">vec_as_location</a></span>(<span class="kw">quote</span>, <span class="fl">2</span>)
-</pre></div>
+<span class="fu">vctrs</span><span class="fu">::</span><span class="fu"><a href="https://vctrs.r-lib.org/reference/vec_as_location.html">vec_as_location</a></span><span class="op">(</span><span class="va">quote</span>, <span class="fl">2</span><span class="op">)</span></pre></div>
 <pre><code>Error: Must subset elements with a valid subscript vector.
 ✖ Subscript has the wrong type `function`.
 ℹ It must be logical, numeric, or character.
@@ -547,7 +539,7 @@ Backtrace:
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="http://krlmlr.info">Kirill Müller</a>, Ian Lance Taylor.</p>
+  <p>Developed by <a href="http://krlmlr.info">Kirill Müller</a>, <a href="https://www.r-consortium.org">R Consortium</a>, Ian Lance Taylor.</p>
 </div>
 
 <div class="pkgdown">

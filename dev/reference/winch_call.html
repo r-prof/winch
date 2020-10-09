@@ -126,7 +126,7 @@
     <p>Primarily intended for testing.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>winch_call</span>(<span class='kw'>fun</span>, env = <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>parent.frame</a></span>())</pre>
+    <pre class="usage"><span class='fu'>winch_call</span><span class='op'>(</span><span class='va'>fun</span>, env <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>parent.frame</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -149,15 +149,15 @@
     <div class='dont-index'><p><code><a href='winch_stop.html'>winch_stop()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>foo</span> <span class='op'>&lt;-</span> <span class='fu'>function</span>() {
-  <span class='fu'>winch_call</span>(<span class='kw'>bar</span>)
-}
+    <pre class="examples"><div class='input'><span class='va'>foo</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='fu'>winch_call</span><span class='op'>(</span><span class='va'>bar</span><span class='op'>)</span>
+<span class='op'>}</span>
 
-<span class='kw'>bar</span> <span class='op'>&lt;-</span> <span class='fu'>function</span>() {
-  <span class='fu'><a href='https://rdrr.io/r/base/writeLines.html'>writeLines</a></span>(<span class='st'>"Hi!"</span>)
-}
+<span class='va'>bar</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/writeLines.html'>writeLines</a></span><span class='op'>(</span><span class='st'>"Hi!"</span><span class='op'>)</span>
+<span class='op'>}</span>
 
-<span class='fu'>foo</span>()
+<span class='fu'>foo</span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Hi!</div><div class='output co'>#&gt; NULL</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -170,7 +170,7 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='http://krlmlr.info'>Kirill Müller</a>, Ian Lance Taylor.</p>
+  <p>Developed by <a href='http://krlmlr.info'>Kirill Müller</a>, <a href='https://www.r-consortium.org'>R Consortium</a>, Ian Lance Taylor.</p>
 </div>
 
 <div class="pkgdown">
