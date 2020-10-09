@@ -25,6 +25,7 @@ On Windows, call \code{\link[=winch_init_library]{winch_init_library()}} to retu
 for a specific package.
 }
 \examples{
+\dontshow{if (winch_available()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 winch_trace_back()
 
 foo <- function() {
@@ -36,6 +37,7 @@ bar <- function() {
 }
 
 foo()
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=sys.calls]{sys.calls()}} for the R equivalent.
