@@ -16,7 +16,7 @@ library_env <- new.env(parent = emptyenv())
 #'
 #' @export
 #' @examplesIf requireNamespace("rlang", quietly = TRUE)
-#' winch_init_library(rlang:::.__NAMESPACE__.$DLLs[[1]][["path"]])
+#' winch_init_library(getLoadedDLLs()[["rlang"]][["path"]])
 winch_init_library <- function(path = NULL, force = FALSE) {
   stopifnot(is.logical(force), length(force) == 1)
 

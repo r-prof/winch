@@ -111,7 +111,7 @@ This functionality is accessible via `winch::winch_trace_back()`.
 For demonstration purposes, this is what the native stack trace looks like for our double round-trip.
 Calls into native code can be deduced from the `pathname` column:
 
-```{r}
+```{r eval = winch::winch_available()}
 baz <- function() {
   winch_trace_back()
 }
