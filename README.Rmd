@@ -22,17 +22,11 @@ pkgload::load_all()
 [![CRAN status](https://www.r-pkg.org/badges/version/winch)](https://CRAN.R-project.org/package=winch)
 <!-- badges: end -->
 
-The goal of winch is to provide stack traces that combine R and C function calls.
-This is primarily useful for developers of R packages where a substantial portion of the code is C or C++.
+Winch provides stack traces for call chains that cross between R and C function calls.
+This is a useful tool for developers of R packages where a substantial portion of the code is C or C++.
 
 
 ## Installation
-
-Once on CRAN, you can install the released version of winch from [CRAN](https://CRAN.R-project.org) with:
-
-``` r
-install.packages("winch")
-```
 
 Install the development version from GitHub with:
 
@@ -40,9 +34,17 @@ Install the development version from GitHub with:
 devtools::install_github("r-lib/winch")
 ```
 
+Once winch is on CRAN, you will be able to install the released version of winch from [CRAN](https://cran.r-project.org/) with:
+
+``` r
+install.packages("winch")
+```
+
+
 ## Example
 
-This is an example where an R function calls into C which calls back into R, see the second-to-last entry in the trace:
+Below is an example where an R function calls into C which calls back into R. 
+Note the second-to-last entry in the trace:
 
 ```{r example}
 library(winch)
@@ -59,7 +61,7 @@ foo()
 ```
 
 `rlang::entrace()` checks if winch is installed, and adds a native backtrace.
-This cannot be easily demonstrated in a knitr document, the output is copied from [this GitHub Actions run](https://github.com/r-prof/winch/runs/1147640026?check_suite_focus=true#step:12:169).
+As this cannot be easily demonstrated in a knitr document, the output is copied from [this GitHub Actions run](https://github.com/r-prof/winch/runs/1147640026?check_suite_focus=true#step:12:169).
 
 ```{r error, eval = FALSE}
 options(
@@ -85,20 +87,21 @@ Backtrace:
 
 ## How does it work?
 
-It's a very crude heuristic.
+winch uses a very simple heuristic.
 R's traceback (and also profiling) infrastructure introduces the notion of a "context".
-Every call to an R function opens a new context, and closes it when execution of the function ends.
+Every call to an R function opens a new context and closes it when execution of the function ends.
 Unfortunately, no new context is established for native code called with `.Call()` or `.External()`.
-Establishing contexts requires precious run time, this might be the reason for this omission.
+Establishing contexts expends precious run time, so this may be the reason for the omission.
 
 To work around this limitation, the source code of all R functions along the call chain is scanned for instances of `.Call` and `.External`.
-The native call stack (obtained via libunwind or libbacktrace) is scanned for chunks of code outside of `libR.so` (R's main library) -- these are assumed to correspond to `.Call()` or `.External()`.
+The native call stack (obtained via [libunwind](https://github.com/libunwind/libunwind) or [libbacktrace](https://github.com/ianlancetaylor/libbacktrace)) is scanned for chunks of code outside of `libR.so` (R's main library) -- these are assumed to correspond to `.Call()` or `.External()`.
 The native traces are embedded as artificial calls into the R stack trace.
 
 ## Limitations
 
-- The matching will not be perfect, it still may lead to quicker discovery of the cause of an error.
-- Windows only works on x64, and there the traces can be obtained only for one shared library at a time. See `winch_init_library()` for details.
+- The matching will not be perfect, but it may still lead to faster discovery of the cause of an error.
+- On Windows winch only works on x64, and there the traces can be obtained only for one shared library at a time. 
+See `winch_init_library()` for details.
 
 ---
 

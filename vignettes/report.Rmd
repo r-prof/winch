@@ -19,14 +19,15 @@ library(winch)
 ```
 
 
-This document describes the concluding efforts of the "Joint Profiling of Native and R Code" project.
-It describes two new packages, winch and its helper package procmaps.
+This document describes the final results of the "Joint Profiling of Native and R Code" project.
+It describes two new packages, `winch`, and its helper package, `procmaps`.
 After a definition of the problem, the packages' features are described, with an outline of work still to be done.
 It concludes with a discussion of technical caveats and a connection to the first part of the project.
 The appendix is a scratch pad for links and other bits of information that don't fit elsewhere.
 
-The winch package allows combining native and R stack traces in a controlled way, for now outside of a profiling context.
-This deviates from the original goal of the project, with good reason: robust combined stack traces are a cornerstone for joint profiling, and useful independently.
+The winch package combines native and R stack traces in a controlled way. 
+For now this is outside of a profiling context.
+This deviates from the original goal of the project, with good reason: robust combined stack traces are a cornerstone for joint profiling and are useful independent of profiling.
 
 
 ## Stack traces
@@ -38,7 +39,7 @@ Use cases include ([source](https://blog.reverberate.org/2013/05/deep-wizardry-s
 
 > 1. In a debugger, to show the user the stack.
 > 2. In a profiler, to take a sample of the stack.
-> 3. From the program itself (like from a crash handler to show the stack).
+> 3. From the program itself (e.g. from a crash handler to show the stack).
 
 ### R code
 
@@ -61,8 +62,8 @@ tail(foo(), 3)
 ```
 
 Native code cannot easily be deduced from the stack trace.
-This is seen when replacing function calls with `winch::winch_call()`, which simulates a roundtrip from native code into R by calling a function passed as argument from C code.
-The example becomes a double roundtrip: R → native → R → native → R.
+This is seen when replacing function calls with `winch::winch_call()`, which simulates a round-trip from native code into R by calling a function passed as argument from C code.
+The example becomes a double round-trip: R → native → R → native → R.
 
 ```{r}
 library(winch)
@@ -95,7 +96,8 @@ This would require changes to base R.
 
 ### Native code
 
-R is an interpreted language, it can be expected that it knows how to track the execution state.
+R is an interpreted language. 
+It can be expected that it knows how to track the execution state.
 (It is much more surprising that it allows programs to compute on their own execution state -- R has very strong support for [reflection](https://en.wikipedia.org/wiki/Reflection_(computer_programming)) indeed.)
 How do we achieve this for native code? [Can an application programmatically generate its own stack trace?](https://stackoverflow.com/q/8031742/946850)
 
@@ -106,7 +108,7 @@ In general, function name, file + line information and even library name must be
 
 The winch package wraps two libraries (for portability across different OSes) that help obtain IP sequences and function names.
 This functionality is accessible via `winch::winch_trace_back()`.
-For demonstration purposes, this is what the native stack trace looks like for our double roundtrip.
+For demonstration purposes, this is what the native stack trace looks like for our double round-trip.
 Calls into native code can be deduced from the `pathname` column:
 
 ```{r}
@@ -121,22 +123,22 @@ table(trace$pathname)
 ```
 
 `winch_trace_back()` is a low-level function not intended to be called by the user.
-It is a corner stone for joint backtraces provided by `winch_add_trace_back()`, as shown in the next section.
+It is a cornerstone for joint backtraces provided by `winch_add_trace_back()`, as shown in the next section.
 For now, `winch_trace_back()` provides the native function name and the library name on all tested platforms (Linux, macOS, Windows).
 Information about file + line remains an open issue.
 
 
 ### R code + native code
 
-R always has been an interface language, with excellent integration of calling into foreign interfaces.
-R code often calls into specialized native code for speed or to avoid reimplementation in R.
+R has always been an interface language, with excellent integration of calls into foreign interfaces.
+R code often calls into specialized native code for speed or to avoid re-implementation in R.
 Due to this duality, it is helpful to access both kinds of stack trace: R and native.
 
 These stack traces are not very helpful if taken separately.
 Native code is hidden from R backtrace, and R code is represented as sequence of function calls in `libR.so` or equivalent.
 Fusing these stack traces allows representing the chain of function calls from both domains when R code calls into native code (which then might call back into R).
 
-The combination of R and native stack traces in winch relies on two prerequisites:
+The combination of R and native stack traces in winch relies on two heuristics:
 
 1. Calls from R into native code can be detected by searching for special function names in the stack trace: `.Call()`, `.External()` or `.External2()`.
 2. In the native stack trace, interpreted R code can be distinguished from user-provided native code by checking the name of the shared library for each IP: R code corresponds to IPs pointing to `libR.so`.
@@ -220,8 +222,8 @@ foo()
  7.             └─(function () ... R/call.R:4:2
 ```
 
-The vctrs package uses C for performance-critical parts, and often calls back into R for e.g. S3 dispatch or error reporting.
-The example below triggers an error:  native code calls into R for actually throwing the error.
+The `vctrs` package uses C for performance-critical parts, and often calls back into R for e.g. S3 dispatch or error reporting.
+The example below triggers an error and native code calls into R to throw the error.
 
 ```{r error, eval = FALSE}
 options(
@@ -269,8 +271,8 @@ A few things need to be done for fully portable joint profiling based on the new
 
 - Collect IPs or native stack traces during profiling
 
-For errors thrown from Rcpp code, the stack trace ends at the autogenerated stub, because this is the code that catches the C++ exception.
-It would be useful if stack trace information would be collected at the point of error, and provided as part of the error condition.
+For errors thrown from Rcpp code, the stack trace ends at the auto-generated stub, because this is the code that catches the C++ exception.
+It would be useful if stack trace information could be collected at the point of error and provided as part of the error condition.
 
 
 ## Technical details
@@ -286,10 +288,10 @@ Determining the shared library that provided the code seems to be an entirely se
 
 ### Retrieving IPs
 
-I experimented with the following options:
+The following options were experimented with:
 
 1. The libc function [`execinfo()`](https://www.gnu.org/software/libc/manual/html_node/Backtraces.html) was a first obvious candidate.
-    It works well enough on mainstream Linux, but not on Windows.
+It works well enough on mainstream Linux, but not on Windows.
 Also, function names were not discovered reliably, in particular for optimized code.
 
 2. The libunwind library supports similar functionality and discovers function names more reliably.
@@ -302,10 +304,9 @@ Also, function names were not discovered reliably, in particular for optimized c
 
 Wrapping the libbacktrace library looks like the best option in terms of portability and features.
 Unfortunately, it currently fails on macOS.
-Therefore, I settled with a combination of libbacktrace and libunwind, depending on the platform:
+Therefore, a combination of libbacktrace and libunwind is used depending on the platform:
 
-- On Linux, use libunwind, because it gives slightly better results
-    - Possible to use libbacktrace
+- On Linux, use libunwind, because it gives slightly better results (it is possible to use libbacktrace)
 - On macOS, use libunwind, because libbacktrace doesn't work in this setting yet
 - On Windows, use libbacktrace, because it's the only option
 - Disable on Solaris, neither library works there
@@ -324,34 +325,28 @@ The `execinfo()` approach is no longer used because libunwind is clearly better.
 #### libbacktrace on Windows
 
 - libbacktrace works on mingw64 with gcc patch: https://github.com/gcc-mirror/gcc/pull/48
-
-    - documented in libbacktrace issue: https://github.com/ianlancetaylor/libbacktrace/issues/43#issuecomment-687858320
-
-    - gcc bug reported: https://gcc.gnu.org/bugzilla/show_bug.cgi?id=96948
-
-    - patches by me and by Martin Storsjö: https://gcc.gnu.org/pipermail/gcc-patches/2020-September/553418.html
-
-    - patch submitted to rtools-packages: https://github.com/r-windows/rtools-packages/pull/148
-
-    - works somewhat if using region addresses, can slightly patch libbacktrace to achieve this with stock gcc: https://github.com/ianlancetaylor/libbacktrace/pull/54, rejected upstream, applied in winch
-
+    - documented in libbacktrace issue: [https://github.com/ianlancetaylor/libbacktrace/issues/43#issuecomment-687858320](https://github.com/ianlancetaylor/libbacktrace/issues/43#issuecomment-687858320)
+    - gcc bug reported: [https://gcc.gnu.org/bugzilla/show_bug.cgi?id=96948](https://gcc.gnu.org/bugzilla/show_bug.cgi?id=96948)
+    - patches by me and by Martin Storsjö: [https://gcc.gnu.org/pipermail/gcc-patches/2020-September/553418.html](https://gcc.gnu.org/pipermail/gcc-patches/2020-September/553418.html)
+    - patch submitted to rtools-packages: [https://github.com/r-windows/rtools-packages/pull/148](https://github.com/r-windows/rtools-packages/pull/148)
+    - works somewhat if using region addresses, can slightly patch libbacktrace to achieve this with stock gcc: [https://github.com/ianlancetaylor/libbacktrace/pull/54](https://github.com/ianlancetaylor/libbacktrace/pull/54), rejected upstream, applied in winch
 - almost as good as libunwind when looking up symbol information, observed difference in some `libR.so` symbols
-
     - no improvement seen with [a pull request](https://github.com/ianlancetaylor/libbacktrace/pull/38)
 
 #### Options not considered
 
-- I haven't tried [boost stacktrace](https://www.boost.org/doc/libs/master/boost/stacktrace/detail/collect_unwind.ipp) yet
+- [boost stacktrace](https://www.boost.org/doc/libs/master/boost/stacktrace/detail/collect_unwind.ipp) has not been tried yet
 
 - The [stacktrace](http://stacktrace.sourceforge.net/) library is from 2009, was last changed 2013
 
-- I haven't considered going a [fully native route](https://programmer.help/blogs/using-the-_unwind_backtrace-function-to-grab-the-backtrace-of-the-c-c-stack.html) without library suport, this would amount to rewriting large parts of existing library code.
+- A [fully native route](https://programmer.help/blogs/using-the-_unwind_backtrace-function-to-grab-the-backtrace-of-the-c-c-stack.html) has not been considered. Without library support this would amount to rewriting large parts of existing library code.
 
 ### Retrieving module name
 
 Perhaps not surprising, mapping IPs to module names also requires platform-specific code.
-On Linux, the mapping is provided through the `/proc/self/maps` virtual file, other systems require vastly different approaches.
-I haven't found a library dedicated specifically to this problem.
+On Linux, the mapping is provided through the `/proc/self/maps` virtual file. 
+Other systems require vastly different approaches.
+It appears that there is not a library dedicated specifically to this problem.
 
 The [gperftools repository](https://github.com/gperftools/gperftools) contains relevant code targeting all platforms of interest.
 I extracted this code in the procmaps package, now on CRAN.
@@ -369,7 +364,7 @@ The libbacktrace library optionally provides file + line information for each en
 
 Unfortunately it currently does not work on macOS:
 
-- Its internal tests show "libbacktrace: no debug info in Mach-O executable", perhaps related to [an issue that also limits usability on Windows](https://github.com/ianlancetaylor/libbacktrace/issues/53)
+- Its internal tests show "libbacktrace: no debug info in Mach-O executable", perhaps related to [an issue that also limits usability on Windows](https://github.com/ianlancetaylor/libbacktrace/issues/53).
 
 - Using libbacktrace in winch gives a segmentation fault.
 
@@ -380,16 +375,17 @@ Once a fully portable solution is found, this information should be provided by 
 
 ## History: jointprof part 1
 
-The main result of the first part of the project is the jointprof package, which implements a proof of concepts for recording native and R stack traces in parallel, exclusively during profiling.
+The main result of the first part of the project is the `jointprof` package, which implements a proof of concept for recording native and R stack traces in parallel, exclusively during profiling.
 It uses [the gperftools library](https://github.com/gperftools/gperftools) to record native stack traces, and daisy chains into the profiling routine provided by R to record R stack traces.
-A helper package, profile, processes the profiler data created by gperftools.
+A helper package, `profile`, processes the profiler data created by gperftools.
 
 This approach works on Linux only.
 On macOS, a patch is required; Windows is completely unsupported.
-The approach is a bit brittle, occasionally stack traces could not be matched.
+The approach is a bit brittle. 
+Occasionally stack traces could not be matched.
 Fusion of stack traces for debugging purposes is not possible.
 
-Will Landau contributed the proffer package to the project, a drop-in replacement to profvis that uses [pprof](https://github.com/google/pprof) to visualize profiles.
+Will Landau contributed the `proffer` package to the project, a drop-in replacement to profvis that uses [pprof](https://github.com/google/pprof) to visualize profiles.
 
 ## Appendix
 
