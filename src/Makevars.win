@@ -1,16 +1,24 @@
 DEBUG = true
 PKG_CPPFLAGS = -Ilocal/include
+
+ifeq (, $(shell ( mkdir -p build/libbacktrace && cd build/libbacktrace && CC="$(CC)" AR="$(AR)" RANLIB="$(RANLIB)" ../../vendor/libbacktrace/configure --disable-host-shared --prefix=$${PWD}/../../local ) 1>&2 && echo ok ))
+
+# Only compile if configuration is successful
 PKG_CFLAGS = -DHAVE_LIBBACKTRACE
 WINCH_LOCAL_LIBS = local/lib/libbacktrace.a
 PKG_LIBS = ${WINCH_LOCAL_LIBS}
 
+else
+
+PKG_CFLAGS =
+WINCH_LOCAL_LIBS =
+PKG_LIBS =
+
+fi
+
 all: $(SHLIB)
 
 $(SHLIB): ${WINCH_LOCAL_LIBS}
-
-build/libbacktrace/Makefile: vendor/libbacktrace/configure
-	# Set CONFIG_SHELL and MKDIR_P to work around problem when sh is on a path with spaces
-	mkdir -p build/libbacktrace && cd build/libbacktrace && CC="$(CC)" AR="$(AR)" RANLIB="$(RANLIB)" CONFIG_SHELL=/bin/bash MKDIR_P="/bin/mkdir -p" ../../vendor/libbacktrace/configure --disable-host-shared --prefix=$${PWD}/../../local
 
 local/lib/libbacktrace.a: build/libbacktrace/Makefile vendor/libbacktrace/*.c vendor/libbacktrace/*.h
 	cd build/libbacktrace && make install
