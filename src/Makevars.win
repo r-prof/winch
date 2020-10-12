@@ -22,3 +22,5 @@ $(SHLIB): ${WINCH_LOCAL_LIBS}
 
 local/lib/libbacktrace.a: build/libbacktrace/Makefile vendor/libbacktrace/*.c vendor/libbacktrace/*.h
 	cd build/libbacktrace && make install
+
+trace_back_backtrace.o: ${WINCH_LOCAL_LIBS}
