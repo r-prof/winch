@@ -68,7 +68,7 @@ As this cannot be easily demonstrated in a knitr document, the output is copied 
 options(
   error = rlang::entrace,
   rlang_backtrace_on_error = "full",
-  rlang_trace_use_winch = 1L
+  rlang_trace_use_winch = TRUE
 )
 
 vctrs::vec_as_location(quote, 2)
