@@ -28,17 +28,18 @@ This is a useful tool for developers of R packages where a substantial portion o
 
 ## Installation
 
+Install the released version of winch from [CRAN](https://cran.r-project.org/) with:
+
+``` r
+install.packages("winch")
+```
+
 Install the development version from GitHub with:
 
 ``` r
 devtools::install_github("r-lib/winch")
 ```
 
-Once winch is on CRAN, you will be able to install the released version of winch from [CRAN](https://cran.r-project.org/) with:
-
-``` r
-install.packages("winch")
-```
 
 
 ## Example
