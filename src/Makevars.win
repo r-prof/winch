@@ -10,7 +10,7 @@ $(SHLIB): ${WINCH_LOCAL_LIBS}
 
 build/libbacktrace/Makefile: vendor/libbacktrace/configure
 	# Set CONFIG_SHELL and MKDIR_P to work around problem when sh is on a path with spaces
-	mkdir -p build/libbacktrace && cd build/libbacktrace && CC="$(CC)" AR="$(AR)" RANLIB="$(RANLIB)" CONFIG_SHELL=/bin/sh MKDIR_P="/bin/mkdir -p" ../../vendor/libbacktrace/configure --disable-host-shared --prefix=$${PWD}/../../local
+	mkdir -p build/libbacktrace && cd build/libbacktrace && CC="$(CC)" AR="$(AR)" RANLIB="$(RANLIB)" CONFIG_SHELL=/bin/bash MKDIR_P="/bin/mkdir -p" ../../vendor/libbacktrace/configure --disable-host-shared --prefix=$${PWD}/../../local
 
 local/lib/libbacktrace.a: build/libbacktrace/Makefile vendor/libbacktrace/*.c vendor/libbacktrace/*.h
 	cd build/libbacktrace && make install
