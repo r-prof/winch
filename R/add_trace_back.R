@@ -23,6 +23,11 @@ winch_add_trace_back <- function(trace = rlang::trace_back(bottom = parent.frame
     return(trace)
   }
 
+  # Check for trace version
+  if (!identical(attr(trace, "version"), 1L)) {
+    return(trace)
+  }
+
   # Avoid recursion
   old_options <- options(rlang_trace_use_winch = NULL)
   on.exit(options(old_options))
