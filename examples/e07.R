@@ -4,7 +4,7 @@
 
 library(winch)
 
-options(rlang_trace_use_winch = 1L)
+options(rlang_trace_use_winch = TRUE)
 
 foo <- function() {
   winch_call(bar)

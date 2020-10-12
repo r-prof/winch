@@ -117,7 +117,7 @@ Below is an example where an R function calls into C which calls back into R. No
 <span class='nf'><a href='https://rdrr.io/r/base/options.html'>options</a></span>(
   error = <span class='k'>rlang</span>::<span class='k'><a href='https://rlang.r-lib.org/reference/entrace.html'>entrace</a></span>,
   rlang_backtrace_on_error = <span class='s'>"full"</span>,
-  rlang_trace_use_winch = <span class='m'>1L</span>
+  rlang_trace_use_winch = <span class='m'>TRUE</span>
 )
 
 <span class='k'>vctrs</span>::<span class='nf'><a href='https://vctrs.r-lib.org/reference/vec_as_location.html'>vec_as_location</a></span>(<span class='k'>quote</span>, <span class='m'>2</span>)

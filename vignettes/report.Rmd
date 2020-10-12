@@ -202,7 +202,7 @@ The integration is a [small change to rlang](https://github.com/r-lib/rlang/pull
 With this option set, manual addition of the native stack trace is no longer necessary.
 
 ```{r eval = FALSE}
-options(rlang_trace_use_winch = 1L)
+options(rlang_trace_use_winch = TRUE)
 
 baz <- function() {
   rlang::trace_back()
@@ -229,7 +229,7 @@ The example below triggers an error and native code calls into R to throw the er
 options(
   error = rlang::entrace,
   rlang_backtrace_on_error = "full",
-  rlang_trace_use_winch = 1L
+  rlang_trace_use_winch = TRUE
 )
 
 vctrs::vec_as_location(quote, 2)
