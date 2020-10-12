@@ -206,31 +206,31 @@
 <span class="co">#&gt; [1] 227</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">trace</span>, <span class="fl">25</span><span class="op">)</span>
 <span class="co">#&gt;               func               ip</span>
-<span class="co">#&gt; 1           bcEval 00007f7206abf2f0</span>
-<span class="co">#&gt; 2          Rf_eval 00007f7206ad4c60</span>
-<span class="co">#&gt; 3    R_execClosure 00007f7206ad68e0</span>
-<span class="co">#&gt; 4  Rf_applyClosure 00007f7206ad7800</span>
-<span class="co">#&gt; 5          Rf_eval 00007f7206ad4c60</span>
-<span class="co">#&gt; 6         do_begin 00007f7206ad8600</span>
-<span class="co">#&gt; 7          Rf_eval 00007f7206ad4c60</span>
-<span class="co">#&gt; 8    R_execClosure 00007f7206ad68e0</span>
-<span class="co">#&gt; 9  Rf_applyClosure 00007f7206ad7800</span>
-<span class="co">#&gt; 10         Rf_eval 00007f7206ad4c60</span>
-<span class="co">#&gt; 11      winch_call 00007f71efd5f5b0</span>
-<span class="co">#&gt; 12     R_doDotCall 00007f7206a89010</span>
-<span class="co">#&gt; 13          bcEval 00007f7206abf2f0</span>
-<span class="co">#&gt; 14         Rf_eval 00007f7206ad4c60</span>
-<span class="co">#&gt; 15   R_execClosure 00007f7206ad68e0</span>
-<span class="co">#&gt; 16 Rf_applyClosure 00007f7206ad7800</span>
-<span class="co">#&gt; 17          bcEval 00007f7206abf2f0</span>
-<span class="co">#&gt; 18         Rf_eval 00007f7206ad4c60</span>
-<span class="co">#&gt; 19   R_execClosure 00007f7206ad68e0</span>
-<span class="co">#&gt; 20 Rf_applyClosure 00007f7206ad7800</span>
-<span class="co">#&gt; 21         Rf_eval 00007f7206ad4c60</span>
-<span class="co">#&gt; 22      winch_call 00007f71efd5f5b0</span>
-<span class="co">#&gt; 23     R_doDotCall 00007f7206a89010</span>
-<span class="co">#&gt; 24          bcEval 00007f7206abf2f0</span>
-<span class="co">#&gt; 25         Rf_eval 00007f7206ad4c60</span>
+<span class="co">#&gt; 1           bcEval 00007ff2bb9042f0</span>
+<span class="co">#&gt; 2          Rf_eval 00007ff2bb919c60</span>
+<span class="co">#&gt; 3    R_execClosure 00007ff2bb91b8e0</span>
+<span class="co">#&gt; 4  Rf_applyClosure 00007ff2bb91c800</span>
+<span class="co">#&gt; 5          Rf_eval 00007ff2bb919c60</span>
+<span class="co">#&gt; 6         do_begin 00007ff2bb91d600</span>
+<span class="co">#&gt; 7          Rf_eval 00007ff2bb919c60</span>
+<span class="co">#&gt; 8    R_execClosure 00007ff2bb91b8e0</span>
+<span class="co">#&gt; 9  Rf_applyClosure 00007ff2bb91c800</span>
+<span class="co">#&gt; 10         Rf_eval 00007ff2bb919c60</span>
+<span class="co">#&gt; 11      winch_call 00007ff2a4ba45b0</span>
+<span class="co">#&gt; 12     R_doDotCall 00007ff2bb8ce010</span>
+<span class="co">#&gt; 13          bcEval 00007ff2bb9042f0</span>
+<span class="co">#&gt; 14         Rf_eval 00007ff2bb919c60</span>
+<span class="co">#&gt; 15   R_execClosure 00007ff2bb91b8e0</span>
+<span class="co">#&gt; 16 Rf_applyClosure 00007ff2bb91c800</span>
+<span class="co">#&gt; 17          bcEval 00007ff2bb9042f0</span>
+<span class="co">#&gt; 18         Rf_eval 00007ff2bb919c60</span>
+<span class="co">#&gt; 19   R_execClosure 00007ff2bb91b8e0</span>
+<span class="co">#&gt; 20 Rf_applyClosure 00007ff2bb91c800</span>
+<span class="co">#&gt; 21         Rf_eval 00007ff2bb919c60</span>
+<span class="co">#&gt; 22      winch_call 00007ff2a4ba45b0</span>
+<span class="co">#&gt; 23     R_doDotCall 00007ff2bb8ce010</span>
+<span class="co">#&gt; 24          bcEval 00007ff2bb9042f0</span>
+<span class="co">#&gt; 25         Rf_eval 00007ff2bb919c60</span>
 <span class="co">#&gt;                                               pathname</span>
 <span class="co">#&gt; 1                       /opt/R/4.0.3/lib/R/lib/libR.so</span>
 <span class="co">#&gt; 2                       /opt/R/4.0.3/lib/R/lib/libR.so</span>
@@ -318,7 +318,7 @@ foo()                libR.so::... (repeated)</code></pre>
  7.             └─(function () ... R/call.R:4:2</code></pre>
 <p>Stack traces must be collected at the time that the error occurs, this includes calls to <code><a href="https://rlang.r-lib.org/reference/abort.html">rlang::abort()</a></code> which already collect a stack trace. The integration is a <a href="https://github.com/r-lib/rlang/pull/1039">small change to rlang</a> that calls <code><a href="../reference/winch_add_trace_back.html">winch_add_trace_back()</a></code> during collection if winch is installed and the <code>rlang_trace_use_winch</code> option is identical to <code>1L</code>. With this option set, manual addition of the native stack trace is no longer necessary.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>rlang_trace_use_winch <span class="op">=</span> <span class="fl">1L</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>rlang_trace_use_winch <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 
 <span class="va">baz</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
   <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/trace_back.html">trace_back</a></span><span class="op">(</span><span class="op">)</span>
@@ -338,7 +338,7 @@ foo()                libR.so::... (repeated)</code></pre>
 <span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>
   error <span class="op">=</span> <span class="fu">rlang</span><span class="fu">::</span><span class="va"><a href="https://rlang.r-lib.org/reference/entrace.html">entrace</a></span>,
   rlang_backtrace_on_error <span class="op">=</span> <span class="st">"full"</span>,
-  rlang_trace_use_winch <span class="op">=</span> <span class="fl">1L</span>
+  rlang_trace_use_winch <span class="op">=</span> <span class="cn">TRUE</span>
 <span class="op">)</span>
 
 <span class="fu">vctrs</span><span class="fu">::</span><span class="fu"><a href="https://vctrs.r-lib.org/reference/vec_as_location.html">vec_as_location</a></span><span class="op">(</span><span class="va">quote</span>, <span class="fl">2</span><span class="op">)</span></pre></div>
