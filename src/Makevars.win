@@ -1,7 +1,7 @@
 DEBUG = true
 PKG_CPPFLAGS = -Ilocal/include
 
-ifeq (, $(shell ( mkdir -p build/libbacktrace && cd build/libbacktrace && CC="$(CC)" AR="$(AR)" RANLIB="$(RANLIB)" ../../vendor/libbacktrace/configure --disable-host-shared --prefix=$${PWD}/../../local ) 1>&2 && echo ok ))
+ifeq (ok, $(shell ( mkdir -p build/libbacktrace && cd build/libbacktrace && CC="$(CC)" AR="$(AR)" RANLIB="$(RANLIB)" ../../vendor/libbacktrace/configure --disable-host-shared --prefix=$${PWD}/../../local ) 1>&2 && echo ok ))
 
 # Only compile if configuration is successful
 PKG_CFLAGS = -DHAVE_LIBBACKTRACE
@@ -14,7 +14,7 @@ PKG_CFLAGS =
 WINCH_LOCAL_LIBS =
 PKG_LIBS =
 
-fi
+endif
 
 all: $(SHLIB)
 
@@ -22,5 +22,3 @@ $(SHLIB): ${WINCH_LOCAL_LIBS}
 
 local/lib/libbacktrace.a: build/libbacktrace/Makefile vendor/libbacktrace/*.c vendor/libbacktrace/*.h
 	cd build/libbacktrace && make install
-
-trace_back_backtrace.o: local/lib/libbacktrace.a
