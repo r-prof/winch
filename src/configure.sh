@@ -1,7 +1,7 @@
-#!/bin/bash
+#!/bin/sh
 
 set -e
-cd $(dirname $0)
+cd `dirname $0`
 
 # Anticonf (tm) script by Jeroen Ooms, Murat Tasan and Kirill Müller (2020)
 # This script will prefer cflags (specifically includefile dirs) and lib dirs
@@ -42,10 +42,10 @@ case "$OSTYPE" in
   PKG_LIBUNWIND="-DHAVE_LIBUNWIND"
   PKG_LIBBACKTRACE="-DHAVE_LIBBACKTRACE"
 
-  if [ $(command -v pkg-config) ]; then
-    PKGCONFIG_CFLAGS=$(pkg-config --cflags --silence-errors ${PKG_CONFIG_NAME} || true)
-    PKGCONFIG_LIBS=$(pkg-config --libs --silence-errors ${PKG_CONFIG_NAME} || true)
-    PKGCONFIG_MODVERSION=$(pkg-config --modversion --silence-errors ${PKG_CONFIG_NAME} || true)
+  if [ `command -v pkg-config` ]; then
+    PKGCONFIG_CFLAGS=`pkg-config --cflags --silence-errors ${PKG_CONFIG_NAME} || true`
+    PKGCONFIG_LIBS=`pkg-config --libs --silence-errors ${PKG_CONFIG_NAME} || true`
+    PKGCONFIG_MODVERSION=`pkg-config --modversion --silence-errors ${PKG_CONFIG_NAME} || true`
   fi
 
   # Note that cflags may be empty in case of success
@@ -71,9 +71,9 @@ echo "Using PKG_CFLAGS=$PKG_CFLAGS"
 echo "Using PKG_LIBS=$PKG_LIBS"
 
 # Find compiler
-CC=$(${R_HOME}/bin/R CMD config CC)
-CFLAGS=$(${R_HOME}/bin/R CMD config CFLAGS)
-CPPFLAGS=$(${R_HOME}/bin/R CMD config CPPFLAGS)
+CC=`${R_HOME}/bin/R CMD config CC`
+CFLAGS=`${R_HOME}/bin/R CMD config CFLAGS`
+CPPFLAGS=`${R_HOME}/bin/R CMD config CPPFLAGS`
 
 # Test configuration
 echo "#include $PKG_TEST_HEADER" | ${CC} ${CPPFLAGS} ${PKG_CFLAGS} ${CFLAGS} -E -xc - >/dev/null 2>&1 || R_CONFIG_ERROR=1;
