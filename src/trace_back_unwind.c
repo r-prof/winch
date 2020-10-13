@@ -14,6 +14,7 @@ void* buf[10000];
 
 SEXP winch_trace_back_unwind() {
   unw_context_t uc;
+  memset(&uc, 0, sizeof(uc));
 
   int unw;
   unw = unw_getcontext(&uc);

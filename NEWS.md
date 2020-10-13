@@ -1,6 +1,6 @@
 # winch 0.0.2 (2020-10-13)
 
-- Same as previous version.
+- Fix Valgrind error.
 
 
 # winch 0.0.1.9002 (2020-10-13)
