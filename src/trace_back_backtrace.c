@@ -2,7 +2,6 @@
 #include <R.h>
 #include <Rinternals.h>
 
-
 #ifdef HAVE_LIBBACKTRACE
 
 #define __STDC_FORMAT_MACROS

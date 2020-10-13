@@ -1,6 +1,7 @@
 test_that("traceback unchanged if no native code", {
   skip_on_cran()
   skip_if_not_installed("rlang")
+  skip_if_not(winch_available())
 
   trace <- rlang::trace_back()
   expect_identical(unclass(winch_add_trace_back(trace)), unclass(trace))
@@ -9,7 +10,7 @@ test_that("traceback unchanged if no native code", {
 test_that("traceback changed if native code", {
   skip_on_cran()
   skip_if_not_installed("rlang")
-  skip_if(.Platform$r_arch == "i386")
+  skip_if_not(winch_available())
 
   foo <- function(fun) {
     winch_call(fun)
