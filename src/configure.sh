@@ -17,48 +17,52 @@ PKG_RPM_NAME="libunwind-devel"
 PKG_URL="https://github.com/libunwind/libunwind"
 PKG_TEST_HEADER="<libunwind.h>"
 
+PKG_CFLAGS=""
+PKG_LIBUNWIND=""
+PKG_LIBBACKTRACE=""
+PKG_LIBS=""
+WINCH_LOCAL_LIBS=""
+
 # pkg-config values (if available)
-if [[ "$OSTYPE" == "darwin"* ]]; then
+case "$OSTYPE" in
+ darwin*)
   # -lSystem sufficient on the Mac, no installation needed
   # (will check anyway)
-  PKG_CFLAGS=""
   PKG_LIBUNWIND="-DHAVE_LIBUNWIND"
-  WINCH_LOCAL_LIBS=""
   PKG_LIBS="-lSystem"
-elif [[ "$OSTYPE" == "msys"* ]]; then
-  PKG_CFLAGS=""
+  ;;
+ msys*)
+  # handled in configure.win.sh
+  false
+  ;;
+ solaris*)
   PKG_LIBBACKTRACE="-DHAVE_LIBBACKTRACE"
-  WINCH_LOCAL_LIBS="local/lib/libbacktrace.a"
-  PKG_LIBS=""
-elif [[ "$OSTYPE" == "solaris"* ]]; then
-  PKG_CFLAGS=""
-  WINCH_LOCAL_LIBS=""
-  PKG_LIBS=""
-else
+  ;;
+ *)
   PKG_LIBUNWIND="-DHAVE_LIBUNWIND"
   PKG_LIBBACKTRACE="-DHAVE_LIBBACKTRACE"
-  WINCH_LOCAL_LIBS="local/lib/libbacktrace.a"
 
   if [ $(command -v pkg-config) ]; then
     PKGCONFIG_CFLAGS=$(pkg-config --cflags --silence-errors ${PKG_CONFIG_NAME} || true)
     PKGCONFIG_LIBS=$(pkg-config --libs --silence-errors ${PKG_CONFIG_NAME} || true)
     PKGCONFIG_MODVERSION=$(pkg-config --modversion --silence-errors ${PKG_CONFIG_NAME} || true)
   fi
-fi
 
-# Note that cflags may be empty in case of success
-if [ "$INCLUDE_DIR" ] || [ "$LIB_DIR" ]; then
-  echo "Found INCLUDE_DIR and/or LIB_DIR!"
-  PKG_CFLAGS="-I$INCLUDE_DIR $PKG_CFLAGS"
-  PKG_LIBS="-L$LIB_DIR $PKG_LIBS"
-elif [ "$PKGCONFIG_CFLAGS" ] || [ "$PKGCONFIG_LIBS" ]; then
-  echo "Found pkg-config cflags and libs ($PKG_CONFIG_NAME $PKGCONFIG_MODVERSION)!"
-  PKG_CFLAGS="$PKGCONFIG_CFLAGS"
-  PKG_LIBS="$PKGCONFIG_LIBS"
-else
-  echo "No cflags and libs found!"
-  PKG_CFLAGS=""
-fi
+  # Note that cflags may be empty in case of success
+  if [ "$INCLUDE_DIR" ] || [ "$LIB_DIR" ]; then
+    echo "Found INCLUDE_DIR and/or LIB_DIR!"
+    PKG_CFLAGS="-I$INCLUDE_DIR $PKG_CFLAGS"
+    PKG_LIBS="-L$LIB_DIR $PKG_LIBS"
+  elif [ "$PKGCONFIG_CFLAGS" ] || [ "$PKGCONFIG_LIBS" ]; then
+    echo "Found pkg-config cflags and libs ($PKG_CONFIG_NAME $PKGCONFIG_MODVERSION)!"
+    PKG_CFLAGS="$PKGCONFIG_CFLAGS"
+    PKG_LIBS="$PKGCONFIG_LIBS"
+  else
+    echo "No cflags and libs found!"
+    PKG_CFLAGS=""
+  fi
+  ;;
+esac
 
 if [ -n "$PKG_LIBUNWIND" ]; then
 
@@ -93,6 +97,20 @@ if [ $R_CONFIG_ERROR ]; then
 fi
 
 fi # if [ -n "$PKG_LIBUNWIND" ]; then
+
+if [ -n "$PKG_LIBBACKTRACE" ]; then
+
+  nproc=`nproc`
+
+  # Only if libbacktrace can be configured and built
+  # (need to use make because environment variables are set in etc/Makeconf)
+  if make -j ${nproc} -l ${nproc} -f ${R_HOME}/etc${R_ARCH}/Makeconf -f Makevars.configure; then
+    WINCH_LOCAL_LIBS="local/lib/libbacktrace.a"
+  else
+    PKG_LIBBACKTRACE=""
+  fi
+
+fi # if [ -n "$PKG_LIBBACKTRACE" ]; then
 
 # Final, with our definitions
 PKG_CFLAGS="$PKG_CFLAGS $PKG_LIBUNWIND $PKG_LIBBACKTRACE"
