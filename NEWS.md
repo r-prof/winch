@@ -1,3 +1,9 @@
+# winch 0.0.1.9002 (2020-10-13)
+
+- Only enable libbacktrace if it can be configured and built. This fixes problems on Windows oldrelease and Solaris (#34).
+- Adapt to trace format with version specification in attribute in rlang 0.4.8 (#35).
+
+
 # winch 0.0.1.9001 (2020-10-12)
 
 - Copy-edit text (#33, @jawond).
