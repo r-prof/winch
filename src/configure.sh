@@ -100,7 +100,7 @@ fi # if [ -n "$PKG_LIBUNWIND" ]; then
 
 if [ -n "$PKG_LIBBACKTRACE" ]; then
 
-  nproc=`nproc`
+  nproc=`nproc || echo 1`
 
   # Only if libbacktrace can be configured and built
   # (need to use make because environment variables are set in etc/Makeconf)
