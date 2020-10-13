@@ -2,7 +2,6 @@
 #include <R.h>
 #include <Rinternals.h>
 
-
 #ifdef HAVE_LIBBACKTRACE
 
 #define __STDC_FORMAT_MACROS
@@ -85,8 +84,7 @@ int cb_get_name_ip(void *data, uintptr_t pc,
   R_xlen_t pos = cb_data->pos;
 
   char ip_buf[33];
-  // Cast needed for mingw32 (?)
-  sprintf(ip_buf, "%.16" PRIx64, (long long unsigned int)pc);
+  sprintf(ip_buf, "%.16" PRIx64, pc);
   ip_buf[sizeof(ip_buf) / sizeof(*ip_buf) - 1] = '\0';
   SEXP chr_ip = Rf_mkCharCE(ip_buf, CE_UTF8);
   SET_STRING_ELT(out_ip, pos, chr_ip);
