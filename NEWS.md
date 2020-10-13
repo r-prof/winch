@@ -1,3 +1,8 @@
+# winch 0.0.2 (2020-10-13)
+
+- Same as previous version.
+
+
 # winch 0.0.1.9002 (2020-10-13)
 
 - Only enable libbacktrace if it can be configured and built. This fixes problems on Windows oldrelease and Solaris (#34).
