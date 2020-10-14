@@ -21,6 +21,7 @@ SEXP winch_trace_back_unwind() {
   if (unw != 0) Rf_error("unw_getcontext() error: %d", unw);
 
   unw_cursor_t cursor;
+  memset(&cursor, 0, sizeof(cursor));
   unw = unw_init_local(&cursor, &uc);
   if (unw != 0) Rf_error("unw_init_local() error: %d", unw);
 
