@@ -1,3 +1,8 @@
+# winch 0.0.3 (2020-10-15)
+
+- Internal changes only.
+
+
 # winch 0.0.2.9000 (2020-10-13)
 
 - Internal changes only.
