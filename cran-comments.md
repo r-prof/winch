@@ -1,4 +1,4 @@
-winch 0.0.1
+winch 0.0.2
 
 ## Cran Repository Policy
 
@@ -7,9 +7,10 @@ winch 0.0.1
 ## R CMD check results
 
 - [x] Checked locally, R 4.0.2
-- [x] Checked on CI system, R 4.0.2
+- [x] Checked on CI system, R 4.0.3
 - [x] Checked on win-builder, R devel
 
 ## Current CRAN check results
 
-Initial release.
+- [x] Checked on 2020-10-13, problems found: https://cran.r-project.org/web/checks/check_results_winch.html
+- [x] Fixed compatibility with Fedora, Solaris, and Windows R-oldrel.

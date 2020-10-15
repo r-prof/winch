@@ -14,12 +14,14 @@ void* buf[10000];
 
 SEXP winch_trace_back_unwind() {
   unw_context_t uc;
+  memset(&uc, 0, sizeof(uc));
 
   int unw;
   unw = unw_getcontext(&uc);
   if (unw != 0) Rf_error("unw_getcontext() error: %d", unw);
 
   unw_cursor_t cursor;
+  memset(&cursor, 0, sizeof(cursor));
   unw = unw_init_local(&cursor, &uc);
   if (unw != 0) Rf_error("unw_init_local() error: %d", unw);
 
@@ -42,8 +44,10 @@ SEXP winch_trace_back_unwind() {
   SEXP out_name = PROTECT(Rf_allocVector(STRSXP, size));
   SEXP out_ip = PROTECT(Rf_allocVector(STRSXP, size));
 
-  for (R_xlen_t i = size_base; ; ++i) {
-    unw = unw_step(&cursor);
+  R_xlen_t i = size_base;
+  // Use another copy of cursor to pacify valgrind
+  for (unw_cursor_t cursor2 = cursor; ; ++i) {
+    unw = unw_step(&cursor2);
     if (unw == 0) {
       break;
     }
@@ -52,12 +56,12 @@ SEXP winch_trace_back_unwind() {
     if (i < 0) continue;
 
     unw_proc_info_t pi;
-    unw = unw_get_proc_info(&cursor, &pi);
+    unw = unw_get_proc_info(&cursor2, &pi);
     if (unw != 0) Rf_error("unw_get_proc_info() error: %d", unw);
 
     char buf[1000];
     unw_word_t off;
-    unw = unw_get_proc_name(&cursor, buf, sizeof(buf) / sizeof(*buf), &off);
+    unw = unw_get_proc_name(&cursor2, buf, sizeof(buf) / sizeof(*buf), &off);
     buf[sizeof(buf) / sizeof(*buf) - 1] = '\0';
     if (unw != 0 && unw != -UNW_ENOMEM) Rf_error("unw_get_proc_name() error: %d", unw);
 

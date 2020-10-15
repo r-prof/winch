@@ -1,2 +1,7 @@
 DEBUG = true
+
+# Only works on 64-bit systems anyway
+# Otherwise we would need to run configuration twice in configure.win.sh
+ifeq (/x64, $(R_ARCH))
 include Makevars
+endif
