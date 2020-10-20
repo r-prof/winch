@@ -1,4 +1,4 @@
-winch 0.0.2
+winch 0.0.3
 
 ## Cran Repository Policy
 
@@ -12,5 +12,5 @@ winch 0.0.2
 
 ## Current CRAN check results
 
-- [x] Checked on 2020-10-13, problems found: https://cran.r-project.org/web/checks/check_results_winch.html
+- [x] Checked on 2020-10-15, problems found: https://cran.r-project.org/web/checks/check_results_winch.html
 - [x] Fixed compatibility with Fedora, Solaris, and Windows R-oldrel.
