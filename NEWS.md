@@ -1,3 +1,8 @@
+# winch 0.0.4.9000 (2020-10-20)
+
+- Avoid -j and -l when calling make.
+
+
 # winch 0.0.4 (2020-10-20)
 
 - Avoid -j and -l when calling make.
