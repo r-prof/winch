@@ -100,11 +100,9 @@ fi # if [ -n "$PKG_LIBUNWIND" ]; then
 
 if [ -n "$PKG_LIBBACKTRACE" ]; then
 
-  nproc=`nproc || echo 1`
-
   # Only if libbacktrace can be configured and built
   # (need to use make because environment variables are set in etc/Makeconf)
-  if make -j ${nproc} -l ${nproc} -f ${R_HOME}/etc${R_ARCH}/Makeconf -f Makevars.configure; then
+  if make -f ${R_HOME}/etc${R_ARCH}/Makeconf -f Makevars.configure; then
     WINCH_LOCAL_LIBS="local/lib/libbacktrace.a"
   else
     PKG_LIBBACKTRACE=""
