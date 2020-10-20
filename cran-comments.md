@@ -1,4 +1,4 @@
-winch 0.0.3
+winch 0.0.4
 
 ## Cran Repository Policy
 
@@ -7,10 +7,11 @@ winch 0.0.3
 ## R CMD check results
 
 - [x] Checked locally, R 4.0.2
-- [x] Checked on CI system, R 4.0.3
-- [x] Checked on win-builder, R devel
+- [ ] Checked on CI system, R 4.0.3
+- [ ] Checked on win-builder, R devel
+
+Check the boxes above after successful execution and remove this line. Then run `fledge::release()`.
 
 ## Current CRAN check results
 
-- [x] Checked on 2020-10-15, problems found: https://cran.r-project.org/web/checks/check_results_winch.html
-- [x] Fixed compatibility with Fedora, Solaris, and Windows R-oldrel.
+Initial release.
