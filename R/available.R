@@ -7,6 +7,10 @@
 #' @examples
 #' winch_available()
 winch_available <- function() {
+  # https://stackoverflow.com/a/62364698/946850
+  if (grepl("/valgrind/|/vgpreload_", Sys.getenv("LD_PRELOAD"))) {
+    return(FALSE)
+  }
   # in zzz.R
   default_method != 0L
 }
