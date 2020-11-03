@@ -30,7 +30,7 @@ Suggests:
     knitr,
     magrittr,
     purrr,
-    rlang,
+    rlang (>= 0.4.8),
     rmarkdown,
     RSQLite,
     testthat,

@@ -15,5 +15,5 @@ if (winch_available() && require(magrittr) && requireNamespace("rlang")) {
     rlang_trace_use_winch = TRUE
   )
 
-  foo() %>% identity()
+  tryCatch(foo() %>% identity(), error = identity)
 }

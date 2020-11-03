@@ -2,6 +2,11 @@
 #include <R.h>
 #include <Rinternals.h>
 
+#ifdef HAVE_LIBBACKTRACE
+#include <backtrace-supported.h>
+#endif
+
+
 extern SEXP winch_trace_back_unwind();
 extern SEXP winch_trace_back_backtrace();
 
@@ -27,7 +32,7 @@ SEXP winch_trace_back(SEXP method) {
 SEXP winch_trace_back_default_method() {
 #if defined(HAVE_LIBUNWIND)
   return Rf_ScalarInteger(1);
-#elif defined(HAVE_LIBBACKTRACE)
+#elif defined(HAVE_LIBBACKTRACE) && BACKTRACE_SUPPORTED
   return Rf_ScalarInteger(2);
 #else
   return Rf_ScalarInteger(0);

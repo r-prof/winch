@@ -18,5 +18,5 @@ boo <- function() {
 }
 
 if (winch_available() && requireNamespace("purrr")) {
-  foo()
+  tryCatch(foo(), error = identity)
 }
