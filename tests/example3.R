@@ -7,5 +7,5 @@ if (winch::winch_available() && require(vctrs)) {
 
   winch::winch_init_library(vctrs:::vctrs_init$dll[["path"]])
 
-  vctrs::vec_as_location(quote, 2)
+  tryCatch(vctrs::vec_as_location(quote, 2), error = identity)
 }

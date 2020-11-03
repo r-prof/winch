@@ -15,5 +15,5 @@ if (winch_available() && requireNamespace("rlang")) {
     rlang_trace_use_winch = TRUE
   )
 
-  foo()
+  tryCatch(foo(), error = identity)
 }
