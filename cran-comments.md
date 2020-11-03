@@ -1,4 +1,4 @@
-winch 0.0.3
+winch 0.0.4
 
 ## Cran Repository Policy
 
