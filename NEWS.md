@@ -1,3 +1,8 @@
+# winch 0.0.5.9000 (2020-11-03)
+
+- Fix checks when libbacktrace compiles but is broken (#40).
+
+
 # winch 0.0.5 (2020-11-03)
 
 - Fix checks when libbacktrace compiles but is broken (#40).
