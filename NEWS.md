@@ -1,6 +1,8 @@
-# winch 0.0.4.9000 (2020-10-20)
+# winch 0.0.5 (2020-11-03)
 
-- Avoid -j and -l when calling make.
+- Fix checks when libbacktrace compiles but is broken (#40).
+
+- Vendor libraries are not checked on Valgrind (#41).
 
 
 # winch 0.0.4 (2020-10-20)
