@@ -9,7 +9,7 @@ PKG_CFLAGS=""
 # Only on x64 (known to fail on i386)
 if [ "x${R_ARCH}" = "x/x64" ]; then
 
-nproc=`nproc`
+nproc=`nproc || echo 2`
 
 # Only if libbacktrace can be configured and built
 # (need to use make because environment variables are set in etc/Makeconf)
