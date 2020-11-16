@@ -7,15 +7,13 @@ winch 0.0.6
 ## R CMD check results
 
 - [x] Checked locally, R 4.0.3
-- [ ] Checked on CI system, R 4.0.3
-- [ ] Checked on win-builder, R devel
-
-Check the boxes above after successful execution and remove this line. Then run `fledge::release()`.
+- [x] Checked on CI system, R 4.0.3
+- [x] Checked on win-builder, R devel
 
 ## Current CRAN check results
 
 - [x] Checked on 2020-11-16, problems found: https://cran.r-project.org/web/checks/check_results_winch.html
-- [ ] ERROR: r-devel-linux-x86_64-debian-clang
-- [ ] ERROR: r-oldrel-windows-ix86+x86_64
+- [x] ERROR: r-devel-linux-x86_64-debian-clang
+- [x] ERROR: r-oldrel-windows-ix86+x86_64
 
-Check results at: https://cran.r-project.org/web/checks/check_results_winch.html
+Addressed all problems.
