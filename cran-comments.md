@@ -1,4 +1,4 @@
-winch 0.0.5
+winch 0.0.6
 
 ## Cran Repository Policy
 
@@ -12,4 +12,8 @@ winch 0.0.5
 
 ## Current CRAN check results
 
-Initial release.
+- [x] Checked on 2020-11-16, problems found: https://cran.r-project.org/web/checks/check_results_winch.html
+- [x] ERROR: r-devel-linux-x86_64-debian-clang
+- [x] ERROR: r-oldrel-windows-ix86+x86_64
+
+Addressed all problems.
