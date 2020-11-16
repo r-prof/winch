@@ -1,6 +1,6 @@
 Package: winch
 Title: Portable Native and Joint Stack Traces
-Version: 0.0.6
+Version: 0.0.6.9000
 Date: 2020-11-16
 Authors@R: 
     c(person(given = "Kirill",

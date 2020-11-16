@@ -1,3 +1,9 @@
+# winch 0.0.6.9000 (2020-11-16)
+
+- Work around CRAN check failures on Linux with C locale and Windows oldrel (#45).
+- Enable more tests on CRAN (#43).
+
+
 # winch 0.0.6 (2020-11-16)
 
 - Work around CRAN check failures on Linux with C locale and Windows oldrel (#45).
