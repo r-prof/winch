@@ -33,7 +33,7 @@ Suggests:
     rlang (>= 0.4.8),
     rmarkdown,
     RSQLite,
-    testthat,
+    testthat (>= 3.0.0),
     vctrs
 VignetteBuilder: 
     knitr
@@ -42,3 +42,4 @@ Biarch: yes
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1.9000
+Config/testthat/edition: 3
