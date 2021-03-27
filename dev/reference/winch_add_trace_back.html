@@ -60,6 +60,9 @@ It is intended to be called by rlang." />
 
 
 
+<!-- dependencies from examples -->
+
+
   
 
   
@@ -175,7 +178,7 @@ It is intended to be called by rlang.</p>
 #&gt; </span><span style='color: #555555;'> 11. </span><span>                  └─pkgdown:::run_examples(...)
 #&gt; </span><span style='color: #555555;'> 12. </span><span>                    └─pkgdown:::highlight_examples(code, topic, env = env)
 #&gt; </span><span style='color: #555555;'> 13. </span><span>                      └─downlit::evaluate_and_highlight(...)
-#&gt; </span><span style='color: #555555;'> 14. </span><span>                        └─evaluate::evaluate(code, child_env(env), new_device = TRUE)
+#&gt; </span><span style='color: #555555;'> 14. </span><span>                        └─evaluate::evaluate(code, child_env(env), new_device = TRUE, output_handler = output_handler)
 #&gt; </span><span style='color: #555555;'> 15. </span><span>                          └─evaluate:::evaluate_call(...)
 #&gt; </span><span style='color: #555555;'> 16. </span><span>                            ├─evaluate:::timing_fn(...)
 #&gt; </span><span style='color: #555555;'> 17. </span><span>                            ├─evaluate:::handle(...)
@@ -207,7 +210,7 @@ It is intended to be called by rlang.</p>
 </div>
 
 <div class="pkgdown">
-  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9000.</p></p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
