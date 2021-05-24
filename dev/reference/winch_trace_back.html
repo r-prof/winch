@@ -61,8 +61,6 @@ running process's entry point." />
 
 
 
-<!-- dependencies from examples -->
-
 
   
 
@@ -143,7 +141,7 @@ Deep function calls come first, the last row corresponds to the
 running process's entry point.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>winch_trace_back</span><span class='op'>(</span><span class='op'>)</span></pre>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>winch_trace_back</span><span class='op'>(</span><span class='op'>)</span></code></pre></div>
 
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -163,658 +161,660 @@ for a specific package.</p>
     <div class='dont-index'><p><code><a href='https://rdrr.io/r/base/sys.parent.html'>sys.calls()</a></code> for the R equivalent.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>winch_trace_back</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;                   func               ip
-#&gt; 1             do_Rprof 00007ffaa97bcdc0
-#&gt; 2              Rf_eval 00007ffaa97d2730
-#&gt; 3              Rf_eval 00007ffaa97d43b0
-#&gt; 4      Rf_applyClosure 00007ffaa97d52d0
-#&gt; 5              Rf_eval 00007ffaa97d2730
-#&gt; 6       R_forceAndCall 00007ffaa97d85e0
-#&gt; 7             do_Rprof 00007ffaa97bcdc0
-#&gt; 8              Rf_eval 00007ffaa97d2730
-#&gt; 9              Rf_eval 00007ffaa97d43b0
-#&gt; 10     Rf_applyClosure 00007ffaa97d52d0
-#&gt; 11            do_Rprof 00007ffaa97bcdc0
-#&gt; 12             Rf_eval 00007ffaa97d2730
-#&gt; 13             Rf_eval 00007ffaa97d31a0
-#&gt; 14             Rf_eval 00007ffaa97d2730
-#&gt; 15      R_forceAndCall 00007ffaa97d93b0
-#&gt; 16         do_Rprofmem 00007ffaa9816320
-#&gt; 17            do_Rprof 00007ffaa97bcdc0
-#&gt; 18             Rf_eval 00007ffaa97d2730
-#&gt; 19             Rf_eval 00007ffaa97d43b0
-#&gt; 20     Rf_applyClosure 00007ffaa97d52d0
-#&gt; 21            do_Rprof 00007ffaa97bcdc0
-#&gt; 22             Rf_eval 00007ffaa97d2730
-#&gt; 23             Rf_eval 00007ffaa97d31a0
-#&gt; 24             Rf_eval 00007ffaa97d32e0
-#&gt; 25            do_Rprof 00007ffaa97bcdc0
-#&gt; 26             Rf_eval 00007ffaa97d2730
-#&gt; 27             Rf_eval 00007ffaa97d43b0
-#&gt; 28     Rf_applyClosure 00007ffaa97d52d0
-#&gt; 29            do_Rprof 00007ffaa97bcdc0
-#&gt; 30             Rf_eval 00007ffaa97d2730
-#&gt; 31             Rf_eval 00007ffaa97d31a0
-#&gt; 32             Rf_eval 00007ffaa97d32e0
-#&gt; 33            do_Rprof 00007ffaa97bcdc0
-#&gt; 34             Rf_eval 00007ffaa97d2730
-#&gt; 35             Rf_eval 00007ffaa97d31a0
-#&gt; 36             Rf_eval 00007ffaa97d32e0
-#&gt; 37            do_Rprof 00007ffaa97bcdc0
-#&gt; 38             Rf_eval 00007ffaa97d2730
-#&gt; 39             Rf_eval 00007ffaa97d31a0
-#&gt; 40             Rf_eval 00007ffaa97d32e0
-#&gt; 41            do_Rprof 00007ffaa97bcdc0
-#&gt; 42             Rf_eval 00007ffaa97d2730
-#&gt; 43             Rf_eval 00007ffaa97d31a0
-#&gt; 44             Rf_eval 00007ffaa97d32e0
-#&gt; 45            do_Rprof 00007ffaa97bcdc0
-#&gt; 46             Rf_eval 00007ffaa97d2730
-#&gt; 47             Rf_eval 00007ffaa97d31a0
-#&gt; 48             Rf_eval 00007ffaa97d32e0
-#&gt; 49            do_Rprof 00007ffaa97bcdc0
-#&gt; 50             Rf_eval 00007ffaa97d2730
-#&gt; 51             Rf_eval 00007ffaa97d31a0
-#&gt; 52             Rf_eval 00007ffaa97d32e0
-#&gt; 53            do_Rprof 00007ffaa97bcdc0
-#&gt; 54             Rf_eval 00007ffaa97d2730
-#&gt; 55             Rf_eval 00007ffaa97d43b0
-#&gt; 56     Rf_applyClosure 00007ffaa97d52d0
-#&gt; 57            do_Rprof 00007ffaa97bcdc0
-#&gt; 58             Rf_eval 00007ffaa97d2730
-#&gt; 59             Rf_eval 00007ffaa97d43b0
-#&gt; 60     Rf_applyClosure 00007ffaa97d52d0
-#&gt; 61            do_Rprof 00007ffaa97bcdc0
-#&gt; 62             Rf_eval 00007ffaa97d2730
-#&gt; 63             Rf_eval 00007ffaa97d43b0
-#&gt; 64     Rf_applyClosure 00007ffaa97d52d0
-#&gt; 65            do_Rprof 00007ffaa97bcdc0
-#&gt; 66             Rf_eval 00007ffaa97d2730
-#&gt; 67             Rf_eval 00007ffaa97d43b0
-#&gt; 68     Rf_applyClosure 00007ffaa97d52d0
-#&gt; 69            do_Rprof 00007ffaa97bcdc0
-#&gt; 70             Rf_eval 00007ffaa97d2730
-#&gt; 71             Rf_eval 00007ffaa97d43b0
-#&gt; 72     Rf_applyClosure 00007ffaa97d52d0
-#&gt; 73            do_Rprof 00007ffaa97bcdc0
-#&gt; 74             Rf_eval 00007ffaa97d2730
-#&gt; 75             Rf_eval 00007ffaa97d43b0
-#&gt; 76     Rf_applyClosure 00007ffaa97d52d0
-#&gt; 77            do_Rprof 00007ffaa97bcdc0
-#&gt; 78             Rf_eval 00007ffaa97d2730
-#&gt; 79             Rf_eval 00007ffaa97d31a0
-#&gt; 80             Rf_eval 00007ffaa97d32e0
-#&gt; 81            do_Rprof 00007ffaa97bcdc0
-#&gt; 82             Rf_eval 00007ffaa97d2730
-#&gt; 83             Rf_eval 00007ffaa97d43b0
-#&gt; 84     Rf_applyClosure 00007ffaa97d52d0
-#&gt; 85            do_Rprof 00007ffaa97bcdc0
-#&gt; 86             Rf_eval 00007ffaa97d2730
-#&gt; 87             Rf_eval 00007ffaa97d43b0
-#&gt; 88     Rf_applyClosure 00007ffaa97d52d0
-#&gt; 89            do_Rprof 00007ffaa97bcdc0
-#&gt; 90             Rf_eval 00007ffaa97d2730
-#&gt; 91             Rf_eval 00007ffaa97d43b0
-#&gt; 92     Rf_applyClosure 00007ffaa97d52d0
-#&gt; 93            do_Rprof 00007ffaa97bcdc0
-#&gt; 94             Rf_eval 00007ffaa97d2730
-#&gt; 95             Rf_eval 00007ffaa97d43b0
-#&gt; 96     Rf_applyClosure 00007ffaa97d52d0
-#&gt; 97            do_Rprof 00007ffaa97bcdc0
-#&gt; 98             Rf_eval 00007ffaa97d2730
-#&gt; 99             Rf_eval 00007ffaa97d43b0
-#&gt; 100    Rf_applyClosure 00007ffaa97d52d0
-#&gt; 101           do_Rprof 00007ffaa97bcdc0
-#&gt; 102            Rf_eval 00007ffaa97d2730
-#&gt; 103            Rf_eval 00007ffaa97d43b0
-#&gt; 104    Rf_applyClosure 00007ffaa97d52d0
-#&gt; 105           do_Rprof 00007ffaa97bcdc0
-#&gt; 106            Rf_eval 00007ffaa97d2730
-#&gt; 107            Rf_eval 00007ffaa97d43b0
-#&gt; 108    Rf_applyClosure 00007ffaa97d52d0
-#&gt; 109           do_Rprof 00007ffaa97bcdc0
-#&gt; 110            Rf_eval 00007ffaa97d2730
-#&gt; 111            Rf_eval 00007ffaa97d31a0
-#&gt; 112            Rf_eval 00007ffaa97d32e0
-#&gt; 113           do_Rprof 00007ffaa97bcdc0
-#&gt; 114            Rf_eval 00007ffaa97d2730
-#&gt; 115            Rf_eval 00007ffaa97d43b0
-#&gt; 116    Rf_applyClosure 00007ffaa97d52d0
-#&gt; 117           do_Rprof 00007ffaa97bcdc0
-#&gt; 118            Rf_eval 00007ffaa97d2730
-#&gt; 119            Rf_eval 00007ffaa97d43b0
-#&gt; 120    Rf_applyClosure 00007ffaa97d52d0
-#&gt; 121     R_forceAndCall 00007ffaa97d7ca0
-#&gt; 122          call_loop 00007ffa9bc483b0
-#&gt; 123           map_impl 00007ffa9bc48500
-#&gt; 124 Rf_NewFrameConfirm 00007ffaa9786a60
-#&gt; 125           do_Rprof 00007ffaa97bcdc0
-#&gt; 126            Rf_eval 00007ffaa97d2730
-#&gt; 127            Rf_eval 00007ffaa97d43b0
-#&gt; 128    Rf_applyClosure 00007ffaa97d52d0
-#&gt; 129           do_Rprof 00007ffaa97bcdc0
-#&gt; 130            Rf_eval 00007ffaa97d2730
-#&gt; 131            Rf_eval 00007ffaa97d43b0
-#&gt; 132    Rf_applyClosure 00007ffaa97d52d0
-#&gt; 133           do_Rprof 00007ffaa97bcdc0
-#&gt; 134            Rf_eval 00007ffaa97d2730
-#&gt; 135            Rf_eval 00007ffaa97d43b0
-#&gt; 136    Rf_applyClosure 00007ffaa97d52d0
-#&gt; 137           do_Rprof 00007ffaa97bcdc0
-#&gt; 138            Rf_eval 00007ffaa97d2730
-#&gt; 139            Rf_eval 00007ffaa97d43b0
-#&gt; 140    Rf_applyClosure 00007ffaa97d52d0
-#&gt; 141           do_Rprof 00007ffaa97bcdc0
-#&gt; 142            Rf_eval 00007ffaa97d2730
-#&gt; 143            Rf_eval 00007ffaa97d43b0
-#&gt; 144    Rf_applyClosure 00007ffaa97d52d0
-#&gt; 145            Rf_eval 00007ffaa97d2730
-#&gt; 146   Rf_ReplIteration 00007ffaa98063e0
-#&gt; 147   Rf_ReplIteration 00007ffaa9806960
-#&gt; 148      run_Rmainloop 00007ffaa9806a50
-#&gt; 149               main 000055c780ae3820
-#&gt; 150  __libc_start_main 00007ffaa92bfb10
-#&gt; 151             _start 000055c780ae3850
-#&gt;                                                pathname
-#&gt; 1                                /usr/lib/R/lib/libR.so
-#&gt; 2                                /usr/lib/R/lib/libR.so
-#&gt; 3                                /usr/lib/R/lib/libR.so
-#&gt; 4                                /usr/lib/R/lib/libR.so
-#&gt; 5                                /usr/lib/R/lib/libR.so
-#&gt; 6                                /usr/lib/R/lib/libR.so
-#&gt; 7                                /usr/lib/R/lib/libR.so
-#&gt; 8                                /usr/lib/R/lib/libR.so
-#&gt; 9                                /usr/lib/R/lib/libR.so
-#&gt; 10                               /usr/lib/R/lib/libR.so
-#&gt; 11                               /usr/lib/R/lib/libR.so
-#&gt; 12                               /usr/lib/R/lib/libR.so
-#&gt; 13                               /usr/lib/R/lib/libR.so
-#&gt; 14                               /usr/lib/R/lib/libR.so
-#&gt; 15                               /usr/lib/R/lib/libR.so
-#&gt; 16                               /usr/lib/R/lib/libR.so
-#&gt; 17                               /usr/lib/R/lib/libR.so
-#&gt; 18                               /usr/lib/R/lib/libR.so
-#&gt; 19                               /usr/lib/R/lib/libR.so
-#&gt; 20                               /usr/lib/R/lib/libR.so
-#&gt; 21                               /usr/lib/R/lib/libR.so
-#&gt; 22                               /usr/lib/R/lib/libR.so
-#&gt; 23                               /usr/lib/R/lib/libR.so
-#&gt; 24                               /usr/lib/R/lib/libR.so
-#&gt; 25                               /usr/lib/R/lib/libR.so
-#&gt; 26                               /usr/lib/R/lib/libR.so
-#&gt; 27                               /usr/lib/R/lib/libR.so
-#&gt; 28                               /usr/lib/R/lib/libR.so
-#&gt; 29                               /usr/lib/R/lib/libR.so
-#&gt; 30                               /usr/lib/R/lib/libR.so
-#&gt; 31                               /usr/lib/R/lib/libR.so
-#&gt; 32                               /usr/lib/R/lib/libR.so
-#&gt; 33                               /usr/lib/R/lib/libR.so
-#&gt; 34                               /usr/lib/R/lib/libR.so
-#&gt; 35                               /usr/lib/R/lib/libR.so
-#&gt; 36                               /usr/lib/R/lib/libR.so
-#&gt; 37                               /usr/lib/R/lib/libR.so
-#&gt; 38                               /usr/lib/R/lib/libR.so
-#&gt; 39                               /usr/lib/R/lib/libR.so
-#&gt; 40                               /usr/lib/R/lib/libR.so
-#&gt; 41                               /usr/lib/R/lib/libR.so
-#&gt; 42                               /usr/lib/R/lib/libR.so
-#&gt; 43                               /usr/lib/R/lib/libR.so
-#&gt; 44                               /usr/lib/R/lib/libR.so
-#&gt; 45                               /usr/lib/R/lib/libR.so
-#&gt; 46                               /usr/lib/R/lib/libR.so
-#&gt; 47                               /usr/lib/R/lib/libR.so
-#&gt; 48                               /usr/lib/R/lib/libR.so
-#&gt; 49                               /usr/lib/R/lib/libR.so
-#&gt; 50                               /usr/lib/R/lib/libR.so
-#&gt; 51                               /usr/lib/R/lib/libR.so
-#&gt; 52                               /usr/lib/R/lib/libR.so
-#&gt; 53                               /usr/lib/R/lib/libR.so
-#&gt; 54                               /usr/lib/R/lib/libR.so
-#&gt; 55                               /usr/lib/R/lib/libR.so
-#&gt; 56                               /usr/lib/R/lib/libR.so
-#&gt; 57                               /usr/lib/R/lib/libR.so
-#&gt; 58                               /usr/lib/R/lib/libR.so
-#&gt; 59                               /usr/lib/R/lib/libR.so
-#&gt; 60                               /usr/lib/R/lib/libR.so
-#&gt; 61                               /usr/lib/R/lib/libR.so
-#&gt; 62                               /usr/lib/R/lib/libR.so
-#&gt; 63                               /usr/lib/R/lib/libR.so
-#&gt; 64                               /usr/lib/R/lib/libR.so
-#&gt; 65                               /usr/lib/R/lib/libR.so
-#&gt; 66                               /usr/lib/R/lib/libR.so
-#&gt; 67                               /usr/lib/R/lib/libR.so
-#&gt; 68                               /usr/lib/R/lib/libR.so
-#&gt; 69                               /usr/lib/R/lib/libR.so
-#&gt; 70                               /usr/lib/R/lib/libR.so
-#&gt; 71                               /usr/lib/R/lib/libR.so
-#&gt; 72                               /usr/lib/R/lib/libR.so
-#&gt; 73                               /usr/lib/R/lib/libR.so
-#&gt; 74                               /usr/lib/R/lib/libR.so
-#&gt; 75                               /usr/lib/R/lib/libR.so
-#&gt; 76                               /usr/lib/R/lib/libR.so
-#&gt; 77                               /usr/lib/R/lib/libR.so
-#&gt; 78                               /usr/lib/R/lib/libR.so
-#&gt; 79                               /usr/lib/R/lib/libR.so
-#&gt; 80                               /usr/lib/R/lib/libR.so
-#&gt; 81                               /usr/lib/R/lib/libR.so
-#&gt; 82                               /usr/lib/R/lib/libR.so
-#&gt; 83                               /usr/lib/R/lib/libR.so
-#&gt; 84                               /usr/lib/R/lib/libR.so
-#&gt; 85                               /usr/lib/R/lib/libR.so
-#&gt; 86                               /usr/lib/R/lib/libR.so
-#&gt; 87                               /usr/lib/R/lib/libR.so
-#&gt; 88                               /usr/lib/R/lib/libR.so
-#&gt; 89                               /usr/lib/R/lib/libR.so
-#&gt; 90                               /usr/lib/R/lib/libR.so
-#&gt; 91                               /usr/lib/R/lib/libR.so
-#&gt; 92                               /usr/lib/R/lib/libR.so
-#&gt; 93                               /usr/lib/R/lib/libR.so
-#&gt; 94                               /usr/lib/R/lib/libR.so
-#&gt; 95                               /usr/lib/R/lib/libR.so
-#&gt; 96                               /usr/lib/R/lib/libR.so
-#&gt; 97                               /usr/lib/R/lib/libR.so
-#&gt; 98                               /usr/lib/R/lib/libR.so
-#&gt; 99                               /usr/lib/R/lib/libR.so
-#&gt; 100                              /usr/lib/R/lib/libR.so
-#&gt; 101                              /usr/lib/R/lib/libR.so
-#&gt; 102                              /usr/lib/R/lib/libR.so
-#&gt; 103                              /usr/lib/R/lib/libR.so
-#&gt; 104                              /usr/lib/R/lib/libR.so
-#&gt; 105                              /usr/lib/R/lib/libR.so
-#&gt; 106                              /usr/lib/R/lib/libR.so
-#&gt; 107                              /usr/lib/R/lib/libR.so
-#&gt; 108                              /usr/lib/R/lib/libR.so
-#&gt; 109                              /usr/lib/R/lib/libR.so
-#&gt; 110                              /usr/lib/R/lib/libR.so
-#&gt; 111                              /usr/lib/R/lib/libR.so
-#&gt; 112                              /usr/lib/R/lib/libR.so
-#&gt; 113                              /usr/lib/R/lib/libR.so
-#&gt; 114                              /usr/lib/R/lib/libR.so
-#&gt; 115                              /usr/lib/R/lib/libR.so
-#&gt; 116                              /usr/lib/R/lib/libR.so
-#&gt; 117                              /usr/lib/R/lib/libR.so
-#&gt; 118                              /usr/lib/R/lib/libR.so
-#&gt; 119                              /usr/lib/R/lib/libR.so
-#&gt; 120                              /usr/lib/R/lib/libR.so
-#&gt; 121                              /usr/lib/R/lib/libR.so
-#&gt; 122 /home/runner/work/_temp/Library/purrr/libs/purrr.so
-#&gt; 123 /home/runner/work/_temp/Library/purrr/libs/purrr.so
-#&gt; 124                              /usr/lib/R/lib/libR.so
-#&gt; 125                              /usr/lib/R/lib/libR.so
-#&gt; 126                              /usr/lib/R/lib/libR.so
-#&gt; 127                              /usr/lib/R/lib/libR.so
-#&gt; 128                              /usr/lib/R/lib/libR.so
-#&gt; 129                              /usr/lib/R/lib/libR.so
-#&gt; 130                              /usr/lib/R/lib/libR.so
-#&gt; 131                              /usr/lib/R/lib/libR.so
-#&gt; 132                              /usr/lib/R/lib/libR.so
-#&gt; 133                              /usr/lib/R/lib/libR.so
-#&gt; 134                              /usr/lib/R/lib/libR.so
-#&gt; 135                              /usr/lib/R/lib/libR.so
-#&gt; 136                              /usr/lib/R/lib/libR.so
-#&gt; 137                              /usr/lib/R/lib/libR.so
-#&gt; 138                              /usr/lib/R/lib/libR.so
-#&gt; 139                              /usr/lib/R/lib/libR.so
-#&gt; 140                              /usr/lib/R/lib/libR.so
-#&gt; 141                              /usr/lib/R/lib/libR.so
-#&gt; 142                              /usr/lib/R/lib/libR.so
-#&gt; 143                              /usr/lib/R/lib/libR.so
-#&gt; 144                              /usr/lib/R/lib/libR.so
-#&gt; 145                              /usr/lib/R/lib/libR.so
-#&gt; 146                              /usr/lib/R/lib/libR.so
-#&gt; 147                              /usr/lib/R/lib/libR.so
-#&gt; 148                              /usr/lib/R/lib/libR.so
-#&gt; 149                               /usr/lib/R/bin/exec/R
-#&gt; 150                  /lib/x86_64-linux-gnu/libc-2.27.so
-#&gt; 151                               /usr/lib/R/bin/exec/R</div><div class='input'>
-<span class='va'>foo</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>{</span>
-  <span class='fu'><a href='winch_call.html'>winch_call</a></span><span class='op'>(</span><span class='va'>bar</span><span class='op'>)</span>
-<span class='op'>}</span>
-
-<span class='va'>bar</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>{</span>
-  <span class='fu'>winch_trace_back</span><span class='op'>(</span><span class='op'>)</span>
-<span class='op'>}</span>
-
-<span class='fu'>foo</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;                   func               ip
-#&gt; 1             do_Rprof 00007ffaa97bcdc0
-#&gt; 2              Rf_eval 00007ffaa97d2730
-#&gt; 3              Rf_eval 00007ffaa97d43b0
-#&gt; 4      Rf_applyClosure 00007ffaa97d52d0
-#&gt; 5              Rf_eval 00007ffaa97d2730
-#&gt; 6         R_execMethod 00007ffaa97d60d0
-#&gt; 7              Rf_eval 00007ffaa97d2730
-#&gt; 8              Rf_eval 00007ffaa97d43b0
-#&gt; 9      Rf_applyClosure 00007ffaa97d52d0
-#&gt; 10             Rf_eval 00007ffaa97d2730
-#&gt; 11          winch_call 00007ffa94b28240
-#&gt; 12  Rf_NewFrameConfirm 00007ffaa9786a60
-#&gt; 13            do_Rprof 00007ffaa97bcdc0
-#&gt; 14             Rf_eval 00007ffaa97d2730
-#&gt; 15             Rf_eval 00007ffaa97d43b0
-#&gt; 16     Rf_applyClosure 00007ffaa97d52d0
-#&gt; 17             Rf_eval 00007ffaa97d2730
-#&gt; 18        R_execMethod 00007ffaa97d60d0
-#&gt; 19             Rf_eval 00007ffaa97d2730
-#&gt; 20             Rf_eval 00007ffaa97d43b0
-#&gt; 21     Rf_applyClosure 00007ffaa97d52d0
-#&gt; 22             Rf_eval 00007ffaa97d2730
-#&gt; 23      R_forceAndCall 00007ffaa97d85e0
-#&gt; 24            do_Rprof 00007ffaa97bcdc0
-#&gt; 25             Rf_eval 00007ffaa97d2730
-#&gt; 26             Rf_eval 00007ffaa97d43b0
-#&gt; 27     Rf_applyClosure 00007ffaa97d52d0
-#&gt; 28            do_Rprof 00007ffaa97bcdc0
-#&gt; 29             Rf_eval 00007ffaa97d2730
-#&gt; 30             Rf_eval 00007ffaa97d31a0
-#&gt; 31             Rf_eval 00007ffaa97d2730
-#&gt; 32      R_forceAndCall 00007ffaa97d93b0
-#&gt; 33         do_Rprofmem 00007ffaa9816320
-#&gt; 34            do_Rprof 00007ffaa97bcdc0
-#&gt; 35             Rf_eval 00007ffaa97d2730
-#&gt; 36             Rf_eval 00007ffaa97d43b0
-#&gt; 37     Rf_applyClosure 00007ffaa97d52d0
-#&gt; 38            do_Rprof 00007ffaa97bcdc0
-#&gt; 39             Rf_eval 00007ffaa97d2730
-#&gt; 40             Rf_eval 00007ffaa97d31a0
-#&gt; 41             Rf_eval 00007ffaa97d32e0
-#&gt; 42            do_Rprof 00007ffaa97bcdc0
-#&gt; 43             Rf_eval 00007ffaa97d2730
-#&gt; 44             Rf_eval 00007ffaa97d43b0
-#&gt; 45     Rf_applyClosure 00007ffaa97d52d0
-#&gt; 46            do_Rprof 00007ffaa97bcdc0
-#&gt; 47             Rf_eval 00007ffaa97d2730
-#&gt; 48             Rf_eval 00007ffaa97d31a0
-#&gt; 49             Rf_eval 00007ffaa97d32e0
-#&gt; 50            do_Rprof 00007ffaa97bcdc0
-#&gt; 51             Rf_eval 00007ffaa97d2730
-#&gt; 52             Rf_eval 00007ffaa97d31a0
-#&gt; 53             Rf_eval 00007ffaa97d32e0
-#&gt; 54            do_Rprof 00007ffaa97bcdc0
-#&gt; 55             Rf_eval 00007ffaa97d2730
-#&gt; 56             Rf_eval 00007ffaa97d31a0
-#&gt; 57             Rf_eval 00007ffaa97d32e0
-#&gt; 58            do_Rprof 00007ffaa97bcdc0
-#&gt; 59             Rf_eval 00007ffaa97d2730
-#&gt; 60             Rf_eval 00007ffaa97d31a0
-#&gt; 61             Rf_eval 00007ffaa97d32e0
-#&gt; 62            do_Rprof 00007ffaa97bcdc0
-#&gt; 63             Rf_eval 00007ffaa97d2730
-#&gt; 64             Rf_eval 00007ffaa97d31a0
-#&gt; 65             Rf_eval 00007ffaa97d32e0
-#&gt; 66            do_Rprof 00007ffaa97bcdc0
-#&gt; 67             Rf_eval 00007ffaa97d2730
-#&gt; 68             Rf_eval 00007ffaa97d31a0
-#&gt; 69             Rf_eval 00007ffaa97d32e0
-#&gt; 70            do_Rprof 00007ffaa97bcdc0
-#&gt; 71             Rf_eval 00007ffaa97d2730
-#&gt; 72             Rf_eval 00007ffaa97d43b0
-#&gt; 73     Rf_applyClosure 00007ffaa97d52d0
-#&gt; 74            do_Rprof 00007ffaa97bcdc0
-#&gt; 75             Rf_eval 00007ffaa97d2730
-#&gt; 76             Rf_eval 00007ffaa97d43b0
-#&gt; 77     Rf_applyClosure 00007ffaa97d52d0
-#&gt; 78            do_Rprof 00007ffaa97bcdc0
-#&gt; 79             Rf_eval 00007ffaa97d2730
-#&gt; 80             Rf_eval 00007ffaa97d43b0
-#&gt; 81     Rf_applyClosure 00007ffaa97d52d0
-#&gt; 82            do_Rprof 00007ffaa97bcdc0
-#&gt; 83             Rf_eval 00007ffaa97d2730
-#&gt; 84             Rf_eval 00007ffaa97d43b0
-#&gt; 85     Rf_applyClosure 00007ffaa97d52d0
-#&gt; 86            do_Rprof 00007ffaa97bcdc0
-#&gt; 87             Rf_eval 00007ffaa97d2730
-#&gt; 88             Rf_eval 00007ffaa97d43b0
-#&gt; 89     Rf_applyClosure 00007ffaa97d52d0
-#&gt; 90            do_Rprof 00007ffaa97bcdc0
-#&gt; 91             Rf_eval 00007ffaa97d2730
-#&gt; 92             Rf_eval 00007ffaa97d43b0
-#&gt; 93     Rf_applyClosure 00007ffaa97d52d0
-#&gt; 94            do_Rprof 00007ffaa97bcdc0
-#&gt; 95             Rf_eval 00007ffaa97d2730
-#&gt; 96             Rf_eval 00007ffaa97d31a0
-#&gt; 97             Rf_eval 00007ffaa97d32e0
-#&gt; 98            do_Rprof 00007ffaa97bcdc0
-#&gt; 99             Rf_eval 00007ffaa97d2730
-#&gt; 100            Rf_eval 00007ffaa97d43b0
-#&gt; 101    Rf_applyClosure 00007ffaa97d52d0
-#&gt; 102           do_Rprof 00007ffaa97bcdc0
-#&gt; 103            Rf_eval 00007ffaa97d2730
-#&gt; 104            Rf_eval 00007ffaa97d43b0
-#&gt; 105    Rf_applyClosure 00007ffaa97d52d0
-#&gt; 106           do_Rprof 00007ffaa97bcdc0
-#&gt; 107            Rf_eval 00007ffaa97d2730
-#&gt; 108            Rf_eval 00007ffaa97d43b0
-#&gt; 109    Rf_applyClosure 00007ffaa97d52d0
-#&gt; 110           do_Rprof 00007ffaa97bcdc0
-#&gt; 111            Rf_eval 00007ffaa97d2730
-#&gt; 112            Rf_eval 00007ffaa97d43b0
-#&gt; 113    Rf_applyClosure 00007ffaa97d52d0
-#&gt; 114           do_Rprof 00007ffaa97bcdc0
-#&gt; 115            Rf_eval 00007ffaa97d2730
-#&gt; 116            Rf_eval 00007ffaa97d43b0
-#&gt; 117    Rf_applyClosure 00007ffaa97d52d0
-#&gt; 118           do_Rprof 00007ffaa97bcdc0
-#&gt; 119            Rf_eval 00007ffaa97d2730
-#&gt; 120            Rf_eval 00007ffaa97d43b0
-#&gt; 121    Rf_applyClosure 00007ffaa97d52d0
-#&gt; 122           do_Rprof 00007ffaa97bcdc0
-#&gt; 123            Rf_eval 00007ffaa97d2730
-#&gt; 124            Rf_eval 00007ffaa97d43b0
-#&gt; 125    Rf_applyClosure 00007ffaa97d52d0
-#&gt; 126           do_Rprof 00007ffaa97bcdc0
-#&gt; 127            Rf_eval 00007ffaa97d2730
-#&gt; 128            Rf_eval 00007ffaa97d31a0
-#&gt; 129            Rf_eval 00007ffaa97d32e0
-#&gt; 130           do_Rprof 00007ffaa97bcdc0
-#&gt; 131            Rf_eval 00007ffaa97d2730
-#&gt; 132            Rf_eval 00007ffaa97d43b0
-#&gt; 133    Rf_applyClosure 00007ffaa97d52d0
-#&gt; 134           do_Rprof 00007ffaa97bcdc0
-#&gt; 135            Rf_eval 00007ffaa97d2730
-#&gt; 136            Rf_eval 00007ffaa97d43b0
-#&gt; 137    Rf_applyClosure 00007ffaa97d52d0
-#&gt; 138     R_forceAndCall 00007ffaa97d7ca0
-#&gt; 139          call_loop 00007ffa9bc483b0
-#&gt; 140           map_impl 00007ffa9bc48500
-#&gt; 141 Rf_NewFrameConfirm 00007ffaa9786a60
-#&gt; 142           do_Rprof 00007ffaa97bcdc0
-#&gt; 143            Rf_eval 00007ffaa97d2730
-#&gt; 144            Rf_eval 00007ffaa97d43b0
-#&gt; 145    Rf_applyClosure 00007ffaa97d52d0
-#&gt; 146           do_Rprof 00007ffaa97bcdc0
-#&gt; 147            Rf_eval 00007ffaa97d2730
-#&gt; 148            Rf_eval 00007ffaa97d43b0
-#&gt; 149    Rf_applyClosure 00007ffaa97d52d0
-#&gt; 150           do_Rprof 00007ffaa97bcdc0
-#&gt; 151            Rf_eval 00007ffaa97d2730
-#&gt; 152            Rf_eval 00007ffaa97d43b0
-#&gt; 153    Rf_applyClosure 00007ffaa97d52d0
-#&gt; 154           do_Rprof 00007ffaa97bcdc0
-#&gt; 155            Rf_eval 00007ffaa97d2730
-#&gt; 156            Rf_eval 00007ffaa97d43b0
-#&gt; 157    Rf_applyClosure 00007ffaa97d52d0
-#&gt; 158           do_Rprof 00007ffaa97bcdc0
-#&gt; 159            Rf_eval 00007ffaa97d2730
-#&gt; 160            Rf_eval 00007ffaa97d43b0
-#&gt; 161    Rf_applyClosure 00007ffaa97d52d0
-#&gt; 162            Rf_eval 00007ffaa97d2730
-#&gt; 163   Rf_ReplIteration 00007ffaa98063e0
-#&gt; 164   Rf_ReplIteration 00007ffaa9806960
-#&gt; 165      run_Rmainloop 00007ffaa9806a50
-#&gt; 166               main 000055c780ae3820
-#&gt; 167  __libc_start_main 00007ffaa92bfb10
-#&gt; 168             _start 000055c780ae3850
-#&gt;                                                pathname
-#&gt; 1                                /usr/lib/R/lib/libR.so
-#&gt; 2                                /usr/lib/R/lib/libR.so
-#&gt; 3                                /usr/lib/R/lib/libR.so
-#&gt; 4                                /usr/lib/R/lib/libR.so
-#&gt; 5                                /usr/lib/R/lib/libR.so
-#&gt; 6                                /usr/lib/R/lib/libR.so
-#&gt; 7                                /usr/lib/R/lib/libR.so
-#&gt; 8                                /usr/lib/R/lib/libR.so
-#&gt; 9                                /usr/lib/R/lib/libR.so
-#&gt; 10                               /usr/lib/R/lib/libR.so
-#&gt; 11  /home/runner/work/_temp/Library/winch/libs/winch.so
-#&gt; 12                               /usr/lib/R/lib/libR.so
-#&gt; 13                               /usr/lib/R/lib/libR.so
-#&gt; 14                               /usr/lib/R/lib/libR.so
-#&gt; 15                               /usr/lib/R/lib/libR.so
-#&gt; 16                               /usr/lib/R/lib/libR.so
-#&gt; 17                               /usr/lib/R/lib/libR.so
-#&gt; 18                               /usr/lib/R/lib/libR.so
-#&gt; 19                               /usr/lib/R/lib/libR.so
-#&gt; 20                               /usr/lib/R/lib/libR.so
-#&gt; 21                               /usr/lib/R/lib/libR.so
-#&gt; 22                               /usr/lib/R/lib/libR.so
-#&gt; 23                               /usr/lib/R/lib/libR.so
-#&gt; 24                               /usr/lib/R/lib/libR.so
-#&gt; 25                               /usr/lib/R/lib/libR.so
-#&gt; 26                               /usr/lib/R/lib/libR.so
-#&gt; 27                               /usr/lib/R/lib/libR.so
-#&gt; 28                               /usr/lib/R/lib/libR.so
-#&gt; 29                               /usr/lib/R/lib/libR.so
-#&gt; 30                               /usr/lib/R/lib/libR.so
-#&gt; 31                               /usr/lib/R/lib/libR.so
-#&gt; 32                               /usr/lib/R/lib/libR.so
-#&gt; 33                               /usr/lib/R/lib/libR.so
-#&gt; 34                               /usr/lib/R/lib/libR.so
-#&gt; 35                               /usr/lib/R/lib/libR.so
-#&gt; 36                               /usr/lib/R/lib/libR.so
-#&gt; 37                               /usr/lib/R/lib/libR.so
-#&gt; 38                               /usr/lib/R/lib/libR.so
-#&gt; 39                               /usr/lib/R/lib/libR.so
-#&gt; 40                               /usr/lib/R/lib/libR.so
-#&gt; 41                               /usr/lib/R/lib/libR.so
-#&gt; 42                               /usr/lib/R/lib/libR.so
-#&gt; 43                               /usr/lib/R/lib/libR.so
-#&gt; 44                               /usr/lib/R/lib/libR.so
-#&gt; 45                               /usr/lib/R/lib/libR.so
-#&gt; 46                               /usr/lib/R/lib/libR.so
-#&gt; 47                               /usr/lib/R/lib/libR.so
-#&gt; 48                               /usr/lib/R/lib/libR.so
-#&gt; 49                               /usr/lib/R/lib/libR.so
-#&gt; 50                               /usr/lib/R/lib/libR.so
-#&gt; 51                               /usr/lib/R/lib/libR.so
-#&gt; 52                               /usr/lib/R/lib/libR.so
-#&gt; 53                               /usr/lib/R/lib/libR.so
-#&gt; 54                               /usr/lib/R/lib/libR.so
-#&gt; 55                               /usr/lib/R/lib/libR.so
-#&gt; 56                               /usr/lib/R/lib/libR.so
-#&gt; 57                               /usr/lib/R/lib/libR.so
-#&gt; 58                               /usr/lib/R/lib/libR.so
-#&gt; 59                               /usr/lib/R/lib/libR.so
-#&gt; 60                               /usr/lib/R/lib/libR.so
-#&gt; 61                               /usr/lib/R/lib/libR.so
-#&gt; 62                               /usr/lib/R/lib/libR.so
-#&gt; 63                               /usr/lib/R/lib/libR.so
-#&gt; 64                               /usr/lib/R/lib/libR.so
-#&gt; 65                               /usr/lib/R/lib/libR.so
-#&gt; 66                               /usr/lib/R/lib/libR.so
-#&gt; 67                               /usr/lib/R/lib/libR.so
-#&gt; 68                               /usr/lib/R/lib/libR.so
-#&gt; 69                               /usr/lib/R/lib/libR.so
-#&gt; 70                               /usr/lib/R/lib/libR.so
-#&gt; 71                               /usr/lib/R/lib/libR.so
-#&gt; 72                               /usr/lib/R/lib/libR.so
-#&gt; 73                               /usr/lib/R/lib/libR.so
-#&gt; 74                               /usr/lib/R/lib/libR.so
-#&gt; 75                               /usr/lib/R/lib/libR.so
-#&gt; 76                               /usr/lib/R/lib/libR.so
-#&gt; 77                               /usr/lib/R/lib/libR.so
-#&gt; 78                               /usr/lib/R/lib/libR.so
-#&gt; 79                               /usr/lib/R/lib/libR.so
-#&gt; 80                               /usr/lib/R/lib/libR.so
-#&gt; 81                               /usr/lib/R/lib/libR.so
-#&gt; 82                               /usr/lib/R/lib/libR.so
-#&gt; 83                               /usr/lib/R/lib/libR.so
-#&gt; 84                               /usr/lib/R/lib/libR.so
-#&gt; 85                               /usr/lib/R/lib/libR.so
-#&gt; 86                               /usr/lib/R/lib/libR.so
-#&gt; 87                               /usr/lib/R/lib/libR.so
-#&gt; 88                               /usr/lib/R/lib/libR.so
-#&gt; 89                               /usr/lib/R/lib/libR.so
-#&gt; 90                               /usr/lib/R/lib/libR.so
-#&gt; 91                               /usr/lib/R/lib/libR.so
-#&gt; 92                               /usr/lib/R/lib/libR.so
-#&gt; 93                               /usr/lib/R/lib/libR.so
-#&gt; 94                               /usr/lib/R/lib/libR.so
-#&gt; 95                               /usr/lib/R/lib/libR.so
-#&gt; 96                               /usr/lib/R/lib/libR.so
-#&gt; 97                               /usr/lib/R/lib/libR.so
-#&gt; 98                               /usr/lib/R/lib/libR.so
-#&gt; 99                               /usr/lib/R/lib/libR.so
-#&gt; 100                              /usr/lib/R/lib/libR.so
-#&gt; 101                              /usr/lib/R/lib/libR.so
-#&gt; 102                              /usr/lib/R/lib/libR.so
-#&gt; 103                              /usr/lib/R/lib/libR.so
-#&gt; 104                              /usr/lib/R/lib/libR.so
-#&gt; 105                              /usr/lib/R/lib/libR.so
-#&gt; 106                              /usr/lib/R/lib/libR.so
-#&gt; 107                              /usr/lib/R/lib/libR.so
-#&gt; 108                              /usr/lib/R/lib/libR.so
-#&gt; 109                              /usr/lib/R/lib/libR.so
-#&gt; 110                              /usr/lib/R/lib/libR.so
-#&gt; 111                              /usr/lib/R/lib/libR.so
-#&gt; 112                              /usr/lib/R/lib/libR.so
-#&gt; 113                              /usr/lib/R/lib/libR.so
-#&gt; 114                              /usr/lib/R/lib/libR.so
-#&gt; 115                              /usr/lib/R/lib/libR.so
-#&gt; 116                              /usr/lib/R/lib/libR.so
-#&gt; 117                              /usr/lib/R/lib/libR.so
-#&gt; 118                              /usr/lib/R/lib/libR.so
-#&gt; 119                              /usr/lib/R/lib/libR.so
-#&gt; 120                              /usr/lib/R/lib/libR.so
-#&gt; 121                              /usr/lib/R/lib/libR.so
-#&gt; 122                              /usr/lib/R/lib/libR.so
-#&gt; 123                              /usr/lib/R/lib/libR.so
-#&gt; 124                              /usr/lib/R/lib/libR.so
-#&gt; 125                              /usr/lib/R/lib/libR.so
-#&gt; 126                              /usr/lib/R/lib/libR.so
-#&gt; 127                              /usr/lib/R/lib/libR.so
-#&gt; 128                              /usr/lib/R/lib/libR.so
-#&gt; 129                              /usr/lib/R/lib/libR.so
-#&gt; 130                              /usr/lib/R/lib/libR.so
-#&gt; 131                              /usr/lib/R/lib/libR.so
-#&gt; 132                              /usr/lib/R/lib/libR.so
-#&gt; 133                              /usr/lib/R/lib/libR.so
-#&gt; 134                              /usr/lib/R/lib/libR.so
-#&gt; 135                              /usr/lib/R/lib/libR.so
-#&gt; 136                              /usr/lib/R/lib/libR.so
-#&gt; 137                              /usr/lib/R/lib/libR.so
-#&gt; 138                              /usr/lib/R/lib/libR.so
-#&gt; 139 /home/runner/work/_temp/Library/purrr/libs/purrr.so
-#&gt; 140 /home/runner/work/_temp/Library/purrr/libs/purrr.so
-#&gt; 141                              /usr/lib/R/lib/libR.so
-#&gt; 142                              /usr/lib/R/lib/libR.so
-#&gt; 143                              /usr/lib/R/lib/libR.so
-#&gt; 144                              /usr/lib/R/lib/libR.so
-#&gt; 145                              /usr/lib/R/lib/libR.so
-#&gt; 146                              /usr/lib/R/lib/libR.so
-#&gt; 147                              /usr/lib/R/lib/libR.so
-#&gt; 148                              /usr/lib/R/lib/libR.so
-#&gt; 149                              /usr/lib/R/lib/libR.so
-#&gt; 150                              /usr/lib/R/lib/libR.so
-#&gt; 151                              /usr/lib/R/lib/libR.so
-#&gt; 152                              /usr/lib/R/lib/libR.so
-#&gt; 153                              /usr/lib/R/lib/libR.so
-#&gt; 154                              /usr/lib/R/lib/libR.so
-#&gt; 155                              /usr/lib/R/lib/libR.so
-#&gt; 156                              /usr/lib/R/lib/libR.so
-#&gt; 157                              /usr/lib/R/lib/libR.so
-#&gt; 158                              /usr/lib/R/lib/libR.so
-#&gt; 159                              /usr/lib/R/lib/libR.so
-#&gt; 160                              /usr/lib/R/lib/libR.so
-#&gt; 161                              /usr/lib/R/lib/libR.so
-#&gt; 162                              /usr/lib/R/lib/libR.so
-#&gt; 163                              /usr/lib/R/lib/libR.so
-#&gt; 164                              /usr/lib/R/lib/libR.so
-#&gt; 165                              /usr/lib/R/lib/libR.so
-#&gt; 166                               /usr/lib/R/bin/exec/R
-#&gt; 167                  /lib/x86_64-linux-gnu/libc-2.27.so
-#&gt; 168                               /usr/lib/R/bin/exec/R</div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='fu'>winch_trace_back</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                   func               ip</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1             do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2              Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3              Rf_eval 00007f13df7b73b0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4      Rf_applyClosure 00007f13df7b82d0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5              Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6       R_forceAndCall 00007f13df7bb5e0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 7             do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 8              Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 9              Rf_eval 00007f13df7b73b0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 10     Rf_applyClosure 00007f13df7b82d0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 11            do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 12             Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 13             Rf_eval 00007f13df7b61a0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 14             Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 15      R_forceAndCall 00007f13df7bc3b0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 16         do_Rprofmem 00007f13df7f9320</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 17            do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 18             Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 19             Rf_eval 00007f13df7b73b0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 20     Rf_applyClosure 00007f13df7b82d0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 21            do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 22             Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 23             Rf_eval 00007f13df7b61a0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 24             Rf_eval 00007f13df7b62e0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 25            do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 26             Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 27             Rf_eval 00007f13df7b73b0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 28     Rf_applyClosure 00007f13df7b82d0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 29            do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 30             Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 31             Rf_eval 00007f13df7b61a0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 32             Rf_eval 00007f13df7b62e0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 33            do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 34             Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 35             Rf_eval 00007f13df7b61a0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 36             Rf_eval 00007f13df7b62e0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 37            do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 38             Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 39             Rf_eval 00007f13df7b61a0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 40             Rf_eval 00007f13df7b62e0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 41            do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 42             Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 43             Rf_eval 00007f13df7b61a0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 44             Rf_eval 00007f13df7b62e0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 45            do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 46             Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 47             Rf_eval 00007f13df7b61a0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 48             Rf_eval 00007f13df7b62e0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 49            do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 50             Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 51             Rf_eval 00007f13df7b61a0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 52             Rf_eval 00007f13df7b62e0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 53            do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 54             Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 55             Rf_eval 00007f13df7b73b0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 56     Rf_applyClosure 00007f13df7b82d0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 57            do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 58             Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 59             Rf_eval 00007f13df7b73b0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 60     Rf_applyClosure 00007f13df7b82d0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 61            do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 62             Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 63             Rf_eval 00007f13df7b73b0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 64     Rf_applyClosure 00007f13df7b82d0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 65            do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 66             Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 67             Rf_eval 00007f13df7b73b0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 68     Rf_applyClosure 00007f13df7b82d0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 69            do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 70             Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 71             Rf_eval 00007f13df7b73b0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 72     Rf_applyClosure 00007f13df7b82d0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 73            do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 74             Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 75             Rf_eval 00007f13df7b73b0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 76     Rf_applyClosure 00007f13df7b82d0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 77            do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 78             Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 79             Rf_eval 00007f13df7b61a0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 80             Rf_eval 00007f13df7b62e0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 81            do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 82             Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 83             Rf_eval 00007f13df7b73b0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 84     Rf_applyClosure 00007f13df7b82d0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 85            do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 86             Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 87             Rf_eval 00007f13df7b73b0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 88     Rf_applyClosure 00007f13df7b82d0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 89            do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 90             Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 91             Rf_eval 00007f13df7b73b0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 92     Rf_applyClosure 00007f13df7b82d0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 93            do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 94             Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 95             Rf_eval 00007f13df7b73b0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 96     Rf_applyClosure 00007f13df7b82d0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 97            do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 98             Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 99             Rf_eval 00007f13df7b73b0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 100    Rf_applyClosure 00007f13df7b82d0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 101           do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 102            Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 103            Rf_eval 00007f13df7b73b0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 104    Rf_applyClosure 00007f13df7b82d0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 105           do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 106            Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 107            Rf_eval 00007f13df7b73b0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 108    Rf_applyClosure 00007f13df7b82d0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 109           do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 110            Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 111            Rf_eval 00007f13df7b61a0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 112            Rf_eval 00007f13df7b62e0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 113           do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 114            Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 115            Rf_eval 00007f13df7b73b0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 116    Rf_applyClosure 00007f13df7b82d0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 117           do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 118            Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 119            Rf_eval 00007f13df7b73b0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 120    Rf_applyClosure 00007f13df7b82d0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 121     R_forceAndCall 00007f13df7baca0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 122          call_loop 00007f13d20093b0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 123           map_impl 00007f13d2009500</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 124 Rf_NewFrameConfirm 00007f13df769a60</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 125           do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 126            Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 127            Rf_eval 00007f13df7b73b0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 128    Rf_applyClosure 00007f13df7b82d0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 129           do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 130            Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 131            Rf_eval 00007f13df7b73b0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 132    Rf_applyClosure 00007f13df7b82d0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 133           do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 134            Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 135            Rf_eval 00007f13df7b73b0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 136    Rf_applyClosure 00007f13df7b82d0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 137           do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 138            Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 139            Rf_eval 00007f13df7b73b0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 140    Rf_applyClosure 00007f13df7b82d0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 141           do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 142            Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 143            Rf_eval 00007f13df7b73b0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 144    Rf_applyClosure 00007f13df7b82d0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 145            Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 146   Rf_ReplIteration 00007f13df7e93e0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 147   Rf_ReplIteration 00007f13df7e9960</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 148      run_Rmainloop 00007f13df7e9a50</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 149               main 000055564b84d820</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 150  __libc_start_main 00007f13df2a2b10</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 151             _start 000055564b84d850</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                pathname</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1                                /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2                                /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3                                /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4                                /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5                                /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6                                /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 7                                /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 8                                /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 9                                /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 10                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 11                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 12                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 13                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 14                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 15                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 16                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 17                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 18                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 19                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 20                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 21                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 22                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 23                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 24                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 25                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 26                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 27                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 28                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 29                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 30                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 31                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 32                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 33                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 34                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 35                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 36                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 37                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 38                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 39                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 40                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 41                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 42                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 43                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 44                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 45                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 46                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 47                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 48                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 49                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 50                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 51                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 52                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 53                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 54                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 55                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 56                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 57                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 58                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 59                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 60                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 61                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 62                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 63                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 64                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 65                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 66                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 67                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 68                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 69                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 70                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 71                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 72                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 73                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 74                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 75                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 76                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 77                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 78                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 79                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 80                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 81                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 82                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 83                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 84                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 85                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 86                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 87                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 88                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 89                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 90                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 91                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 92                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 93                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 94                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 95                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 96                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 97                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 98                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 99                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 100                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 101                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 102                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 103                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 104                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 105                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 106                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 107                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 108                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 109                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 110                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 111                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 112                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 113                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 114                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 115                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 116                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 117                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 118                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 119                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 120                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 121                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 122 /home/runner/work/_temp/Library/purrr/libs/purrr.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 123 /home/runner/work/_temp/Library/purrr/libs/purrr.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 124                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 125                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 126                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 127                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 128                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 129                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 130                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 131                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 132                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 133                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 134                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 135                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 136                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 137                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 138                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 139                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 140                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 141                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 142                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 143                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 144                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 145                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 146                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 147                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 148                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 149                               /usr/lib/R/bin/exec/R</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 150                  /lib/x86_64-linux-gnu/libc-2.27.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 151                               /usr/lib/R/bin/exec/R</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>foo</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'>  <span class='fu'><a href='winch_call.html'>winch_call</a></span><span class='op'>(</span><span class='va'>bar</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>bar</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'>  <span class='fu'>winch_trace_back</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'>foo</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                   func               ip</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1             do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2              Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3              Rf_eval 00007f13df7b73b0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4      Rf_applyClosure 00007f13df7b82d0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5              Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6         R_execMethod 00007f13df7b90d0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 7              Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 8              Rf_eval 00007f13df7b73b0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 9      Rf_applyClosure 00007f13df7b82d0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 10             Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 11          winch_call 00007f13caa29240</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 12  Rf_NewFrameConfirm 00007f13df769a60</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 13            do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 14             Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 15             Rf_eval 00007f13df7b73b0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 16     Rf_applyClosure 00007f13df7b82d0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 17             Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 18        R_execMethod 00007f13df7b90d0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 19             Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 20             Rf_eval 00007f13df7b73b0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 21     Rf_applyClosure 00007f13df7b82d0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 22             Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 23      R_forceAndCall 00007f13df7bb5e0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 24            do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 25             Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 26             Rf_eval 00007f13df7b73b0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 27     Rf_applyClosure 00007f13df7b82d0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 28            do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 29             Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 30             Rf_eval 00007f13df7b61a0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 31             Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 32      R_forceAndCall 00007f13df7bc3b0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 33         do_Rprofmem 00007f13df7f9320</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 34            do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 35             Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 36             Rf_eval 00007f13df7b73b0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 37     Rf_applyClosure 00007f13df7b82d0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 38            do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 39             Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 40             Rf_eval 00007f13df7b61a0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 41             Rf_eval 00007f13df7b62e0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 42            do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 43             Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 44             Rf_eval 00007f13df7b73b0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 45     Rf_applyClosure 00007f13df7b82d0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 46            do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 47             Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 48             Rf_eval 00007f13df7b61a0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 49             Rf_eval 00007f13df7b62e0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 50            do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 51             Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 52             Rf_eval 00007f13df7b61a0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 53             Rf_eval 00007f13df7b62e0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 54            do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 55             Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 56             Rf_eval 00007f13df7b61a0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 57             Rf_eval 00007f13df7b62e0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 58            do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 59             Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 60             Rf_eval 00007f13df7b61a0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 61             Rf_eval 00007f13df7b62e0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 62            do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 63             Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 64             Rf_eval 00007f13df7b61a0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 65             Rf_eval 00007f13df7b62e0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 66            do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 67             Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 68             Rf_eval 00007f13df7b61a0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 69             Rf_eval 00007f13df7b62e0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 70            do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 71             Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 72             Rf_eval 00007f13df7b73b0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 73     Rf_applyClosure 00007f13df7b82d0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 74            do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 75             Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 76             Rf_eval 00007f13df7b73b0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 77     Rf_applyClosure 00007f13df7b82d0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 78            do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 79             Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 80             Rf_eval 00007f13df7b73b0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 81     Rf_applyClosure 00007f13df7b82d0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 82            do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 83             Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 84             Rf_eval 00007f13df7b73b0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 85     Rf_applyClosure 00007f13df7b82d0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 86            do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 87             Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 88             Rf_eval 00007f13df7b73b0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 89     Rf_applyClosure 00007f13df7b82d0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 90            do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 91             Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 92             Rf_eval 00007f13df7b73b0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 93     Rf_applyClosure 00007f13df7b82d0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 94            do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 95             Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 96             Rf_eval 00007f13df7b61a0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 97             Rf_eval 00007f13df7b62e0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 98            do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 99             Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 100            Rf_eval 00007f13df7b73b0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 101    Rf_applyClosure 00007f13df7b82d0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 102           do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 103            Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 104            Rf_eval 00007f13df7b73b0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 105    Rf_applyClosure 00007f13df7b82d0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 106           do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 107            Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 108            Rf_eval 00007f13df7b73b0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 109    Rf_applyClosure 00007f13df7b82d0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 110           do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 111            Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 112            Rf_eval 00007f13df7b73b0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 113    Rf_applyClosure 00007f13df7b82d0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 114           do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 115            Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 116            Rf_eval 00007f13df7b73b0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 117    Rf_applyClosure 00007f13df7b82d0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 118           do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 119            Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 120            Rf_eval 00007f13df7b73b0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 121    Rf_applyClosure 00007f13df7b82d0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 122           do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 123            Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 124            Rf_eval 00007f13df7b73b0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 125    Rf_applyClosure 00007f13df7b82d0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 126           do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 127            Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 128            Rf_eval 00007f13df7b61a0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 129            Rf_eval 00007f13df7b62e0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 130           do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 131            Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 132            Rf_eval 00007f13df7b73b0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 133    Rf_applyClosure 00007f13df7b82d0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 134           do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 135            Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 136            Rf_eval 00007f13df7b73b0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 137    Rf_applyClosure 00007f13df7b82d0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 138     R_forceAndCall 00007f13df7baca0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 139          call_loop 00007f13d20093b0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 140           map_impl 00007f13d2009500</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 141 Rf_NewFrameConfirm 00007f13df769a60</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 142           do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 143            Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 144            Rf_eval 00007f13df7b73b0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 145    Rf_applyClosure 00007f13df7b82d0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 146           do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 147            Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 148            Rf_eval 00007f13df7b73b0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 149    Rf_applyClosure 00007f13df7b82d0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 150           do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 151            Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 152            Rf_eval 00007f13df7b73b0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 153    Rf_applyClosure 00007f13df7b82d0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 154           do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 155            Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 156            Rf_eval 00007f13df7b73b0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 157    Rf_applyClosure 00007f13df7b82d0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 158           do_Rprof 00007f13df79fdc0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 159            Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 160            Rf_eval 00007f13df7b73b0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 161    Rf_applyClosure 00007f13df7b82d0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 162            Rf_eval 00007f13df7b5730</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 163   Rf_ReplIteration 00007f13df7e93e0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 164   Rf_ReplIteration 00007f13df7e9960</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 165      run_Rmainloop 00007f13df7e9a50</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 166               main 000055564b84d820</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 167  __libc_start_main 00007f13df2a2b10</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 168             _start 000055564b84d850</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                pathname</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1                                /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2                                /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3                                /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4                                /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5                                /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6                                /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 7                                /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 8                                /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 9                                /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 10                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 11  /home/runner/work/_temp/Library/winch/libs/winch.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 12                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 13                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 14                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 15                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 16                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 17                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 18                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 19                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 20                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 21                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 22                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 23                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 24                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 25                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 26                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 27                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 28                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 29                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 30                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 31                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 32                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 33                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 34                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 35                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 36                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 37                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 38                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 39                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 40                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 41                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 42                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 43                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 44                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 45                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 46                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 47                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 48                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 49                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 50                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 51                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 52                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 53                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 54                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 55                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 56                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 57                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 58                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 59                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 60                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 61                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 62                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 63                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 64                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 65                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 66                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 67                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 68                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 69                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 70                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 71                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 72                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 73                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 74                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 75                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 76                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 77                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 78                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 79                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 80                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 81                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 82                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 83                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 84                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 85                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 86                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 87                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 88                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 89                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 90                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 91                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 92                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 93                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 94                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 95                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 96                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 97                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 98                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 99                               /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 100                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 101                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 102                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 103                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 104                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 105                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 106                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 107                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 108                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 109                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 110                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 111                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 112                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 113                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 114                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 115                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 116                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 117                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 118                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 119                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 120                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 121                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 122                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 123                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 124                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 125                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 126                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 127                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 128                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 129                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 130                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 131                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 132                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 133                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 134                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 135                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 136                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 137                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 138                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 139 /home/runner/work/_temp/Library/purrr/libs/purrr.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 140 /home/runner/work/_temp/Library/purrr/libs/purrr.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 141                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 142                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 143                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 144                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 145                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 146                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 147                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 148                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 149                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 150                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 151                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 152                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 153                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 154                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 155                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 156                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 157                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 158                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 159                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 160                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 161                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 162                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 163                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 164                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 165                              /usr/lib/R/lib/libR.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 166                               /usr/lib/R/bin/exec/R</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 167                  /lib/x86_64-linux-gnu/libc-2.27.so</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 168                               /usr/lib/R/bin/exec/R</span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
