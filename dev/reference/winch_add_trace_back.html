@@ -60,7 +60,6 @@ It is intended to be called by rlang." />
 
 
 
-
   
 
   
@@ -162,37 +161,37 @@ It is intended to be called by rlang.</p>
 <span class='r-in'><span class='op'>}</span></span>
 <span class='r-in'></span>
 <span class='r-in'><span class='fu'>foo</span><span class='op'>(</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'>     </span><span>█</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'>  1. </span><span>└─pkgdown::deploy_to_branch(new_process = FALSE)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'>  2. </span><span>  └─pkgdown::build_site(...)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'>  3. </span><span>    └─pkgdown:::build_site_local(...)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'>  4. </span><span>      └─pkgdown::build_reference(...)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'>  5. </span><span>        └─purrr::map(...)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'>  6. </span><span>          └─`/purrr.so`::map_impl()</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'>  7. </span><span>            └─`/purrr.so`::call_loop()</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'>  8. </span><span>              └─pkgdown:::.f(.x[[i]], ...)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'>  9. </span><span>                ├─base::withCallingHandlers(...)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'> 10. </span><span>                └─pkgdown:::data_reference_topic(...)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'> 11. </span><span>                  └─pkgdown:::run_examples(...)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'> 12. </span><span>                    └─pkgdown:::highlight_examples(code, topic, env = env)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'> 13. </span><span>                      └─downlit::evaluate_and_highlight(...)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'> 14. </span><span>                        └─evaluate::evaluate(code, child_env(env), new_device = TRUE, output_handler = output_handler)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'> 15. </span><span>                          └─evaluate:::evaluate_call(...)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'> 16. </span><span>                            ├─evaluate:::timing_fn(...)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'> 17. </span><span>                            ├─evaluate:::handle(...)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'> 18. </span><span>                            │ └─base::try(f, silent = TRUE)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'> 19. </span><span>                            │   └─base::tryCatch(...)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'> 20. </span><span>                            │     └─base:::tryCatchList(expr, classes, parentenv, handlers)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'> 21. </span><span>                            │       └─base:::tryCatchOne(expr, names, parentenv, handlers[[1L]])</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'> 22. </span><span>                            │         └─base:::doTryCatch(return(expr), name, parentenv, handler)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'> 23. </span><span>                            ├─base::withCallingHandlers(...)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'> 24. </span><span>                            ├─base::withVisible(eval(expr, envir, enclos))</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'> 25. </span><span>                            └─base::eval(expr, envir, enclos)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'> 26. </span><span>                              └─base::eval(expr, envir, enclos)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'> 27. </span><span>                                └─foo()</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'> 28. </span><span>                                  └─winch::winch_call(bar)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'> 29. </span><span>                                    └─`/winch.so`::winch_call()</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'> 30. </span><span>                                      └─(function () ... </span><span style='color: #555555;'>/home/runner/work/winch/winch/R/call.R:23:2</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'>     </span>█</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'>  1. </span>└─pkgdown::deploy_to_branch(new_process = FALSE)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'>  2. </span>  └─pkgdown::build_site(...)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'>  3. </span>    └─pkgdown:::build_site_local(...)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'>  4. </span>      └─pkgdown::build_reference(...)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'>  5. </span>        └─purrr::map(...)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'>  6. </span>          └─`/purrr.so`::map_impl()</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'>  7. </span>            └─`/purrr.so`::call_loop()</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'>  8. </span>              └─pkgdown:::.f(.x[[i]], ...)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'>  9. </span>                ├─base::withCallingHandlers(...)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'> 10. </span>                └─pkgdown:::data_reference_topic(...)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'> 11. </span>                  └─pkgdown:::run_examples(...)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'> 12. </span>                    └─pkgdown:::highlight_examples(code, topic, env = env)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'> 13. </span>                      └─downlit::evaluate_and_highlight(...)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'> 14. </span>                        └─evaluate::evaluate(code, child_env(env), new_device = TRUE, output_handler = output_handler)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'> 15. </span>                          └─evaluate:::evaluate_call(...)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'> 16. </span>                            ├─evaluate:::timing_fn(...)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'> 17. </span>                            ├─evaluate:::handle(...)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'> 18. </span>                            │ └─base::try(f, silent = TRUE)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'> 19. </span>                            │   └─base::tryCatch(...)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'> 20. </span>                            │     └─base:::tryCatchList(expr, classes, parentenv, handlers)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'> 21. </span>                            │       └─base:::tryCatchOne(expr, names, parentenv, handlers[[1L]])</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'> 22. </span>                            │         └─base:::doTryCatch(return(expr), name, parentenv, handler)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'> 23. </span>                            ├─base::withCallingHandlers(...)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'> 24. </span>                            ├─base::withVisible(eval(expr, envir, enclos))</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'> 25. </span>                            └─base::eval(expr, envir, enclos)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'> 26. </span>                              └─base::eval(expr, envir, enclos)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'> 27. </span>                                └─foo()</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'> 28. </span>                                  └─winch::winch_call(bar)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'> 29. </span>                                    └─`/winch.so`::winch_call()</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #555555;'> 30. </span>                                      └─(function () ... <span style='color: #555555;'>/home/runner/work/winch/winch/R/call.R:23:2</span></span>
 </code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
