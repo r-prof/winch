@@ -7,6 +7,7 @@ test_that("traceback unchanged if no native code", {
 
 test_that("traceback changed if native code", {
   skip_if_not(winch_available())
+  skip_if_not_installed("rlang", "0.99.0.9000")
 
   foo <- function(fun) {
     winch_call(fun)
@@ -24,5 +25,5 @@ test_that("traceback changed if native code", {
   foo_baz <- foo(baz)
 
   expect_false(identical(foo_bar, foo_baz))
-  expect_true(any(grepl("/winch", foo_baz$calls)))
+  expect_true(any(grepl("/winch", foo_baz$namespace)))
 })
