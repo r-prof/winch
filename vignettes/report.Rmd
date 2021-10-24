@@ -395,7 +395,7 @@ Scratch pad for information that doesn't fit elsewhere.
 
 - symbolic backtrace:
 
-    - dwarf (http://kamalmarhubi.com/blog/2016/07/25/some-things-i-learned-about-libdwarf/), elf, ...
+    - dwarf (https://kamalmarhubi.com/blog/2016/07/25/some-things-i-learned-about-libdwarf/), elf, ...
 
 - related project in Nim: https://github.com/timotheecour/Nim/issues/49
 
