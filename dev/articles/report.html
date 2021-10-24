@@ -34,7 +34,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">winch</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.0.6.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.0.7.9000</span>
       </span>
     </div>
 
@@ -91,9 +91,9 @@
     
 <p>This document describes the final results of the “Joint Profiling of Native and R Code” project. It describes two new packages, <code>winch</code>, and its helper package, <code>procmaps</code>. After a definition of the problem, the packages’ features are described, with an outline of work still to be done. It concludes with a discussion of technical caveats and a connection to the first part of the project. The appendix is a scratch pad for links and other bits of information that don’t fit elsewhere.</p>
 <p>The winch package combines native and R stack traces in a controlled way. For now this is outside of a profiling context. This deviates from the original goal of the project, with good reason: robust combined stack traces are a cornerstone for joint profiling and are useful independent of profiling.</p>
-<div id="stack-traces" class="section level2">
-<h2 class="hasAnchor">
-<a href="#stack-traces" class="anchor" aria-hidden="true"></a>Stack traces</h2>
+<div class="section level2">
+<h2 id="stack-traces">Stack traces<a class="anchor" aria-label="anchor" href="#stack-traces"></a>
+</h2>
 <p>A <a href="https://en.wikipedia.org/wiki/Stack_trace" class="external-link"><em>stack trace</em></a> is a sequence of code locations that describes the execution path from a program’s main entry point to a specific point of interest. Each entry represents a nested function call.</p>
 <p>Use cases include (<a href="https://blog.reverberate.org/2013/05/deep-wizardry-stack-unwinding.html" class="external-link">source</a>):</p>
 <blockquote>
@@ -103,9 +103,9 @@
 <li>From the program itself (e.g. from a crash handler to show the stack).</li>
 </ol>
 </blockquote>
-<div id="r-code" class="section level3">
-<h3 class="hasAnchor">
-<a href="#r-code" class="anchor" aria-hidden="true"></a>R code</h3>
+<div class="section level3">
+<h3 id="r-code">R code<a class="anchor" aria-label="anchor" href="#r-code"></a>
+</h3>
 <p>In R, stack traces can be obtained via <code><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">sys.calls()</a></code>:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">foo</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
@@ -188,9 +188,9 @@
 <span class="co">#&gt; }</span></code></pre></div>
 <p>It would be much more accurate if the information was available directly in the stack trace. This would require changes to base R.</p>
 </div>
-<div id="native-code" class="section level3">
-<h3 class="hasAnchor">
-<a href="#native-code" class="anchor" aria-hidden="true"></a>Native code</h3>
+<div class="section level3">
+<h3 id="native-code">Native code<a class="anchor" aria-label="anchor" href="#native-code"></a>
+</h3>
 <p>R is an interpreted language. It can be expected that it knows how to track the execution state. (It is much more surprising that it allows programs to compute on their own execution state – R has very strong support for <a href="https://en.wikipedia.org/wiki/Reflection_(computer_programming)" class="external-link">reflection</a> indeed.) How do we achieve this for native code? <a href="https://stackoverflow.com/q/8031742/946850" class="external-link">Can an application programmatically generate its own stack trace?</a></p>
 <p>For native code, this is provided by the compiler or by specialized libraries. The main result is a sequence of instruction pointers (IP for short): addresses in the process’s memory from where function calls occurred. In some cases, additional information such as the function name is provided. In general, function name, file + line information and even library name must be deduced separately, using other specialized libraries.</p>
 <p>The winch package wraps two libraries (for portability across different OSes) that help obtain IP sequences and function names. This functionality is accessible via <code><a href="../reference/winch_trace_back.html">winch::winch_trace_back()</a></code>. For demonstration purposes, this is what the native stack trace looks like for our double round-trip. Calls into native code can be deduced from the <code>pathname</code> column:</p>
@@ -204,31 +204,31 @@
 <span class="co">#&gt; [1] 231</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">trace</span>, <span class="fl">25</span><span class="op">)</span>
 <span class="co">#&gt;                  func               ip</span>
-<span class="co">#&gt; 1            do_Rprof 00007f360ee2ca60</span>
-<span class="co">#&gt; 2             Rf_eval 00007f360ee424e0</span>
-<span class="co">#&gt; 3             Rf_eval 00007f360ee44160</span>
-<span class="co">#&gt; 4     Rf_applyClosure 00007f360ee45080</span>
-<span class="co">#&gt; 5             Rf_eval 00007f360ee424e0</span>
-<span class="co">#&gt; 6        R_execMethod 00007f360ee45e50</span>
-<span class="co">#&gt; 7             Rf_eval 00007f360ee424e0</span>
-<span class="co">#&gt; 8             Rf_eval 00007f360ee44160</span>
-<span class="co">#&gt; 9     Rf_applyClosure 00007f360ee45080</span>
-<span class="co">#&gt; 10            Rf_eval 00007f360ee424e0</span>
-<span class="co">#&gt; 11         winch_call 00007f35f9efc240</span>
-<span class="co">#&gt; 12 Rf_NewFrameConfirm 00007f360edf5700</span>
-<span class="co">#&gt; 13           do_Rprof 00007f360ee2ca60</span>
-<span class="co">#&gt; 14            Rf_eval 00007f360ee424e0</span>
-<span class="co">#&gt; 15            Rf_eval 00007f360ee44160</span>
-<span class="co">#&gt; 16    Rf_applyClosure 00007f360ee45080</span>
-<span class="co">#&gt; 17           do_Rprof 00007f360ee2ca60</span>
-<span class="co">#&gt; 18            Rf_eval 00007f360ee424e0</span>
-<span class="co">#&gt; 19            Rf_eval 00007f360ee44160</span>
-<span class="co">#&gt; 20    Rf_applyClosure 00007f360ee45080</span>
-<span class="co">#&gt; 21            Rf_eval 00007f360ee424e0</span>
-<span class="co">#&gt; 22         winch_call 00007f35f9efc240</span>
-<span class="co">#&gt; 23 Rf_NewFrameConfirm 00007f360edf5700</span>
-<span class="co">#&gt; 24           do_Rprof 00007f360ee2ca60</span>
-<span class="co">#&gt; 25            Rf_eval 00007f360ee424e0</span>
+<span class="co">#&gt; 1            do_Rprof 00007f88c4dd99e0</span>
+<span class="co">#&gt; 2             Rf_eval 00007f88c4def460</span>
+<span class="co">#&gt; 3             Rf_eval 00007f88c4df10e0</span>
+<span class="co">#&gt; 4     Rf_applyClosure 00007f88c4df2000</span>
+<span class="co">#&gt; 5             Rf_eval 00007f88c4def460</span>
+<span class="co">#&gt; 6        R_execMethod 00007f88c4df2dd0</span>
+<span class="co">#&gt; 7             Rf_eval 00007f88c4def460</span>
+<span class="co">#&gt; 8             Rf_eval 00007f88c4df10e0</span>
+<span class="co">#&gt; 9     Rf_applyClosure 00007f88c4df2000</span>
+<span class="co">#&gt; 10            Rf_eval 00007f88c4def460</span>
+<span class="co">#&gt; 11         winch_call 00007f88b11f2240</span>
+<span class="co">#&gt; 12 Rf_NewFrameConfirm 00007f88c4da26e0</span>
+<span class="co">#&gt; 13           do_Rprof 00007f88c4dd99e0</span>
+<span class="co">#&gt; 14            Rf_eval 00007f88c4def460</span>
+<span class="co">#&gt; 15            Rf_eval 00007f88c4df10e0</span>
+<span class="co">#&gt; 16    Rf_applyClosure 00007f88c4df2000</span>
+<span class="co">#&gt; 17           do_Rprof 00007f88c4dd99e0</span>
+<span class="co">#&gt; 18            Rf_eval 00007f88c4def460</span>
+<span class="co">#&gt; 19            Rf_eval 00007f88c4df10e0</span>
+<span class="co">#&gt; 20    Rf_applyClosure 00007f88c4df2000</span>
+<span class="co">#&gt; 21            Rf_eval 00007f88c4def460</span>
+<span class="co">#&gt; 22         winch_call 00007f88b11f2240</span>
+<span class="co">#&gt; 23 Rf_NewFrameConfirm 00007f88c4da26e0</span>
+<span class="co">#&gt; 24           do_Rprof 00007f88c4dd99e0</span>
+<span class="co">#&gt; 25            Rf_eval 00007f88c4def460</span>
 <span class="co">#&gt;                                               pathname</span>
 <span class="co">#&gt; 1                               /usr/lib/R/lib/libR.so</span>
 <span class="co">#&gt; 2                               /usr/lib/R/lib/libR.so</span>
@@ -267,9 +267,9 @@
 <span class="co">#&gt;                                                 226</span></code></pre></div>
 <p><code><a href="../reference/winch_trace_back.html">winch_trace_back()</a></code> is a low-level function not intended to be called by the user. It is a cornerstone for joint backtraces provided by <code><a href="../reference/winch_add_trace_back.html">winch_add_trace_back()</a></code>, as shown in the next section. For now, <code><a href="../reference/winch_trace_back.html">winch_trace_back()</a></code> provides the native function name and the library name on all tested platforms (Linux, macOS, Windows). Information about file + line remains an open issue.</p>
 </div>
-<div id="r-code-native-code" class="section level3">
-<h3 class="hasAnchor">
-<a href="#r-code-native-code" class="anchor" aria-hidden="true"></a>R code + native code</h3>
+<div class="section level3">
+<h3 id="r-code-native-code">R code + native code<a class="anchor" aria-label="anchor" href="#r-code-native-code"></a>
+</h3>
 <p>R has always been an interface language, with excellent integration of calls into foreign interfaces. R code often calls into specialized native code for speed or to avoid re-implementation in R. Due to this duality, it is helpful to access both kinds of stack trace: R and native.</p>
 <p>These stack traces are not very helpful if taken separately. Native code is hidden from R backtrace, and R code is represented as sequence of function calls in <code>libR.so</code> or equivalent. Fusing these stack traces allows representing the chain of function calls from both domains when R code calls into native code (which then might call back into R).</p>
 <p>The combination of R and native stack traces in winch relies on two heuristics:</p>
@@ -350,17 +350,17 @@ Backtrace:
  3.     └─`/vctrs.so`::vec_as_location_opts()</code></pre>
 <p>A bare-bones solution that enhances <code><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">sys.calls()</a></code> and <code><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">sys.frames()</a></code> and is usable outside of rlang remains an open issue.</p>
 </div>
-<div id="limitations-on-windows" class="section level3">
-<h3 class="hasAnchor">
-<a href="#limitations-on-windows" class="anchor" aria-hidden="true"></a>Limitations on Windows</h3>
+<div class="section level3">
+<h3 id="limitations-on-windows">Limitations on Windows<a class="anchor" aria-label="anchor" href="#limitations-on-windows"></a>
+</h3>
 <p>Building an R package on Linux and Windows seems to include the necessary debugging information that helps libunwind and libbacktrace. On Windows, it seems necessary to set <code>DEBUG=true</code>, e.g. in <code>~/.R/Makevars</code>. This adds <code>-gdwarf-2</code> to the compiler flags.</p>
 <p>Also, Windows users currently need <code><a href="../reference/winch_init_library.html">winch::winch_init_library()</a></code> to trace errors in their library. This is a <a href="https://github.com/ianlancetaylor/libbacktrace/issues/53" class="external-link">limitation of the upstream library</a>.</p>
 <p>On Windows, 64-bit R is required.</p>
 </div>
 </div>
-<div id="next-steps" class="section level2">
-<h2 class="hasAnchor">
-<a href="#next-steps" class="anchor" aria-hidden="true"></a>Next steps</h2>
+<div class="section level2">
+<h2 id="next-steps">Next steps<a class="anchor" aria-label="anchor" href="#next-steps"></a>
+</h2>
 <p>The current implementation is useful for displaying combined stack traces for debugging. Testing in practice is likely to discover problems or corner cases that were missed during initial testing.</p>
 <p>A few things need to be done for fully portable joint profiling based on the new infrastructure:</p>
 <ul>
@@ -369,17 +369,17 @@ Backtrace:
 </ul>
 <p>For errors thrown from Rcpp code, the stack trace ends at the auto-generated stub, because this is the code that catches the C++ exception. It would be useful if stack trace information could be collected at the point of error and provided as part of the error condition.</p>
 </div>
-<div id="technical-details" class="section level2">
-<h2 class="hasAnchor">
-<a href="#technical-details" class="anchor" aria-hidden="true"></a>Technical details</h2>
+<div class="section level2">
+<h2 id="technical-details">Technical details<a class="anchor" aria-label="anchor" href="#technical-details"></a>
+</h2>
 <p>Stack unwinding, or retrieving the sequence of IPs for the stack trace, is dependent on the compiler, and also on the executable format used. As the <a href="https://blog.reverberate.org/2013/05/deep-wizardry-stack-unwinding.html" class="external-link">blog post already linked above</a> puts it,</p>
 <blockquote>
 <p>stack unwinding … [is an] esoteric topic [that] lies at the intersection of compilers, linkers, loaders, debuggers, ABIs, and language runtimes. There is precious little documentation about it and, from what I can tell, a small handful of guys who answer all the questions about it.</p>
 </blockquote>
 <p>It’s not surprising that there is no portable “one size fits all” solution. Some but not all options give the function name for each entry, sometimes file + line information is available too. Determining the shared library that provided the code seems to be an entirely separate topic.</p>
-<div id="retrieving-ips" class="section level3">
-<h3 class="hasAnchor">
-<a href="#retrieving-ips" class="anchor" aria-hidden="true"></a>Retrieving IPs</h3>
+<div class="section level3">
+<h3 id="retrieving-ips">Retrieving IPs<a class="anchor" aria-label="anchor" href="#retrieving-ips"></a>
+</h3>
 <p>The following options were experimented with:</p>
 <ol style="list-style-type: decimal">
 <li><p>The libc function <a href="https://www.gnu.org/software/libc/manual/html_node/Backtraces.html" class="external-link"><code>execinfo()</code></a> was a first obvious candidate. It works well enough on mainstream Linux, but not on Windows. Also, function names were not discovered reliably, in particular for optimized code.</p></li>
@@ -394,18 +394,18 @@ Backtrace:
 <li>Disable on Solaris, neither library works there</li>
 </ul>
 <p>The <code>execinfo()</code> approach is no longer used because libunwind is clearly better.</p>
-<div id="libbacktrace-on-the-mac" class="section level4">
-<h4 class="hasAnchor">
-<a href="#libbacktrace-on-the-mac" class="anchor" aria-hidden="true"></a>libbacktrace on the Mac</h4>
+<div class="section level4">
+<h4 id="libbacktrace-on-the-mac">libbacktrace on the Mac<a class="anchor" aria-label="anchor" href="#libbacktrace-on-the-mac"></a>
+</h4>
 <ul>
 <li><p>The libbacktrace tests succeed</p></li>
 <li><p>The winch package can be built with libbacktrace enabled</p></li>
 <li><p>Running the winch examples gives a segmentation fault</p></li>
 </ul>
 </div>
-<div id="libbacktrace-on-windows" class="section level4">
-<h4 class="hasAnchor">
-<a href="#libbacktrace-on-windows" class="anchor" aria-hidden="true"></a>libbacktrace on Windows</h4>
+<div class="section level4">
+<h4 id="libbacktrace-on-windows">libbacktrace on Windows<a class="anchor" aria-label="anchor" href="#libbacktrace-on-windows"></a>
+</h4>
 <ul>
 <li>libbacktrace works on mingw64 with gcc patch: <a href="https://github.com/gcc-mirror/gcc/pull/48" class="external-link uri">https://github.com/gcc-mirror/gcc/pull/48</a>
 <ul>
@@ -428,9 +428,9 @@ Backtrace:
 </li>
 </ul>
 </div>
-<div id="options-not-considered" class="section level4">
-<h4 class="hasAnchor">
-<a href="#options-not-considered" class="anchor" aria-hidden="true"></a>Options not considered</h4>
+<div class="section level4">
+<h4 id="options-not-considered">Options not considered<a class="anchor" aria-label="anchor" href="#options-not-considered"></a>
+</h4>
 <ul>
 <li><p><a href="https://www.boost.org/doc/libs/master/boost/stacktrace/detail/collect_unwind.ipp" class="external-link">boost stacktrace</a> has not been tried yet</p></li>
 <li><p>The <a href="http://stacktrace.sourceforge.net/" class="external-link">stacktrace</a> library is from 2009, was last changed 2013</p></li>
@@ -438,16 +438,16 @@ Backtrace:
 </ul>
 </div>
 </div>
-<div id="retrieving-module-name" class="section level3">
-<h3 class="hasAnchor">
-<a href="#retrieving-module-name" class="anchor" aria-hidden="true"></a>Retrieving module name</h3>
+<div class="section level3">
+<h3 id="retrieving-module-name">Retrieving module name<a class="anchor" aria-label="anchor" href="#retrieving-module-name"></a>
+</h3>
 <p>Perhaps not surprising, mapping IPs to module names also requires platform-specific code. On Linux, the mapping is provided through the <code>/proc/self/maps</code> virtual file. Other systems require vastly different approaches. It appears that there is not a library dedicated specifically to this problem.</p>
 <p>The <a href="https://github.com/gperftools/gperftools" class="external-link">gperftools repository</a> contains relevant code targeting all platforms of interest. I extracted this code in the procmaps package, now on CRAN.</p>
 <p>A first release, version 0.0.1, was flagged due to a too complex <code>./configure</code> script. With further simplification it was possible to avoid configuration entirely. It should be possible to rewrite the relevant code in C to provide a standalone solution that is applicable in a wider context.</p>
 </div>
-<div id="retrieving-file-line" class="section level3">
-<h3 class="hasAnchor">
-<a href="#retrieving-file-line" class="anchor" aria-hidden="true"></a>Retrieving file + line</h3>
+<div class="section level3">
+<h3 id="retrieving-file-line">Retrieving file + line<a class="anchor" aria-label="anchor" href="#retrieving-file-line"></a>
+</h3>
 <p>When file and line are provided for function calls in the stack trace, debugging is even easier. This information is also relevant for profiling, so that the costs of each source line can be estimated.</p>
 <p>The libbacktrace library optionally provides file + line information for each entry in the stack trace.</p>
 <p>Unfortunately it currently does not work on macOS:</p>
@@ -459,20 +459,20 @@ Backtrace:
 <p>Once a fully portable solution is found, this information should be provided by <code><a href="../reference/winch_add_trace_back.html">winch_add_trace_back()</a></code>.</p>
 </div>
 </div>
-<div id="history-jointprof-part-1" class="section level2">
-<h2 class="hasAnchor">
-<a href="#history-jointprof-part-1" class="anchor" aria-hidden="true"></a>History: jointprof part 1</h2>
+<div class="section level2">
+<h2 id="history-jointprof-part-1">History: jointprof part 1<a class="anchor" aria-label="anchor" href="#history-jointprof-part-1"></a>
+</h2>
 <p>The main result of the first part of the project is the <code>jointprof</code> package, which implements a proof of concept for recording native and R stack traces in parallel, exclusively during profiling. It uses <a href="https://github.com/gperftools/gperftools" class="external-link">the gperftools library</a> to record native stack traces, and daisy chains into the profiling routine provided by R to record R stack traces. A helper package, <code>profile</code>, processes the profiler data created by gperftools.</p>
 <p>This approach works on Linux only. On macOS, a patch is required; Windows is completely unsupported. The approach is a bit brittle. Occasionally stack traces could not be matched. Fusion of stack traces for debugging purposes is not possible.</p>
 <p>Will Landau contributed the <code>proffer</code> package to the project, a drop-in replacement to profvis that uses <a href="https://github.com/google/pprof" class="external-link">pprof</a> to visualize profiles.</p>
 </div>
-<div id="appendix" class="section level2">
-<h2 class="hasAnchor">
-<a href="#appendix" class="anchor" aria-hidden="true"></a>Appendix</h2>
+<div class="section level2">
+<h2 id="appendix">Appendix<a class="anchor" aria-label="anchor" href="#appendix"></a>
+</h2>
 <p>Scratch pad for information that doesn’t fit elsewhere.</p>
-<div id="further-documentation-links" class="section level3">
-<h3 class="hasAnchor">
-<a href="#further-documentation-links" class="anchor" aria-hidden="true"></a>Further documentation links</h3>
+<div class="section level3">
+<h3 id="further-documentation-links">Further documentation links<a class="anchor" aria-label="anchor" href="#further-documentation-links"></a>
+</h3>
 <ul>
 <li>
 <p>symbolic backtrace:</p>
@@ -483,9 +483,9 @@ Backtrace:
 <li><p>related project in Nim: <a href="https://github.com/timotheecour/Nim/issues/49" class="external-link uri">https://github.com/timotheecour/Nim/issues/49</a></p></li>
 </ul>
 </div>
-<div id="accompanying-work" class="section level3">
-<h3 class="hasAnchor">
-<a href="#accompanying-work" class="anchor" aria-hidden="true"></a>Accompanying work</h3>
+<div class="section level3">
+<h3 id="accompanying-work">Accompanying work<a class="anchor" aria-label="anchor" href="#accompanying-work"></a>
+</h3>
 <ul>
 <li>
 <p>r-windows: submitted ccache pull request – package and usage</p>
@@ -506,9 +506,9 @@ Backtrace:
 </li>
 </ul>
 </div>
-<div id="technical-details-1" class="section level3">
-<h3 class="hasAnchor">
-<a href="#technical-details-1" class="anchor" aria-hidden="true"></a>Technical details</h3>
+<div class="section level3">
+<h3 id="technical-details-1">Technical details<a class="anchor" aria-label="anchor" href="#technical-details-1"></a>
+</h3>
 <ul>
 <li>
 <p>sjlj vs. seh (why the difference between 32 and 64 bits?):</p>
@@ -536,12 +536,12 @@ Backtrace:
 
       <footer><div class="copyright">
   <p></p>
-<p>Developed by <a href="https://krlmlr.info" class="external-link external-link">Kirill Müller</a>, <a href="https://www.r-consortium.org" class="external-link external-link">R Consortium</a>, Ian Lance Taylor.</p>
+<p>Developed by <a href="https://krlmlr.info" class="external-link">Kirill Müller</a>, <a href="https://www.r-consortium.org" class="external-link">R Consortium</a>, Ian Lance Taylor.</p>
 </div>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link external-link">pkgdown</a> 1.6.1.9001.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.9000.9000.9000.</p>
 </div>
 
       </footer>

@@ -35,7 +35,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">winch</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.0.6.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.0.7.9000</span>
       </span>
     </div>
 
@@ -62,7 +62,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/r-prof/winch/">
+  <a href="https://github.com/r-prof/winch/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -79,16 +79,16 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="winch" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#winch" class="anchor" aria-hidden="true"></a>winch</h1></div>
+<div class="section level1">
+<div class="page-header"><h1 id="winch">winch<a class="anchor" aria-label="anchor" href="#winch"></a>
+</h1></div>
 <!-- badges: start -->
 
 <!-- badges: end -->
 <p>Winch provides stack traces for call chains that cross between R and C function calls. This is a useful tool for developers of R packages where a substantial portion of the code is C or C++.</p>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor" aria-hidden="true"></a>Installation</h2>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
 <p>Install the released version of winch from <a href="https://cran.r-project.org/" class="external-link">CRAN</a> with:</p>
 <pre class="chroma">
 <span class="nf"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span>(<span class="s">"winch"</span>)
@@ -98,9 +98,9 @@
 <span class="k">devtools</span>::<span class="nf"><a href="https://devtools.r-lib.org//reference/remote-reexports.html" class="external-link">install_github</a></span>(<span class="s">"r-lib/winch"</span>)
 </pre>
 </div>
-<div id="example" class="section level2">
-<h2 class="hasAnchor">
-<a href="#example" class="anchor" aria-hidden="true"></a>Example</h2>
+<div class="section level2">
+<h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
+</h2>
 <p>Below is an example where an R function calls into C which calls back into R. Note the second-to-last entry in the trace:</p>
 <pre class="chroma">
 <span class="nf"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span>(<span class="k"><a href="https://r-prof.github.io/winch/" class="external-link">winch</a></span>)
@@ -203,24 +203,24 @@
 <span id="cb1-7"><a href="#cb1-7"></a> <span class="fl">2.</span>   └─<span class="st">`</span><span class="dt">/vctrs.so</span><span class="st">`</span><span class="op">::</span><span class="kw">vctrs_as_location</span>()</span>
 <span id="cb1-8"><a href="#cb1-8"></a> <span class="fl">3.</span>     └─<span class="st">`</span><span class="dt">/vctrs.so</span><span class="st">`</span><span class="op">::</span><span class="kw">vec_as_location_opts</span>()</span></code></pre></div>
 </div>
-<div id="how-does-it-work" class="section level2">
-<h2 class="hasAnchor">
-<a href="#how-does-it-work" class="anchor" aria-hidden="true"></a>How does it work?</h2>
+<div class="section level2">
+<h2 id="how-does-it-work">How does it work?<a class="anchor" aria-label="anchor" href="#how-does-it-work"></a>
+</h2>
 <p>winch uses a very simple heuristic. R’s traceback (and also profiling) infrastructure introduces the notion of a “context”. Every call to an R function opens a new context and closes it when execution of the function ends. Unfortunately, no new context is established for native code called with <a href="https://rdrr.io/r/base/CallExternal.html" class="external-link"><code>.Call()</code></a> or <a href="https://rdrr.io/r/base/CallExternal.html" class="external-link"><code>.External()</code></a>. Establishing contexts expends precious run time, so this may be the reason for the omission.</p>
 <p>To work around this limitation, the source code of all R functions along the call chain is scanned for instances of <code>.Call</code> and <code>.External</code>. The native call stack (obtained via <a href="https://github.com/libunwind/libunwind" class="external-link">libunwind</a> or <a href="https://github.com/ianlancetaylor/libbacktrace" class="external-link">libbacktrace</a>) is scanned for chunks of code outside of <code>libR.so</code> (R’s main library) – these are assumed to correspond to <a href="https://rdrr.io/r/base/CallExternal.html" class="external-link"><code>.Call()</code></a> or <a href="https://rdrr.io/r/base/CallExternal.html" class="external-link"><code>.External()</code></a>. The native traces are embedded as artificial calls into the R stack trace.</p>
 </div>
-<div id="limitations" class="section level2">
-<h2 class="hasAnchor">
-<a href="#limitations" class="anchor" aria-hidden="true"></a>Limitations</h2>
+<div class="section level2">
+<h2 id="limitations">Limitations<a class="anchor" aria-label="anchor" href="#limitations"></a>
+</h2>
 <ul>
 <li>The matching will not be perfect, but it may still lead to faster discovery of the cause of an error.</li>
 <li>On Windows winch only works on x64, and there the traces can be obtained only for one shared library at a time. See <a href="https://r-prof.github.io/winch/reference/winch_init_library.html" class="external-link"><code>winch_init_library()</code></a> for details.</li>
 </ul>
 <hr>
 </div>
-<div id="code-of-conduct" class="section level2">
-<h2 class="hasAnchor">
-<a href="#code-of-conduct" class="anchor" aria-hidden="true"></a>Code of Conduct</h2>
+<div class="section level2">
+<h2 id="code-of-conduct">Code of Conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>
+</h2>
 <p>Please note that the winch project is released with a <a href="https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html" class="external-link">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>
 </div>
@@ -230,11 +230,11 @@
     <div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=winch">https://​cloud.r-project.org/​package=winch</a>
+<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=winch" class="external-link">https://​cloud.r-project.org/​package=winch</a>
 </li>
-<li>Browse source code at <br><a href="https://github.com/r-prof/winch/">https://​github.com/​r-prof/​winch/​</a>
+<li>Browse source code at <br><a href="https://github.com/r-prof/winch/" class="external-link">https://​github.com/​r-prof/​winch/​</a>
 </li>
-<li>Report a bug at <br><a href="https://github.com/r-prof/winch/issues">https://​github.com/​r-prof/​winch/​issues</a>
+<li>Report a bug at <br><a href="https://github.com/r-prof/winch/issues" class="external-link">https://​github.com/​r-prof/​winch/​issues</a>
 </li>
 </ul>
 </div>
@@ -242,7 +242,7 @@
 <div class="license">
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
-<li><a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a></li>
+<li><a href="https://www.r-project.org/Licenses/GPL-3" class="external-link">GPL-3</a></li>
 </ul>
 </div>
 
@@ -257,9 +257,9 @@
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>
-<a href="https://krlmlr.info">Kirill Müller</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-1416-3412" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<a href="https://krlmlr.info" class="external-link">Kirill Müller</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-1416-3412" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>
-<a href="https://www.r-consortium.org">R Consortium</a> <br><small class="roles"> Funder </small>  </li>
+<a href="https://www.r-consortium.org" class="external-link">R Consortium</a> <br><small class="roles"> Funder </small>  </li>
 <li>Ian Lance Taylor <br><small class="roles"> Author </small>  </li>
 <li><a href="authors.html">More on authors...</a></li>
 </ul>
@@ -285,7 +285,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.9000.9000.9000.</p>
 </div>
 
       </footer>
