@@ -428,6 +428,6 @@ Scratch pad for information that doesn't fit elsewhere.
 
     - https://stat.ethz.ch/pipermail/r-sig-windows/2015q3/000020.html
 
-    - http://mingw-w64.org/doku.php/contribute
+    - https://www.mingw-w64.org/contribute/
 
 - `R_GlobalContext` is accessed from several R packages, CRAN checks catch this
