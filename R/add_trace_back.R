@@ -23,11 +23,6 @@ winch_add_trace_back <- function(trace = rlang::trace_back(bottom = parent.frame
     return(trace)
   }
 
-  # Check for trace version
-  if (!identical(attr(trace, "version"), 1L)) {
-    return(trace)
-  }
-
   # Avoid recursion
   old_options <- options(rlang_trace_use_winch = NULL)
   on.exit(options(old_options))
@@ -137,6 +132,81 @@ find_calls <- function(x) {
 }
 
 insert_native_chunk <- function(trace, idx, native) {
+  # Check for trace version
+  if (identical(attr(trace, "version"), 1L)) {
+    # pre 1.0.0
+    return(insert_native_chunk_0(trace, idx, native))
+  }
+
+  added_namespaces <- paste0("/", basename(native$pathname))
+  added_calls <- lapply(native$func, function(func) call(func))
+
+  old_size <- length(trace$call)
+  new_size <- old_size + length(added_calls)
+  if (old_size == new_size) {
+    # Nothing to do
+    return(native)
+  }
+
+  # Prepare for pasting
+  added_idx <- seq.int(idx + 1L, length.out = length(added_calls))
+  added_parents <- lag(added_idx, default = idx)
+  rechain_idx <- added_idx[[length(added_idx)]]
+
+  # Create translation table
+  xlat <- c(
+    seq_len(idx),
+    seq.int(idx + length(added_calls) + 1L, length.out = old_size - idx)
+  )
+  xlat1 <- c(0L, xlat)
+
+  # Move
+  new_parents <- rep(-1L, new_size)
+  new_parents[xlat] <- xlat1[trace$parent + 1L]
+
+  new_calls <- rep(NULL, new_size)
+  new_calls[xlat] <- trace$call
+
+  new_visible <- rep(TRUE, new_size)
+  new_visible[xlat] <- trace$visible
+
+  new_namespace <- rep(NA_character_, new_size)
+  new_namespace[xlat] <- trace$namespace
+
+  new_scope <- rep(NA_character_, new_size)
+  new_scope[xlat] <- trace$scope
+
+  new_idx <- seq_len(new_size)
+
+  # Rechain existing
+  parents_fix_idx <- (new_parents == idx)
+  grandparents_fix_idx <- (new_parents == new_parents[[idx]] & seq_along(new_parents) > idx)
+  new_parents[parents_fix_idx | grandparents_fix_idx] <- rechain_idx
+
+  # Paste (after rechaining!)
+  new_parents[added_idx] <- added_parents
+  new_calls[added_idx] <- added_calls
+  new_namespace[added_idx] <- added_namespaces
+  new_scope[added_idx] <- "::"
+
+  # Use new
+  new <- data.frame(
+    call = new_parents, parent = new_parents,
+    visible = new_visible, namespace = new_namespace, scope = new_scope,
+    stringsAsFactors = FALSE
+  )
+  # Can't pass in constructor
+  new$call <- new_calls
+
+  # Clumsy way of replacing the contents of `trace` without touching the attributes
+  new_idx <- seq_len(nrow(new))
+  trace[new_idx, ] <- trace[new_idx, ]
+  trace[] <- new
+
+  trace
+}
+
+insert_native_chunk_0 <- function(trace, idx, native) {
   added_calls <- Map(
     basename(native$pathname),
     native$func,
