@@ -133,7 +133,7 @@ find_calls <- function(x) {
 
 insert_native_chunk <- function(trace, idx, native) {
   # Check for trace version
-  if (!identical(attr(trace, "version"), 1L)) {
+  if (identical(attr(trace, "version"), 1L)) {
     # pre 1.0.0
     return(insert_native_chunk_0(trace, idx, native))
   }
