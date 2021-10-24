@@ -1,3 +1,11 @@
+<!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
+
+# winch 0.0.6.9001 (2021-10-24)
+
+- Fix compatibility with dev rlang (#50).
+- Use correct `printf()` format for `uintptr_t` (#48, @QuLogic).
+
+
 # winch 0.0.6.9000 (2020-11-16)
 
 - Work around CRAN check failures on Linux with C locale and Windows oldrel (#45).
