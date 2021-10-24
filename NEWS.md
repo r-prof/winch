@@ -7,39 +7,8 @@
 
 # winch 0.0.7 (2021-10-24)
 
-- Same as previous version.
-
-
-# winch 0.0.6.9005 (2021-10-24)
-
-- Same as previous version.
-
-
-# winch 0.0.6.9004 (2021-10-24)
-
-- Same as previous version.
-
-
-# winch 0.0.6.9003 (2021-10-24)
-
-- Same as previous version.
-
-
-# winch 0.0.6.9002 (2021-10-24)
-
-- Same as previous version.
-
-
-# winch 0.0.6.9001 (2021-10-24)
-
 - Fix compatibility with dev rlang (#50).
 - Use correct `printf()` format for `uintptr_t` (#48, @QuLogic).
-
-
-# winch 0.0.6.9000 (2020-11-16)
-
-- Work around CRAN check failures on Linux with C locale and Windows oldrel (#45).
-- Enable more tests on CRAN (#43).
 
 
 # winch 0.0.6 (2020-11-16)

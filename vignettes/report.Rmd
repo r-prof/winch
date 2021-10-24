@@ -395,7 +395,7 @@ Scratch pad for information that doesn't fit elsewhere.
 
 - symbolic backtrace:
 
-    - dwarf (http://kamalmarhubi.com/blog/2016/07/25/some-things-i-learned-about-libdwarf/), elf, ...
+    - dwarf (https://kamalmarhubi.com/blog/2016/07/25/some-things-i-learned-about-libdwarf/), elf, ...
 
 - related project in Nim: https://github.com/timotheecour/Nim/issues/49
 
@@ -428,6 +428,6 @@ Scratch pad for information that doesn't fit elsewhere.
 
     - https://stat.ethz.ch/pipermail/r-sig-windows/2015q3/000020.html
 
-    - http://mingw-w64.org/doku.php/contribute
+    - https://www.mingw-w64.org/contribute/
 
 - `R_GlobalContext` is accessed from several R packages, CRAN checks catch this
