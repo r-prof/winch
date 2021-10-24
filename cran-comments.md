@@ -16,6 +16,4 @@ Check the boxes above after successful execution and remove this line. Then run 
 
 - [x] Checked on 2021-10-24, problems found: https://cran.r-project.org/web/checks/check_results_winch.html
 - [x] NOTE: r-devel-linux-x86_64-debian-clang, r-devel-linux-x86_64-debian-gcc, r-devel-linux-x86_64-fedora-clang, r-devel-linux-x86_64-fedora-gcc, r-devel-windows-x86_64, r-devel-windows-x86_64-gcc10-UCRT, r-patched-linux-x86_64, r-patched-solaris-x86, r-release-linux-x86_64, r-release-macos-arm64, r-release-macos-x86_64, r-release-windows-ix86+x86_64: LazyData removed
-- [x] WARN: r-devel-windows-x86_64-gcc10-UCRT
-
-Check results at: https://cran.r-project.org/web/checks/check_results_winch.html
+- [x] WARN: r-devel-windows-x86_64-gcc10-UCRT: Can't replicate
