@@ -56,7 +56,7 @@ It is intended to be called by rlang."><meta name="robots" content="noindex"><!-
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Enrich an rlang traceback with details on native calls</h1>
-    <small class="dont-index">Source: <a href="https://github.com/r-prof/winch/blob/master/R/add_trace_back.R" class="external-link"><code>R/add_trace_back.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/r-prof/winch/blob/HEAD/R/add_trace_back.R" class="external-link"><code>R/add_trace_back.R</code></a></small>
     <div class="hidden name"><code>winch_add_trace_back.Rd</code></div>
     </div>
 
@@ -66,20 +66,19 @@ to add details on native function calls to an rlang traceback object.
 It is intended to be called by rlang.</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">winch_add_trace_back</span><span class="op">(</span>trace <span class="op">=</span> <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/trace_back.html" class="external-link">trace_back</a></span><span class="op">(</span>bottom <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">parent.frame</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-
-    <div id="ref-sections">
-    <div id="arguments">
-    <h2>Arguments</h2>
-    
-
-<dl><dt>trace</dt><dd><p>An rlang traceback as returned by <code><a href="https://rlang.r-lib.org/reference/trace_back.html" class="external-link">rlang::trace_back()</a></code>.</p></dd>
-</dl></div>
+    <div id="ref-usage">
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">winch_add_trace_back</span><span class="op">(</span>trace <span class="op">=</span> <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/trace_back.html" class="external-link">trace_back</a></span><span class="op">(</span>bottom <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">parent.frame</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
     </div>
 
-    <div id="examples">
+    <div id="arguments">
+    <h2>Arguments</h2>
+    <dl><dt>trace</dt>
+<dd><p>An rlang traceback as returned by <code><a href="https://rlang.r-lib.org/reference/trace_back.html" class="external-link">rlang::trace_back()</a></code>.</p></dd>
+</dl></div>
+
+    <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">foo</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">foo</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
 <span class="r-in">  <span class="fu"><a href="winch_call.html">winch_call</a></span><span class="op">(</span><span class="va">bar</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">}</span></span>
 <span class="r-in"></span>
@@ -135,7 +134,7 @@ It is intended to be called by rlang.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.9000.9000.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.9000.</p>
 </div>
 
       </footer></div>

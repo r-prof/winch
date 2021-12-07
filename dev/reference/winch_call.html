@@ -54,7 +54,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Call an R function from native code</h1>
-    <small class="dont-index">Source: <a href="https://github.com/r-prof/winch/blob/master/R/call.R" class="external-link"><code>R/call.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/r-prof/winch/blob/HEAD/R/call.R" class="external-link"><code>R/call.R</code></a></small>
     <div class="hidden name"><code>winch_call.Rd</code></div>
     </div>
 
@@ -62,15 +62,16 @@
     <p>Primarily intended for testing.</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">winch_call</span><span class="op">(</span><span class="va">fun</span>, env <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">parent.frame</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+    <div id="ref-usage">
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">winch_call</span><span class="op">(</span><span class="va">fun</span>, env <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">parent.frame</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+    </div>
 
-    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    
-
-<dl><dt>fun</dt><dd><p>A function callable without arguments.</p></dd>
-</dl><dl><dt>env</dt><dd><p>The environment in which to evaluate the function call.</p></dd>
+    <dl><dt>fun</dt>
+<dd><p>A function callable without arguments.</p></dd>
+<dt>env</dt>
+<dd><p>The environment in which to evaluate the function call.</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>
@@ -80,11 +81,10 @@
     <h2>See also</h2>
     <div class="dont-index"><p><code><a href="winch_stop.html">winch_stop()</a></code></p></div>
     </div>
-    </div>
 
-    <div id="examples">
+    <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">foo</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">foo</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
 <span class="r-in">  <span class="fu">winch_call</span><span class="op">(</span><span class="va">bar</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">}</span></span>
 <span class="r-in"></span>
@@ -109,7 +109,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.9000.9000.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.9000.</p>
 </div>
 
       </footer></div>
