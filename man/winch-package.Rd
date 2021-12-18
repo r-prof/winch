@@ -6,8 +6,7 @@
 \alias{winch-package}
 \title{winch: Portable Native and Joint Stack Traces}
 \description{
-Obtain the native stack trace and fuse it with R's
-    stack trace for easier debugging of R packages with native code.
+Obtain the native stack trace and fuse it with R's stack trace for easier debugging of R packages with native code.
 }
 \seealso{
 Useful links:
