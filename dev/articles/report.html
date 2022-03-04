@@ -44,7 +44,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -201,34 +201,34 @@
 
 <span class="va">trace</span> <span class="op">&lt;-</span> <span class="fu">foo</span><span class="op">(</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">trace</span><span class="op">)</span>
-<span class="co">#&gt; [1] 231</span>
+<span class="co">#&gt; [1] 235</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">trace</span>, <span class="fl">25</span><span class="op">)</span>
 <span class="co">#&gt;                  func               ip</span>
-<span class="co">#&gt; 1            do_Rprof 00007f4a8267b8b0</span>
-<span class="co">#&gt; 2             Rf_eval 00007f4a8269a8c0</span>
-<span class="co">#&gt; 3             Rf_eval 00007f4a8269c560</span>
-<span class="co">#&gt; 4     Rf_applyClosure 00007f4a8269d560</span>
-<span class="co">#&gt; 5             Rf_eval 00007f4a8269a8c0</span>
-<span class="co">#&gt; 6        R_execMethod 00007f4a8269e350</span>
-<span class="co">#&gt; 7             Rf_eval 00007f4a8269a8c0</span>
-<span class="co">#&gt; 8             Rf_eval 00007f4a8269c560</span>
-<span class="co">#&gt; 9     Rf_applyClosure 00007f4a8269d560</span>
-<span class="co">#&gt; 10            Rf_eval 00007f4a8269a8c0</span>
-<span class="co">#&gt; 11         winch_call 00007f4a78027720</span>
-<span class="co">#&gt; 12 Rf_NewFrameConfirm 00007f4a82642b10</span>
-<span class="co">#&gt; 13           do_Rprof 00007f4a8267b8b0</span>
-<span class="co">#&gt; 14            Rf_eval 00007f4a8269a8c0</span>
-<span class="co">#&gt; 15            Rf_eval 00007f4a8269c560</span>
-<span class="co">#&gt; 16    Rf_applyClosure 00007f4a8269d560</span>
-<span class="co">#&gt; 17           do_Rprof 00007f4a8267b8b0</span>
-<span class="co">#&gt; 18            Rf_eval 00007f4a8269a8c0</span>
-<span class="co">#&gt; 19            Rf_eval 00007f4a8269c560</span>
-<span class="co">#&gt; 20    Rf_applyClosure 00007f4a8269d560</span>
-<span class="co">#&gt; 21            Rf_eval 00007f4a8269a8c0</span>
-<span class="co">#&gt; 22         winch_call 00007f4a78027720</span>
-<span class="co">#&gt; 23 Rf_NewFrameConfirm 00007f4a82642b10</span>
-<span class="co">#&gt; 24           do_Rprof 00007f4a8267b8b0</span>
-<span class="co">#&gt; 25            Rf_eval 00007f4a8269a8c0</span>
+<span class="co">#&gt; 1            do_Rprof 00007ff16793e8b0</span>
+<span class="co">#&gt; 2             Rf_eval 00007ff16795d8c0</span>
+<span class="co">#&gt; 3             Rf_eval 00007ff16795f560</span>
+<span class="co">#&gt; 4     Rf_applyClosure 00007ff167960560</span>
+<span class="co">#&gt; 5             Rf_eval 00007ff16795d8c0</span>
+<span class="co">#&gt; 6        R_execMethod 00007ff167961350</span>
+<span class="co">#&gt; 7             Rf_eval 00007ff16795d8c0</span>
+<span class="co">#&gt; 8             Rf_eval 00007ff16795f560</span>
+<span class="co">#&gt; 9     Rf_applyClosure 00007ff167960560</span>
+<span class="co">#&gt; 10            Rf_eval 00007ff16795d8c0</span>
+<span class="co">#&gt; 11         winch_call 00007ff15d2e9720</span>
+<span class="co">#&gt; 12 Rf_NewFrameConfirm 00007ff167905b10</span>
+<span class="co">#&gt; 13           do_Rprof 00007ff16793e8b0</span>
+<span class="co">#&gt; 14            Rf_eval 00007ff16795d8c0</span>
+<span class="co">#&gt; 15            Rf_eval 00007ff16795f560</span>
+<span class="co">#&gt; 16    Rf_applyClosure 00007ff167960560</span>
+<span class="co">#&gt; 17           do_Rprof 00007ff16793e8b0</span>
+<span class="co">#&gt; 18            Rf_eval 00007ff16795d8c0</span>
+<span class="co">#&gt; 19            Rf_eval 00007ff16795f560</span>
+<span class="co">#&gt; 20    Rf_applyClosure 00007ff167960560</span>
+<span class="co">#&gt; 21            Rf_eval 00007ff16795d8c0</span>
+<span class="co">#&gt; 22         winch_call 00007ff15d2e9720</span>
+<span class="co">#&gt; 23 Rf_NewFrameConfirm 00007ff167905b10</span>
+<span class="co">#&gt; 24           do_Rprof 00007ff16793e8b0</span>
+<span class="co">#&gt; 25            Rf_eval 00007ff16795d8c0</span>
 <span class="co">#&gt;                                               pathname</span>
 <span class="co">#&gt; 1                               /usr/lib/R/lib/libR.so</span>
 <span class="co">#&gt; 2                               /usr/lib/R/lib/libR.so</span>
@@ -262,7 +262,7 @@
 <span class="co">#&gt;                               /usr/lib/R/bin/exec/R </span>
 <span class="co">#&gt;                                                   2 </span>
 <span class="co">#&gt;                              /usr/lib/R/lib/libR.so </span>
-<span class="co">#&gt;                                                 226 </span>
+<span class="co">#&gt;                                                 230 </span>
 <span class="co">#&gt;              /usr/lib/x86_64-linux-gnu/libc-2.31.so </span>
 <span class="co">#&gt;                                                   1</span></code></pre></div>
 <p><code><a href="../reference/winch_trace_back.html">winch_trace_back()</a></code> is a low-level function not intended to be called by the user. It is a cornerstone for joint backtraces provided by <code><a href="../reference/winch_add_trace_back.html">winch_add_trace_back()</a></code>, as shown in the next section. For now, <code><a href="../reference/winch_trace_back.html">winch_trace_back()</a></code> provides the native function name and the library name on all tested platforms (Linux, macOS, Windows). Information about file + line remains an open issue.</p>
