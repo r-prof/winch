@@ -20,7 +20,7 @@ running process's entry point."><!-- mathjax --><script src="https://cdnjs.cloud
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">winch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.8</span>
       </span>
     </div>
 
@@ -29,7 +29,7 @@ running process's entry point."><!-- mathjax --><script src="https://cdnjs.cloud
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -57,7 +57,7 @@ running process's entry point."><!-- mathjax --><script src="https://cdnjs.cloud
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Native stack trace</h1>
-    <small class="dont-index">Source: <a href="https://github.com/r-prof/winch/blob/master/R/trace_back.R" class="external-link"><code>R/trace_back.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/r-prof/winch/blob/HEAD/R/trace_back.R" class="external-link"><code>R/trace_back.R</code></a></small>
     <div class="hidden name"><code>winch_trace_back.Rd</code></div>
     </div>
 
@@ -68,9 +68,10 @@ Deep function calls come first, the last row corresponds to the
 running process's entry point.</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">winch_trace_back</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+    <div id="ref-usage">
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">winch_trace_back</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+    </div>
 
-    <div id="ref-sections">
     <div id="value">
     <h2>Value</h2>
     <p>A data frame with the columns:</p><ul><li><p><code>func</code>: function name</p></li>
@@ -86,167 +87,170 @@ for a specific package.</p>
     <h2>See also</h2>
     <div class="dont-index"><p><code><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">sys.calls()</a></code> for the R equivalent.</p></div>
     </div>
-    </div>
 
-    <div id="examples">
+    <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">winch_trace_back</span><span class="op">(</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">winch_trace_back</span><span class="op">(</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                   func               ip</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1             do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2              Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3              Rf_eval 00007f72e49290e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4      Rf_applyClosure 00007f72e492a000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5              Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6       R_forceAndCall 00007f72e492d470</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7             do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8              Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9              Rf_eval 00007f72e49290e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10     Rf_applyClosure 00007f72e492a000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11            do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12             Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13             Rf_eval 00007f72e4927ed0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14             Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15      R_forceAndCall 00007f72e492e240</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16         do_Rprofmem 00007f72e496b6c0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17            do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18             Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19             Rf_eval 00007f72e49290e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20     Rf_applyClosure 00007f72e492a000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 21            do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 22             Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 23             Rf_eval 00007f72e4927ed0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 24             Rf_eval 00007f72e4928010</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 25            do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 26             Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 27             Rf_eval 00007f72e49290e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 28     Rf_applyClosure 00007f72e492a000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 29            do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 30             Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 31             Rf_eval 00007f72e4927ed0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 32             Rf_eval 00007f72e4928010</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 33            do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 34             Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 35             Rf_eval 00007f72e4927ed0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 36             Rf_eval 00007f72e4928010</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 37            do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 38             Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 39             Rf_eval 00007f72e4927ed0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 40             Rf_eval 00007f72e4928010</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 41            do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 42             Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 43             Rf_eval 00007f72e4927ed0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 44             Rf_eval 00007f72e4928010</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 45            do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 46             Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 47             Rf_eval 00007f72e4927ed0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 48             Rf_eval 00007f72e4928010</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 49            do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 50             Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 51             Rf_eval 00007f72e4927ed0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 52             Rf_eval 00007f72e4928010</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 53            do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 54             Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 55             Rf_eval 00007f72e49290e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 56     Rf_applyClosure 00007f72e492a000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 57            do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 58             Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 59             Rf_eval 00007f72e49290e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 60     Rf_applyClosure 00007f72e492a000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 61            do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 62             Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 63             Rf_eval 00007f72e49290e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 64     Rf_applyClosure 00007f72e492a000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 65            do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 66             Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 67             Rf_eval 00007f72e49290e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 68     Rf_applyClosure 00007f72e492a000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 69            do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 70             Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 71             Rf_eval 00007f72e49290e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 72     Rf_applyClosure 00007f72e492a000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 73            do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 74             Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 75             Rf_eval 00007f72e49290e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 76     Rf_applyClosure 00007f72e492a000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 77            do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 78             Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 79             Rf_eval 00007f72e4927ed0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 80             Rf_eval 00007f72e4928010</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 81            do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 82             Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 83             Rf_eval 00007f72e49290e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 84     Rf_applyClosure 00007f72e492a000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 85            do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 86             Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 87             Rf_eval 00007f72e49290e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 88     Rf_applyClosure 00007f72e492a000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 89            do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 90             Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 91             Rf_eval 00007f72e49290e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 92     Rf_applyClosure 00007f72e492a000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 93            do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 94             Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 95             Rf_eval 00007f72e49290e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 96     Rf_applyClosure 00007f72e492a000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 97            do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 98             Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 99             Rf_eval 00007f72e49290e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 100    Rf_applyClosure 00007f72e492a000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 101           do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 102            Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 103            Rf_eval 00007f72e49290e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 104    Rf_applyClosure 00007f72e492a000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 105           do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 106            Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 107            Rf_eval 00007f72e49290e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 108    Rf_applyClosure 00007f72e492a000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 109           do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 110            Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 111            Rf_eval 00007f72e4927ed0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 112            Rf_eval 00007f72e4928010</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 113           do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 114            Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 115            Rf_eval 00007f72e49290e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 116    Rf_applyClosure 00007f72e492a000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 117           do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 118            Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 119            Rf_eval 00007f72e49290e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 120    Rf_applyClosure 00007f72e492a000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 121     R_forceAndCall 00007f72e492cb30</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 122          call_loop 00007f72d5f913b0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 123           map_impl 00007f72d5f91500</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 124 Rf_NewFrameConfirm 00007f72e48da6e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 125           do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 126            Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 127            Rf_eval 00007f72e49290e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 128    Rf_applyClosure 00007f72e492a000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 129           do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 130            Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 131            Rf_eval 00007f72e49290e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 132    Rf_applyClosure 00007f72e492a000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 133           do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 134            Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 135            Rf_eval 00007f72e49290e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 136    Rf_applyClosure 00007f72e492a000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 137           do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 138            Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 139            Rf_eval 00007f72e49290e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 140    Rf_applyClosure 00007f72e492a000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 141           do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 142            Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 143            Rf_eval 00007f72e49290e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 144    Rf_applyClosure 00007f72e492a000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 145           do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 146            Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 147            Rf_eval 00007f72e49290e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 148    Rf_applyClosure 00007f72e492a000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 149            Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 150   Rf_ReplIteration 00007f72e495b5d0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 151   Rf_ReplIteration 00007f72e495bb60</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 152      run_Rmainloop 00007f72e495bc50</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 153               main 000055c4d06f0820</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 154  __libc_start_main 00007f72e4412b10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 155             _start 000055c4d06f0850</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1             do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2              Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3              Rf_eval 00007fee83fc3560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4      Rf_applyClosure 00007fee83fc4560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5              Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6       R_forceAndCall 00007fee83fc7780</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7             do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8              Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9              Rf_eval 00007fee83fc3560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10     Rf_applyClosure 00007fee83fc4560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11            do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12             Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13             Rf_eval 00007fee83fc3560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14     Rf_applyClosure 00007fee83fc4560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15            do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16             Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17             Rf_eval 00007fee83fc2310</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18             Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19      R_forceAndCall 00007fee83fc8530</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20         do_Rprofmem 00007fee840060d0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21            do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22             Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23             Rf_eval 00007fee83fc3560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24     Rf_applyClosure 00007fee83fc4560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25            do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26             Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27             Rf_eval 00007fee83fc2310</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28             Rf_eval 00007fee83fc2450</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29            do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30             Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 31             Rf_eval 00007fee83fc3560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 32     Rf_applyClosure 00007fee83fc4560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 33            do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 34             Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 35             Rf_eval 00007fee83fc2310</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36             Rf_eval 00007fee83fc2450</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 37            do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 38             Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 39             Rf_eval 00007fee83fc2310</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 40             Rf_eval 00007fee83fc2450</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41            do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 42             Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 43             Rf_eval 00007fee83fc2310</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 44             Rf_eval 00007fee83fc2450</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 45            do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 46             Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 47             Rf_eval 00007fee83fc2310</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 48             Rf_eval 00007fee83fc2450</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 49            do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 50             Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 51             Rf_eval 00007fee83fc2310</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 52             Rf_eval 00007fee83fc2450</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 53            do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 54             Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 55             Rf_eval 00007fee83fc2310</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 56             Rf_eval 00007fee83fc2450</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 57            do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 58             Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 59             Rf_eval 00007fee83fc3560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 60     Rf_applyClosure 00007fee83fc4560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 61            do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 62             Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 63             Rf_eval 00007fee83fc3560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 64     Rf_applyClosure 00007fee83fc4560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 65            do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 66             Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 67             Rf_eval 00007fee83fc3560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 68     Rf_applyClosure 00007fee83fc4560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 69            do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 70             Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 71             Rf_eval 00007fee83fc3560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 72     Rf_applyClosure 00007fee83fc4560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 73            do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 74             Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 75             Rf_eval 00007fee83fc3560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 76     Rf_applyClosure 00007fee83fc4560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 77            do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 78             Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 79             Rf_eval 00007fee83fc3560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 80     Rf_applyClosure 00007fee83fc4560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 81            do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 82             Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 83             Rf_eval 00007fee83fc2310</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 84             Rf_eval 00007fee83fc2450</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 85            do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 86             Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 87             Rf_eval 00007fee83fc3560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 88     Rf_applyClosure 00007fee83fc4560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 89            do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 90             Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 91             Rf_eval 00007fee83fc3560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 92     Rf_applyClosure 00007fee83fc4560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 93            do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 94             Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 95             Rf_eval 00007fee83fc3560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 96     Rf_applyClosure 00007fee83fc4560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 97            do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 98             Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 99             Rf_eval 00007fee83fc3560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 100    Rf_applyClosure 00007fee83fc4560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 101           do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 102            Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 103            Rf_eval 00007fee83fc3560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 104    Rf_applyClosure 00007fee83fc4560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 105           do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 106            Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 107            Rf_eval 00007fee83fc3560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 108    Rf_applyClosure 00007fee83fc4560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 109           do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 110            Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 111            Rf_eval 00007fee83fc3560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 112    Rf_applyClosure 00007fee83fc4560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 113           do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 114            Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 115            Rf_eval 00007fee83fc2310</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 116            Rf_eval 00007fee83fc2450</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 117           do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 118            Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 119            Rf_eval 00007fee83fc3560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 120    Rf_applyClosure 00007fee83fc4560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 121           do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 122            Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 123            Rf_eval 00007fee83fc3560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 124    Rf_applyClosure 00007fee83fc4560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 125     R_forceAndCall 00007fee83fc6ed0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 126          call_loop 00007fee7ad56670</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 127           map_impl 00007fee7ad567d0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 128 Rf_NewFrameConfirm 00007fee83f69b10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 129           do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 130            Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 131            Rf_eval 00007fee83fc3560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 132    Rf_applyClosure 00007fee83fc4560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 133           do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 134            Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 135            Rf_eval 00007fee83fc3560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 136    Rf_applyClosure 00007fee83fc4560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 137           do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 138            Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 139            Rf_eval 00007fee83fc3560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 140    Rf_applyClosure 00007fee83fc4560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 141           do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 142            Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 143            Rf_eval 00007fee83fc3560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 144    Rf_applyClosure 00007fee83fc4560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 145           do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 146            Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 147            Rf_eval 00007fee83fc3560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 148    Rf_applyClosure 00007fee83fc4560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 149           do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 150            Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 151            Rf_eval 00007fee83fc3560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 152    Rf_applyClosure 00007fee83fc4560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 153            Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 154   Rf_ReplIteration 00007fee83ff5c60</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 155   Rf_ReplIteration 00007fee83ff6170</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 156      run_Rmainloop 00007fee83ff6270</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 157               main 000055db3acfc080</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 158  __libc_start_main 00007fee83ca8fc0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 159             _start 000055db3acfc0b0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                pathname</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1                                /usr/lib/R/lib/libR.so</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2                                /usr/lib/R/lib/libR.so</span>
@@ -369,12 +373,12 @@ for a specific package.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 119                              /usr/lib/R/lib/libR.so</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 120                              /usr/lib/R/lib/libR.so</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 121                              /usr/lib/R/lib/libR.so</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 122 /home/runner/work/_temp/Library/purrr/libs/purrr.so</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 123 /home/runner/work/_temp/Library/purrr/libs/purrr.so</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 122                              /usr/lib/R/lib/libR.so</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 123                              /usr/lib/R/lib/libR.so</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 124                              /usr/lib/R/lib/libR.so</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 125                              /usr/lib/R/lib/libR.so</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 126                              /usr/lib/R/lib/libR.so</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 127                              /usr/lib/R/lib/libR.so</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 126 /home/runner/work/_temp/Library/purrr/libs/purrr.so</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 127 /home/runner/work/_temp/Library/purrr/libs/purrr.so</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 128                              /usr/lib/R/lib/libR.so</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 129                              /usr/lib/R/lib/libR.so</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 130                              /usr/lib/R/lib/libR.so</span>
@@ -400,9 +404,13 @@ for a specific package.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 150                              /usr/lib/R/lib/libR.so</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 151                              /usr/lib/R/lib/libR.so</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 152                              /usr/lib/R/lib/libR.so</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 153                               /usr/lib/R/bin/exec/R</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 154                  /lib/x86_64-linux-gnu/libc-2.27.so</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 155                               /usr/lib/R/bin/exec/R</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 153                              /usr/lib/R/lib/libR.so</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 154                              /usr/lib/R/lib/libR.so</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 155                              /usr/lib/R/lib/libR.so</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 156                              /usr/lib/R/lib/libR.so</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 157                               /usr/lib/R/bin/exec/R</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 158              /usr/lib/x86_64-linux-gnu/libc-2.31.so</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 159                               /usr/lib/R/bin/exec/R</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="va">foo</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
 <span class="r-in">  <span class="fu"><a href="winch_call.html">winch_call</a></span><span class="op">(</span><span class="va">bar</span><span class="op">)</span></span>
@@ -414,178 +422,182 @@ for a specific package.</p>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">foo</span><span class="op">(</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                   func               ip</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1             do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2              Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3              Rf_eval 00007f72e49290e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4      Rf_applyClosure 00007f72e492a000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5              Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6         R_execMethod 00007f72e492add0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7              Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8              Rf_eval 00007f72e49290e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9      Rf_applyClosure 00007f72e492a000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10             Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11          winch_call 00007f72ce254240</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12  Rf_NewFrameConfirm 00007f72e48da6e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13            do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14             Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15             Rf_eval 00007f72e49290e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16     Rf_applyClosure 00007f72e492a000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17             Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18        R_execMethod 00007f72e492add0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19             Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20             Rf_eval 00007f72e49290e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 21     Rf_applyClosure 00007f72e492a000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 22             Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 23      R_forceAndCall 00007f72e492d470</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 24            do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 25             Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 26             Rf_eval 00007f72e49290e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 27     Rf_applyClosure 00007f72e492a000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 28            do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 29             Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 30             Rf_eval 00007f72e4927ed0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 31             Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 32      R_forceAndCall 00007f72e492e240</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 33         do_Rprofmem 00007f72e496b6c0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 34            do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 35             Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 36             Rf_eval 00007f72e49290e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 37     Rf_applyClosure 00007f72e492a000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 38            do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 39             Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 40             Rf_eval 00007f72e4927ed0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 41             Rf_eval 00007f72e4928010</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 42            do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 43             Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 44             Rf_eval 00007f72e49290e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 45     Rf_applyClosure 00007f72e492a000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 46            do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 47             Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 48             Rf_eval 00007f72e4927ed0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 49             Rf_eval 00007f72e4928010</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 50            do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 51             Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 52             Rf_eval 00007f72e4927ed0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 53             Rf_eval 00007f72e4928010</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 54            do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 55             Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 56             Rf_eval 00007f72e4927ed0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 57             Rf_eval 00007f72e4928010</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 58            do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 59             Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 60             Rf_eval 00007f72e4927ed0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 61             Rf_eval 00007f72e4928010</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 62            do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 63             Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 64             Rf_eval 00007f72e4927ed0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 65             Rf_eval 00007f72e4928010</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 66            do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 67             Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 68             Rf_eval 00007f72e4927ed0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 69             Rf_eval 00007f72e4928010</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 70            do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 71             Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 72             Rf_eval 00007f72e49290e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 73     Rf_applyClosure 00007f72e492a000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 74            do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 75             Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 76             Rf_eval 00007f72e49290e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 77     Rf_applyClosure 00007f72e492a000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 78            do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 79             Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 80             Rf_eval 00007f72e49290e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 81     Rf_applyClosure 00007f72e492a000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 82            do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 83             Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 84             Rf_eval 00007f72e49290e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 85     Rf_applyClosure 00007f72e492a000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 86            do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 87             Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 88             Rf_eval 00007f72e49290e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 89     Rf_applyClosure 00007f72e492a000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 90            do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 91             Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 92             Rf_eval 00007f72e49290e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 93     Rf_applyClosure 00007f72e492a000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 94            do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 95             Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 96             Rf_eval 00007f72e4927ed0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 97             Rf_eval 00007f72e4928010</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 98            do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 99             Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 100            Rf_eval 00007f72e49290e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 101    Rf_applyClosure 00007f72e492a000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 102           do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 103            Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 104            Rf_eval 00007f72e49290e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 105    Rf_applyClosure 00007f72e492a000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 106           do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 107            Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 108            Rf_eval 00007f72e49290e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 109    Rf_applyClosure 00007f72e492a000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 110           do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 111            Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 112            Rf_eval 00007f72e49290e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 113    Rf_applyClosure 00007f72e492a000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 114           do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 115            Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 116            Rf_eval 00007f72e49290e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 117    Rf_applyClosure 00007f72e492a000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 118           do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 119            Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 120            Rf_eval 00007f72e49290e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 121    Rf_applyClosure 00007f72e492a000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 122           do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 123            Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 124            Rf_eval 00007f72e49290e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 125    Rf_applyClosure 00007f72e492a000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 126           do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 127            Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 128            Rf_eval 00007f72e4927ed0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 129            Rf_eval 00007f72e4928010</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 130           do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 131            Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 132            Rf_eval 00007f72e49290e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 133    Rf_applyClosure 00007f72e492a000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 134           do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 135            Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 136            Rf_eval 00007f72e49290e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 137    Rf_applyClosure 00007f72e492a000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 138     R_forceAndCall 00007f72e492cb30</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 139          call_loop 00007f72d5f913b0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 140           map_impl 00007f72d5f91500</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 141 Rf_NewFrameConfirm 00007f72e48da6e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 142           do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 143            Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 144            Rf_eval 00007f72e49290e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 145    Rf_applyClosure 00007f72e492a000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 146           do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 147            Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 148            Rf_eval 00007f72e49290e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 149    Rf_applyClosure 00007f72e492a000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 150           do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 151            Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 152            Rf_eval 00007f72e49290e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 153    Rf_applyClosure 00007f72e492a000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 154           do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 155            Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 156            Rf_eval 00007f72e49290e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 157    Rf_applyClosure 00007f72e492a000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 158           do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 159            Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 160            Rf_eval 00007f72e49290e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 161    Rf_applyClosure 00007f72e492a000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 162           do_Rprof 00007f72e49119e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 163            Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 164            Rf_eval 00007f72e49290e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 165    Rf_applyClosure 00007f72e492a000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 166            Rf_eval 00007f72e4927460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 167   Rf_ReplIteration 00007f72e495b5d0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 168   Rf_ReplIteration 00007f72e495bb60</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 169      run_Rmainloop 00007f72e495bc50</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 170               main 000055c4d06f0820</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 171  __libc_start_main 00007f72e4412b10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 172             _start 000055c4d06f0850</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1             do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2              Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3              Rf_eval 00007fee83fc3560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4      Rf_applyClosure 00007fee83fc4560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5              Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6         R_execMethod 00007fee83fc5350</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7              Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8              Rf_eval 00007fee83fc3560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9      Rf_applyClosure 00007fee83fc4560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10             Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11          winch_call 00007fee78a59720</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12  Rf_NewFrameConfirm 00007fee83f69b10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13            do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14             Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15             Rf_eval 00007fee83fc3560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16     Rf_applyClosure 00007fee83fc4560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17             Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18        R_execMethod 00007fee83fc5350</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19             Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20             Rf_eval 00007fee83fc3560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21     Rf_applyClosure 00007fee83fc4560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22             Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23      R_forceAndCall 00007fee83fc7780</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24            do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25             Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26             Rf_eval 00007fee83fc3560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27     Rf_applyClosure 00007fee83fc4560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28            do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29             Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30             Rf_eval 00007fee83fc3560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 31     Rf_applyClosure 00007fee83fc4560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 32            do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 33             Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 34             Rf_eval 00007fee83fc2310</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 35             Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36      R_forceAndCall 00007fee83fc8530</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 37         do_Rprofmem 00007fee840060d0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 38            do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 39             Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 40             Rf_eval 00007fee83fc3560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41     Rf_applyClosure 00007fee83fc4560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 42            do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 43             Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 44             Rf_eval 00007fee83fc2310</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 45             Rf_eval 00007fee83fc2450</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 46            do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 47             Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 48             Rf_eval 00007fee83fc3560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 49     Rf_applyClosure 00007fee83fc4560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 50            do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 51             Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 52             Rf_eval 00007fee83fc2310</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 53             Rf_eval 00007fee83fc2450</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 54            do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 55             Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 56             Rf_eval 00007fee83fc2310</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 57             Rf_eval 00007fee83fc2450</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 58            do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 59             Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 60             Rf_eval 00007fee83fc2310</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 61             Rf_eval 00007fee83fc2450</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 62            do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 63             Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 64             Rf_eval 00007fee83fc2310</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 65             Rf_eval 00007fee83fc2450</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 66            do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 67             Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 68             Rf_eval 00007fee83fc2310</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 69             Rf_eval 00007fee83fc2450</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 70            do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 71             Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 72             Rf_eval 00007fee83fc2310</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 73             Rf_eval 00007fee83fc2450</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 74            do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 75             Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 76             Rf_eval 00007fee83fc3560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 77     Rf_applyClosure 00007fee83fc4560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 78            do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 79             Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 80             Rf_eval 00007fee83fc3560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 81     Rf_applyClosure 00007fee83fc4560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 82            do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 83             Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 84             Rf_eval 00007fee83fc3560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 85     Rf_applyClosure 00007fee83fc4560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 86            do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 87             Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 88             Rf_eval 00007fee83fc3560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 89     Rf_applyClosure 00007fee83fc4560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 90            do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 91             Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 92             Rf_eval 00007fee83fc3560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 93     Rf_applyClosure 00007fee83fc4560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 94            do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 95             Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 96             Rf_eval 00007fee83fc3560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 97     Rf_applyClosure 00007fee83fc4560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 98            do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 99             Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 100            Rf_eval 00007fee83fc2310</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 101            Rf_eval 00007fee83fc2450</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 102           do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 103            Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 104            Rf_eval 00007fee83fc3560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 105    Rf_applyClosure 00007fee83fc4560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 106           do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 107            Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 108            Rf_eval 00007fee83fc3560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 109    Rf_applyClosure 00007fee83fc4560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 110           do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 111            Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 112            Rf_eval 00007fee83fc3560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 113    Rf_applyClosure 00007fee83fc4560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 114           do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 115            Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 116            Rf_eval 00007fee83fc3560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 117    Rf_applyClosure 00007fee83fc4560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 118           do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 119            Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 120            Rf_eval 00007fee83fc3560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 121    Rf_applyClosure 00007fee83fc4560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 122           do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 123            Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 124            Rf_eval 00007fee83fc3560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 125    Rf_applyClosure 00007fee83fc4560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 126           do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 127            Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 128            Rf_eval 00007fee83fc3560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 129    Rf_applyClosure 00007fee83fc4560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 130           do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 131            Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 132            Rf_eval 00007fee83fc2310</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 133            Rf_eval 00007fee83fc2450</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 134           do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 135            Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 136            Rf_eval 00007fee83fc3560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 137    Rf_applyClosure 00007fee83fc4560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 138           do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 139            Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 140            Rf_eval 00007fee83fc3560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 141    Rf_applyClosure 00007fee83fc4560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 142     R_forceAndCall 00007fee83fc6ed0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 143          call_loop 00007fee7ad56670</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 144           map_impl 00007fee7ad567d0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 145 Rf_NewFrameConfirm 00007fee83f69b10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 146           do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 147            Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 148            Rf_eval 00007fee83fc3560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 149    Rf_applyClosure 00007fee83fc4560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 150           do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 151            Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 152            Rf_eval 00007fee83fc3560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 153    Rf_applyClosure 00007fee83fc4560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 154           do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 155            Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 156            Rf_eval 00007fee83fc3560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 157    Rf_applyClosure 00007fee83fc4560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 158           do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 159            Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 160            Rf_eval 00007fee83fc3560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 161    Rf_applyClosure 00007fee83fc4560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 162           do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 163            Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 164            Rf_eval 00007fee83fc3560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 165    Rf_applyClosure 00007fee83fc4560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 166           do_Rprof 00007fee83fa28b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 167            Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 168            Rf_eval 00007fee83fc3560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 169    Rf_applyClosure 00007fee83fc4560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 170            Rf_eval 00007fee83fc18c0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 171   Rf_ReplIteration 00007fee83ff5c60</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 172   Rf_ReplIteration 00007fee83ff6170</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 173      run_Rmainloop 00007fee83ff6270</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 174               main 000055db3acfc080</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 175  __libc_start_main 00007fee83ca8fc0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 176             _start 000055db3acfc0b0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                pathname</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1                                /usr/lib/R/lib/libR.so</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2                                /usr/lib/R/lib/libR.so</span>
@@ -725,12 +737,12 @@ for a specific package.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 136                              /usr/lib/R/lib/libR.so</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 137                              /usr/lib/R/lib/libR.so</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 138                              /usr/lib/R/lib/libR.so</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 139 /home/runner/work/_temp/Library/purrr/libs/purrr.so</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 140 /home/runner/work/_temp/Library/purrr/libs/purrr.so</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 139                              /usr/lib/R/lib/libR.so</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 140                              /usr/lib/R/lib/libR.so</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 141                              /usr/lib/R/lib/libR.so</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 142                              /usr/lib/R/lib/libR.so</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 143                              /usr/lib/R/lib/libR.so</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 144                              /usr/lib/R/lib/libR.so</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 143 /home/runner/work/_temp/Library/purrr/libs/purrr.so</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 144 /home/runner/work/_temp/Library/purrr/libs/purrr.so</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 145                              /usr/lib/R/lib/libR.so</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 146                              /usr/lib/R/lib/libR.so</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 147                              /usr/lib/R/lib/libR.so</span>
@@ -756,9 +768,13 @@ for a specific package.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 167                              /usr/lib/R/lib/libR.so</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 168                              /usr/lib/R/lib/libR.so</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 169                              /usr/lib/R/lib/libR.so</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 170                               /usr/lib/R/bin/exec/R</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 171                  /lib/x86_64-linux-gnu/libc-2.27.so</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 172                               /usr/lib/R/bin/exec/R</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 170                              /usr/lib/R/lib/libR.so</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 171                              /usr/lib/R/lib/libR.so</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 172                              /usr/lib/R/lib/libR.so</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 173                              /usr/lib/R/lib/libR.so</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 174                               /usr/lib/R/bin/exec/R</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 175              /usr/lib/x86_64-linux-gnu/libc-2.31.so</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 176                               /usr/lib/R/bin/exec/R</span>
 </code></pre></div>
     </div>
   </div>
@@ -769,11 +785,11 @@ for a specific package.</p>
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by <a href="https://krlmlr.info" class="external-link">Kirill Müller</a>, <a href="https://www.r-consortium.org" class="external-link">R Consortium</a>, Ian Lance Taylor.</p>
+  <p></p><p>Developed by <a href="https://krlmlr.info" class="external-link">Kirill Müller</a>, R Consortium, Ian Lance Taylor.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.9000.9000.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.9000.</p>
 </div>
 
       </footer></div>
