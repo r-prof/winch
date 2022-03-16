@@ -84,7 +84,13 @@ int cb_get_name_ip(void *data, uintptr_t pc,
   R_xlen_t pos = cb_data->pos;
 
   char ip_buf[33];
-  sprintf(ip_buf, "%.16" PRIxPTR, pc);
+  // Workaround for MINGW UCRT problems:
+  sprintf(
+    ip_buf,
+    "%.8" PRIx32 "%.8" PRIx32,
+    (uint32_t)((uint64_t)pc / 0x100000000),
+    (uint32_t)((uint64_t)pc % 0x100000000)
+  );
   ip_buf[sizeof(ip_buf) / sizeof(*ip_buf) - 1] = '\0';
   SEXP chr_ip = Rf_mkCharCE(ip_buf, CE_UTF8);
   SET_STRING_ELT(out_ip, pos, chr_ip);
