@@ -7,17 +7,7 @@
 
 # winch 0.0.8 (2022-03-16)
 
-- Same as previous version.
-
-
-# winch 0.0.7.9001 (2022-02-22)
-
 - Fix compatibility with vctrs > 0.3.8.
-
-
-# winch 0.0.7.9000 (2021-10-24)
-
-- Same as previous version.
 
 
 # winch 0.0.7 (2021-10-24)
