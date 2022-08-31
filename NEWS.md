@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# winch 0.0.8.9001 (2022-08-31)
+
+## Features
+
+- Breaking change: rlang backtraces are disabled for now (#56).
+
+## Breaking changes
+
+- Breaking change: rlang backtraces are disabled for now (#56).
+
+
 # winch 0.0.8.9000 (2022-03-16)
 
 - Same as previous version.
