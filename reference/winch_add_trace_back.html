@@ -19,7 +19,7 @@ It is intended to be called by rlang."><!-- mathjax --><script src="https://cdnj
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">winch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.9</span>
       </span>
     </div>
 
@@ -67,51 +67,52 @@ It is intended to be called by rlang.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">winch_add_trace_back</span><span class="op">(</span>trace <span class="op">=</span> <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/trace_back.html" class="external-link">trace_back</a></span><span class="op">(</span>bottom <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">parent.frame</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">winch_add_trace_back</span><span class="op">(</span>trace <span class="op">=</span> <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/trace_back.html" class="external-link">trace_back</a></span><span class="op">(</span>bottom <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">parent.frame</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>trace</dt>
 <dd><p>An rlang traceback as returned by <code><a href="https://rlang.r-lib.org/reference/trace_back.html" class="external-link">rlang::trace_back()</a></code>.</p></dd>
+
 </dl></div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">foo</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="fu"><a href="winch_call.html">winch_call</a></span><span class="op">(</span><span class="va">bar</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">bar</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="va">trace</span> <span class="op">&lt;-</span> <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/trace_back.html" class="external-link">trace_back</a></span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in">  <span class="fu">winch_add_trace_back</span><span class="op">(</span><span class="va">trace</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">foo</span><span class="op">(</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">foo</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="winch_call.html">winch_call</a></span><span class="op">(</span><span class="va">bar</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">bar</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">trace</span> <span class="op">&lt;-</span> <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/trace_back.html" class="external-link">trace_back</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu">winch_add_trace_back</span><span class="op">(</span><span class="va">trace</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">foo</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">     </span>▆</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">  1. </span>└─<span style="font-weight: bold;">pkgdown</span>::deploy_to_branch(new_process = FALSE)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">  2. </span>  └─pkgdown::build_site_github_pages(pkg, ..., clean = clean)<span style="color: #555555;"> at pkgdown/R/deploy-site.R:151:2</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">  3. </span>    └─pkgdown::build_site(...)<span style="color: #555555;"> at pkgdown/R/build-github.R:32:2</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">  4. </span>      └─pkgdown:::build_site_local(...)<span style="color: #555555;"> at pkgdown/R/build.R:359:4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">  5. </span>        └─pkgdown::build_reference(...)<span style="color: #555555;"> at pkgdown/R/build.R:432:2</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">  6. </span>          └─<span style="font-weight: bold;">purrr</span>::map(...)<span style="color: #555555;"> at pkgdown/R/build-reference.R:191:2</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">  5. </span>        └─pkgdown::build_reference(...)<span style="color: #555555;"> at pkgdown/R/build.R:431:2</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">  6. </span>          └─<span style="font-weight: bold;">purrr</span>::map(...)<span style="color: #555555;"> at pkgdown/R/build-reference.R:188:2</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">  7. </span>            └─`/purrr.so`::map_impl()</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">  8. </span>              └─`/purrr.so`::call_loop()</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">  9. </span>                └─<span style="font-weight: bold;">pkgdown</span> .f(.x[[i]], ...)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;"> 10. </span>                  ├─<span style="font-weight: bold;">base</span>::withCallingHandlers(...)<span style="color: #555555;"> at pkgdown/R/build-reference.R:279:2</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;"> 11. </span>                  └─<span style="font-weight: bold;">pkgdown</span>:::data_reference_topic(...)<span style="color: #555555;"> at pkgdown/R/build-reference.R:279:2</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;"> 12. </span>                    └─pkgdown:::run_examples(...)<span style="color: #555555;"> at pkgdown/R/build-reference.R:363:4</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">  9. </span>                └─<span style="font-weight: bold;">pkgdown</span> (local) .f(.x[[i]], ...)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;"> 10. </span>                  ├─<span style="font-weight: bold;">base</span>::withCallingHandlers(...)<span style="color: #555555;"> at pkgdown/R/build-reference.R:276:2</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;"> 11. </span>                  └─<span style="font-weight: bold;">pkgdown</span>:::data_reference_topic(...)<span style="color: #555555;"> at pkgdown/R/build-reference.R:276:2</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;"> 12. </span>                    └─pkgdown:::run_examples(...)<span style="color: #555555;"> at pkgdown/R/build-reference.R:360:4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;"> 13. </span>                      └─pkgdown:::highlight_examples(code, topic, env = env)<span style="color: #555555;"> at pkgdown/R/rd-example.R:37:4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;"> 14. </span>                        └─<span style="font-weight: bold;">downlit</span>::evaluate_and_highlight(...)<span style="color: #555555;"> at pkgdown/R/highlight.R:32:2</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;"> 14. </span>                        └─<span style="font-weight: bold;">downlit</span>::evaluate_and_highlight(...)<span style="color: #555555;"> at pkgdown/R/highlight.R:31:2</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;"> 15. </span>                          └─<span style="font-weight: bold;">evaluate</span>::evaluate(code, child_env(env), new_device = TRUE, output_handler = output_handler)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;"> 16. </span>                            └─evaluate:::evaluate_call(...)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;"> 17. </span>                              ├─evaluate timing_fn(...)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;"> 18. </span>                              ├─evaluate handle(...)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;"> 17. </span>                              ├─evaluate (local) timing_fn(...)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;"> 18. </span>                              ├─evaluate (local) handle(...)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;"> 19. </span>                              │ └─<span style="font-weight: bold;">base</span>::try(f, silent = TRUE)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;"> 20. </span>                              │   └─base::tryCatch(...)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;"> 21. </span>                              │     └─base tryCatchList(expr, classes, parentenv, handlers)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;"> 22. </span>                              │       └─base tryCatchOne(expr, names, parentenv, handlers[[1L]])</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;"> 23. </span>                              │         └─base doTryCatch(return(expr), name, parentenv, handler)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;"> 21. </span>                              │     └─base (local) tryCatchList(expr, classes, parentenv, handlers)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;"> 22. </span>                              │       └─base (local) tryCatchOne(expr, names, parentenv, handlers[[1L]])</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;"> 23. </span>                              │         └─base (local) doTryCatch(return(expr), name, parentenv, handler)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;"> 24. </span>                              ├─base::withCallingHandlers(...)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;"> 25. </span>                              ├─base::withVisible(...)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;"> 26. </span>                              └─<span style="font-weight: bold;">evaluate</span>:::eval_with_user_handlers(expr, envir, enclos, user_handlers)</span>
@@ -135,7 +136,7 @@ It is intended to be called by rlang.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>
