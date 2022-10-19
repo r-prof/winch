@@ -86,7 +86,7 @@ SEXP winch_trace_back_unwind() {
 
 #else // #ifdef HAVE_LIBUNWIND
 
-SEXP winch_trace_back_unwind() {
+SEXP winch_trace_back_unwind(void) {
   Rf_error("libunwind not supported on this platform.");
 }
 

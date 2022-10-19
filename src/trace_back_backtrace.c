@@ -112,7 +112,7 @@ int cb_get_name_ip(void *data, uintptr_t pc,
   return 0;
 }
 
-SEXP winch_trace_back_backtrace() {
+SEXP winch_trace_back_backtrace(void) {
   R_xlen_t size = 0;
   backtrace_full(backtrace_state, 1, cb_increment_size, cb_error, &size);
 

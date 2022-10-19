@@ -7,11 +7,11 @@
 #include <R_ext/Visibility.h>
 #define export attribute_visible extern
 
-extern SEXP winch_init_library();
-extern SEXP winch_trace_back();
-extern SEXP winch_trace_back_default_method();
-extern SEXP winch_call(SEXP function, SEXP env);
-extern SEXP winch_stop(SEXP message);
+SEXP winch_init_library(SEXP argv0, SEXP force);
+SEXP winch_trace_back(SEXP method); 
+SEXP winch_trace_back_default_method(void);
+SEXP winch_call(SEXP function, SEXP env);
+SEXP winch_stop(SEXP message);
 
 static const R_CallMethodDef CallEntries[] = {
   {"winch_c_init_library",                 (DL_FUNC) &winch_init_library, 2},
@@ -23,7 +23,7 @@ static const R_CallMethodDef CallEntries[] = {
   {NULL, NULL, 0}
 };
 
-extern SEXP init_backtrace(const char* argv0, int force);
+SEXP init_backtrace(const char* argv0, int force);
 
 export void R_init_winch(DllInfo *dll)
 {
