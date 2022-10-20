@@ -12,7 +12,7 @@
 
 void* buf[10000];
 
-SEXP winch_trace_back_unwind() {
+SEXP winch_trace_back_unwind(void) {
   unw_context_t uc;
   memset(&uc, 0, sizeof(uc));
 
