@@ -337,7 +337,7 @@ The `execinfo()` approach is no longer used because libunwind is clearly better.
 
 - [boost stacktrace](https://www.boost.org/doc/libs/master/boost/stacktrace/detail/collect_unwind.ipp) has not been tried yet
 
-- The [stacktrace](http://stacktrace.sourceforge.net/) library is from 2009, was last changed 2013
+- The [stacktrace](https://stacktrace.sourceforge.net/) library is from 2009, was last changed 2013
 
 - A [fully native route](https://programmer.help/blogs/using-the-_unwind_backtrace-function-to-grab-the-backtrace-of-the-c-c-stack.html) has not been considered. Without library support this would amount to rewriting large parts of existing library code.
 
