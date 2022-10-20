@@ -1,20 +1,17 @@
-winch 0.0.8
+winch 0.0.9
 
 ## Cran Repository Policy
 
-- [x] Reviewed CRP last edited 2022-02-08.
-
-See changes at https://github.com/eddelbuettel/crp/compare/master@%7B2021-09-25%7D...master@%7B2022-02-08%7D
+- [x] Reviewed CRP last edited 2022-07-26.
 
 ## R CMD check results
 
-- [x] Checked locally, R 4.1.2
-- [x] Checked on CI system, R 4.1.3
+- [x] Checked locally, R 4.1.3
+- [x] Checked on CI system, R 4.2.1
 - [x] Checked on win-builder, R devel
 
-Check the boxes above after successful execution and remove this line. Then run `fledge::release()`.
 
 ## Current CRAN check results
 
-- [x] Checked on 2022-03-16, problems found: https://cran.r-project.org/web/checks/check_results_winch.html
-- [x] WARN: r-devel-windows-x86_64-new-UL: Fixed.
+- [x] Checked on 2022-08-31, problems found: https://cran.r-project.org/web/checks/check_results_winch.html
+- [x] ERROR: r-devel-linux-x86_64-debian-clang, r-devel-linux-x86_64-debian-gcc, r-patched-linux-x86_64, r-release-linux-x86_64: Fixed.
