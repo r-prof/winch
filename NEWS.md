@@ -2,19 +2,9 @@
 
 # winch 0.0.10 (2022-10-20)
 
-- Same as previous version.
-
-
-# winch 0.0.9.9001 (2022-10-20)
-
 ## Bug fixes
 
 - Fix deprecation warnings (@Antonov548, #58).
-
-
-# winch 0.0.9.9000 (2022-08-31)
-
-- Internal changes only.
 
 
 # winch 0.0.9 (2022-08-31)
