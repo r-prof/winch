@@ -7,8 +7,8 @@
 #endif
 
 
-extern SEXP winch_trace_back_unwind();
-extern SEXP winch_trace_back_backtrace();
+SEXP winch_trace_back_unwind(void);
+SEXP winch_trace_back_backtrace(void);
 
 
 SEXP winch_trace_back(SEXP method) {
@@ -29,7 +29,7 @@ SEXP winch_trace_back(SEXP method) {
   }
 }
 
-SEXP winch_trace_back_default_method() {
+SEXP winch_trace_back_default_method(void) {
 #if defined(HAVE_LIBUNWIND)
   return Rf_ScalarInteger(1);
 #elif defined(HAVE_LIBBACKTRACE) && BACKTRACE_SUPPORTED
