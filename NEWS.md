@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# winch 0.0.10.9000 (2022-10-20)
+
+- Internal changes only.
+
+
 # winch 0.0.10 (2022-10-20)
 
 - Same as previous version.
