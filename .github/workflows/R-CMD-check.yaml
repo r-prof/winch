@@ -182,6 +182,10 @@ jobs:
         config:
           - {os: macOS-latest,   r: 'release'}
 
+          - {os: ubuntu-22.04,   r: 'devel'}
+          - {os: ubuntu-22.04,   r: 'relese'}
+
+          - {os: ubuntu-20.04,   r: 'devel'}
           - {os: ubuntu-20.04,   r: 'release'}
 
           # Use older ubuntu to maximise backward compatibility
