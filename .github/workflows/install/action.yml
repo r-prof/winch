@@ -64,8 +64,14 @@ runs:
         extra-packages: ${{ inputs.extra-packages }} ${{ matrix.config.covr && 'any::covr' }} ${{ steps.get-extra.outputs.packages }}
         cache-version: ${{ inputs.cache-version }}
 
+    - name: Show R CMD config --all
+      run: |
+        R CMD config --all
+      shell: bash
+
     - name: Add pkg.lock to .gitignore
       run: |
+        ## Add pkg.lock to .gitignore
         set -x
         if ! [ -f .github/.gitignore ] || [ -z "$(grep '^/pkg.lock$' .github/.gitignore)" ]; then
           echo /pkg.lock >> .github/.gitignore
@@ -75,6 +81,7 @@ runs:
     - name: Add fake qpdf and checkbashisms
       if: runner.os == 'Linux'
       run: |
+        ## Add fake qpdf and checkbashisms
         sudo ln -s $(which true) /usr/local/bin/qpdf
         sudo ln -s $(which true) /usr/local/bin/checkbashisms
       shell: bash
