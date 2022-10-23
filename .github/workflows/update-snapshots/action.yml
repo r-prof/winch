@@ -7,6 +7,12 @@ description: >
 runs:
   using: "composite"
   steps:
+    - name: Check that package can be built
+      id: run-tests
+      run: |
+        pkgbuild::check_build_tools(debug = TRUE)
+      shell: Rscript {0}
+
     - name: Run tests on test files that use snapshots
       id: run-tests
       run: |
