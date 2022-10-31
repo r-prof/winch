@@ -18,16 +18,6 @@
 
 - Fix prototype warning (@Antonov548, #60).
 
-## Uncategorized
-
-- Merged cran-0.0.10 into main
-
-
-
-# winch 0.0.10.9000 (2022-10-20)
-
-- Internal changes only.
-
 
 # winch 0.0.10 (2022-10-20)
 
