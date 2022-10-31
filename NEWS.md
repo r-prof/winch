@@ -2,14 +2,9 @@
 
 # winch 0.0.11.9000 (2022-10-31)
 
-## Bug fixes
-
-- Fix prototype warning (@Antonov548, #60).
-
 ## Uncategorized
 
 - Merged cran-0.0.10 into main
-
 
 
 # winch 0.0.11 (2022-10-31)
