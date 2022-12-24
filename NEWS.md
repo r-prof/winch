@@ -1,5 +1,11 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# winch 0.0.11.9001 (2022-12-24)
+
+- Merged cran-0.0.11 into main.
+
+
+
 # winch 0.0.11.9000 (2022-10-31)
 
 ## Uncategorized
