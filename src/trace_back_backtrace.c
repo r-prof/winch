@@ -85,8 +85,9 @@ int cb_get_name_ip(void *data, uintptr_t pc,
 
   char ip_buf[33];
   // Workaround for MINGW UCRT problems:
-  sprintf(
+  snprintf(
     ip_buf,
+    33,
     "%.8" PRIx32 "%.8" PRIx32,
     (uint32_t)((uint64_t)pc / 0x100000000),
     (uint32_t)((uint64_t)pc % 0x100000000)
