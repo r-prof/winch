@@ -12,7 +12,7 @@
 
 void* buf[10000];
 
-SEXP winch_trace_back_unwind() {
+SEXP winch_trace_back_unwind(void) {
   unw_context_t uc;
   memset(&uc, 0, sizeof(uc));
 
@@ -68,7 +68,7 @@ SEXP winch_trace_back_unwind() {
     SET_STRING_ELT(out_name, i, Rf_mkCharCE(buf, CE_UTF8));
 
     char ip_buf[33];
-    sprintf(ip_buf, "%.16" PRIxPTR, pi.start_ip);
+    snprintf(ip_buf, 33, "%.16" PRIxPTR, pi.start_ip);
     //snprintf(ip_buf, sizeof(ip_buf) / sizeof(buf), "%p", (void*)pi.start_ip);
     ip_buf[sizeof(ip_buf) / sizeof(*ip_buf) - 1] = '\0';
     SET_STRING_ELT(out_ip, i, Rf_mkCharCE(ip_buf, CE_UTF8));
