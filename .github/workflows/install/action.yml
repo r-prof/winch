@@ -79,9 +79,9 @@ runs:
       run: |
         ## Create ~/.R/Makevars
         mkdir -p ~/.R
-        echo 'CFLAGS=-g -O2 -Wall -pedantic -mtune=native -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection -Werror=implicit-function-declaration -Wstrict-prototypes' >> ~/.R/Makevars
+        echo 'CFLAGS=-g -O2 -Wall -pedantic -mtune=native -Werror=format-security -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection' >> ~/.R/Makevars
         echo 'FFLAGS=-g -O2 -mtune=native -Wall -pedantic' >> ~/.R/Makevars
-        echo 'CXXFLAGS=-g -O2 -Wall -pedantic -mtune=native -Wno-ignored-attributes -Wno-parentheses -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection' >> ~/.R/Makevars
+        echo 'CXXFLAGS=-g -O2 -Wall -pedantic -mtune=native -Wno-ignored-attributes -Wno-parentheses -Werror=format-security -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection' >> ~/.R/Makevars
       shell: bash
 
     - name: Show R CMD config --all
