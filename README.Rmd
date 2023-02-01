@@ -62,7 +62,7 @@ foo()
 ```
 
 `rlang::entrace()` checks if winch is installed, and adds a native backtrace.
-As this cannot be easily demonstrated in a knitr document, the output is copied from [this GitHub Actions run](https://github.com/r-prof/winch/runs/1147640026?check_suite_focus=true#step:12:169).
+As this cannot be easily demonstrated in a knitr document, the output is copied from a GitHub Actions run.
 
 ```{r error, eval = FALSE}
 options(

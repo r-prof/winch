@@ -12,37 +12,9 @@
 
 # winch 0.0.12 (2023-01-30)
 
-- Same as previous version.
-
-
-# winch 0.0.11.9004 (2023-01-30)
-
-- Same as previous version.
-
-
-# winch 0.0.11.9003 (2023-01-30)
-
 ## Chore
 
 - Fix compiler warnings (@Antonov548, #63).
-
-
-# winch 0.0.11.9002 (2022-12-30)
-
-- Internal changes only.
-
-
-# winch 0.0.11.9001 (2022-12-24)
-
-- Merged cran-0.0.11 into main.
-
-
-
-# winch 0.0.11.9000 (2022-10-31)
-
-## Uncategorized
-
-- Merged cran-0.0.10 into main
 
 
 # winch 0.0.11 (2022-10-31)

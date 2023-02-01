@@ -111,7 +111,7 @@ Below is an example where an R function calls into C which calls back into R. No
 <span class='c'>#&gt;  [ reached 'max' / getOption("max.print") -- omitted 99 rows ]</span>
 </pre>
 
-[`rlang::entrace()`](https://rlang.r-lib.org/reference/entrace.html) checks if winch is installed, and adds a native backtrace. As this cannot be easily demonstrated in a knitr document, the output is copied from [this GitHub Actions run](https://github.com/r-prof/winch/runs/1147640026?check_suite_focus=true#step:12:169).
+[`rlang::entrace()`](https://rlang.r-lib.org/reference/entrace.html) checks if winch is installed, and adds a native backtrace. As this cannot be easily demonstrated in a knitr document, the output is copied from a GitHub Actions run.
 
 <pre class='chroma'>
 <span class='nf'><a href='https://rdrr.io/r/base/options.html'>options</a></span>(
