@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# winch 0.0.12.9004 (2023-03-24)
+
+- Internal changes only.
+
+
 # winch 0.0.12.9003 (2023-02-17)
 
 - Internal changes only.
