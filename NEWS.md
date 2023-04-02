@@ -1,21 +1,36 @@
-<!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
+<!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# winch 0.0.11.9002 (2022-12-30)
+# winch 0.0.12.9004 (2023-03-24)
 
 - Internal changes only.
 
 
-# winch 0.0.11.9001 (2022-12-24)
+# winch 0.0.12.9003 (2023-02-17)
 
-- Merged cran-0.0.11 into main.
+- Internal changes only.
+
+
+# winch 0.0.12.9002 (2023-02-02)
+
+- Merged cran-0.0.12 into main.
 
 
 
-# winch 0.0.11.9000 (2022-10-31)
+# winch 0.0.12.9001 (2023-01-30)
 
-## Uncategorized
+- Same as previous version.
 
-- Merged cran-0.0.10 into main
+
+# winch 0.0.12.9000 (2023-01-30)
+
+- Internal changes only.
+
+
+# winch 0.0.12 (2023-01-30)
+
+## Chore
+
+- Fix compiler warnings (@Antonov548, #63).
 
 
 # winch 0.0.11 (2022-10-31)
