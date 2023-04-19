@@ -13,6 +13,8 @@
 #' - `func`: function name
 #' - `ip`: instruction pointer
 #' - `pathname`: path to shared library
+#' - `is_libr`: a logical, `TRUE` if this entry is from R's shared library,
+#'   determined via [procmaps::path_is_libr()] on the `pathname` component
 #'
 #' @seealso [sys.calls()] for the R equivalent.
 #'
@@ -43,9 +45,10 @@ winch_trace_back <- function() {
   inside <- apply(gte & lt, 1, function(x) which(x)[1])
 
   native_trace[[3]] <- map$pathname[inside]
+  native_trace[[4]] <- procmaps::path_is_libr(native_trace[[3]])
 
   attr(native_trace, "row.names") <- .set_row_names(length(native_trace[[1]]))
-  names(native_trace) <- c("func", "ip", "pathname")
+  names(native_trace) <- c("func", "ip", "pathname", "is_libr")
   class(native_trace) <- "data.frame"
 
   native_trace

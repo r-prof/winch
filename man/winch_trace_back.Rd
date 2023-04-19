@@ -12,6 +12,8 @@ A data frame with the columns:
 \item \code{func}: function name
 \item \code{ip}: instruction pointer
 \item \code{pathname}: path to shared library
+\item \code{is_libr}: a logical, \code{TRUE} if this entry is from R's shared library,
+determined via \code{\link[procmaps:path_is_libr]{procmaps::path_is_libr()}} on the \code{pathname} component
 }
 }
 \description{
