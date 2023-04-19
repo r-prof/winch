@@ -20,7 +20,7 @@ running process's entry point."><!-- mathjax --><script src="https://cdnjs.cloud
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">winch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.12</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -79,6 +79,8 @@ running process's entry point.</p>
 <p>A data frame with the columns:</p><ul><li><p><code>func</code>: function name</p></li>
 <li><p><code>ip</code>: instruction pointer</p></li>
 <li><p><code>pathname</code>: path to shared library</p></li>
+<li><p><code>is_libr</code>: a logical, <code>TRUE</code> if this entry is from R's shared library,
+determined via <code><a href="https://r-prof.github.io/procmaps/reference/path_is_libr.html" class="external-link">procmaps::path_is_libr()</a></code> on the <code>pathname</code> component</p></li>
 </ul></div>
     <div id="details">
     <h2>Details</h2>
