@@ -1,5 +1,20 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# winch 0.0.12.9005 (2023-04-19)
+
+## Features
+
+- `winch_trace_back()` returns a new `is_libr` column that indicates if an entry is from R's shared library (#56).
+
+## Chore
+
+- Deprecate `winch_add_trace_back()`, to be reimplemented in rlang (#56).
+
+- Tweak snapshot.
+
+- Fix compiler warning regarding empty prototype.
+
+
 # winch 0.0.12.9004 (2023-03-24)
 
 - Internal changes only.
