@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# winch 0.1.0 (2023-04-19)
+
+- Same as previous version.
+
+
 # winch 0.0.12.9005 (2023-04-19)
 
 ## Features
