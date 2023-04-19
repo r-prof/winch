@@ -24,6 +24,7 @@ URL: https://r-prof.github.io/winch/,
     https://github.com/r-prof/winch
 BugReports: https://github.com/r-prof/winch/issues
 Imports: 
+    lifecycle,
     procmaps (>= 0.0.2)
 Suggests: 
     DBI,

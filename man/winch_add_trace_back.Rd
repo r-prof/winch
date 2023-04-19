@@ -10,21 +10,9 @@ winch_add_trace_back(trace = rlang::trace_back(bottom = parent.frame()))
 \item{trace}{An rlang traceback as returned by \code{\link[rlang:trace_back]{rlang::trace_back()}}.}
 }
 \description{
-This function uses the native stack trace returned from \code{\link[=winch_trace_back]{winch_trace_back()}}
-to add details on native function calls to an rlang traceback object.
-It is intended to be called by rlang.
-}
-\examples{
-\dontshow{if (requireNamespace("rlang", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-foo <- function() {
-  winch_call(bar)
-}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-bar <- function() {
-  trace <- rlang::trace_back()
-  winch_add_trace_back(trace)
+This function should be reimplemented in rlang, to avoid a soft dependency between
+rlang's traceback format and this package.
 }
-
-foo()
-\dontshow{\}) # examplesIf}
-}
+\keyword{internal}
