@@ -139,7 +139,7 @@ SEXP init_backtrace(const char* argv0, int force) {
   return R_NilValue;
 }
 
-SEXP winch_trace_back_backtrace() {
+SEXP winch_trace_back_backtrace(void) {
   Rf_error("libbacktrace not supported on this platform.");
 }
 
