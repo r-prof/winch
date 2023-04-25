@@ -7,11 +7,6 @@
 
 # winch 0.1.0 (2023-04-19)
 
-- Same as previous version.
-
-
-# winch 0.0.12.9005 (2023-04-19)
-
 ## Features
 
 - `winch_trace_back()` returns a new `is_libr` column that indicates if an entry is from R's shared library (#56).
@@ -23,32 +18,6 @@
 - Tweak snapshot.
 
 - Fix compiler warning regarding empty prototype.
-
-
-# winch 0.0.12.9004 (2023-03-24)
-
-- Internal changes only.
-
-
-# winch 0.0.12.9003 (2023-02-17)
-
-- Internal changes only.
-
-
-# winch 0.0.12.9002 (2023-02-02)
-
-- Merged cran-0.0.12 into main.
-
-
-
-# winch 0.0.12.9001 (2023-01-30)
-
-- Same as previous version.
-
-
-# winch 0.0.12.9000 (2023-01-30)
-
-- Internal changes only.
 
 
 # winch 0.0.12 (2023-01-30)
