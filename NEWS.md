@@ -1,6 +1,6 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# winch 0.1.0.9003 (2024-02-19)
+# winch 0.1.1 (2024-02-19)
 
 ## Bug fixes
 
@@ -10,20 +10,10 @@
 
 - Show Makevars.
 
-
-# winch 0.1.0.9002 (2023-10-09)
+## Uncategorized
 
 - Internal changes only.
-
-
-# winch 0.1.0.9001 (2023-04-26)
-
 - Merged cran-0.1.0 into main.
-
-
-# winch 0.1.0.9000 (2023-04-19)
-
-- Internal changes only.
 
 
 # winch 0.1.0 (2023-04-19)
