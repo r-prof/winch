@@ -63,7 +63,9 @@ SEXP winch_trace_back_unwind(void) {
     unw_word_t off;
     unw = unw_get_proc_name(&cursor2, buf, sizeof(buf) / sizeof(*buf), &off);
     buf[sizeof(buf) / sizeof(*buf) - 1] = '\0';
-    if (unw != 0 && unw != -UNW_ENOMEM) Rf_error("unw_get_proc_name() error: %d", unw);
+    if (unw != 0 && unw != -UNW_ENOMEM) {
+      snprintf(buf, sizeof(buf) / sizeof(*buf), "<unw_get_proc_name() error: %d>", unw);
+    }
 
     SET_STRING_ELT(out_name, i, Rf_mkCharCE(buf, CE_UTF8));
 
