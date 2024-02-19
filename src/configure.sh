@@ -66,10 +66,6 @@ esac
 
 if [ -n "$PKG_LIBUNWIND" ]; then
 
-# For debugging
-echo "Using PKG_CFLAGS=$PKG_CFLAGS"
-echo "Using PKG_LIBS=$PKG_LIBS"
-
 # Find compiler
 CC=`${R_HOME}/bin/R CMD config CC`
 CFLAGS=`${R_HOME}/bin/R CMD config CFLAGS`
@@ -119,6 +115,10 @@ if [ ! -f Makevars ] || (which diff > /dev/null && ! diff -q Makevars Makevars.n
   cp -f Makevars.new Makevars
 fi
 rm -f Makevars.new
+
+# For debugging
+echo "Contents of Makevars"
+cat Makevars
 
 # Success
 exit 0
