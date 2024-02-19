@@ -6,15 +6,6 @@
 
 - Gracefully degrade if `unw_get_proc_name()` results in an error.
 
-## Chore
-
-- Show Makevars.
-
-## Uncategorized
-
-- Internal changes only.
-- Merged cran-0.1.0 into main.
-
 
 # winch 0.1.0 (2023-04-19)
 
