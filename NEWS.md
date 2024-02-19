@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# winch 0.1.1.9000 (2024-02-19)
+
+- Merge branch 'cran-0.1.1'.
+
+
 # winch 0.1.1 (2024-02-19)
 
 ## Bug fixes
