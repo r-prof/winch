@@ -69,8 +69,29 @@ runs:
         extra-packages: ${{ inputs.extra-packages }} ${{ ( matrix.config.covr && 'any::covr' ) || '' }} ${{ steps.get-extra.outputs.packages }}
         cache-version: ${{ inputs.cache-version }}
 
+    - name: Show R CMD config --all
+      run: |
+        R CMD config --all
+      shell: bash
+
+    - name: Create ~/.R/Makevars
+      # Following https://www.stats.ox.ac.uk/pub/bdr/Rconfig/r-devel-linux-x86_64-fedora-gcc
+      run: |
+        ## Create ~/.R/Makevars
+        mkdir -p ~/.R
+        echo 'CFLAGS=-g -O2 -Wall -pedantic -mtune=native -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection' >> ~/.R/Makevars
+        echo 'FFLAGS=-g -O2 -mtune=native -Wall -pedantic' >> ~/.R/Makevars
+        echo 'CXXFLAGS=-g -O2 -Wall -pedantic -mtune=native -Wno-ignored-attributes -Wno-parentheses -fexceptions -fstack-protector-strong -fstack-clash-protection -fcf-protection' >> ~/.R/Makevars
+      shell: bash
+
+    - name: Show R CMD config --all
+      run: |
+        R CMD config --all
+      shell: bash
+
     - name: Add pkg.lock to .gitignore
       run: |
+        ## Add pkg.lock to .gitignore
         set -x
         if ! [ -f .github/.gitignore ] || [ -z "$(grep '^/pkg.lock$' .github/.gitignore)" ]; then
           echo /pkg.lock >> .github/.gitignore
@@ -80,6 +101,7 @@ runs:
     - name: Add fake qpdf and checkbashisms
       if: runner.os == 'Linux'
       run: |
+        ## Add fake qpdf and checkbashisms
         sudo ln -s $(which true) /usr/local/bin/qpdf
         sudo ln -s $(which true) /usr/local/bin/checkbashisms
       shell: bash
