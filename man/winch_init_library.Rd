@@ -21,7 +21,7 @@ for only one library at a time.
 Call this function to set the library for which to obtain symbols.
 }
 \examples{
-\dontshow{if (requireNamespace("rlang", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (requireNamespace("rlang", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 winch_init_library(getLoadedDLLs()[["rlang"]][["path"]])
 \dontshow{\}) # examplesIf}
 }
