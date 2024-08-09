@@ -94,49 +94,49 @@ for a specific package.</p>
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">winch_trace_back</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                func               ip</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1                     R_ParseString 00007fcad0535f60</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2                     R_ParseString 00007fcad0553f50</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3                           Rf_eval 00007fcad0554390</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4                           Rf_eval 00007fcad0556410</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5                           Rf_eval 00007fcad0557440</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6                           Rf_eval 00007fcad0554390</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7                    R_forceAndCall 00007fcad055a880</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8                     R_ParseString 00007fcad0535f60</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9                     R_ParseString 00007fcad0553f50</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10                          Rf_eval 00007fcad0554390</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11                          Rf_eval 00007fcad0554df0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12                          Rf_eval 00007fcad0554390</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13                   R_forceAndCall 00007fcad055b340</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14                      do_Rprofmem 00007fcad059ae80</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15                    R_ParseString 00007fcad0535f60</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16                    R_ParseString 00007fcad0553f50</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17                          Rf_eval 00007fcad0554390</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18                          Rf_eval 00007fcad0556410</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19                          Rf_eval 00007fcad0557440</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20                   R_forceAndCall 00007fcad0559b80</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 21                     R_init_purrr 00007fcacccd8bf0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 22                     R_init_purrr 00007fcacccd8e00</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 23               Rf_NewFrameConfirm 00007fcad04fb950</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 24               Rf_NewFrameConfirm 00007fcad04fd4d0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 25                          Rf_eval 00007fcad0554390</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 26 &lt;unw_get_proc_name() error: -10&gt; 00007fcacccd6c20</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 27                R_ExecWithCleanup 00007fcad04e42b0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 28 &lt;unw_get_proc_name() error: -10&gt; 00007fcacccd6eb0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 29 &lt;unw_get_proc_name() error: -10&gt; 00007fcacccd6f60</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 30               Rf_NewFrameConfirm 00007fcad04fb950</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 31                    R_ParseString 00007fcad0535f60</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 32                    R_ParseString 00007fcad0553f50</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 33                          Rf_eval 00007fcad0554390</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 34                          Rf_eval 00007fcad0556410</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 35                          Rf_eval 00007fcad0557440</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 36                          Rf_eval 00007fcad0554390</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 37                 Rf_ReplIteration 00007fcad058aae0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 38                 Rf_ReplIteration 00007fcad058aff0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 39                    run_Rmainloop 00007fcad058b0f0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 40                             main 000055a126cc7080</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 41                __libc_init_first 00007fcad0029d10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 42                __libc_start_main 00007fcad0029dc0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 43                           _start 000055a126cc70b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                     R_ParseString 00007fe690d35f60</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2                     R_ParseString 00007fe690d53f50</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3                           Rf_eval 00007fe690d54390</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4                           Rf_eval 00007fe690d56410</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5                           Rf_eval 00007fe690d57440</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6                           Rf_eval 00007fe690d54390</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7                    R_forceAndCall 00007fe690d5a880</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8                     R_ParseString 00007fe690d35f60</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9                     R_ParseString 00007fe690d53f50</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10                          Rf_eval 00007fe690d54390</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11                          Rf_eval 00007fe690d54df0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12                          Rf_eval 00007fe690d54390</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13                   R_forceAndCall 00007fe690d5b340</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14                      do_Rprofmem 00007fe690d9ae80</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15                    R_ParseString 00007fe690d35f60</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16                    R_ParseString 00007fe690d53f50</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17                          Rf_eval 00007fe690d54390</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18                          Rf_eval 00007fe690d56410</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19                          Rf_eval 00007fe690d57440</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20                   R_forceAndCall 00007fe690d59b80</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21                     R_init_purrr 00007fe68cb42bf0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22                     R_init_purrr 00007fe68cb42e00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23               Rf_NewFrameConfirm 00007fe690cfb950</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24               Rf_NewFrameConfirm 00007fe690cfd4d0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25                          Rf_eval 00007fe690d54390</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26 &lt;unw_get_proc_name() error: -10&gt; 00007fe68cb40c20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27                R_ExecWithCleanup 00007fe690ce42b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28 &lt;unw_get_proc_name() error: -10&gt; 00007fe68cb40eb0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29 &lt;unw_get_proc_name() error: -10&gt; 00007fe68cb40f60</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30               Rf_NewFrameConfirm 00007fe690cfb950</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 31                    R_ParseString 00007fe690d35f60</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 32                    R_ParseString 00007fe690d53f50</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 33                          Rf_eval 00007fe690d54390</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 34                          Rf_eval 00007fe690d56410</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 35                          Rf_eval 00007fe690d57440</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36                          Rf_eval 00007fe690d54390</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 37                 Rf_ReplIteration 00007fe690d8aae0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 38                 Rf_ReplIteration 00007fe690d8aff0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 39                    run_Rmainloop 00007fe690d8b0f0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 40                             main 000055dfdbab3080</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41                __libc_init_first 00007fe690829d10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 42                __libc_start_main 00007fe690829dc0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 43                           _start 000055dfdbab30b0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                               pathname is_libr</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1                               /usr/lib/R/lib/libR.so    TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2                               /usr/lib/R/lib/libR.so    TRUE</span>
@@ -192,67 +192,67 @@ for a specific package.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">foo</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                func               ip</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1                     R_ParseString 00007fcad0535f60</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2                     R_ParseString 00007fcad0553f50</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3                           Rf_eval 00007fcad0554390</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4                           Rf_eval 00007fcad0556410</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5                           Rf_eval 00007fcad0557440</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6                           Rf_eval 00007fcad0554390</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7                      R_execMethod 00007fcad0558160</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8                           Rf_eval 00007fcad0554390</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9                           Rf_eval 00007fcad0556410</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10                          Rf_eval 00007fcad0557440</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11                          Rf_eval 00007fcad0554390</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12                       winch_call 00007fcac4e59710</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13               Rf_NewFrameConfirm 00007fcad04fb950</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14                    R_ParseString 00007fcad0535f60</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15                    R_ParseString 00007fcad0553f50</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16                          Rf_eval 00007fcad0554390</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17                          Rf_eval 00007fcad0556410</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18                          Rf_eval 00007fcad0557440</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19                          Rf_eval 00007fcad0554390</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20                     R_execMethod 00007fcad0558160</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 21                          Rf_eval 00007fcad0554390</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 22                          Rf_eval 00007fcad0556410</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 23                          Rf_eval 00007fcad0557440</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 24                          Rf_eval 00007fcad0554390</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 25                   R_forceAndCall 00007fcad055a880</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 26                    R_ParseString 00007fcad0535f60</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 27                    R_ParseString 00007fcad0553f50</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 28                          Rf_eval 00007fcad0554390</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 29                          Rf_eval 00007fcad0554df0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 30                          Rf_eval 00007fcad0554390</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 31                   R_forceAndCall 00007fcad055b340</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 32                      do_Rprofmem 00007fcad059ae80</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 33                    R_ParseString 00007fcad0535f60</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 34                    R_ParseString 00007fcad0553f50</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 35                          Rf_eval 00007fcad0554390</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 36                          Rf_eval 00007fcad0556410</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 37                          Rf_eval 00007fcad0557440</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 38                   R_forceAndCall 00007fcad0559b80</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 39                     R_init_purrr 00007fcacccd8bf0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 40                     R_init_purrr 00007fcacccd8e00</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 41               Rf_NewFrameConfirm 00007fcad04fb950</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 42               Rf_NewFrameConfirm 00007fcad04fd4d0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 43                          Rf_eval 00007fcad0554390</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 44 &lt;unw_get_proc_name() error: -10&gt; 00007fcacccd6c20</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 45                R_ExecWithCleanup 00007fcad04e42b0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 46 &lt;unw_get_proc_name() error: -10&gt; 00007fcacccd6eb0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 47 &lt;unw_get_proc_name() error: -10&gt; 00007fcacccd6f60</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 48               Rf_NewFrameConfirm 00007fcad04fb950</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 49                    R_ParseString 00007fcad0535f60</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 50                    R_ParseString 00007fcad0553f50</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 51                          Rf_eval 00007fcad0554390</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 52                          Rf_eval 00007fcad0556410</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 53                          Rf_eval 00007fcad0557440</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 54                          Rf_eval 00007fcad0554390</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 55                 Rf_ReplIteration 00007fcad058aae0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 56                 Rf_ReplIteration 00007fcad058aff0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 57                    run_Rmainloop 00007fcad058b0f0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 58                             main 000055a126cc7080</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 59                __libc_init_first 00007fcad0029d10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 60                __libc_start_main 00007fcad0029dc0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 61                           _start 000055a126cc70b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                     R_ParseString 00007fe690d35f60</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2                     R_ParseString 00007fe690d53f50</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3                           Rf_eval 00007fe690d54390</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4                           Rf_eval 00007fe690d56410</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5                           Rf_eval 00007fe690d57440</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6                           Rf_eval 00007fe690d54390</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7                      R_execMethod 00007fe690d58160</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8                           Rf_eval 00007fe690d54390</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9                           Rf_eval 00007fe690d56410</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10                          Rf_eval 00007fe690d57440</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11                          Rf_eval 00007fe690d54390</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12                       winch_call 00007fe685685710</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13               Rf_NewFrameConfirm 00007fe690cfb950</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14                    R_ParseString 00007fe690d35f60</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15                    R_ParseString 00007fe690d53f50</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16                          Rf_eval 00007fe690d54390</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17                          Rf_eval 00007fe690d56410</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18                          Rf_eval 00007fe690d57440</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19                          Rf_eval 00007fe690d54390</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20                     R_execMethod 00007fe690d58160</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21                          Rf_eval 00007fe690d54390</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22                          Rf_eval 00007fe690d56410</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23                          Rf_eval 00007fe690d57440</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24                          Rf_eval 00007fe690d54390</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25                   R_forceAndCall 00007fe690d5a880</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26                    R_ParseString 00007fe690d35f60</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27                    R_ParseString 00007fe690d53f50</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28                          Rf_eval 00007fe690d54390</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29                          Rf_eval 00007fe690d54df0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30                          Rf_eval 00007fe690d54390</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 31                   R_forceAndCall 00007fe690d5b340</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 32                      do_Rprofmem 00007fe690d9ae80</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 33                    R_ParseString 00007fe690d35f60</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 34                    R_ParseString 00007fe690d53f50</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 35                          Rf_eval 00007fe690d54390</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36                          Rf_eval 00007fe690d56410</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 37                          Rf_eval 00007fe690d57440</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 38                   R_forceAndCall 00007fe690d59b80</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 39                     R_init_purrr 00007fe68cb42bf0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 40                     R_init_purrr 00007fe68cb42e00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41               Rf_NewFrameConfirm 00007fe690cfb950</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 42               Rf_NewFrameConfirm 00007fe690cfd4d0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 43                          Rf_eval 00007fe690d54390</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 44 &lt;unw_get_proc_name() error: -10&gt; 00007fe68cb40c20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 45                R_ExecWithCleanup 00007fe690ce42b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 46 &lt;unw_get_proc_name() error: -10&gt; 00007fe68cb40eb0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 47 &lt;unw_get_proc_name() error: -10&gt; 00007fe68cb40f60</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 48               Rf_NewFrameConfirm 00007fe690cfb950</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 49                    R_ParseString 00007fe690d35f60</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 50                    R_ParseString 00007fe690d53f50</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 51                          Rf_eval 00007fe690d54390</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 52                          Rf_eval 00007fe690d56410</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 53                          Rf_eval 00007fe690d57440</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 54                          Rf_eval 00007fe690d54390</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 55                 Rf_ReplIteration 00007fe690d8aae0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 56                 Rf_ReplIteration 00007fe690d8aff0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 57                    run_Rmainloop 00007fe690d8b0f0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 58                             main 000055dfdbab3080</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 59                __libc_init_first 00007fe690829d10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 60                __libc_start_main 00007fe690829dc0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 61                           _start 000055dfdbab30b0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                               pathname is_libr</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1                               /usr/lib/R/lib/libR.so    TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2                               /usr/lib/R/lib/libR.so    TRUE</span>
