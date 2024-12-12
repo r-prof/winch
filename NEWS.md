@@ -1,5 +1,74 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# winch 0.1.1.9001 (2024-12-12)
+
+## Chore
+
+- Auto-update from GitHub Actions.
+
+  Run: https://github.com/r-prof/winch/actions/runs/10425483563
+
+- Auto-update from GitHub Actions.
+
+  Run: https://github.com/r-prof/winch/actions/runs/10224245868
+
+- Auto-update from GitHub Actions.
+
+  Run: https://github.com/r-prof/winch/actions/runs/10208525483
+
+- Auto-update from GitHub Actions.
+
+  Run: https://github.com/r-prof/winch/actions/runs/9728442265
+
+- Auto-update from GitHub Actions.
+
+  Run: https://github.com/r-prof/winch/actions/runs/9691617471
+
+## Continuous integration
+
+- Avoid failure in fledge workflow if no changes (#82).
+
+- Fetch tags for fledge workflow to avoid unnecessary NEWS entries (#81).
+
+- Use larger retry count for lock-threads workflow (#80).
+
+- Ignore errors when removing pkg-config on macOS (#79).
+
+- Explicit permissions (#78).
+
+- Use styler from main branch (#77).
+
+- Need to install R on Ubuntu 24.04 (#76).
+
+- Use Ubuntu 24.04 and styler PR (#74).
+
+- Correctly detect branch protection (#73).
+
+- Use stable pak (#72).
+
+- Trigger run (#71).
+
+- Use pkgdown branch (#70).
+
+- Install via R CMD INSTALL ., not pak (#69).
+
+- Install local package for pkgdown builds.
+
+- Improve support for protected branches with fledge.
+
+- Improve support for protected branches, without fledge.
+
+- Sync with latest developments.
+
+- Use v2 instead of master.
+
+- Import from actions-sync, check carefully.
+
+- Import from actions-sync, check carefully.
+
+- Avoid checking bashisms on Windows.
+
+
 # winch 0.1.1.9000 (2024-02-19)
 
 - Merge branch 'cran-0.1.1'.
