@@ -1,5 +1,36 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# winch 0.1.1.9002 (2025-04-30)
+
+## Chore
+
+- IDE.
+
+- Avoid calling `abort()` (#91).
+
+- Auto-update from GitHub Actions.
+
+  Run: https://github.com/r-prof/winch/actions/runs/14636203953
+
+## Continuous integration
+
+- Permissions, better tests for missing suggests, lints (#90).
+
+- Only fail covr builds if token is given (#89).
+
+- Always use `_R_CHECK_FORCE_SUGGESTS_=false` (#88).
+
+- Correct installation of xml2 (#87).
+
+- Explain (#86).
+
+- Add xml2 for covr, print testthat results (#85).
+
+- Fix (#84).
+
+- Sync (#83).
+
+
 # winch 0.1.1.9001 (2024-12-12)
 
 ## Chore
