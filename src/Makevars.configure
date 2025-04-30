@@ -1,4 +1,4 @@
-PKG_CPPFLAGS = -Ilocal/include
+PKG_CPPFLAGS = -Ilocal/include -Dabort=R_abort
 
 all: local/lib/libbacktrace.a
 
