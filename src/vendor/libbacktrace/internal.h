@@ -35,6 +35,7 @@ POSSIBILITY OF SUCH DAMAGE.  */
 
 // Implemented by R glue code
 #define abort R_abort
+void R_abort(void);
 
 /* We assume that <sys/types.h> and "backtrace.h" have already been
    included.  */

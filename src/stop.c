@@ -7,6 +7,6 @@ SEXP winch_stop(SEXP message) {
 }
 
 // For embedded libbacktrace
-SEXP R_abort() {
+void R_abort() {
   Rf_error("abort() called from C code");
 }
