@@ -1,5 +1,26 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# winch 0.1.1.9003 (2025-04-30)
+
+## Bug fixes
+
+- Declare.
+
+## Features
+
+- Avoid calling `abort()`.
+
+## Chore
+
+- Support compilation database.
+
+- Define `abort`.
+
+- Shellcheck.
+
+- Define `abort`.
+
+
 # winch 0.1.1.9002 (2025-04-30)
 
 ## Chore
