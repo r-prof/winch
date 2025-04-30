@@ -1,6 +1,5 @@
-winch 0.1.1
+winch 0.1.2
 
-## Current CRAN check results
+## Cran Repository Policy
 
-- [x] Checked on 2024-02-19, problems found: https://cran.r-project.org/web/checks/check_results_winch.html
-- [x] ERROR: r-devel-linux-x86_64-fedora-clang: Fixed
+- [x] Reviewed CRP last edited 2024-08-27.
