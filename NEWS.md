@@ -1,6 +1,6 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# winch 0.1.1.9003 (2025-04-30)
+# winch 0.1.2 (2025-04-30)
 
 ## Bug fixes
 
@@ -18,13 +18,6 @@
 
 - Shellcheck.
 
-- Define `abort`.
-
-
-# winch 0.1.1.9002 (2025-04-30)
-
-## Chore
-
 - IDE.
 
 - Avoid calling `abort()` (#91).
@@ -32,6 +25,16 @@
 - Auto-update from GitHub Actions.
 
   Run: https://github.com/r-prof/winch/actions/runs/14636203953
+
+  Run: https://github.com/r-prof/winch/actions/runs/10425483563
+
+  Run: https://github.com/r-prof/winch/actions/runs/10224245868
+
+  Run: https://github.com/r-prof/winch/actions/runs/10208525483
+
+  Run: https://github.com/r-prof/winch/actions/runs/9728442265
+
+  Run: https://github.com/r-prof/winch/actions/runs/9691617471
 
 ## Continuous integration
 
@@ -50,33 +53,6 @@
 - Fix (#84).
 
 - Sync (#83).
-
-
-# winch 0.1.1.9001 (2024-12-12)
-
-## Chore
-
-- Auto-update from GitHub Actions.
-
-  Run: https://github.com/r-prof/winch/actions/runs/10425483563
-
-- Auto-update from GitHub Actions.
-
-  Run: https://github.com/r-prof/winch/actions/runs/10224245868
-
-- Auto-update from GitHub Actions.
-
-  Run: https://github.com/r-prof/winch/actions/runs/10208525483
-
-- Auto-update from GitHub Actions.
-
-  Run: https://github.com/r-prof/winch/actions/runs/9728442265
-
-- Auto-update from GitHub Actions.
-
-  Run: https://github.com/r-prof/winch/actions/runs/9691617471
-
-## Continuous integration
 
 - Avoid failure in fledge workflow if no changes (#82).
 
@@ -116,12 +92,9 @@
 
 - Import from actions-sync, check carefully.
 
-- Import from actions-sync, check carefully.
-
 - Avoid checking bashisms on Windows.
 
-
-# winch 0.1.1.9000 (2024-02-19)
+## Uncategorized
 
 - Merge branch 'cran-0.1.1'.
 
