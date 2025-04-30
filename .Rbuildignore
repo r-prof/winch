@@ -13,3 +13,5 @@
 ^CRAN-SUBMISSION$
 ^src/vendor/libbacktrace/\.editorconfig$
 ^src/vendor/libbacktrace/\.github$
+^compile_commands\.json$
+^\.cache$

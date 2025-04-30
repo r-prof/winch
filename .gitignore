@@ -3,3 +3,5 @@ src/Makevars
 inst/doc
 CRAN-RELEASE
 CRAN-SUBMISSION
+/compile_commands.json
+/.cache/
