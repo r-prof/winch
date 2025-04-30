@@ -1,5 +1,5 @@
 @header@
-PKG_CPPFLAGS = -Ilocal/include -Dabort=R_abort
+PKG_CPPFLAGS = -Ilocal/include
 PKG_CFLAGS = @cflags@
 WINCH_LOCAL_LIBS = @winch_local_libs@
 PKG_LIBS = @libs@ ${WINCH_LOCAL_LIBS}

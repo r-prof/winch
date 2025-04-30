@@ -33,6 +33,9 @@ POSSIBILITY OF SUCH DAMAGE.  */
 #ifndef BACKTRACE_INTERNAL_H
 #define BACKTRACE_INTERNAL_H
 
+// Implemented by R glue code
+#define abort R_abort
+
 /* We assume that <sys/types.h> and "backtrace.h" have already been
    included.  */
 
