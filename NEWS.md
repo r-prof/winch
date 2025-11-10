@@ -1,5 +1,26 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# winch 0.1.2.9000 (2025-11-10)
+
+## Chore
+
+- Auto-update from GitHub Actions (#96).
+
+## Continuous integration
+
+- Use workflows for fledge (#99).
+
+- Sync (#98).
+
+- Use reviewdog for external PRs (#97).
+
+- Cleanup and fix.
+
+- Format with air, check detritus, better handling of `extra-packages` (#95).
+
+- Enhance permissions for workflow (#94).
+
+
 # winch 0.1.2 (2025-04-30)
 
 ## Chore
