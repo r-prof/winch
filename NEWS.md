@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# winch 0.1.2.9001 (2025-11-12)
+
+## Continuous integration
+
+- Fix reviewdog and add commenting workflow (#101).
+
+
 # winch 0.1.2.9000 (2025-11-10)
 
 ## Chore
