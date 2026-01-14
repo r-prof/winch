@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# winch 0.1.2.9003 (2026-01-14)
+
+## Continuous integration
+
+- Fix comment (#107).
+
+- Tweaks (#106).
+
+- Test all R versions on branches that start with cran- (#105).
+
+
 # winch 0.1.2.9002 (2025-11-17)
 
 ## Continuous integration
