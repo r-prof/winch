@@ -7,8 +7,6 @@ if (winch::winch_available() && requireNamespace("RSQLite") && requireNamespace(
     rlang_trace_use_winch = TRUE
   )
 
-  winch::winch_init_library(RSQLite:::"_RSQLite_init_logging"$dll[["path"]])
-
   con <- DBI::dbConnect(RSQLite::SQLite())
   tryCatch(DBI::dbGetQuery(con, "SELECT ? AS a, ? AS b", list(1)), error = identity)
 }
