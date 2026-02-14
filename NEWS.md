@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# winch 0.1.2.9004 (2026-02-14)
+
+## Continuous integration
+
+- Remove plogr usage.
+
+
 # winch 0.1.2.9003 (2026-01-14)
 
 ## Continuous integration
