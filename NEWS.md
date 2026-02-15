@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# winch 0.1.3.9000 (2026-02-15)
+
+## fledge
+
+- CRAN release v0.1.3 (#109).
+
+
 # winch 0.1.3 (2026-02-14)
 
 ## Chore
