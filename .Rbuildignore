@@ -15,3 +15,4 @@
 ^src/vendor/libbacktrace/\.github$
 ^compile_commands\.json$
 ^\.cache$
+^\.ccache$
