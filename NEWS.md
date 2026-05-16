@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# winch 0.1.3.9005 (2026-05-16)
+
+## Continuous integration
+
+- Explain (#86).
+
+
 # winch 0.1.3.9004 (2026-05-13)
 
 ## Chore
