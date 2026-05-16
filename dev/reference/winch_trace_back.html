@@ -20,7 +20,7 @@ running process's entry point."><meta name="robots" content="noindex"><!-- mathj
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">winch</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.1.3.9003</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.1.3.9004</span>
       </span>
     </div>
 
@@ -94,63 +94,63 @@ for a specific package.</p>
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">winch_trace_back</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                func               ip</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1                       bcEval_loop 00007ffa11742e30</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2                            bcEval 00007ffa11756210</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3                           Rf_eval 00007ffa11756660</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4                     R_execClosure 00007ffa11758550</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5                 applyClosure_core 00007ffa11759500</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6                           Rf_eval 00007ffa11756660</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7                           do_eval 00007ffa1175cb20</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8                       bcEval_loop 00007ffa11742e30</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9                            bcEval 00007ffa11756210</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10                          Rf_eval 00007ffa11756660</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11              forcePromise.part.0 00007ffa11757080</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12                          Rf_eval 00007ffa11756660</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13                   do_withVisible 00007ffa1175d780</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14                      do_internal 00007ffa117a3240</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15                      bcEval_loop 00007ffa11742e30</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16                           bcEval 00007ffa11756210</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17                          Rf_eval 00007ffa11756660</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18              forcePromise.part.0 00007ffa11757080</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19                          Rf_eval 00007ffa11756660</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20              forcePromise.part.0 00007ffa11757080</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 21                           getvar 00007ffa11757280</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 22                      bcEval_loop 00007ffa11742e30</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 23                           bcEval 00007ffa11756210</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 24                          Rf_eval 00007ffa11756660</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 25                    R_execClosure 00007ffa11758550</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 26                applyClosure_core 00007ffa11759500</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 27                          Rf_eval 00007ffa11756660</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 28                          do_eval 00007ffa1175cb20</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 29                      bcEval_loop 00007ffa11742e30</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 30                           bcEval 00007ffa11756210</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 31                          Rf_eval 00007ffa11756660</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 32                    R_execClosure 00007ffa11758550</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 33                applyClosure_core 00007ffa11759500</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 34                   R_forceAndCall 00007ffa1175be30</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 35                     R_init_purrr 00007ffa0be6aa50</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 36                     R_init_purrr 00007ffa0be6ac60</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 37                      R_doDotCall 00007ffa11704dc0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 38                       do_dotcall 00007ffa117069e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 39                          Rf_eval 00007ffa11756660</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 40 &lt;unw_get_proc_name() error: -10&gt; 00007ffa0be68bc0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 41                R_ExecWithCleanup 00007ffa116ecfe0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 42 &lt;unw_get_proc_name() error: -10&gt; 00007ffa0be68e70</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 43 &lt;unw_get_proc_name() error: -10&gt; 00007ffa0be68f20</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 44                      R_doDotCall 00007ffa11704dc0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 45                      bcEval_loop 00007ffa11742e30</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 46                           bcEval 00007ffa11756210</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 47                          Rf_eval 00007ffa11756660</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 48                    R_execClosure 00007ffa11758550</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 49                applyClosure_core 00007ffa11759500</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 50                          Rf_eval 00007ffa11756660</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 51                 Rf_ReplIteration 00007ffa11790870</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 52                    R_ReplConsole 00007ffa11790d90</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 53                    run_Rmainloop 00007ffa11790e80</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 54                             main 000055c165865080</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 55                __libc_init_first 00007ffa1122a150</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 56                __libc_start_main 00007ffa1122a200</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 57                           _start 000055c1658650b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                       bcEval_loop 00007f88a6d42e30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2                            bcEval 00007f88a6d56210</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3                           Rf_eval 00007f88a6d56660</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4                     R_execClosure 00007f88a6d58550</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5                 applyClosure_core 00007f88a6d59500</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6                           Rf_eval 00007f88a6d56660</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7                           do_eval 00007f88a6d5cb20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8                       bcEval_loop 00007f88a6d42e30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9                            bcEval 00007f88a6d56210</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10                          Rf_eval 00007f88a6d56660</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11              forcePromise.part.0 00007f88a6d57080</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12                          Rf_eval 00007f88a6d56660</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13                   do_withVisible 00007f88a6d5d780</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14                      do_internal 00007f88a6da3240</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15                      bcEval_loop 00007f88a6d42e30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16                           bcEval 00007f88a6d56210</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17                          Rf_eval 00007f88a6d56660</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18              forcePromise.part.0 00007f88a6d57080</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19                          Rf_eval 00007f88a6d56660</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20              forcePromise.part.0 00007f88a6d57080</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21                           getvar 00007f88a6d57280</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22                      bcEval_loop 00007f88a6d42e30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23                           bcEval 00007f88a6d56210</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24                          Rf_eval 00007f88a6d56660</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25                    R_execClosure 00007f88a6d58550</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26                applyClosure_core 00007f88a6d59500</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27                          Rf_eval 00007f88a6d56660</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28                          do_eval 00007f88a6d5cb20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29                      bcEval_loop 00007f88a6d42e30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30                           bcEval 00007f88a6d56210</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 31                          Rf_eval 00007f88a6d56660</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 32                    R_execClosure 00007f88a6d58550</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 33                applyClosure_core 00007f88a6d59500</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 34                   R_forceAndCall 00007f88a6d5be30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 35                     R_init_purrr 00007f88a1470a50</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36                     R_init_purrr 00007f88a1470c60</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 37                      R_doDotCall 00007f88a6d04dc0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 38                       do_dotcall 00007f88a6d069e0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 39                          Rf_eval 00007f88a6d56660</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 40 &lt;unw_get_proc_name() error: -10&gt; 00007f88a146ebc0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41                R_ExecWithCleanup 00007f88a6cecfe0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 42 &lt;unw_get_proc_name() error: -10&gt; 00007f88a146ee70</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 43 &lt;unw_get_proc_name() error: -10&gt; 00007f88a146ef20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 44                      R_doDotCall 00007f88a6d04dc0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 45                      bcEval_loop 00007f88a6d42e30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 46                           bcEval 00007f88a6d56210</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 47                          Rf_eval 00007f88a6d56660</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 48                    R_execClosure 00007f88a6d58550</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 49                applyClosure_core 00007f88a6d59500</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 50                          Rf_eval 00007f88a6d56660</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 51                 Rf_ReplIteration 00007f88a6d90870</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 52                    R_ReplConsole 00007f88a6d90d90</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 53                    run_Rmainloop 00007f88a6d90e80</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 54                             main 000055b7a8acb080</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 55                __libc_init_first 00007f88a682a150</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 56                __libc_start_main 00007f88a682a200</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 57                           _start 000055b7a8acb0b0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                               pathname is_libr</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1                       /opt/R/4.6.0/lib/R/lib/libR.so    TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2                       /opt/R/4.6.0/lib/R/lib/libR.so    TRUE</span>
@@ -220,81 +220,81 @@ for a specific package.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">foo</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                func               ip</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1                       bcEval_loop 00007ffa11742e30</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2                            bcEval 00007ffa11756210</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3                           Rf_eval 00007ffa11756660</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4                     R_execClosure 00007ffa11758550</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5                 applyClosure_core 00007ffa11759500</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6                           Rf_eval 00007ffa11756660</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7                          do_begin 00007ffa1175a240</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8                           Rf_eval 00007ffa11756660</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9                     R_execClosure 00007ffa11758550</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10                applyClosure_core 00007ffa11759500</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11                          Rf_eval 00007ffa11756660</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12                       winch_call 00007ff9f0348970</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13                      R_doDotCall 00007ffa11704dc0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14                      bcEval_loop 00007ffa11742e30</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15                           bcEval 00007ffa11756210</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16                          Rf_eval 00007ffa11756660</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17                    R_execClosure 00007ffa11758550</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18                applyClosure_core 00007ffa11759500</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19                          Rf_eval 00007ffa11756660</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20                         do_begin 00007ffa1175a240</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 21                          Rf_eval 00007ffa11756660</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 22                    R_execClosure 00007ffa11758550</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 23                applyClosure_core 00007ffa11759500</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 24                          Rf_eval 00007ffa11756660</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 25                          do_eval 00007ffa1175cb20</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 26                      bcEval_loop 00007ffa11742e30</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 27                           bcEval 00007ffa11756210</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 28                          Rf_eval 00007ffa11756660</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 29              forcePromise.part.0 00007ffa11757080</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 30                          Rf_eval 00007ffa11756660</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 31                   do_withVisible 00007ffa1175d780</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 32                      do_internal 00007ffa117a3240</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 33                      bcEval_loop 00007ffa11742e30</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 34                           bcEval 00007ffa11756210</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 35                          Rf_eval 00007ffa11756660</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 36              forcePromise.part.0 00007ffa11757080</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 37                          Rf_eval 00007ffa11756660</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 38              forcePromise.part.0 00007ffa11757080</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 39                           getvar 00007ffa11757280</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 40                      bcEval_loop 00007ffa11742e30</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 41                           bcEval 00007ffa11756210</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 42                          Rf_eval 00007ffa11756660</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 43                    R_execClosure 00007ffa11758550</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 44                applyClosure_core 00007ffa11759500</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 45                          Rf_eval 00007ffa11756660</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 46                          do_eval 00007ffa1175cb20</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 47                      bcEval_loop 00007ffa11742e30</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 48                           bcEval 00007ffa11756210</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 49                          Rf_eval 00007ffa11756660</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 50                    R_execClosure 00007ffa11758550</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 51                applyClosure_core 00007ffa11759500</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 52                   R_forceAndCall 00007ffa1175be30</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 53                     R_init_purrr 00007ffa0be6aa50</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 54                     R_init_purrr 00007ffa0be6ac60</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 55                      R_doDotCall 00007ffa11704dc0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 56                       do_dotcall 00007ffa117069e0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 57                          Rf_eval 00007ffa11756660</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 58 &lt;unw_get_proc_name() error: -10&gt; 00007ffa0be68bc0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 59                R_ExecWithCleanup 00007ffa116ecfe0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 60 &lt;unw_get_proc_name() error: -10&gt; 00007ffa0be68e70</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 61 &lt;unw_get_proc_name() error: -10&gt; 00007ffa0be68f20</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 62                      R_doDotCall 00007ffa11704dc0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 63                      bcEval_loop 00007ffa11742e30</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 64                           bcEval 00007ffa11756210</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 65                          Rf_eval 00007ffa11756660</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 66                    R_execClosure 00007ffa11758550</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 67                applyClosure_core 00007ffa11759500</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 68                          Rf_eval 00007ffa11756660</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 69                 Rf_ReplIteration 00007ffa11790870</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 70                    R_ReplConsole 00007ffa11790d90</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 71                    run_Rmainloop 00007ffa11790e80</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 72                             main 000055c165865080</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 73                __libc_init_first 00007ffa1122a150</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 74                __libc_start_main 00007ffa1122a200</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 75                           _start 000055c1658650b0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                       bcEval_loop 00007f88a6d42e30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2                            bcEval 00007f88a6d56210</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3                           Rf_eval 00007f88a6d56660</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4                     R_execClosure 00007f88a6d58550</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5                 applyClosure_core 00007f88a6d59500</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6                           Rf_eval 00007f88a6d56660</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7                          do_begin 00007f88a6d5a240</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8                           Rf_eval 00007f88a6d56660</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9                     R_execClosure 00007f88a6d58550</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10                applyClosure_core 00007f88a6d59500</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11                          Rf_eval 00007f88a6d56660</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12                       winch_call 00007f8884134970</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13                      R_doDotCall 00007f88a6d04dc0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14                      bcEval_loop 00007f88a6d42e30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15                           bcEval 00007f88a6d56210</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16                          Rf_eval 00007f88a6d56660</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17                    R_execClosure 00007f88a6d58550</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18                applyClosure_core 00007f88a6d59500</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19                          Rf_eval 00007f88a6d56660</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20                         do_begin 00007f88a6d5a240</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21                          Rf_eval 00007f88a6d56660</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22                    R_execClosure 00007f88a6d58550</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23                applyClosure_core 00007f88a6d59500</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24                          Rf_eval 00007f88a6d56660</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25                          do_eval 00007f88a6d5cb20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26                      bcEval_loop 00007f88a6d42e30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27                           bcEval 00007f88a6d56210</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28                          Rf_eval 00007f88a6d56660</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29              forcePromise.part.0 00007f88a6d57080</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30                          Rf_eval 00007f88a6d56660</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 31                   do_withVisible 00007f88a6d5d780</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 32                      do_internal 00007f88a6da3240</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 33                      bcEval_loop 00007f88a6d42e30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 34                           bcEval 00007f88a6d56210</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 35                          Rf_eval 00007f88a6d56660</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36              forcePromise.part.0 00007f88a6d57080</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 37                          Rf_eval 00007f88a6d56660</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 38              forcePromise.part.0 00007f88a6d57080</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 39                           getvar 00007f88a6d57280</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 40                      bcEval_loop 00007f88a6d42e30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41                           bcEval 00007f88a6d56210</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 42                          Rf_eval 00007f88a6d56660</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 43                    R_execClosure 00007f88a6d58550</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 44                applyClosure_core 00007f88a6d59500</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 45                          Rf_eval 00007f88a6d56660</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 46                          do_eval 00007f88a6d5cb20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 47                      bcEval_loop 00007f88a6d42e30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 48                           bcEval 00007f88a6d56210</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 49                          Rf_eval 00007f88a6d56660</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 50                    R_execClosure 00007f88a6d58550</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 51                applyClosure_core 00007f88a6d59500</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 52                   R_forceAndCall 00007f88a6d5be30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 53                     R_init_purrr 00007f88a1470a50</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 54                     R_init_purrr 00007f88a1470c60</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 55                      R_doDotCall 00007f88a6d04dc0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 56                       do_dotcall 00007f88a6d069e0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 57                          Rf_eval 00007f88a6d56660</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 58 &lt;unw_get_proc_name() error: -10&gt; 00007f88a146ebc0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 59                R_ExecWithCleanup 00007f88a6cecfe0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 60 &lt;unw_get_proc_name() error: -10&gt; 00007f88a146ee70</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 61 &lt;unw_get_proc_name() error: -10&gt; 00007f88a146ef20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 62                      R_doDotCall 00007f88a6d04dc0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 63                      bcEval_loop 00007f88a6d42e30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 64                           bcEval 00007f88a6d56210</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 65                          Rf_eval 00007f88a6d56660</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 66                    R_execClosure 00007f88a6d58550</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 67                applyClosure_core 00007f88a6d59500</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 68                          Rf_eval 00007f88a6d56660</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 69                 Rf_ReplIteration 00007f88a6d90870</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 70                    R_ReplConsole 00007f88a6d90d90</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 71                    run_Rmainloop 00007f88a6d90e80</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 72                             main 000055b7a8acb080</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 73                __libc_init_first 00007f88a682a150</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 74                __libc_start_main 00007f88a682a200</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 75                           _start 000055b7a8acb0b0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                               pathname is_libr</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1                       /opt/R/4.6.0/lib/R/lib/libR.so    TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2                       /opt/R/4.6.0/lib/R/lib/libR.so    TRUE</span>
