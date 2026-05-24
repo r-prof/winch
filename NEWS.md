@@ -1,5 +1,14 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# winch 0.1.3.9006 (2026-05-24)
+
+## Continuous integration
+
+- Update ccache-action reference.
+
+- Bump action version.
+
+
 # winch 0.1.3.9005 (2026-05-16)
 
 ## Continuous integration
