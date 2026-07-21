@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# Remove build artifacts created in the source tree by 'src/configure.sh'
+# (and by 'R CMD INSTALL', which builds the bundled libbacktrace in place).
+#
+# 'R CMD build' runs this script after installing the package to build the
+# vignettes.  Since R 4.7.0 that install happens *after* '.Rbuildignore' has
+# been applied, so the freshly created artifacts would otherwise be packaged
+# into the source tarball and flagged by 'R CMD check' (object files in a
+# source package, hidden '.libs' directory, stray 'src/Makevars').
+
+rm -rf src/build src/local
+rm -f src/Makevars
+rm -f src/*.o src/*.so src/*.dll
