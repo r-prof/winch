@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# winch 0.1.3.9007 (2026-07-22)
+
+## Bug fixes
+
+- Add `cleanup` script to drop in-tree libbacktrace build artifacts (#126).
+
+
 # winch 0.1.3.9006 (2026-05-24)
 
 ## Continuous integration
