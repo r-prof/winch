@@ -1,5 +1,18 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# winch 0.1.3.9009 (2026-07-24)
+
+## Bug fixes
+
+### ci
+
+- Emit empty package matrix when there are no (rev)deps.
+
+## fledge
+
+- CRAN release v0.1.2 (#93).
+
+
 # winch 0.1.3.9008 (2026-07-22)
 
 ## Continuous integration
