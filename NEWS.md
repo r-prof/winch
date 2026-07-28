@@ -1,5 +1,18 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# winch 0.1.3.9011 (2026-07-28)
+
+## Chore
+
+- Auto-update from GitHub Actions (#96).
+
+## Continuous integration
+
+- Use reviewdog for external PRs (#97).
+
+- Format with air, check detritus, better handling of `extra-packages` (#95).
+
+
 # winch 0.1.3.9010 (2026-07-25)
 
 ## Continuous integration
