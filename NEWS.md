@@ -1,5 +1,24 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# winch 0.1.3.9012 (2026-08-05)
+
+## Chore
+
+- Auto-update from GitHub Actions (#132).
+
+## Continuous integration
+
+- Install binaries from r-universe for dev workflow (#103).
+
+- Remove unused pr-commands workflow.
+
+- Use workflows for fledge (#99).
+
+## fledge
+
+- Bump version to 0.1.2.9001 (#102).
+
+
 # winch 0.1.3.9011 (2026-07-28)
 
 ## Chore
