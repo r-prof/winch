@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# winch 0.1.3.9013 (2026-08-06)
+
+## Continuous integration
+
+- Add sharded `revdep2` workflow.
+
+- Tweaks (#106).
+
+- Test all R versions on branches that start with cran- (#105).
+
+
 # winch 0.1.3.9012 (2026-08-05)
 
 ## Chore
