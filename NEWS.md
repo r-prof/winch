@@ -1,5 +1,24 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# winch 0.1.3.9016 (2026-09-13)
+
+## Features
+
+### ci
+
+- Align the `revdep2`, `revdep4` and `revdepx` subsystems with `rigraph`.
+
+## Chore
+
+- Auto-update from GitHub Actions (#113).
+
+- Auto-update from GitHub Actions (#111).
+
+## fledge
+
+- Bump version to 0.1.3.9001 (#112).
+
+
 # winch 0.1.3.9015 (2026-09-05)
 
 ## Bug fixes
