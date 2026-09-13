@@ -181,9 +181,9 @@ vctrs::vec_as_location(quote, 2)
     ℹ It must be logical, numeric, or character.
     Backtrace:
         █
-     1. └─vctrs::vec_as_location(quote, 2)
-     2.   └─`/vctrs.so`::vctrs_as_location()
-     3.     └─`/vctrs.so`::vec_as_location_opts()
+     1. └-vctrs::vec_as_location(quote, 2)
+     2.   └-`/vctrs.so`::vctrs_as_location()
+     3.     └-`/vctrs.so`::vec_as_location_opts()
 
 ## How does it work?
 
@@ -202,9 +202,3 @@ The native traces are embedded as artificial calls into the R stack trace.
 - The matching will not be perfect, but it may still lead to faster discovery of the cause of an error.
 - On Windows winch only works on x64, and there the traces can be obtained only for one shared library at a time.
   See `winch_init_library()` for details.
-
-------------------------------------------------------------------------
-
-## Code of Conduct
-
-Please note that the winch project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
