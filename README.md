@@ -58,109 +58,24 @@ trace$pathname <- basename(trace$pathname)
 # A frame whose symbol the linker cannot resolve falls back to its address,
 # which is randomised too.
 trace$func <- sub("^[0-9a-f]{8,}$", "<unresolved>", trace$func)
-trace
-#>                       func  pathname is_libr
-#> 1         winch_trace_back  winch.so   FALSE
-#> 2              R_doDotCall   libR.so    TRUE
-#> 3               do_dotcall   libR.so    TRUE
-#> 4                  Rf_eval   libR.so    TRUE
-#> 5                   do_set   libR.so    TRUE
-#> 6                  Rf_eval   libR.so    TRUE
-#> 7                 do_begin   libR.so    TRUE
-#> 8                  Rf_eval   libR.so    TRUE
-#> 9            R_execClosure   libR.so    TRUE
-#> 10       applyClosure_core   libR.so    TRUE
-#> 11         Rf_applyClosure   libR.so    TRUE
-#> 12                 Rf_eval   libR.so    TRUE
-#> 13                do_begin   libR.so    TRUE
-#> 14                 Rf_eval   libR.so    TRUE
-#> 15           R_execClosure   libR.so    TRUE
-#> 16       applyClosure_core   libR.so    TRUE
-#> 17         Rf_applyClosure   libR.so    TRUE
-#> 18                 Rf_eval   libR.so    TRUE
-#> 19           do_winch_call  winch.so   FALSE
-#> 20              winch_call  winch.so   FALSE
-#> 21             R_doDotCall   libR.so    TRUE
-#> 22              do_dotcall   libR.so    TRUE
-#> 23                 Rf_eval   libR.so    TRUE
-#> 24                do_begin   libR.so    TRUE
-#> 25                 Rf_eval   libR.so    TRUE
-#> 26           R_execClosure   libR.so    TRUE
-#> 27       applyClosure_core   libR.so    TRUE
-#> 28         Rf_applyClosure   libR.so    TRUE
-#> 29                 Rf_eval   libR.so    TRUE
-#> 30                do_begin   libR.so    TRUE
-#> 31                 Rf_eval   libR.so    TRUE
-#> 32           R_execClosure   libR.so    TRUE
-#> 33       applyClosure_core   libR.so    TRUE
-#> 34         Rf_applyClosure   libR.so    TRUE
-#> 35                 Rf_eval   libR.so    TRUE
-#> 36                  do_set   libR.so    TRUE
-#> 37                 Rf_eval   libR.so    TRUE
-#> 38                 do_eval   libR.so    TRUE
-#> 39             bcEval_loop   libR.so    TRUE
-#> 40                  bcEval   libR.so    TRUE
-#> 41                  bcEval   libR.so    TRUE
-#> 42                 Rf_eval   libR.so    TRUE
-#> 43            forcePromise   libR.so    TRUE
-#> 44            forcePromise   libR.so    TRUE
-#> 45                 Rf_eval   libR.so    TRUE
-#> 46          do_withVisible   libR.so    TRUE
-#> 47             do_internal   libR.so    TRUE
-#> 48             bcEval_loop   libR.so    TRUE
-#> 49                  bcEval   libR.so    TRUE
-#> 50                  bcEval   libR.so    TRUE
-#> 51                 Rf_eval   libR.so    TRUE
-#> 52            forcePromise   libR.so    TRUE
-#> 53            forcePromise   libR.so    TRUE
-#> 54                 Rf_eval   libR.so    TRUE
-#> 55            forcePromise   libR.so    TRUE
-#> 56            forcePromise   libR.so    TRUE
-#> 57                  getvar   libR.so    TRUE
-#> 58             bcEval_loop   libR.so    TRUE
-#> 59                  bcEval   libR.so    TRUE
-#> 60                  bcEval   libR.so    TRUE
-#> 61                 Rf_eval   libR.so    TRUE
-#> 62           R_execClosure   libR.so    TRUE
-#> 63       applyClosure_core   libR.so    TRUE
-#> 64         Rf_applyClosure   libR.so    TRUE
-#> 65                 Rf_eval   libR.so    TRUE
-#> 66                 do_eval   libR.so    TRUE
-#> 67             bcEval_loop   libR.so    TRUE
-#> 68                  bcEval   libR.so    TRUE
-#> 69                  bcEval   libR.so    TRUE
-#> 70                 Rf_eval   libR.so    TRUE
-#> 71           R_execClosure   libR.so    TRUE
-#> 72       applyClosure_core   libR.so    TRUE
-#> 73         Rf_applyClosure   libR.so    TRUE
-#> 74                 Rf_eval   libR.so    TRUE
-#> 75           R_execClosure   libR.so    TRUE
-#> 76       applyClosure_core   libR.so    TRUE
-#> 77         Rf_applyClosure   libR.so    TRUE
-#> 78             bcEval_loop   libR.so    TRUE
-#> 79                  bcEval   libR.so    TRUE
-#> 80                  bcEval   libR.so    TRUE
-#> 81                 Rf_eval   libR.so    TRUE
-#> 82           R_execClosure   libR.so    TRUE
-#> 83       applyClosure_core   libR.so    TRUE
-#> 84         Rf_applyClosure   libR.so    TRUE
-#> 85                 Rf_eval   libR.so    TRUE
-#> 86             Rf_evalList   libR.so    TRUE
-#> 87                 Rf_eval   libR.so    TRUE
-#> 88                do_begin   libR.so    TRUE
-#> 89                 Rf_eval   libR.so    TRUE
-#> 90           R_execClosure   libR.so    TRUE
-#> 91       applyClosure_core   libR.so    TRUE
-#> 92         Rf_applyClosure   libR.so    TRUE
-#> 93                 Rf_eval   libR.so    TRUE
-#> 94        Rf_ReplIteration   libR.so    TRUE
-#> 95           R_ReplConsole   libR.so    TRUE
-#> 96           run_Rmainloop   libR.so    TRUE
-#> 97            <unresolved>         R    TRUE
-#> 98  __libc_start_call_main libc.so.6   FALSE
-#> 99  __libc_start_main_impl libc.so.6   FALSE
-#> 100           <unresolved>         R    TRUE
-#> 101           <unresolved>         R    TRUE
+# Everything below the closure call is the stack of whatever invoked the
+# render, so its depth -- and with it the column alignment -- depends on how
+# this document was knitted. The frames that show what winch does are the
+# first few, and they are the same either way.
+head(trace, 12)
+#>                 func pathname is_libr
+#> 1   winch_trace_back winch.so   FALSE
+#> 2        R_doDotCall  libR.so    TRUE
+#> 3         do_dotcall  libR.so    TRUE
+#> 4            Rf_eval  libR.so    TRUE
+#> 5             do_set  libR.so    TRUE
+#> 6            Rf_eval  libR.so    TRUE
+#> 7           do_begin  libR.so    TRUE
+#> 8            Rf_eval  libR.so    TRUE
+#> 9      R_execClosure  libR.so    TRUE
+#> 10 applyClosure_core  libR.so    TRUE
+#> 11   Rf_applyClosure  libR.so    TRUE
+#> 12           Rf_eval  libR.so    TRUE
 ```
 
 `rlang::entrace()` checks if winch is installed, and adds a native backtrace.

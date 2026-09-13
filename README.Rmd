@@ -73,7 +73,11 @@ trace$pathname <- basename(trace$pathname)
 # A frame whose symbol the linker cannot resolve falls back to its address,
 # which is randomised too.
 trace$func <- sub("^[0-9a-f]{8,}$", "<unresolved>", trace$func)
-trace
+# Everything below the closure call is the stack of whatever invoked the
+# render, so its depth -- and with it the column alignment -- depends on how
+# this document was knitted. The frames that show what winch does are the
+# first few, and they are the same either way.
+head(trace, 12)
 ```
 
 `rlang::entrace()` checks if winch is installed, and adds a native backtrace.
