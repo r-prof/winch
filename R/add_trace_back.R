@@ -5,7 +5,7 @@
 #' `r lifecycle::badge('deprecated')`
 #'
 #' This function should be reimplemented in rlang,
-#' to avoid a soft dependency between rlang's traceback format and this package.
+#'  to avoid a soft dependency between rlang's traceback format and this package.
 #'
 #' @param trace An rlang traceback as returned by [rlang::trace_back()].
 #'
