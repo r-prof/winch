@@ -194,7 +194,8 @@ Unfortunately, no new context is established for native code called with `.Call(
 Establishing contexts expends precious run time, so this may be the reason for the omission.
 
 To work around this limitation, the source code of all R functions along the call chain is scanned for instances of `.Call` and `.External`.
-The native call stack (obtained via [libunwind](https://github.com/libunwind/libunwind) or [libbacktrace](https://github.com/ianlancetaylor/libbacktrace)) is scanned for chunks of code outside of `libR.so` (R's main library) -- these are assumed to correspond to `.Call()` or `.External()`.
+The native call stack (obtained via [libunwind](https://github.com/libunwind/libunwind) or [libbacktrace](https://github.com/ianlancetaylor/libbacktrace)) is scanned for chunks of code outside of `libR.so` (R's main library) --
+these are assumed to correspond to `.Call()` or `.External()`.
 The native traces are embedded as artificial calls into the R stack trace.
 
 ## Limitations

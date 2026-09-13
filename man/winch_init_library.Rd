@@ -9,15 +9,13 @@ winch_init_library(path = NULL, force = FALSE)
 \arguments{
 \item{path}{Path to the DLL.}
 
-\item{force}{Reinitialize even if the path to the DLL is unchanged
-from the last call.}
+\item{force}{Reinitialize even if the path to the DLL is unchanged from the last call.}
 }
 \value{
 This function is called for its side effects.
 }
 \description{
-On Windows, function names in native stack traces can be obtained
-for only one library at a time.
+On Windows, function names in native stack traces can be obtained for only one library at a time.
 Call this function to set the library for which to obtain symbols.
 }
 \examples{

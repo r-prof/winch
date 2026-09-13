@@ -4,8 +4,8 @@
 #'
 #' `r lifecycle::badge('deprecated')`
 #'
-#' This function should be reimplemented in rlang, to avoid a soft dependency between
-#' rlang's traceback format and this package.
+#' This function should be reimplemented in rlang,
+#' to avoid a soft dependency between rlang's traceback format and this package.
 #'
 #' @param trace An rlang traceback as returned by [rlang::trace_back()].
 #'
@@ -24,8 +24,7 @@ winch_add_trace_back <- function(trace = rlang::trace_back(bottom = parent.frame
   rlang_trace <- trace
 
   native_trace <- winch_trace_back()
-  # Remove __libc_start_main because it comes between two entries pointing to
-  # .../bin/exec/R
+  # Remove __libc_start_main because it comes between two entries pointing to .../bin/exec/R
   native_trace <- native_trace[is.na(native_trace$func) | native_trace$func != "__libc_start_main", ]
 
   # FIXME: This is artificial, remove when done
@@ -58,8 +57,7 @@ winch_add_trace_back <- function(trace = rlang::trace_back(bottom = parent.frame
     native_trace[seq.int(end, by = -1L, length.out = len), ]
   }))
 
-  # Find all functions in the stack trace that call .Call(),
-  # .External() or .External2()
+  # Find all functions in the stack trace that call .Call(), .External() or .External2()
   r_funs <- sys_functions()
   # The sys_functions() call must be separate, it is very brittle
 
@@ -89,8 +87,7 @@ winch_add_trace_back <- function(trace = rlang::trace_back(bottom = parent.frame
   }
 
   # Insert native stack trace chunks into R stack trace
-  # Reverse order is important to avoid index shifts after inserting
-  # into the trace
+  # Reverse order is important to avoid index shifts after inserting into the trace
   for (i in rev(seq_along(r_fun_has_call_idx))) {
     rlang_trace <- insert_native_chunk(rlang_trace, r_fun_has_call_idx[[i]], native_trace_chunks[[i]])
   }
