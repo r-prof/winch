@@ -3,7 +3,7 @@ library_env <- new.env(parent = emptyenv())
 #' Set library to collect symbols for native stack traces
 #'
 #' On Windows, function names in native stack traces can be obtained for only one library at a time.
-#'  Call this function to set the library for which to obtain symbols.
+#' Call this function to set the library for which to obtain symbols.
 #'
 #' @param path Path to the DLL.
 #' @param force Reinitialize even if the path to the DLL is unchanged from the last call.

@@ -1,8 +1,8 @@
 #' Native stack trace
 #'
 #' This function returns the native stack trace as a data frame.
-#'  Each native stack frame corresponds to one row in the returned data frame.
-#'  Deep function calls come first, the last row corresponds to the running process's entry point.
+#' Each native stack frame corresponds to one row in the returned data frame.
+#' Deep function calls come first, the last row corresponds to the running process's entry point.
 #'
 #' On Windows, call [winch_init_library()] to return function names for a specific package.
 #'
