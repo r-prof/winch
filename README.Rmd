@@ -1,8 +1,11 @@
 ---
-output: downlit::readme_document
+output: cynkratemplate::readme_document
 ---
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
+<!-- README.md and index.md are generated from README.Rmd.
+     Edit that file and render it the usual way: rmarkdown::render(),
+     devtools::build_readme(), or the Knit button. The cynkratemplate
+     package must be installed; it supplies the output format. -->
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
@@ -37,7 +40,8 @@ install.packages("winch")
 Install the development version from GitHub with:
 
 ``` r
-devtools::install_github("r-lib/winch")
+# install.packages("pak")
+pak::pak("r-prof/winch")
 ```
 
 
@@ -58,7 +62,18 @@ bar <- function() {
   winch_trace_back()
 }
 
-foo()
+trace <- foo()
+
+# Keep the render reproducible: the instruction pointers are randomised by
+# ASLR, and the shared object is loaded from a temporary directory whose
+# name is new on every load -- and the varying path width re-aligns the
+# whole table. Show the columns that are stable.
+trace$ip <- NULL
+trace$pathname <- basename(trace$pathname)
+# A frame whose symbol the linker cannot resolve falls back to its address,
+# which is randomised too.
+trace$func <- sub("^[0-9a-f]{8,}$", "<unresolved>", trace$func)
+trace
 ```
 
 `rlang::entrace()` checks if winch is installed, and adds a native backtrace.
