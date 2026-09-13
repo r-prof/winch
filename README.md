@@ -21,7 +21,8 @@ Install the released version of winch from [CRAN](https://cran.r-project.org/) w
 Install the development version from GitHub with:
 
 <pre class='chroma'>
-<span class='k'>devtools</span>::<span class='nf'><a href='https://devtools.r-lib.org//reference/remote-reexports.html'>install_github</a></span>(<span class='s'>"r-lib/winch"</span>)
+<span class='c'># install.packages("pak")</span>
+<span class='k'>pak</span>::<span class='nf'><a href='https://pak.r-lib.org/reference/pak.html'>pak</a></span>(<span class='s'>"r-prof/winch"</span>)
 </pre>
 
 ## Example
