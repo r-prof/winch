@@ -16,7 +16,7 @@ This function is called for its side effects.
 }
 \description{
 On Windows, function names in native stack traces can be obtained for only one library at a time.
-Call this function to set the library for which to obtain symbols.
+ Call this function to set the library for which to obtain symbols.
 }
 \examples{
 \dontshow{if (requireNamespace("rlang", quietly = TRUE)) withAutoprint(\{ # examplesIf}
