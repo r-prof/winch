@@ -27,12 +27,14 @@ The appendix is a scratch pad for links and other bits of information that don't
 
 The winch package combines native and R stack traces in a controlled way. 
 For now this is outside of a profiling context.
-This deviates from the original goal of the project, with good reason: robust combined stack traces are a cornerstone for joint profiling and are useful independent of profiling.
+This deviates from the original goal of the project, with good reason:
+robust combined stack traces are a cornerstone for joint profiling and are useful independent of profiling.
 
 
 ## Stack traces
 
-A [*stack trace*](https://en.wikipedia.org/wiki/Stack_trace) is a sequence of code locations that describes the execution path from a program's main entry point to a specific point of interest.
+A [*stack trace*](https://en.wikipedia.org/wiki/Stack_trace) is a sequence of code locations
+that describes the execution path from a program's main entry point to a specific point of interest.
 Each entry represents a nested function call.
 
 Use cases include ([source](https://blog.reverberate.org/2013/05/deep-wizardry-stack-unwinding.html)):
@@ -62,7 +64,8 @@ tail(foo(), 3)
 ```
 
 Native code cannot easily be deduced from the stack trace.
-This is seen when replacing function calls with `winch::winch_call()`, which simulates a round-trip from native code into R by calling a function passed as argument from C code.
+This is seen when replacing function calls with `winch::winch_call()`,
+which simulates a round-trip from native code into R by calling a function passed as argument from C code.
 The example becomes a double round-trip: R → native → R → native → R.
 
 ```{r}
@@ -79,7 +82,8 @@ bar <- function() {
 tail(foo(), 5)
 ```
 
-A bit of guesswork is required here: we can inspect the bodies of the functions in the call stack to check for calls to `.Call()`, `.External()` or `.External2()`.
+A bit of guesswork is required here:
+we can inspect the bodies of the functions in the call stack to check for calls to `.Call()`, `.External()` or `.External2()`.
 In our example the candidates are located at indexes 2 and 4:
 
 ```{r}
@@ -98,8 +102,10 @@ This would require changes to base R.
 
 R is an interpreted language. 
 It can be expected that it knows how to track the execution state.
-(It is much more surprising that it allows programs to compute on their own execution state -- R has very strong support for [reflection](https://en.wikipedia.org/wiki/Reflection_(computer_programming)) indeed.)
-How do we achieve this for native code? [Can an application programmatically generate its own stack trace?](https://stackoverflow.com/q/8031742/946850)
+(It is much more surprising that it allows programs to compute on their own execution state --
+R has very strong support for [reflection](https://en.wikipedia.org/wiki/Reflection_(computer_programming)) indeed.)
+How do we achieve this for native code?
+[Can an application programmatically generate its own stack trace?](https://stackoverflow.com/q/8031742/946850)
 
 For native code, this is provided by the compiler or by specialized libraries.
 The main result is a sequence of instruction pointers (IP for short): addresses in the process's memory from where function calls occurred.
@@ -136,12 +142,16 @@ Due to this duality, it is helpful to access both kinds of stack trace: R and na
 
 These stack traces are not very helpful if taken separately.
 Native code is hidden from R backtrace, and R code is represented as sequence of function calls in `libR.so` or equivalent.
-Fusing these stack traces allows representing the chain of function calls from both domains when R code calls into native code (which then might call back into R).
+Fusing these stack traces allows representing the chain of function calls from both domains
+when R code calls into native code (which then might call back into R).
 
 The combination of R and native stack traces in winch relies on two heuristics:
 
-1. Calls from R into native code can be detected by searching for special function names in the stack trace: `.Call()`, `.External()` or `.External2()`.
-2. In the native stack trace, interpreted R code can be distinguished from user-provided native code by checking the name of the shared library for each IP: R code corresponds to IPs pointing to `libR.so`.
+1. Calls from R into native code can be detected by searching for special function names in the stack trace:
+   `.Call()`, `.External()` or `.External2()`.
+2. In the native stack trace,
+   interpreted R code can be distinguished from user-provided native code by checking the name of the shared library for each IP:
+   R code corresponds to IPs pointing to `libR.so`.
 
 For our example, a simplified view on the R and native stack traces, side by side, looks like this:
 
@@ -154,9 +164,11 @@ bar()                libR.so::... (repeated)
 foo()                libR.so::... (repeated)
 ```
 
-Combining stack traces now means pairing corresponding `.Call()` entries with native traces from other modules than `libR.so`, denoted by `<-->` in the above example.
+Combining stack traces now means pairing corresponding `.Call()` entries with native traces from other modules than `libR.so`,
+denoted by `<-->` in the above example.
 
-The winch package implements this on top of `rlang::trace_back()`, a wrapper around `sys.calls()` that displays as a tree and creates better output in the presence of lazy evaluation.
+The winch package implements this on top of `rlang::trace_back()`,
+a wrapper around `sys.calls()` that displays as a tree and creates better output in the presence of lazy evaluation.
 
 ```{r eval = FALSE}
 baz <- function() {
@@ -175,7 +187,9 @@ foo()
  5.     └─(function () ... R/call.R:4:2
 ```
 
-The function `winch::winch_add_trace_back()` enriches an rlang stack trace with relevant parts of the native stack trace, by pairing `.Call()` and similar entries with native code from outside of `libR.so`, as described above.
+The function `winch::winch_add_trace_back()` enriches an rlang stack trace with relevant parts of the native stack trace,
+by pairing `.Call()` and similar entries with native code from outside of `libR.so`,
+as described above.
 
 ```{r eval = FALSE}
 baz <- function() {
@@ -197,8 +211,11 @@ foo()
  7.             └─(function () ... R/call.R:4:2
 ```
 
-Stack traces must be collected at the time that the error occurs, this includes calls to `rlang::abort()` which already collect a stack trace.
-The integration is a [small change to rlang](https://github.com/r-lib/rlang/pull/1039) that calls `winch_add_trace_back()` during collection if winch is installed and the `rlang_trace_use_winch` option is identical to `1L`.
+Stack traces must be collected at the time that the error occurs,
+this includes calls to `rlang::abort()` which already collect a stack trace.
+The integration is a [small change to rlang](https://github.com/r-lib/rlang/pull/1039)
+that calls `winch_add_trace_back()` during collection
+if winch is installed and the `rlang_trace_use_winch` option is identical to `1L`.
 With this option set, manual addition of the native stack trace is no longer necessary.
 
 ```{r eval = FALSE}
@@ -277,10 +294,12 @@ It would be useful if stack trace information could be collected at the point of
 
 ## Technical details
 
-Stack unwinding, or retrieving the sequence of IPs for the stack trace, is dependent on the compiler, and also on the executable format used.
+Stack unwinding, or retrieving the sequence of IPs for the stack trace, is dependent on the compiler,
+and also on the executable format used.
 As the [blog post already linked above](https://blog.reverberate.org/2013/05/deep-wizardry-stack-unwinding.html) puts it,
 
-> stack unwinding ... [is an] esoteric topic [that] lies at the intersection of compilers, linkers, loaders, debuggers, ABIs, and language runtimes. There is precious little documentation about it and, from what I can tell, a small handful of guys who answer all the questions about it.
+> stack unwinding ... [is an] esoteric topic [that] lies at the intersection of compilers, linkers, loaders, debuggers, ABIs, and language runtimes.
+> There is precious little documentation about it and, from what I can tell, a small handful of guys who answer all the questions about it.
 
 It's not surprising that there is no portable "one size fits all" solution.
 Some but not all options give the function name for each entry, sometimes file + line information is available too.
@@ -296,10 +315,14 @@ Also, function names were not discovered reliably, in particular for optimized c
 
 2. The libunwind library supports similar functionality and discovers function names more reliably.
     Unfortunately, it also [does not work on Windows](https://libunwind-devel.nongnu.narkive.com/ahavTcFa/libunwind-and-windows).
-    What's more, there are [two implementations](http://lists.llvm.org/pipermail/cfe-dev/2016-September/050650.html): the [macOS implementation](https://bcain-llvm.readthedocs.io/projects/libunwind/en/latest/), part of clang, is a newer rewrite of the original [non-GNU implementation](https://www.nongnu.org/libunwind/) that is [available on GitHub](https://github.com/libunwind/libunwind).
+    What's more, there are [two implementations](http://lists.llvm.org/pipermail/cfe-dev/2016-September/050650.html):
+    the [macOS implementation](https://bcain-llvm.readthedocs.io/projects/libunwind/en/latest/), part of clang, is a newer rewrite of the original [non-GNU implementation](https://www.nongnu.org/libunwind/)
+    that is [available on GitHub](https://github.com/libunwind/libunwind).
 
-3. The [libbacktrace library](https://github.com/ianlancetaylor/libbacktrace), part of GCC and also available standalone, with its own tests, seems to give slightly worse results for the detection of function names.
-    On the up side, it is portable, with support for Windows ([MSYS2](https://www.msys2.org/), on which the most recent [rtools](https://cran.r-project.org/bin/windows/Rtools/) is based).
+3. The [libbacktrace library](https://github.com/ianlancetaylor/libbacktrace), part of GCC and also available standalone, with its own tests,
+    seems to give slightly worse results for the detection of function names.
+    On the up side, it is portable,
+    with support for Windows ([MSYS2](https://www.msys2.org/), on which the most recent [rtools](https://cran.r-project.org/bin/windows/Rtools/) is based).
     It also gives file + line information for each stack frame.
 
 Wrapping the libbacktrace library looks like the best option in terms of portability and features.
@@ -339,7 +362,8 @@ The `execinfo()` approach is no longer used because libunwind is clearly better.
 
 - The [stacktrace](https://stacktrace.sourceforge.net/) library is from 2009, was last changed 2013
 
-- A [fully native route](https://programmer.help/blogs/using-the-_unwind_backtrace-function-to-grab-the-backtrace-of-the-c-c-stack.html) has not been considered. Without library support this would amount to rewriting large parts of existing library code.
+- A [fully native route](https://programmer.help/blogs/using-the-_unwind_backtrace-function-to-grab-the-backtrace-of-the-c-c-stack.html) has not been considered.
+  Without library support this would amount to rewriting large parts of existing library code.
 
 ### Retrieving module name
 
@@ -364,19 +388,23 @@ The libbacktrace library optionally provides file + line information for each en
 
 Unfortunately it currently does not work on macOS:
 
-- Its internal tests show "libbacktrace: no debug info in Mach-O executable", perhaps related to [an issue that also limits usability on Windows](https://github.com/ianlancetaylor/libbacktrace/issues/53).
+- Its internal tests show "libbacktrace: no debug info in Mach-O executable",
+  perhaps related to [an issue that also limits usability on Windows](https://github.com/ianlancetaylor/libbacktrace/issues/53).
 
 - Using libbacktrace in winch gives a segmentation fault.
 
-The gperftools library relies on the `addr2line` executable for retrieving file + line information ([source](https://sourceforge.net/p/elftoolchain/code/HEAD/tree/trunk/addr2line/addr2line.c), [relevant StackOverflow question](https://stackoverflow.com/q/11556321/946850)).
+The gperftools library relies on the `addr2line` executable for retrieving file + line information ([source](https://sourceforge.net/p/elftoolchain/code/HEAD/tree/trunk/addr2line/addr2line.c),
+[relevant StackOverflow question](https://stackoverflow.com/q/11556321/946850)).
 
 Once a fully portable solution is found, this information should be provided by `winch_add_trace_back()`.
 
 
 ## History: jointprof part 1
 
-The main result of the first part of the project is the `jointprof` package, which implements a proof of concept for recording native and R stack traces in parallel, exclusively during profiling.
-It uses [the gperftools library](https://github.com/gperftools/gperftools) to record native stack traces, and daisy chains into the profiling routine provided by R to record R stack traces.
+The main result of the first part of the project is the `jointprof` package,
+which implements a proof of concept for recording native and R stack traces in parallel, exclusively during profiling.
+It uses [the gperftools library](https://github.com/gperftools/gperftools) to record native stack traces,
+and daisy chains into the profiling routine provided by R to record R stack traces.
 A helper package, `profile`, processes the profiler data created by gperftools.
 
 This approach works on Linux only.
@@ -385,7 +413,8 @@ The approach is a bit brittle.
 Occasionally stack traces could not be matched.
 Fusion of stack traces for debugging purposes is not possible.
 
-Will Landau contributed the `proffer` package to the project, a drop-in replacement to profvis that uses [pprof](https://github.com/google/pprof) to visualize profiles.
+Will Landau contributed the `proffer` package to the project,
+a drop-in replacement to profvis that uses [pprof](https://github.com/google/pprof) to visualize profiles.
 
 ## Appendix
 
