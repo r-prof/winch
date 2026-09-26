@@ -1,5 +1,26 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# winch 0.1.3.9017 (2026-09-13)
+
+## Chore
+
+- Remove Copilot setup steps.
+
+- Auto-update from GitHub Actions (#117).
+
+## fledge
+
+- Bump version to 0.1.3.9004 (#121).
+
+- Bump version to 0.1.3.9004 (#120).
+
+- Bump version to 0.1.3.9004 (#119).
+
+- Bump version to 0.1.3.9003 (#115).
+
+- Bump version to 0.1.3.9002 (#114).
+
+
 # winch 0.1.3.9016 (2026-09-13)
 
 ## Features
