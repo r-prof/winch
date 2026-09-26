@@ -12,7 +12,7 @@ winch_add_trace_back(trace = rlang::trace_back(bottom = parent.frame()))
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-This function should be reimplemented in rlang, to avoid a soft dependency between
-rlang's traceback format and this package.
+This function should be reimplemented in rlang,
+to avoid a soft dependency between rlang's traceback format and this package.
 }
 \keyword{internal}
