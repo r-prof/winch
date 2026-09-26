@@ -1,5 +1,32 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# winch 0.1.3.9018 (2026-09-26)
+
+## Documentation
+
+- Autolink the inline code in the README's prose (#145).
+
+- State the goals and non-goals (#141).
+
+- Harmonize README and pkgdown front page rendering (#139).
+
+- Break lines at meaning boundaries (#140).
+
+- Harmonize README and pkgdown front page rendering (#139).
+
+## fledge
+
+- Bump version to 0.1.3.9018 (#146).
+
+- Bump version to 0.1.3.9017 (#144).
+
+## Uncategorized
+
+- Refactor(ci): Serve the revdep scripts with the actions instead of copying them (cynkra/cynkratemplate#149).
+
+- Fix(revdep2): Let a slice with no packages check nothing instead of failing (cynkra/cynkratemplate#150).
+
+
 # winch 0.1.3.9017 (2026-09-13)
 
 ## Chore
