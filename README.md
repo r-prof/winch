@@ -77,7 +77,7 @@ head(trace, 12)
 #> 12           Rf_eval  libR.so    TRUE
 ```
 
-[`rlang::entrace()`](https://rdrr.io/pkg/rlang/man/entrace.html) checks if winch is installed, and adds a native backtrace.
+[`rlang::entrace()`](https://rlang.r-lib.org/reference/entrace.html) checks if winch is installed, and adds a native backtrace.
 As this cannot be easily demonstrated in a knitr document, the output is copied from a GitHub Actions run.
 
 ``` r
