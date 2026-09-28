@@ -64,18 +64,18 @@ trace$func <- sub("^[0-9a-f]{8,}$", "<unresolved>", trace$func)
 # first few, and they are the same either way.
 head(trace, 12)
 #>                 func pathname is_libr
-#> 1   winch_trace_back winch.so   FALSE
-#> 2        R_doDotCall  libR.so    TRUE
-#> 3         do_dotcall  libR.so    TRUE
+#> 1         do_dotcall  libR.so    TRUE
+#> 2            Rf_eval  libR.so    TRUE
+#> 3             do_set  libR.so    TRUE
 #> 4            Rf_eval  libR.so    TRUE
-#> 5             do_set  libR.so    TRUE
+#> 5           do_begin  libR.so    TRUE
 #> 6            Rf_eval  libR.so    TRUE
-#> 7           do_begin  libR.so    TRUE
-#> 8            Rf_eval  libR.so    TRUE
-#> 9      R_execClosure  libR.so    TRUE
-#> 10 applyClosure_core  libR.so    TRUE
-#> 11   Rf_applyClosure  libR.so    TRUE
-#> 12           Rf_eval  libR.so    TRUE
+#> 7      R_execClosure  libR.so    TRUE
+#> 8  applyClosure_core  libR.so    TRUE
+#> 9            Rf_eval  libR.so    TRUE
+#> 10          do_begin  libR.so    TRUE
+#> 11           Rf_eval  libR.so    TRUE
+#> 12     R_execClosure  libR.so    TRUE
 ```
 
 `rlang::entrace()` checks if winch is installed, and adds a native backtrace.
