@@ -63,21 +63,21 @@ trace$func <- sub("^[0-9a-f]{8,}$", "<unresolved>", trace$func)
 # first few, and they are the same either way.
 head(trace, 12)
 #>                 func pathname is_libr
-#> 1   winch_trace_back winch.so   FALSE
-#> 2        R_doDotCall  libR.so    TRUE
-#> 3         do_dotcall  libR.so    TRUE
+#> 1         do_dotcall  libR.so    TRUE
+#> 2            Rf_eval  libR.so    TRUE
+#> 3             do_set  libR.so    TRUE
 #> 4            Rf_eval  libR.so    TRUE
-#> 5             do_set  libR.so    TRUE
+#> 5           do_begin  libR.so    TRUE
 #> 6            Rf_eval  libR.so    TRUE
-#> 7           do_begin  libR.so    TRUE
-#> 8            Rf_eval  libR.so    TRUE
-#> 9      R_execClosure  libR.so    TRUE
-#> 10 applyClosure_core  libR.so    TRUE
-#> 11   Rf_applyClosure  libR.so    TRUE
-#> 12           Rf_eval  libR.so    TRUE
+#> 7      R_execClosure  libR.so    TRUE
+#> 8  applyClosure_core  libR.so    TRUE
+#> 9            Rf_eval  libR.so    TRUE
+#> 10          do_begin  libR.so    TRUE
+#> 11           Rf_eval  libR.so    TRUE
+#> 12     R_execClosure  libR.so    TRUE
 ```
 
-`rlang::entrace()` checks if winch is installed, and adds a native backtrace.
+[`rlang::entrace()`](https://rlang.r-lib.org/reference/entrace.html) checks if winch is installed, and adds a native backtrace.
 As this cannot be easily demonstrated in a knitr document, the output is copied from a GitHub Actions run.
 
 ``` r
@@ -104,19 +104,19 @@ vctrs::vec_as_location(quote, 2)
 winch uses a very simple heuristic.
 R's traceback (and also profiling) infrastructure introduces the notion of a "context".
 Every call to an R function opens a new context and closes it when execution of the function ends.
-Unfortunately, no new context is established for native code called with `.Call()` or `.External()`.
+Unfortunately, no new context is established for native code called with [`.Call()`](https://rdrr.io/r/base/CallExternal.html) or [`.External()`](https://rdrr.io/r/base/CallExternal.html).
 Establishing contexts expends precious run time, so this may be the reason for the omission.
 
 To work around this limitation, the source code of all R functions along the call chain is scanned for instances of `.Call` and `.External`.
 The native call stack (obtained via [libunwind](https://github.com/libunwind/libunwind) or [libbacktrace](https://github.com/ianlancetaylor/libbacktrace)) is scanned for chunks of code outside of `libR.so` (R's main library) --
-these are assumed to correspond to `.Call()` or `.External()`.
+these are assumed to correspond to [`.Call()`](https://rdrr.io/r/base/CallExternal.html) or [`.External()`](https://rdrr.io/r/base/CallExternal.html).
 The native traces are embedded as artificial calls into the R stack trace.
 
 ## Limitations
 
 - The matching will not be perfect, but it may still lead to faster discovery of the cause of an error.
 - On Windows winch only works on x64, and there the traces can be obtained only for one shared library at a time.
-  See `winch_init_library()` for details.
+  See [`winch_init_library()`](https://r-prof.github.io/winch/reference/winch_init_library.html) for details.
 
 ------------------------------------------------------------------------
 
