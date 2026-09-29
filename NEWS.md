@@ -1,5 +1,24 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# winch 0.1.3.9019 (2026-09-29)
+
+## Bug fixes
+
+### ci
+
+- Restore the custom `before-install` action (#147).
+
+## Chore
+
+- Auto-update from GitHub Actions (#149).
+
+- Auto-update from GitHub Actions (#118).
+
+## Continuous integration
+
+- Run coverage checks after pkgdown push.
+
+
 # winch 0.1.3.9018 (2026-09-26)
 
 ## Documentation
