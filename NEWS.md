@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# winch 0.1.3.9020 (2026-10-11)
+
+## Chore
+
+- Auto-update from GitHub Actions (#150).
+
+
 # winch 0.1.3.9019 (2026-09-29)
 
 ## Bug fixes
