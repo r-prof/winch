@@ -16,6 +16,30 @@
 Winch provides stack traces for call chains that cross between R and C function calls.
 This is a useful tool for developers of R packages where a substantial portion of the code is C or C++.
 
+## Goals and non-goals
+
+winch aims to:
+
+- Obtain the native stack trace of the running process and return it as a plain data frame, one row per native frame.
+- Splice those native frames into R's own backtrace,
+  so that a call chain that crosses from R into C and back reads as a single trace.
+- Work on the platforms R packages are developed on: Linux, macOS, and Windows on x64.
+- Install without a system unwinder: libbacktrace is bundled, libunwind is used only where `./configure` finds it.
+- Stay a light dependency for packages that want native traces: only lifecycle and procmaps are imported.
+
+It is explicitly not trying to:
+
+- Act as a profiler.
+  winch takes one trace at the point where it is called, it does not sample the stack over time.
+- Match native and R frames exactly.
+  The correspondence is a heuristic that scans the R sources along the call chain for `.Call()` and `.External()`.
+- Report file and line information.
+  A native frame carries a function name, an instruction pointer, and the path of the shared library it came from.
+- Read the process memory map itself.
+  Mapping instruction pointers back to shared libraries is procmaps' job, and winch calls into it.
+- Collect symbols for more than one shared library at a time on Windows,
+  where the library is chosen with `winch_init_library()`.
+
 ## Installation
 
 Install the released version of winch from [CRAN](https://cran.r-project.org/) with:
