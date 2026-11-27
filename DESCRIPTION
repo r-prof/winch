@@ -30,7 +30,8 @@ Suggests:
     testthat (>= 3.0.0),
     vctrs
 VignetteBuilder: 
-    knitr
+    knitr,
+    rmarkdown
 Biarch: yes
 Config/roxygen2/version: 8.1.1.9000
 Config/testthat/edition: 3
