@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">winch</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.1.3.9018</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.1.3.9020</span>
       </span>
     </div>
 
@@ -126,18 +126,18 @@
 <span><span class="co"># first few, and they are the same either way.</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">trace</span>, <span class="fl">12</span><span class="op">)</span></span>
 <span><span class="co">#&gt;                 func pathname is_libr</span></span>
-<span><span class="co">#&gt; 1   winch_trace_back winch.so   FALSE</span></span>
-<span><span class="co">#&gt; 2        R_doDotCall  libR.so    TRUE</span></span>
-<span><span class="co">#&gt; 3         do_dotcall  libR.so    TRUE</span></span>
+<span><span class="co">#&gt; 1         do_dotcall  libR.so    TRUE</span></span>
+<span><span class="co">#&gt; 2            Rf_eval  libR.so    TRUE</span></span>
+<span><span class="co">#&gt; 3             do_set  libR.so    TRUE</span></span>
 <span><span class="co">#&gt; 4            Rf_eval  libR.so    TRUE</span></span>
-<span><span class="co">#&gt; 5             do_set  libR.so    TRUE</span></span>
+<span><span class="co">#&gt; 5           do_begin  libR.so    TRUE</span></span>
 <span><span class="co">#&gt; 6            Rf_eval  libR.so    TRUE</span></span>
-<span><span class="co">#&gt; 7           do_begin  libR.so    TRUE</span></span>
-<span><span class="co">#&gt; 8            Rf_eval  libR.so    TRUE</span></span>
-<span><span class="co">#&gt; 9      R_execClosure  libR.so    TRUE</span></span>
-<span><span class="co">#&gt; 10 applyClosure_core  libR.so    TRUE</span></span>
-<span><span class="co">#&gt; 11   Rf_applyClosure  libR.so    TRUE</span></span>
-<span><span class="co">#&gt; 12           Rf_eval  libR.so    TRUE</span></span></code></pre></div>
+<span><span class="co">#&gt; 7      R_execClosure  libR.so    TRUE</span></span>
+<span><span class="co">#&gt; 8  applyClosure_core  libR.so    TRUE</span></span>
+<span><span class="co">#&gt; 9            Rf_eval  libR.so    TRUE</span></span>
+<span><span class="co">#&gt; 10          do_begin  libR.so    TRUE</span></span>
+<span><span class="co">#&gt; 11           Rf_eval  libR.so    TRUE</span></span>
+<span><span class="co">#&gt; 12     R_execClosure  libR.so    TRUE</span></span></code></pre></div>
 <p><code><a href="https://rlang.r-lib.org/reference/entrace.html" class="external-link">rlang::entrace()</a></code> checks if winch is installed, and adds a native backtrace. As this cannot be easily demonstrated in a knitr document, the output is copied from a GitHub Actions run.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span></span>
