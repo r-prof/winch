@@ -2,26 +2,19 @@ Package: winch
 Title: Portable Native and Joint Stack Traces
 Version: 0.1.3.9021
 Date: 2026-11-27
-Authors@R: 
-    c(person(given = "Kirill",
-             family = "Müller",
-             role = c("aut", "cre"),
-             email = "kirill@cynkra.com",
-             comment = c(ORCID = "0000-0002-1416-3412")),
-      person(given = "R Consortium",
-             role = "fnd"),
-      person(given = "Ian Lance",
-             family = "Taylor",
-             role = "aut",
-             comment = "Bundled libbacktrace library"),
-      person(given = "Free Software Foundation",
-             role = "cph",
-             comment = "Bundled libbacktrace library"))
-Description: Obtain the native stack trace and fuse it with R's
-    stack trace for easier debugging of R packages with native code.
+Authors@R: c(
+    person("Kirill", "Müller", , "kirill@cynkra.com", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-1416-3412")),
+    person("R Consortium", role = "fnd"),
+    person("Ian Lance", "Taylor", role = "aut",
+           comment = "Bundled libbacktrace library"),
+    person("Free Software Foundation", role = "cph",
+           comment = "Bundled libbacktrace library")
+  )
+Description: Obtain the native stack trace and fuse it with R's stack
+    trace for easier debugging of R packages with native code.
 License: GPL-3
-URL: https://r-prof.github.io/winch/,
-    https://github.com/r-prof/winch
+URL: https://r-prof.github.io/winch/, https://github.com/r-prof/winch
 BugReports: https://github.com/r-prof/winch/issues
 Imports: 
     lifecycle,
@@ -38,8 +31,8 @@ Suggests:
     vctrs
 VignetteBuilder: 
     knitr
-Encoding: UTF-8
 Biarch: yes
-Roxygen: list(markdown = TRUE)
-Config/testthat/edition: 3
 Config/roxygen2/version: 8.1.1.9000
+Config/testthat/edition: 3
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
